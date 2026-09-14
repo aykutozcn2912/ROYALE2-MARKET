@@ -490,14 +490,69 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveButton = document.getElementById("profile-edit-save");
 
 if (editButton && modal) {
-    editButton.addEventListener("click", () => {
-        const username = document.getElementById("profile-username")?.textContent || "";
-        const displayName = document.getElementById("profile-display-name")?.textContent || "";
-        const email = document.getElementById("profile-email")?.textContent || "";
+    editButton.addEventListener("click", async () => {
+
+        const username =
+            document.getElementById("profile-username")?.textContent || "";
+
+        const displayName =
+            document.getElementById("profile-display-name")?.textContent || "";
+
+        const email =
+            document.getElementById("profile-email")?.textContent || "";
 
         document.getElementById("edit-username").value = username;
         document.getElementById("edit-display-name").value = displayName;
         document.getElementById("edit-email").value = email;
+
+        const savedUser = localStorage.getItem("royale2_user");
+        const accessToken = localStorage.getItem("royale2_access_token");
+
+        if (savedUser && accessToken) {
+            const user = JSON.parse(savedUser);
+
+            try {
+                const response = await fetch(
+                    `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
+                    {
+                        headers: {
+                            apikey: window.SUPABASE_KEY,
+                            Authorization: `Bearer ${accessToken}`
+                        }
+                    }
+                );
+
+                const data = await response.json();
+                const privateProfile = data?.[0];
+
+                const phoneInput = document.getElementById("edit-phone");
+                const tcInput = document.getElementById("edit-tc");
+                const addressInput = document.getElementById("edit-address");
+                const tcMessage = document.getElementById("tc-lock-message");
+
+                phoneInput.value = privateProfile?.phone || "";
+                addressInput.value = privateProfile?.address || "";
+
+                if (privateProfile?.tc_identity_no) {
+                    tcInput.value = privateProfile.tc_identity_no;
+                    tcInput.disabled = true;
+
+                    if (tcMessage) {
+                        tcMessage.style.display = "block";
+                    }
+                } else {
+                    tcInput.value = "";
+                    tcInput.disabled = false;
+
+                    if (tcMessage) {
+                        tcMessage.style.display = "none";
+                    }
+                }
+
+            } catch (error) {
+                console.error("Özel profil bilgileri yüklenemedi:", error);
+            }
+        }
 
         modal.classList.add("active");
     });

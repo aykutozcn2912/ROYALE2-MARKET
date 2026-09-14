@@ -195,3 +195,263 @@
     text-align: left;
   }
 }
+
+
+/* ===============================
+   PROFESYONEL HESAP PANELİ
+================================ */
+
+.account-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.account-sidebar {
+  background: #0b1119;
+  border: 1px solid #223247;
+  padding: 18px;
+  position: sticky;
+  top: 100px;
+}
+
+.account-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #1c2938;
+}
+
+.account-avatar {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  background: #0f2234;
+  border: 1px solid #2e83bb;
+  color: #5ec0ff;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.account-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.account-user-info strong {
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-user-info span {
+  color: #74869b;
+  font-size: 11px;
+}
+
+.account-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 0;
+}
+
+.account-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  color: #94a4b8;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+}
+
+.account-menu a:hover,
+.account-menu a.active {
+  color: #fff;
+  background: #101b28;
+  border-color: #24384e;
+}
+
+.account-menu a.active {
+  box-shadow: inset 3px 0 0 #43aef2;
+}
+
+.account-logout {
+  width: 100%;
+  padding: 11px 12px;
+  background: #181116;
+  border: 1px solid #4a2630;
+  color: #ff8b96;
+  cursor: pointer;
+  text-align: left;
+}
+
+.account-logout:hover {
+  background: #21151a;
+}
+
+.account-content {
+  min-width: 0;
+}
+
+.account-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: #0d141d;
+  border: 1px solid #223247;
+  padding: 20px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.summary-card span {
+  color: #8395aa;
+  font-size: 12px;
+}
+
+.summary-card strong {
+  margin: 8px 0 4px;
+  color: #49aef3;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.summary-card small {
+  color: #5f7084;
+  font-size: 11px;
+}
+
+.profile-card,
+.security-card {
+  margin-bottom: 20px;
+}
+
+.account-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #1e2b3b;
+  margin-bottom: 8px;
+}
+
+.account-card-head h2 {
+  margin: 0 0 5px;
+}
+
+.account-card-head p {
+  margin: 0;
+  color: #6f8196;
+  font-size: 12px;
+}
+
+.account-edit-btn,
+.security-button {
+  padding: 9px 13px;
+  background: #112338;
+  border: 1px solid #2a5d88;
+  color: #72c4ff;
+  cursor: pointer;
+}
+
+.account-edit-btn:hover,
+.security-button:hover {
+  background: #17304b;
+  color: #fff;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 28px;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 0;
+  border-bottom: 1px solid #1b2837;
+}
+
+.profile-field span {
+  color: #74869b;
+  font-size: 11px;
+}
+
+.profile-field strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.security-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 0;
+  border-bottom: 1px solid #1b2837;
+}
+
+.security-row:last-child {
+  border-bottom: 0;
+}
+
+.security-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.security-row strong {
+  color: #fff;
+  font-size: 13px;
+}
+
+.security-row span {
+  color: #728398;
+  font-size: 11px;
+}
+
+.security-badge {
+  padding: 7px 10px;
+  background: #132217;
+  border: 1px solid #2c5a36;
+  color: #7bdd91 !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 950px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .account-sidebar {
+    position: static;
+  }
+
+  .account-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-details {
+    grid-template-columns: 1fr;
+  }
+}

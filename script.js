@@ -158,7 +158,8 @@ async function loginUser(email, password) {
         console.error("Giriş hatası:", error);
         alert("Giriş sırasında bir hata oluştu.");
     }
-async function registerUser(username, displayName, phone, email, password) {
+ }
+}async function registerUser(username, displayName, phone, email, password) {
     try {
         const response = await fetch(
             `${SUPABASE_API_URL.replace('/rest/v1/', '/') }auth/v1/signup`,

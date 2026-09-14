@@ -8,6 +8,8 @@ const grid = document.getElementById("listings");
 const category = document.getElementById("category");
 
 async function loadListings() {
+ if (!grid) return;
+  
   try {
     grid.innerHTML = `
       <div class="listing">

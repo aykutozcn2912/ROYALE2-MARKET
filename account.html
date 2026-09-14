@@ -366,7 +366,7 @@ async function loadAccountPage() {
 
 
     const listingsResponse = await fetch(
-      `${SUPABASE_API_URL}listings?user_id=eq.${user.id}&status=eq.active&select=id`,
+      `${window.SUPABASE_API_URL}listings?user_id=eq.${user.id}&status=eq.active&select=id`,
       {
         headers: {
           apikey: SUPABASE_KEY,

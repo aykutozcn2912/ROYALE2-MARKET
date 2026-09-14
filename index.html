@@ -106,7 +106,84 @@
     <p>© 2026 ROYALE2 MARKET • Ephesus • Teos • Pergamon</p>
     <div><a href="#">Kurallar</a><a href="#">Gizlilik</a><a href="#">İletişim</a></div>
   </footer>
+<div id="register" class="modal">
+    <div class="modal-box">
+        <a class="close" href="#">×</a>
 
+        <span class="eyebrow">ROYALE2 MARKET</span>
+        <h2>Üye Ol</h2>
+        <p>Yeni hesabını oluştur ve Royale2 Market'e katıl.</p>
+
+        <label>Kullanıcı Adı</label>
+        <input
+            id="register-username"
+            type="text"
+            placeholder="Kullanıcı adınız"
+            maxlength="20"
+            autocomplete="username"
+        >
+
+        <small id="register-username-message"></small>
+
+        <label>Görünen Ad</label>
+        <input
+            id="register-display-name"
+            type="text"
+            placeholder="Görünen adınız"
+            maxlength="40"
+        >
+
+        <label>Telefon Numarası</label>
+        <input
+            id="register-phone"
+            type="tel"
+            placeholder="05XXXXXXXXX"
+            maxlength="11"
+            inputmode="numeric"
+            autocomplete="tel"
+        >
+
+        <label>E-posta Adresi</label>
+        <input
+            id="register-email"
+            type="email"
+            placeholder="ornek@mail.com"
+            autocomplete="email"
+        >
+
+        <label>Şifre</label>
+        <input
+            id="register-password"
+            type="password"
+            placeholder="En az 8 karakter"
+            autocomplete="new-password"
+        >
+
+        <label>Şifre Tekrar</label>
+        <input
+            id="register-password-confirm"
+            type="password"
+            placeholder="Şifrenizi tekrar girin"
+            autocomplete="new-password"
+        >
+
+        <label class="register-consent">
+            <input id="register-terms" type="checkbox">
+            Kullanım koşullarını ve gizlilik politikasını kabul ediyorum.
+        </label>
+
+        <button id="register-button" class="primary full" type="button">
+            Hesap Oluştur
+        </button>
+
+        <small id="register-message"></small>
+
+        <p style="margin-top:14px;">
+            Zaten hesabın var mı?
+            <a href="#login">Giriş Yap</a>
+        </p>
+    </div>
+</div>
 <div id="login" class="modal">
   <div class="modal-box">
     <a class="close" href="#">×</a>

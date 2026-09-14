@@ -215,14 +215,41 @@ document.addEventListener('DOMContentLoaded', () => {
   updateUserMenu();
 
   document.addEventListener('click', (e) => {
+    const userLink = document.getElementById('user-menu-link');
+    const existingMenu = document.getElementById('user-dropdown');
+
     if (e.target.id === 'user-menu-link') {
       e.preventDefault();
 
-      const logout = confirm('Çıkış yapmak istiyor musun?');
-
-      if (logout) {
-        logoutUser();
+      if (existingMenu) {
+        existingMenu.remove();
+        return;
       }
+
+      const menu = document.createElement('div');
+      menu.id = 'user-dropdown';
+      menu.innerHTML = `
+        <a href="#account">Hesabım</a>
+        <a href="#my-listings">İlanlarım</a>
+        <a href="#favorites">Favorilerim</a>
+        <button type="button" id="logout-button">Çıkış Yap</button>
+      `;
+
+      userLink.parentElement.appendChild(menu);
+      return;
+    }
+
+    if (e.target.id === 'logout-button') {
+      logoutUser();
+      return;
+    }
+
+    if (
+      existingMenu &&
+      !existingMenu.contains(e.target) &&
+      e.target.id !== 'user-menu-link'
+    ) {
+      existingMenu.remove();
     }
   });
 });

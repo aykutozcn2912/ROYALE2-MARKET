@@ -91,7 +91,9 @@ document.querySelectorAll(".filter").forEach(btn => {
   });
 });
 
-category.addEventListener("change", render);
+if (category) {
+    category.addEventListener("change", render);
+}
 
 document.querySelectorAll("[data-server-card]").forEach(card => {
   card.addEventListener("click", () => {

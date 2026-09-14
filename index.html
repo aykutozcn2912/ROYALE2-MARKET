@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROYALE2 MARKET</title>
+  <meta name="description" content="ROYALE2 Ephesus, Teos ve Pergamon ticaret pazarı.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">R2</span>
+      <span><strong>ROYALE2</strong><small>MARKET</small></span>
+    </a>
+    <nav>
+      <a class="active" href="#market">İlan Pazarı</a>
+      <a href="#servers">Sunucular</a>
+      <a href="#how">Nasıl Çalışır?</a>
+    </nav>
+    <div class="actions">
+      <a class="login" href="#login">Giriş Yap</a>
+      <a class="sell" href="#sell">+ İlan Ver</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="eyebrow">EPHESUS • TEOS • PERGAMON</div>
+        <h1>ROYALE2 <span>MARKET</span></h1>
+        <p>ROYALE2 ticaretinin yeni adresi. İlanını oluştur, aradığını bul, hızlı ve güvenli şekilde iletişime geç.</p>
+        <div class="hero-buttons">
+          <a class="primary" href="#market">İlanları Keşfet <b>→</b></a>
+          <a class="secondary" href="#sell">İlan Ver</a>
+        </div>
+        <div class="trust">
+          <span>✓</span> Ephesus &nbsp; <span>✓</span> Teos &nbsp; <span>✓</span> Pergamon
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong>3</strong><span>Aktif Sunucu</span></div>
+      <div><strong>4</strong><span>İlan Kategorisi</span></div>
+      <div><strong>24/7</strong><span>Aktif Pazar</span></div>
+      <div><strong>R2</strong><span>Topluluk Odaklı</span></div>
+    </section>
+
+    <section id="market" class="section">
+      <div class="section-head">
+        <div><span class="eyebrow">PAZARI KEŞFET</span><h2>Son İlanlar</h2></div>
+        <a href="#">Tüm İlanları Gör →</a>
+      </div>
+
+      <div class="filters">
+        <button class="filter active" data-server="Tümü">Tümü</button>
+        <button class="filter" data-server="Ephesus">Ephesus</button>
+        <button class="filter" data-server="Teos">Teos</button>
+        <button class="filter" data-server="Pergamon">Pergamon</button>
+        <span class="filter-sep"></span>
+        <select id="category">
+          <option value="Tümü">Tüm Kategoriler</option>
+          <option value="Yang">Yang</option>
+          <option value="Eşya">Eşya</option>
+          <option value="Karakter">Karakter</option>
+          <option value="Hesap">Hesap</option>
+        </select>
+      </div>
+
+      <div id="listings" class="listing-grid"></div>
+    </section>
+
+    <section id="servers" class="section servers">
+      <div class="section-head">
+        <div><span class="eyebrow">SUNUCUNU SEÇ</span><h2>ROYALE2 Dünyası</h2></div>
+      </div>
+      <div class="server-grid">
+        <button class="server-card" data-server-card="Ephesus"><span>EPHESUS</span><small>İlanları Gör →</small></button>
+        <button class="server-card" data-server-card="Teos"><span>TEOS</span><small>İlanları Gör →</small></button>
+        <button class="server-card" data-server-card="Pergamon"><span>PERGAMON</span><small>İlanları Gör →</small></button>
+      </div>
+    </section>
+
+    <section id="how" class="section how">
+      <div class="section-head">
+        <div><span class="eyebrow">BASİT VE HIZLI</span><h2>Nasıl Çalışır?</h2></div>
+      </div>
+      <div class="steps">
+        <div><b>01</b><h3>İlanını Oluştur</h3><p>Sunucunu ve kategorini seçerek ilan bilgilerini gir.</p></div>
+        <div><b>02</b><h3>Alıcıyı Bul</h3><p>İlanını görüntüleyen oyuncular seninle iletişime geçsin.</p></div>
+        <div><b>03</b><h3>Ticareti Tamamla</h3><p>Güvenli iletişim ve doğrulama adımlarıyla işlemini tamamla.</p></div>
+      </div>
+    </section>
+
+    <section id="sell" class="cta">
+      <div><span class="eyebrow">PAZARA KATIL</span><h2>Sen de ilanını yayınla.</h2><p>ROYALE2 oyuncuları için kendi ilanını oluştur.</p></div>
+      <a class="primary" href="#login">Ücretsiz Başla →</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand footer-brand"><span class="brand-mark">R2</span><span><strong>ROYALE2</strong><small>MARKET</small></span></div>
+    <p>© 2026 ROYALE2 MARKET • Ephesus • Teos • Pergamon</p>
+    <div><a href="#">Kurallar</a><a href="#">Gizlilik</a><a href="#">İletişim</a></div>
+  </footer>
+
+  <div id="login" class="modal">
+    <div class="modal-box"><a class="close" href="#">×</a><span class="eyebrow">ROYALE2 MARKET</span><h2>Giriş Yap</h2><p>Bu bölüm V1 tasarımında hazırdır. Gerçek üyelik sistemi sonraki aşamada Supabase ile bağlanacak.</p><input placeholder="Kullanıcı adı veya e-posta"><input placeholder="Şifre" type="password"><button class="primary full">Giriş Yap</button></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

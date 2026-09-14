@@ -35,65 +35,179 @@
 
 <main class="account-page">
 
-  <section class="account-header">
-    <span class="eyebrow">ROYALE2 MARKET</span>
-    <h1>Hesabım</h1>
-    <p>Profil bilgilerini ve hesap durumunu buradan yönetebilirsin.</p>
-  </section>
+  <div class="account-layout">
 
+    <!-- SOL KULLANICI PANELİ -->
+    <aside class="account-sidebar">
 
-  <section class="account-grid">
+      <div class="account-user">
+        <div class="account-avatar">
+          <span id="profile-avatar-letter">P</span>
+        </div>
 
-    <div class="account-card">
-      <h2>Profil Bilgileri</h2>
-
-      <div class="account-row">
-        <span>Kullanıcı Adı</span>
-        <strong id="profile-username">Yükleniyor...</strong>
+        <div class="account-user-info">
+          <strong id="sidebar-username">poweroflions</strong>
+          <span>Royale2 Market Üyesi</span>
+        </div>
       </div>
 
-      <div class="account-row">
-        <span>Görünen Ad</span>
-        <strong id="profile-display-name">Yükleniyor...</strong>
+      <nav class="account-menu">
+
+        <a href="account.html" class="active">
+          <span>👤</span>
+          Hesabım
+        </a>
+
+        <a href="#my-listings">
+          <span>📦</span>
+          İlanlarım
+        </a>
+
+        <a href="#favorites">
+          <span>♥</span>
+          Favorilerim
+        </a>
+
+        <a href="#messages">
+          <span>💬</span>
+          Mesajlarım
+        </a>
+
+        <a href="#security">
+          <span>🛡</span>
+          Güvenlik
+        </a>
+
+      </nav>
+
+      <button
+        type="button"
+        class="account-logout"
+        onclick="logoutUser()"
+      >
+        Çıkış Yap
+      </button>
+
+    </aside>
+
+
+    <!-- SAĞ İÇERİK -->
+    <section class="account-content">
+
+      <div class="account-header">
+        <span class="eyebrow">HESAP YÖNETİMİ</span>
+        <h1>Hesabım</h1>
+        <p>
+          Profil bilgilerini, ilanlarını ve hesap durumunu buradan yönetebilirsin.
+        </p>
       </div>
 
-      <div class="account-row">
-        <span>E-posta</span>
-        <strong id="profile-email">Yükleniyor...</strong>
+
+      <!-- ÖZET KARTLARI -->
+      <div class="account-summary">
+
+        <div class="summary-card">
+          <span>Aktif İlan</span>
+          <strong id="active-listings-count">0</strong>
+          <small>Yayındaki ilanların</small>
+        </div>
+
+        <div class="summary-card">
+          <span>Favorilerim</span>
+          <strong id="favorite-count">0</strong>
+          <small>Kaydettiğin ilanlar</small>
+        </div>
+
+        <div class="summary-card">
+          <span>Hesap Durumu</span>
+          <strong id="verified-status">Hayır</strong>
+          <small>Doğrulanmış hesap</small>
+        </div>
+
       </div>
 
-      <div class="account-row">
-        <span>Üyelik Tarihi</span>
-        <strong id="profile-created-at">Yükleniyor...</strong>
+
+      <!-- PROFİL BİLGİLERİ -->
+      <div class="account-card profile-card">
+
+        <div class="account-card-head">
+          <div>
+            <h2>Profil Bilgileri</h2>
+            <p>Hesabına ait temel bilgiler.</p>
+          </div>
+
+          <button type="button" class="account-edit-btn">
+            Profili Düzenle
+          </button>
+        </div>
+
+
+        <div class="profile-details">
+
+          <div class="profile-field">
+            <span>Kullanıcı Adı</span>
+            <strong id="profile-username">Yükleniyor...</strong>
+          </div>
+
+          <div class="profile-field">
+            <span>Görünen Ad</span>
+            <strong id="profile-display-name">Yükleniyor...</strong>
+          </div>
+
+          <div class="profile-field">
+            <span>E-posta Adresi</span>
+            <strong id="profile-email">Yükleniyor...</strong>
+          </div>
+
+          <div class="profile-field">
+            <span>Üyelik Tarihi</span>
+            <strong id="profile-created-at">Yükleniyor...</strong>
+          </div>
+
+        </div>
+
       </div>
-    </div>
 
 
-    <div class="account-card">
-      <h2>Hesap Özeti</h2>
+      <!-- GÜVENLİK -->
+      <div class="account-card security-card">
 
-      <div class="account-stat">
-        <strong id="active-listings-count">0</strong>
-        <span>Aktif İlan</span>
+        <div class="account-card-head">
+          <div>
+            <h2>Hesap Güvenliği</h2>
+            <p>Hesabının güvenlik durumunu kontrol et.</p>
+          </div>
+        </div>
+
+        <div class="security-row">
+          <div>
+            <strong>E-posta Doğrulaması</strong>
+            <span>Hesabının e-posta doğrulama durumu.</span>
+          </div>
+
+          <span class="security-badge" id="security-verified">
+            Kontrol ediliyor
+          </span>
+        </div>
+
+        <div class="security-row">
+          <div>
+            <strong>Şifre</strong>
+            <span>Hesap şifreni düzenli olarak güncelle.</span>
+          </div>
+
+          <button type="button" class="security-button">
+            Şifre Değiştir
+          </button>
+        </div>
+
       </div>
 
-      <div class="account-stat">
-        <strong id="favorite-count">0</strong>
-        <span>Favori</span>
-      </div>
+    </section>
 
-      <div class="account-stat">
-        <strong id="verified-status">Hayır</strong>
-        <span>Doğrulanmış Hesap</span>
-      </div>
-    </div>
-
-  </section>
+  </div>
 
 </main>
-
-
-<script src="script.js"></script>
 
 <script>
 async function loadAccountPage() {

@@ -456,8 +456,11 @@ if (privateProfile) {
     document.getElementById("verified-status").textContent =
       profile?.is_verified ? "Evet" : "Hayır";
 
-    document.getElementById("account-username").textContent =
-      profile?.username || "Hesabım";
+const accountUsername = document.getElementById("account-username");
+
+if (accountUsername) {
+    accountUsername.textContent = profile?.username || "Hesabım";
+}
 
 
     const listingsResponse = await fetch(

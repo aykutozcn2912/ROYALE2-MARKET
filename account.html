@@ -315,6 +315,35 @@ async function loadAccountPage() {
 
         const profileData = await profileResponse.json();
         const profile = profileData?.[0];
+      const privateResponse = await fetch(
+    `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
+    {
+        headers: {
+            apikey: window.SUPABASE_KEY,
+            Authorization: `Bearer ${accessToken}`
+        }
+    }
+);
+
+const privateData = await privateResponse.json();
+const privateProfile = privateData?.[0];
+
+if (privateProfile) {
+    document.getElementById("edit-phone").value = privateProfile.phone || "";
+    document.getElementById("edit-address").value = privateProfile.address || "";
+
+    const tcInput = document.getElementById("edit-tc");
+    const tcMessage = document.getElementById("tc-lock-message");
+
+    if (privateProfile.tc_identity_no) {
+        tcInput.value = privateProfile.tc_identity_no;
+        tcInput.disabled = true;
+
+        if (tcMessage) {
+            tcMessage.style.display = "block";
+        }
+    }
+}
 
         const username =
             profile?.username ||
@@ -479,6 +508,21 @@ if (editButton && modal) {
 if (saveButton && modal) {
     saveButton.addEventListener("click", async () => {
         const displayName = document.getElementById("edit-display-name").value.trim();
+      
+      const phone = document.getElementById("edit-phone").value.trim();
+const tcInput = document.getElementById("edit-tc");
+const tcIdentityNo = tcInput.value.trim();
+const address = document.getElementById("edit-address").value.trim();
+
+if (!/^05\d{9}$/.test(phone)) {
+    alert("Telefon numarası 05XXXXXXXXX şeklinde 11 haneli olmalıdır.");
+    return;
+}
+
+if (!/^[1-9][0-9]{10}$/.test(tcIdentityNo)) {
+    alert("T.C. Kimlik No 11 haneli olmalıdır.");
+    return;
+}
 
         if (!displayName) {
             alert("Görünen ad boş bırakılamaz.");
@@ -518,6 +562,28 @@ if (saveButton && modal) {
             if (!response.ok) {
                 throw new Error(await response.text());
             }
+          const privateResponse = await fetch(
+    `${window.SUPABASE_API_URL}profile_private?on_conflict=user_id`,
+    {
+        method: "POST",
+        headers: {
+            apikey: window.SUPABASE_KEY,
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+            Prefer: "resolution=merge-duplicates,return=representation"
+        },
+body: JSON.stringify({
+    user_id: user.id,
+    phone: phone,
+    ...(tcInput.disabled ? {} : { tc_identity_no: tcIdentityNo }),
+    address: address
+})
+    }
+);
+
+if (!privateResponse.ok) {
+    throw new Error(await privateResponse.text());
+}
 
             document.getElementById("profile-display-name").textContent = displayName;
 

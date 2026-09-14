@@ -261,7 +261,9 @@
     placeholder="Açık adresinizi yazınız"
     rows="3"
 ></textarea>
-
+<small id="private-lock-message" style="display:none;">
+    Telefon, T.C. Kimlik No ve adres bilgileri kaydedildikten sonra değiştirilemez. Değişiklik için site yönetimiyle iletişime geçiniz.
+</small>
         </div>
 
         <div class="profile-modal-footer">
@@ -529,10 +531,23 @@ if (editButton && modal) {
                 const tcInput = document.getElementById("edit-tc");
                 const addressInput = document.getElementById("edit-address");
                 const tcMessage = document.getElementById("tc-lock-message");
+              const privateLockMessage = document.getElementById("private-lock-message");
 
                 phoneInput.value = privateProfile?.phone || "";
                 addressInput.value = privateProfile?.address || "";
+              addressInput.value = privateProfile?.address || "";
+if (privateLockMessage && (privateProfile?.phone || privateProfile?.tc_identity_no || privateProfile?.address)) {
+    privateLockMessage.style.display = "block";
+} else if (privateLockMessage) {
+    privateLockMessage.style.display = "none";
+}
+if (privateProfile?.phone) {
+    phoneInput.disabled = true;
+}
 
+if (privateProfile?.address) {
+    addressInput.disabled = true;
+}
                 if (privateProfile?.tc_identity_no) {
                     tcInput.value = privateProfile.tc_identity_no;
                     tcInput.disabled = true;

@@ -426,11 +426,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeButton = document.getElementById("profile-modal-close");
     const cancelButton = document.getElementById("profile-edit-cancel");
 
-    if (editButton && modal) {
-        editButton.addEventListener("click", () => {
-            modal.classList.add("active");
-        });
-    }
+if (editButton && modal) {
+    editButton.addEventListener("click", () => {
+        const username = document.getElementById("profile-username")?.textContent || "";
+        const displayName = document.getElementById("profile-display-name")?.textContent || "";
+        const email = document.getElementById("profile-email")?.textContent || "";
+
+        document.getElementById("edit-username").value = username;
+        document.getElementById("edit-display-name").value = displayName;
+        document.getElementById("edit-email").value = email;
+
+        modal.classList.add("active");
+    });
+}
 
     if (closeButton && modal) {
         closeButton.addEventListener("click", () => {

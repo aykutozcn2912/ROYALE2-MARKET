@@ -581,7 +581,7 @@ if (privateProfile?.address) {
 if (saveButton && modal) {
     saveButton.addEventListener("click", async () => {
         const displayName = document.getElementById("edit-display-name").value.trim();
-      
+      const username = document.getElementById("edit-username").value.trim();
       const phone = document.getElementById("edit-phone").value.trim();
 const tcInput = document.getElementById("edit-tc");
 const tcIdentityNo = tcInput.value.trim();
@@ -626,9 +626,10 @@ if (!/^[1-9][0-9]{10}$/.test(tcIdentityNo)) {
                         "Content-Type": "application/json",
                         "Prefer": "return=representation"
                     },
-                    body: JSON.stringify({
-                        display_name: displayName
-                    })
+body: JSON.stringify({
+    username: username,
+    display_name: displayName
+})
                 }
             );
 
@@ -674,16 +675,30 @@ if (Object.keys(privatePayload).length > 1) {
         throw new Error(await privateResponse.text());
     }
 }
-
+const profileUsername = document.getElementById("profile-username");
+if (profileUsername) {
+    profileUsername.textContent = username;
+}
             document.getElementById("profile-display-name").textContent = displayName;
 
             modal.classList.remove("active");
 
             alert("Profil bilgilerin başarıyla güncellendi.");
 
-        } catch (error) {
-            console.error("Profil güncellenemedi:", error);
-            alert("Profil güncellenirken bir hata oluştu.");
+} catch (error) {
+    console.error("Profil güncellenemedi:", error);
+
+    const errorMessage = String(error?.message || error || "");
+
+    if (
+        errorMessage.includes("profiles_username_unique_ci") ||
+        errorMessage.includes("duplicate key value") ||
+        errorMessage.includes("23505")
+    ) {
+        alert("Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin.");
+    } else {
+        alert("Profil güncellenirken bir hata oluştu. Lütfen tekrar deneyin.");
+    }
         } finally {
             saveButton.disabled = false;
             saveButton.textContent = "Değişiklikleri Kaydet";

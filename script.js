@@ -154,4 +154,75 @@ async function loginUser(email, password) {
         console.error("Giriş hatası:", error);
         alert("Giriş sırasında bir hata oluştu.");
     }
+}// ===============================
+// OTURUM / KULLANICI MENÜSÜ
+// ===============================
+
+async function updateUserMenu() {
+  const loginLink = document.querySelector('.login');
+  const savedUser = localStorage.getItem('royale2_user');
+  const accessToken = localStorage.getItem('royale2_access_token');
+
+  if (!loginLink) return;
+
+  if (!savedUser || !accessToken) {
+    loginLink.textContent = 'Giriş Yap';
+    loginLink.href = '#login';
+    return;
+  }
+
+  try {
+    const user = JSON.parse(savedUser);
+
+    const response = await fetch(
+      `${SUPABASE_API_URL}profiles?id=eq.${user.id}&select=username,display_name`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    const profiles = await response.json();
+
+    const profile = profiles?.[0];
+
+    const username =
+      profile?.username ||
+      profile?.display_name ||
+      user.email?.split('@')[0] ||
+      'Hesabım';
+
+    loginLink.textContent = username;
+    loginLink.href = '#';
+    loginLink.id = 'user-menu-link';
+
+  } catch (error) {
+    console.error('Profil bilgisi alınamadı:', error);
+  }
 }
+
+function logoutUser() {
+  localStorage.removeItem('royale2_access_token');
+  localStorage.removeItem('royale2_refresh_token');
+  localStorage.removeItem('royale2_user');
+
+  window.location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateUserMenu();
+
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'user-menu-link') {
+      e.preventDefault();
+
+      const logout = confirm('Çıkış yapmak istiyor musun?');
+
+      if (logout) {
+        logoutUser();
+      }
+    }
+  });
+});

@@ -157,7 +157,6 @@ async function loginUser(email, password) {
     } catch (error) {
         console.error("Giriş hatası:", error);
         alert("Giriş sırasında bir hata oluştu.");
-    }
  }
 async function registerUser(username, displayName, phone, email, password) {
     try {

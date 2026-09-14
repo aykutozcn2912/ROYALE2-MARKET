@@ -1,6 +1,38 @@
 window.SUPABASE_API_URL = "https://rmhupvzeksnqfxdrgmos.supabase.co/rest/v1/";
 window.SUPABASE_KEY = "sb_publishable_alxS7cZ43l46SS1-QyGhYQ_I7O0HNKq";
+async function registerUser({ username, displayName, phone, email, password }) {
+  const supabaseBaseUrl = window.SUPABASE_API_URL.replace("/rest/v1/", "");
 
+  const response = await fetch(`${supabaseBaseUrl}/auth/v1/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": window.SUPABASE_KEY
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+      data: {
+        username: username,
+        display_name: displayName,
+        phone: phone
+      }
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.msg ||
+      data.message ||
+      data.error_description ||
+      "Kullanıcı oluşturulamadı."
+    );
+  }
+
+  return data;
+}
 let listings = [];
 let selectedServer = "Tümü";
 

@@ -136,9 +136,9 @@
             <p>Hesabına ait temel bilgiler.</p>
           </div>
 
-          <button type="button" class="account-edit-btn">
-            Profili Düzenle
-          </button>
+<button type="button" class="account-edit-btn" id="profile-edit-button">
+    Profili Düzenle
+</button>
         </div>
 
 
@@ -206,7 +206,41 @@
     </section>
 
   </div>
+<!-- PROFİL DÜZENLEME PENCERESİ -->
+<div id="profile-edit-modal" class="profile-modal">
+    <div class="profile-modal-box">
 
+        <div class="profile-modal-header">
+            <div>
+                <h2>Profil Bilgilerini Düzenle</h2>
+                <p>Hesabında görünen bilgileri buradan güncelleyebilirsin.</p>
+            </div>
+
+            <button type="button" id="profile-modal-close">×</button>
+        </div>
+
+        <div class="profile-modal-body">
+
+            <label>Kullanıcı Adı</label>
+            <input type="text" id="edit-username" placeholder="Kullanıcı adınız">
+
+            <label>Görünen Ad</label>
+            <input type="text" id="edit-display-name" placeholder="Görünen adınız">
+
+            <label>E-posta Adresi</label>
+            <input type="email" id="edit-email" disabled>
+
+            <small>E-posta adresi güvenlik nedeniyle buradan değiştirilemez.</small>
+
+        </div>
+
+        <div class="profile-modal-footer">
+            <button type="button" id="profile-edit-cancel">Vazgeç</button>
+            <button type="button" id="profile-edit-save">Değişiklikleri Kaydet</button>
+        </div>
+
+    </div>
+</div>
 </main>
   
 <script src="script.js"></script>

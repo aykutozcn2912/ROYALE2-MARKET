@@ -158,6 +158,48 @@ async function loginUser(email, password) {
         console.error("Giriş hatası:", error);
         alert("Giriş sırasında bir hata oluştu.");
     }
+async function registerUser(username, displayName, phone, email, password) {
+    try {
+        const response = await fetch(
+            `${SUPABASE_API_URL.replace('/rest/v1/', '/') }auth/v1/signup`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": SUPABASE_KEY
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    data: {
+                        username: username,
+                        display_name: displayName,
+                        phone: phone
+                    }
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error_description ||
+                data.msg ||
+                data.message ||
+                "Kayıt oluşturulamadı."
+            );
+        }
+
+        return data;
+
+    } catch (error) {
+        console.error("Kayıt hatası:", error);
+        throw error;
+    }
+}
+
+ 
 }// ===============================
 // OTURUM / KULLANICI MENÜSÜ
 // ===============================
@@ -256,4 +298,117 @@ document.addEventListener('DOMContentLoaded', () => {
       existingMenu.remove();
     }
   });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const registerButton = document.getElementById("register-button");
+
+    if (!registerButton) return;
+
+    registerButton.addEventListener("click", async () => {
+        const username = document.getElementById("register-username").value.trim();
+        const displayName = document.getElementById("register-display-name").value.trim();
+        const phone = document.getElementById("register-phone").value.trim();
+        const email = document.getElementById("register-email").value.trim();
+        const password = document.getElementById("register-password").value;
+        const passwordConfirm = document.getElementById("register-password-confirm").value;
+        const termsAccepted = document.getElementById("register-terms").checked;
+        const message = document.getElementById("register-message");
+
+        const reservedUsernames = [
+            "admin",
+            "administrator",
+            "moderator",
+            "mod",
+            "royale2",
+            "support",
+            "destek",
+            "system"
+        ];
+
+        message.textContent = "";
+
+        if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+            message.textContent = "Kullanıcı adı 3-20 karakter olmalı ve sadece harf, rakam veya alt çizgi içermelidir.";
+            return;
+        }
+
+        if (username.startsWith("_") || username.endsWith("_") || username.includes("__")) {
+            message.textContent = "Kullanıcı adı alt çizgi ile başlayamaz, bitemez veya çift alt çizgi içeremez.";
+            return;
+        }
+
+        if (reservedUsernames.includes(username.toLowerCase())) {
+            message.textContent = "Bu kullanıcı adı kullanılamaz.";
+            return;
+        }
+
+        if (!displayName) {
+            message.textContent = "Lütfen adınızı ve soyadınızı girin.";
+            return;
+        }
+
+        if (!/^05\d{9}$/.test(phone)) {
+            message.textContent = "Telefon numarası 05XXXXXXXXX formatında 11 haneli olmalıdır.";
+            return;
+        }
+
+        if (!email) {
+            message.textContent = "Lütfen e-posta adresinizi girin.";
+            return;
+        }
+
+        if (password.length < 8) {
+            message.textContent = "Şifre en az 8 karakter olmalıdır.";
+            return;
+        }
+
+        if (password !== passwordConfirm) {
+            message.textContent = "Şifreler eşleşmiyor.";
+            return;
+        }
+
+        if (!termsAccepted) {
+            message.textContent = "Kullanım koşullarını ve gizlilik politikasını kabul etmelisiniz.";
+            return;
+        }
+
+        try {
+            registerButton.disabled = true;
+            registerButton.textContent = "Hesap oluşturuluyor...";
+
+            await registerUser(
+                username,
+                displayName,
+                phone,
+                email,
+                password
+            );
+
+            message.textContent = "Hesabınız başarıyla oluşturuldu. E-posta doğrulaması açıksa gelen kutunuzu kontrol edin.";
+
+        } catch (error) {
+            const errorText = String(error?.message || error || "");
+
+            if (
+                errorText.includes("already registered") ||
+                errorText.includes("User already registered")
+            ) {
+                message.textContent = "Bu e-posta adresi zaten kayıtlı.";
+            } else if (
+                errorText.includes("duplicate key value") ||
+                errorText.includes("profiles_username_unique_ci")
+            ) {
+                message.textContent = "Bu kullanıcı adı zaten kullanılıyor.";
+            } else {
+                message.textContent = "Hesap oluşturulurken bir hata oluştu.";
+            }
+
+            console.error(error);
+        } finally {
+            registerButton.disabled = false;
+            registerButton.textContent = "Hesap Oluştur";
+        }
+    });
 });

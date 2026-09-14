@@ -106,10 +106,43 @@
     <div><a href="#">Kurallar</a><a href="#">Gizlilik</a><a href="#">İletişim</a></div>
   </footer>
 
-  <div id="login" class="modal">
-    <div class="modal-box"><a class="close" href="#">×</a><span class="eyebrow">ROYALE2 MARKET</span><h2>Giriş Yap</h2><p>Bu bölüm V1 tasarımında hazırdır. Gerçek üyelik sistemi sonraki aşamada Supabase ile bağlanacak.</p><input placeholder="Kullanıcı adı veya e-posta"><input placeholder="Şifre" type="password"><button class="primary full">Giriş Yap</button></div>
+<div id="login" class="modal">
+  <div class="modal-box">
+    <a class="close" href="#">×</a>
+
+    <span class="eyebrow">ROYALE2 MARKET</span>
+    <h2>Giriş Yap</h2>
+
+    <p>Hesabınla giriş yaparak ilanlarını yönetebilirsin.</p>
+
+    <input id="login-email" type="email" placeholder="E-posta">
+
+    <input id="login-password" type="password" placeholder="Şifre">
+
+    <button id="login-button" class="primary full" type="button">
+      Giriş Yap
+    </button>
   </div>
+</div>
 
   <script src="script.js"></script>
-</body>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const loginButton = document.getElementById("login-button");
+
+  if (loginButton) {
+    loginButton.addEventListener("click", () => {
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+
+      if (!email || !password) {
+        alert("E-posta ve şifre gir.");
+        return;
+      }
+
+      loginUser(email, password);
+    });
+  }
+});
+</script></body>
 </html>

@@ -455,3 +455,142 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================
+   PROFİL DÜZENLEME MODALI
+========================= */
+
+.profile-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.profile-modal.active {
+    display: flex;
+}
+
+.profile-modal-box {
+    width: 100%;
+    max-width: 520px;
+    background: #0d1621;
+    border: 1px solid #26384b;
+    border-radius: 8px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+}
+
+.profile-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 22px 24px;
+    border-bottom: 1px solid #213142;
+}
+
+.profile-modal-header h2 {
+    margin: 0 0 6px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.profile-modal-header p {
+    margin: 0;
+    color: #7890a8;
+    font-size: 13px;
+}
+
+#profile-modal-close {
+    background: transparent;
+    border: none;
+    color: #8ca0b5;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+#profile-modal-close:hover {
+    color: #ffffff;
+}
+
+.profile-modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.profile-modal-body label {
+    color: #c8d4df;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.profile-modal-body input {
+    width: 100%;
+    box-sizing: border-box;
+    background: #08111b;
+    border: 1px solid #26394c;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 12px 14px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.profile-modal-body input:focus {
+    border-color: #168eea;
+    box-shadow: 0 0 0 3px rgba(22, 142, 234, 0.12);
+}
+
+.profile-modal-body input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.profile-modal-body small {
+    color: #61778c;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.profile-modal-footer {
+    padding: 18px 24px;
+    border-top: 1px solid #213142;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#profile-edit-cancel,
+#profile-edit-save {
+    padding: 11px 17px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#profile-edit-cancel {
+    background: #141f2b;
+    border: 1px solid #304255;
+    color: #b7c5d3;
+}
+
+#profile-edit-save {
+    background: #087ed0;
+    border: 1px solid #1598ed;
+    color: white;
+}
+
+#profile-edit-save:hover {
+    background: #1094e8;
+}

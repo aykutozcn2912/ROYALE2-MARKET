@@ -113,3 +113,45 @@ document.querySelectorAll("[data-server-card]").forEach(card => {
 });
 
 loadListings();
+// ===============================
+// SUPABASE GİRİŞ SİSTEMİ
+// ===============================
+
+async function loginUser(email, password) {
+    try {
+        const response = await fetch(
+            `${SUPABASE_API_URL.replace('/rest/v1/', '')}/auth/v1/token?grant_type=password`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": SUPABASE_KEY
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert("Giriş başarısız: " + (data.error_description || data.msg || "E-posta veya şifre hatalı."));
+            return;
+        }
+
+        localStorage.setItem("royale2_access_token", data.access_token);
+        localStorage.setItem("royale2_refresh_token", data.refresh_token);
+        localStorage.setItem("royale2_user", JSON.stringify(data.user));
+
+        alert("Giriş başarılı!");
+
+        window.location.hash = "";
+        window.location.reload();
+
+    } catch (error) {
+        console.error("Giriş hatası:", error);
+        alert("Giriş sırasında bir hata oluştu.");
+    }
+}

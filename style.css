@@ -594,3 +594,61 @@
 #profile-edit-save:hover {
     background: #1094e8;
 }
+/* ÜYE OL MODAL */
+#register .modal-box {
+  width: min(460px, calc(100% - 32px));
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+#register .modal-box label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#register .modal-box input[type="text"],
+#register .modal-box input[type="email"],
+#register .modal-box input[type="tel"],
+#register .modal-box input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 13px;
+  border: 1px solid #24364a;
+  background: #0d1722;
+  color: #fff;
+  border-radius: 4px;
+  outline: none;
+}
+
+#register .modal-box input:focus {
+  border-color: #2ea8ff;
+}
+
+#register .register-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#register .register-consent input {
+  margin-top: 3px;
+}
+
+#register-button {
+  width: 100%;
+  margin-top: 18px;
+}
+
+#register-username-message,
+#register-message {
+  display: block;
+  margin-top: 7px;
+  font-size: 12px;
+  line-height: 1.4;
+}

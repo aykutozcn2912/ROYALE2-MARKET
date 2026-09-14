@@ -410,13 +410,13 @@ document.addEventListener("DOMContentLoaded", () => {
             registerButton.disabled = true;
             registerButton.textContent = "Hesap oluşturuluyor...";
 
-            await registerUser(
-                username,
-                displayName,
-                phone,
-                email,
-                password
-            );
+await registerUser({
+    username,
+    displayName,
+    phone,
+    email,
+    password
+});
 
             message.textContent = "Hesabınız başarıyla oluşturuldu. E-posta doğrulaması açıksa gelen kutunuzu kontrol edin.";
 

@@ -64,3 +64,134 @@
   background: #25171b;
   color: #ff9b9b;
 }
+
+
+/* ===============================
+   HESABIM SAYFASI
+================================ */
+
+.account-page {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 70px 0 90px;
+}
+
+.account-header {
+  margin-bottom: 28px;
+}
+
+.account-header .eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: #49aef3;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.account-header h1 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 34px;
+}
+
+.account-header p {
+  margin: 0;
+  color: #8191a5;
+  font-size: 14px;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 22px;
+}
+
+.account-card {
+  background: #0d131c;
+  border: 1px solid #223247;
+  padding: 24px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.account-card h2 {
+  margin: 0 0 22px;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #1d2a3a;
+}
+
+.account-row:last-child {
+  border-bottom: 0;
+}
+
+.account-row span {
+  color: #7f90a6;
+  font-size: 13px;
+}
+
+.account-row strong {
+  color: #ffffff;
+  font-size: 14px;
+  text-align: right;
+}
+
+.account-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid #1d2a3a;
+}
+
+.account-stat:last-child {
+  border-bottom: 0;
+}
+
+.account-stat strong {
+  color: #49aef3;
+  font-size: 28px;
+}
+
+.account-stat span {
+  color: #95a5b8;
+  font-size: 13px;
+}
+
+#verified-status {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+@media (max-width: 850px) {
+  .account-page {
+    width: min(100% - 24px, 1180px);
+    padding: 40px 0 60px;
+  }
+
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-header h1 {
+    font-size: 28px;
+  }
+
+  .account-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .account-row strong {
+    text-align: left;
+  }
+}

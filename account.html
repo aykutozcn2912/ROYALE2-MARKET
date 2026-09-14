@@ -420,7 +420,38 @@ async function loadAccountPage() {
     console.error("Hesap bilgileri yüklenemedi:", error);
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const editButton = document.getElementById("profile-edit-button");
+    const modal = document.getElementById("profile-edit-modal");
+    const closeButton = document.getElementById("profile-modal-close");
+    const cancelButton = document.getElementById("profile-edit-cancel");
 
+    if (editButton && modal) {
+        editButton.addEventListener("click", () => {
+            modal.classList.add("active");
+        });
+    }
+
+    if (closeButton && modal) {
+        closeButton.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+    }
+
+    if (cancelButton && modal) {
+        cancelButton.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+    }
+
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("active");
+            }
+        });
+    }
+});
 document.addEventListener("DOMContentLoaded", loadAccountPage);
 </script>
 

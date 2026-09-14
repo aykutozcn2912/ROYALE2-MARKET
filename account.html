@@ -635,27 +635,44 @@ if (!/^[1-9][0-9]{10}$/.test(tcIdentityNo)) {
             if (!response.ok) {
                 throw new Error(await response.text());
             }
-          const privateResponse = await fetch(
-    `${window.SUPABASE_API_URL}profile_private?on_conflict=user_id`,
-    {
-        method: "POST",
-        headers: {
-            apikey: window.SUPABASE_KEY,
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-            Prefer: "resolution=merge-duplicates,return=representation"
-        },
-body: JSON.stringify({
-    user_id: user.id,
-    phone: phone,
-    ...(tcInput.disabled ? {} : { tc_identity_no: tcIdentityNo }),
-    address: address
-})
-    }
-);
 
-if (!privateResponse.ok) {
-    throw new Error(await privateResponse.text());
+const privatePayload = {
+    user_id: user.id
+};
+
+// Sadece henüz kilitlenmemiş alanları gönder
+if (!document.getElementById("edit-phone").disabled) {
+    privatePayload.phone = phone;
+}
+
+if (!document.getElementById("edit-tc").disabled) {
+    privatePayload.tc_identity_no = tcIdentityNo;
+}
+
+if (!document.getElementById("edit-address").disabled) {
+    privatePayload.address = address;
+}
+
+// user_id dışında kaydedilecek yeni bilgi varsa Supabase'e gönder
+if (Object.keys(privatePayload).length > 1) {
+
+    const privateResponse = await fetch(
+        `${window.SUPABASE_API_URL}profile_private?on_conflict=user_id`,
+        {
+            method: "POST",
+            headers: {
+                apikey: window.SUPABASE_KEY,
+                Authorization: `Bearer ${accessToken}`,
+                "Content-Type": "application/json",
+                Prefer: "resolution=merge-duplicates,return=representation"
+            },
+            body: JSON.stringify(privatePayload)
+        }
+    );
+
+    if (!privateResponse.ok) {
+        throw new Error(await privateResponse.text());
+    }
 }
 
             document.getElementById("profile-display-name").textContent = displayName;

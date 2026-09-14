@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const menu = document.createElement('div');
       menu.id = 'user-dropdown';
       menu.innerHTML = `
-        <a href="#account">Hesabım</a>
+        <a href="account.html">Hesabım</a>
         <a href="#my-listings">İlanlarım</a>
         <a href="#favorites">Favorilerim</a>
         <button type="button" id="logout-button">Çıkış Yap</button>

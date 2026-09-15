@@ -1300,7 +1300,39 @@ async function initActiveConversation() {
         }
 
         const conversation = conversations[0];
+// Karşı tarafın kullanıcı bilgilerini belirle
+const otherUserId =
+    conversation.buyer_id === currentUserId
+        ? conversation.seller_id
+        : conversation.buyer_id;
 
+// Karşı tarafın profilini getir
+const profileResponse = await fetch(
+    `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(otherUserId)}&select=username,display_name`,
+    {
+        headers: {
+            "apikey": window.SUPABASE_KEY,
+            "Authorization": `Bearer ${accessToken}`
+        }
+    }
+);
+
+if (profileResponse.ok) {
+    const profiles = await profileResponse.json();
+
+    if (profiles.length > 0) {
+        const otherProfile = profiles[0];
+
+        const chatUsername = document.getElementById("chatUsername");
+
+        if (chatUsername) {
+            chatUsername.textContent =
+                otherProfile.username ||
+                otherProfile.display_name ||
+                "Royale2 Kullanıcısı";
+        }
+    }
+}
         // Güvenlik kontrolü
         if (
             conversation.buyer_id !== currentUserId &&

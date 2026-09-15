@@ -818,6 +818,30 @@ return;
         }
 
         const listing = listings[0];
+// İlan sahibinin kullanıcı adını getir
+let sellerUsername = "Kullanıcı";
+
+try {
+  const profileResponse = await fetch(
+    `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(listing.user_id)}&select=username`,
+    {
+      headers: {
+        "apikey": window.SUPABASE_KEY
+      }
+    }
+  );
+
+  if (profileResponse.ok) {
+    const profiles = await profileResponse.json();
+
+    if (profiles && profiles.length > 0 && profiles[0].username) {
+      sellerUsername = profiles[0].username;
+    }
+  }
+} catch (profileError) {
+  console.error("Satıcı bilgisi alınamadı:", profileError);
+}
+      
 // İlana ait görselleri getir
 const imagesResponse = await fetch(
     `${window.SUPABASE_API_URL}listing_images?listing_id=eq.${encodeURIComponent(listingId)}&select=*&order=sort_order.asc`,
@@ -876,6 +900,11 @@ if (listingImages.length > 0 && listingImages[0].image_url) {
         };
 
         // Bilgileri ekrana yaz
+      const sellerElement = document.getElementById("listingSeller");
+
+if (sellerElement) {
+    sellerElement.textContent = sellerUsername;
+}
         document.getElementById("listingServer").textContent =
             serverNames[listing.server_id] || "Sunucu";
 

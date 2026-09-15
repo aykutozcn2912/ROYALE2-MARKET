@@ -501,3 +501,172 @@ return;
         sidebarUsername.textContent = "Kullanıcı";
     }
 })();
+
+
+/* ==================================================
+   İLAN FORMU - GERÇEK KAYIT SİSTEMİ
+================================================== */
+
+async function createListingInDatabase(listingData, accessToken) {
+
+    const response = await fetch(
+        `${window.SUPABASE_API_URL}listings`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": window.SUPABASE_KEY,
+                "Authorization": `Bearer ${accessToken}`,
+                "Prefer": "return=representation"
+            },
+            body: JSON.stringify(listingData)
+        }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        console.error("İlan oluşturma hatası:", data);
+        throw new Error(
+            data.message ||
+            data.details ||
+            "İlan oluşturulamadı."
+        );
+    }
+
+    return data[0];
+}
+
+/* ==================================================
+   İLAN FORMU - FORM VERİLERİNİ TOPLA VE KAYDET
+================================================== */
+
+(function initListingSubmit() {
+
+    const form = document.getElementById("createListingForm");
+
+    // Sadece ilan oluşturma sayfasında çalışır
+    if (!form) return;
+
+    form.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const accessToken = localStorage.getItem("royale2_access_token");
+
+        let storedUser = {};
+
+        try {
+            storedUser = JSON.parse(
+                localStorage.getItem("royale2_user") || "{}"
+            );
+        } catch (error) {
+            console.error("Kullanıcı bilgisi okunamadı:", error);
+        }
+
+        // Kullanıcı kontrolü
+        if (!accessToken || !storedUser.id) {
+            alert("İlan verebilmek için hesabınıza giriş yapmanız gerekiyor.");
+            window.location.href = "/";
+            return;
+        }
+
+        // Seçilen sunucu ve kategori
+        const selectedServer = form.querySelector(
+            'input[name="server"]:checked'
+        );
+
+        const selectedCategory = form.querySelector(
+            'input[name="category"]:checked'
+        );
+
+        // İlan alanları
+        const title = document.getElementById("listingTitle");
+        const description = document.getElementById("listingDescription");
+        const price = document.getElementById("listingPrice");
+
+        const message = document.getElementById("listingFormMessage");
+        const publishButton = document.getElementById("publishListingButton");
+
+        // Eksik seçim kontrolü
+        if (!selectedServer) {
+            alert("Lütfen bir sunucu seçin.");
+            return;
+        }
+
+        if (!selectedCategory) {
+            alert("Lütfen bir kategori seçin.");
+            return;
+        }
+
+        if (!title || !title.value.trim()) {
+            alert("Lütfen ilan başlığını girin.");
+            return;
+        }
+
+        if (!price || Number(price.value) <= 0) {
+            alert("Lütfen geçerli bir satış fiyatı girin.");
+            return;
+        }
+
+        const listingData = {
+            user_id: storedUser.id,
+            server_id: Number(selectedServer.value),
+            category_id: Number(selectedCategory.value),
+            title: title.value.trim(),
+            description: description ? description.value.trim() : null,
+            price: Number(price.value),
+            currency: "TRY",
+            status: "active"
+        };
+
+        try {
+
+            if (publishButton) {
+                publishButton.disabled = true;
+                publishButton.textContent = "İlan Yayınlanıyor...";
+            }
+
+            if (message) {
+                message.textContent = "İlanınız oluşturuluyor...";
+            }
+
+            const createdListing = await createListingInDatabase(
+                listingData,
+                accessToken
+            );
+
+            console.log("İlan başarıyla oluşturuldu:", createdListing);
+
+            if (message) {
+                message.textContent = "İlanınız başarıyla yayınlandı.";
+            }
+
+            alert("İlanınız başarıyla yayınlandı!");
+
+        } catch (error) {
+
+            console.error("İlan yayınlama hatası:", error);
+
+            if (message) {
+                message.textContent =
+                    error.message || "İlan yayınlanırken bir hata oluştu.";
+            }
+
+            alert(
+                "İlan yayınlanamadı: " +
+                (error.message || "Bilinmeyen hata")
+            );
+
+        } finally {
+
+            if (publishButton) {
+                publishButton.disabled = false;
+                publishButton.textContent = "İlanı Yayınla";
+            }
+
+        }
+
+    });
+
+})();

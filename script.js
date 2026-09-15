@@ -536,6 +536,87 @@ async function createListingInDatabase(listingData, accessToken) {
 
     return data[0];
 }
+async function uploadListingImages(files, listingId, userId, accessToken) {
+    if (!files || files.length === 0) return [];
+
+    const supabaseBaseUrl = window.SUPABASE_API_URL.replace("/rest/v1/", "");
+    const uploadedImages = [];
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        // Güvenlik kontrolleri
+        const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+        if (!allowedTypes.includes(file.type)) {
+            throw new Error("Sadece JPG, PNG veya WEBP görseller yüklenebilir.");
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            throw new Error("Her görsel en fazla 5 MB olabilir.");
+        }
+
+        const extension = file.name.split(".").pop().toLowerCase();
+        const fileName =
+            `${userId}/${listingId}/${Date.now()}-${i}.${extension}`;
+
+        // Görseli Storage'a yükle
+        const uploadResponse = await fetch(
+            `${supabaseBaseUrl}/storage/v1/object/listing-images/${fileName}`,
+            {
+                method: "POST",
+                headers: {
+                    "apikey": window.SUPABASE_KEY,
+                    "Authorization": `Bearer ${accessToken}`,
+                    "Content-Type": file.type,
+                    "x-upsert": "false"
+                },
+                body: file
+            }
+        );
+
+        if (!uploadResponse.ok) {
+            const errorText = await uploadResponse.text();
+            console.error("Görsel yükleme hatası:", errorText);
+            throw new Error("Görsel yüklenemedi.");
+        }
+
+        // Public görsel adresi
+        const imageUrl =
+            `${supabaseBaseUrl}/storage/v1/object/public/listing-images/${fileName}`;
+
+        // listing_images tablosuna kaydet
+        const databaseResponse = await fetch(
+            `${window.SUPABASE_API_URL}listing_images`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": window.SUPABASE_KEY,
+                    "Authorization": `Bearer ${accessToken}`,
+                    "Prefer": "return=representation"
+                },
+                body: JSON.stringify({
+                    listing_id: listingId,
+                    image_url: imageUrl,
+                    sort_order: i
+                })
+            }
+        );
+
+        if (!databaseResponse.ok) {
+            const errorData = await databaseResponse.text();
+            console.error("Görsel kayıt hatası:", errorData);
+            throw new Error("Görsel bilgisi kaydedilemedi.");
+        }
+
+        uploadedImages.push(imageUrl);
+    }
+
+    return uploadedImages;
+}
+
+
 
 /* ==================================================
    İLAN FORMU - FORM VERİLERİNİ TOPLA VE KAYDET

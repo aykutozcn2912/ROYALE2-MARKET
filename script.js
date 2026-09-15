@@ -945,8 +945,11 @@ if (contactSellerButton) {
         return;
       }
 
-      const tokenData = JSON.parse(accessToken);
-      const currentUserId = tokenData.user?.id;
+const currentUser = JSON.parse(
+  localStorage.getItem("royale2_user") || "null"
+);
+
+const currentUserId = currentUser?.id;
 
       if (!currentUserId) {
         alert("Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.");

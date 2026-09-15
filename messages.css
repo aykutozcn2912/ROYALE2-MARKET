@@ -1,406 +1,494 @@
 /* =====================================================
    ROYALE2 MARKET - MESAJLAR
-   SADECE MESSAGES SAYFASI
+   TEMİZ / UYUMLU SÜRÜM
    ===================================================== */
 
 .messages-page {
-    min-height: calc(100vh - 80px) !important;
-    padding: 40px 20px !important;
-    background: #070b10 !important;
-    color: #f5f7fa !important;
-    box-sizing: border-box !important;
+    min-height: calc(100vh - 80px);
+    padding: 40px 20px;
+    background: #070b10;
+    color: #f5f7fa;
+    box-sizing: border-box;
 }
 
 .messages-page *,
 .messages-page *::before,
 .messages-page *::after {
-    box-sizing: border-box !important;
+    box-sizing: border-box;
 }
 
-/* ANA KUTU */
-
-.messages-page .messages-container {
-    width: 100% !important;
-    max-width: 1250px !important;
-    height: 720px !important;
-    margin: 0 auto !important;
-
-    display: grid !important;
-    grid-template-columns: 340px minmax(0, 1fr) !important;
-
-    background: #0c131c !important;
-    border: 1px solid #1d2b3a !important;
-    border-radius: 14px !important;
-    overflow: hidden !important;
-}
 
 /* =====================================================
-   SOL TARAF
+   ANA MESAJ KUTUSU
+   ===================================================== */
+
+.messages-page .messages-container {
+    width: 100%;
+    max-width: 1250px;
+    height: 720px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+
+    background: #0c131c;
+    border: 1px solid #1d2b3a;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   SOL TARAF - KONUŞMALAR
    ===================================================== */
 
 .messages-page .conversations-panel {
-    width: 340px !important;
-    min-width: 340px !important;
-    height: 100% !important;
+    width: 340px;
+    min-width: 340px;
+    height: 100%;
 
-    display: block !important;
-    background: #0a1018 !important;
-    border-right: 1px solid #1d2b3a !important;
-    overflow-y: auto !important;
+    background: #0a1018;
+    border-right: 1px solid #1d2b3a;
+
+    overflow-y: auto;
 }
 
 .messages-page .messages-panel-title {
-    padding: 24px !important;
-    border-bottom: 1px solid #1d2b3a !important;
+    padding: 24px;
+    border-bottom: 1px solid #1d2b3a;
 }
 
 .messages-page .messages-panel-title h2 {
-    margin: 0 !important;
-    font-size: 21px !important;
-    color: #fff !important;
+    margin: 0;
+    font-size: 21px;
+    color: #fff;
 }
 
 .messages-page #conversationList {
-    width: 100% !important;
-    padding: 12px !important;
+    width: 100%;
+    padding: 12px;
 }
 
 .messages-page .conversation-item {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
+    display: block;
+    width: 100%;
 
-    padding: 16px !important;
-    margin: 0 0 8px 0 !important;
+    padding: 16px;
+    margin: 0 0 8px;
 
-    text-align: left !important;
-    color: #fff !important;
-    background: #101923 !important;
+    text-align: left;
 
-    border: 1px solid #1d2b3a !important;
-    border-radius: 10px !important;
+    color: #fff;
+    background: #101923;
 
-    cursor: pointer !important;
+    border: 1px solid #1d2b3a;
+    border-radius: 10px;
+
+    cursor: pointer;
 }
 
 .messages-page .conversation-item:hover,
 .messages-page .conversation-item.active {
-    background: #152231 !important;
-    border-color: #2e80c7 !important;
+    background: #152231;
+    border-color: #2e80c7;
 }
 
 .messages-page .conversation-item strong {
-    display: block !important;
-    margin-bottom: 6px !important;
-    font-size: 15px !important;
-    color: #fff !important;
+    display: block;
+    margin-bottom: 6px;
+
+    color: #fff;
+    font-size: 15px;
 }
 
 .messages-page .conversation-item small {
-    display: block !important;
-    color: #8193a8 !important;
-    font-size: 12px !important;
+    display: block;
+
+    color: #8193a8;
+    font-size: 12px;
 }
 
+
 /* =====================================================
-   SAĞ SOHBET PANELİ
+   SAĞ TARAF - SOHBET PANELİ
    ===================================================== */
 
 .messages-page .chat-panel {
-    width: 100% !important;
-    min-width: 0 !important;
-    height: 100% !important;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
 
-    position: relative !important;
-    display: block !important;
+    position: relative;
 
-    background: #0c131c !important;
-    overflow: hidden !important;
+    background: #0c131c;
+    overflow: hidden;
 }
 
+
+/* =====================================================
+   KONUŞMA SEÇİLMEDİ EKRANI
+   ÖNEMLİ: BURADA !important KULLANMIYORUZ
+   ===================================================== */
+
 .messages-page .chat-empty {
-    width: 100% !important;
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
 
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
+    display: flex;
 
-    text-align: center !important;
-    color: #8193a8 !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: #8193a8;
 }
 
 .messages-page .chat-empty h2 {
-    margin: 0 0 10px !important;
-    color: #fff !important;
+    margin: 0 0 10px;
+    color: #fff;
 }
 
-/* AKTİF SOHBET */
-
-.messages-page #chatArea {
-    width: 100% !important;
-    height: 100% !important;
-    min-width: 0 !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-
-    background: #0c131c !important;
-    overflow: hidden !important;
+.messages-page .chat-empty p {
+    margin: 0;
 }
+
 
 /* =====================================================
-   SOHBET BAŞLIĞI
+   AKTİF SOHBET
+   ÖNEMLİ:
+   HTML'deki style="display:none" başlangıçta geçerli kalmalı.
+   JavaScript konuşmayı açınca display:flex yapacak.
+   ===================================================== */
+
+.messages-page #chatArea {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+
+    flex-direction: column;
+
+    background: #0c131c;
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   SOHBET ÜST BİLGİ
    ===================================================== */
 
 .messages-page .chat-header {
-    width: 100% !important;
-    min-height: 78px !important;
-    flex: 0 0 auto !important;
+    width: 100%;
+    min-height: 78px;
+    flex: 0 0 auto;
 
-    padding: 18px 24px !important;
+    padding: 18px 24px;
 
-    display: flex !important;
-    align-items: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    background: #0e1721 !important;
-    border-bottom: 1px solid #1d2b3a !important;
+    background: #0e1721;
+    border-bottom: 1px solid #1d2b3a;
+}
+
+.messages-page .chat-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.messages-page .chat-user-avatar {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #1976c9;
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.messages-page .chat-user-details {
+    min-width: 0;
+}
+
+.messages-page .chat-user-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .messages-page .chat-header strong {
-    display: block !important;
-    color: #fff !important;
-    font-size: 17px !important;
+    display: block;
+
+    color: #fff;
+    font-size: 17px;
 }
 
 .messages-page .chat-header small {
-    display: block !important;
-    margin-top: 4px !important;
-    color: #8193a8 !important;
+    display: block;
+    margin-top: 4px;
+
+    color: #8193a8;
 }
+
+.messages-page .chat-status-dot {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+    background: #35c46a;
+}
+
+.messages-page .chat-header-badge {
+    padding: 7px 10px;
+
+    border: 1px solid #24445f;
+    border-radius: 6px;
+
+    color: #70b9f4;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
 
 /* =====================================================
    MESAJ LİSTESİ
    ===================================================== */
 
-.messages-page .message-list,
-.messages-page #messageList {
-    width: 100% !important;
-    min-width: 0 !important;
+.messages-page #messageList,
+.messages-page .message-list {
+    width: 100%;
+    min-width: 0;
 
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
+    flex: 1 1 auto;
+    min-height: 0;
 
-    padding: 25px !important;
+    padding: 25px;
 
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
+    display: flex;
+    flex-direction: column;
 
-    gap: 12px !important;
+    gap: 12px;
 
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+
 
 /* =====================================================
-   MESAJ SATIRI
+   JAVASCRIPT'İN OLUŞTURDUĞU MESAJ SATIRLARI
    ===================================================== */
 
-.messages-page .message {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
+.messages-page .message-item {
+    width: 100%;
+    max-width: 100%;
 
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
+    display: flex;
 
-    margin: 0 !important;
-    padding: 0 !important;
-
-    float: none !important;
-    position: static !important;
+    margin: 0;
+    padding: 0;
 }
 
-.messages-page .message.own,
-.messages-page .message.sent,
-.messages-page .message.mine {
-    align-items: flex-end !important;
+.messages-page .message-received {
+    justify-content: flex-start;
 }
+
+.messages-page .message-sent {
+    justify-content: flex-end;
+}
+
 
 /* =====================================================
    MESAJ BALONU
    ===================================================== */
 
 .messages-page .message-bubble {
-    display: block !important;
+    width: auto;
+    min-width: 60px;
+    max-width: 70%;
 
-    width: auto !important;
-    min-width: 60px !important;
-    max-width: 70% !important;
+    padding: 11px 15px;
 
-    height: auto !important;
-    min-height: 38px !important;
+    background: #182330;
+    color: #fff;
 
-    padding: 11px 15px !important;
-    margin: 0 !important;
+    border-radius: 14px;
 
-    background: #182330 !important;
-    color: #fff !important;
+    line-height: 1.45;
+    font-size: 14px;
 
-    border: none !important;
-    border-radius: 14px !important;
-
-    line-height: 1.45 !important;
-    font-size: 14px !important;
-
-    white-space: normal !important;
-    word-break: break-word !important;
-    overflow-wrap: anywhere !important;
-
-    float: none !important;
-    position: static !important;
-    transform: none !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
-/* JavaScript own sınıfını doğrudan balona veriyorsa */
-
-.messages-page .message-bubble.own,
-.messages-page .message-bubble.sent,
-.messages-page .message-bubble.mine {
-    margin-left: auto !important;
-    margin-right: 0 !important;
-
-    background: #1976c9 !important;
-    color: #fff !important;
+.messages-page .message-bubble.own {
+    background: #1976c9;
+    color: #fff;
 }
 
-/* own sınıfı mesajın dış kutusundaysa */
+.messages-page .message-text {
+    margin: 0;
 
-.messages-page .message.own .message-bubble,
-.messages-page .message.sent .message-bubble,
-.messages-page .message.mine .message-bubble {
-    margin-left: auto !important;
-    margin-right: 0 !important;
+    color: inherit;
+    font-size: 14px;
 
-    background: #1976c9 !important;
-    color: #fff !important;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
-/* Mesaj içindeki metinler */
+.messages-page .message-time {
+    display: block;
 
-.messages-page .message-bubble p,
-.messages-page .message-bubble span,
-.messages-page .message-bubble div {
-    width: auto !important;
-    max-width: 100% !important;
+    margin-top: 5px;
 
-    margin: 0 !important;
-
-    white-space: normal !important;
-    word-break: break-word !important;
-    overflow-wrap: anywhere !important;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    text-align: right;
 }
+
 
 /* =====================================================
    GÜVENLİK UYARISI
    ===================================================== */
 
 .messages-page .phone-warning {
-    width: auto !important;
-    flex: 0 0 auto !important;
+    width: auto;
+    flex: 0 0 auto;
 
-    margin: 0 24px 14px !important;
-    padding: 11px 14px !important;
+    margin: 0 24px 14px;
+    padding: 11px 14px;
 
-    background: rgba(218, 165, 32, 0.08) !important;
-    border: 1px solid rgba(218, 165, 32, 0.35) !important;
-    border-radius: 8px !important;
+    background: rgba(218, 165, 32, 0.08);
+    border: 1px solid rgba(218, 165, 32, 0.35);
+    border-radius: 8px;
 
-    color: #d6b85f !important;
-    font-size: 12px !important;
+    color: #d6b85f;
+    font-size: 12px;
 
-    white-space: normal !important;
-    overflow-wrap: break-word !important;
+    line-height: 1.45;
 }
+
 
 /* =====================================================
    MESAJ YAZMA ALANI
    ===================================================== */
 
-.messages-page .message-form,
-.messages-page #messageForm {
-    width: 100% !important;
-    flex: 0 0 auto !important;
+.messages-page #messageForm,
+.messages-page .message-form {
+    width: 100%;
+    flex: 0 0 auto;
 
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-end !important;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 
-    gap: 12px !important;
-    padding: 18px 24px !important;
+    gap: 12px;
 
-    background: #0a1018 !important;
-    border-top: 1px solid #1d2b3a !important;
+    padding: 18px 24px;
+
+    background: #0a1018;
+    border-top: 1px solid #1d2b3a;
 }
 
 .messages-page #messageInput {
-    display: block !important;
+    display: block;
 
-    width: auto !important;
-    min-width: 0 !important;
+    width: auto;
+    min-width: 0;
 
-    flex: 1 1 auto !important;
+    flex: 1 1 auto;
 
-    min-height: 48px !important;
-    max-height: 120px !important;
+    min-height: 48px;
+    max-height: 120px;
 
-    padding: 13px 15px !important;
+    padding: 13px 15px;
 
-    resize: none !important;
+    resize: none;
 
-    background: #101923 !important;
-    border: 1px solid #26384a !important;
-    border-radius: 9px !important;
+    background: #101923;
+    border: 1px solid #26384a;
+    border-radius: 9px;
 
-    outline: none !important;
+    outline: none;
 
-    color: #fff !important;
-    font-family: inherit !important;
-    font-size: 14px !important;
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 14px;
 }
 
 .messages-page #messageInput:focus {
-    border-color: #2e80c7 !important;
+    border-color: #2e80c7;
 }
 
 .messages-page #messageInput::placeholder {
-    color: #6f8093 !important;
+    color: #6f8093;
 }
 
-.messages-page .message-form button,
-.messages-page #messageForm button {
-    display: block !important;
+.messages-page #messageForm button,
+.messages-page .message-form button {
+    width: auto;
+    min-width: 105px;
+    height: 48px;
 
-    width: auto !important;
-    min-width: 105px !important;
-    height: 48px !important;
+    flex: 0 0 auto;
 
-    flex: 0 0 auto !important;
+    padding: 0 22px;
 
-    padding: 0 22px !important;
+    border: 0;
+    border-radius: 9px;
 
-    border: 0 !important;
-    border-radius: 9px !important;
+    background: #2585d8;
+    color: #fff;
 
-    background: #2585d8 !important;
-    color: #fff !important;
+    font-weight: 700;
 
-    font-weight: 700 !important;
-    cursor: pointer !important;
+    cursor: pointer;
 }
+
+.messages-page #messageForm button:hover,
+.messages-page .message-form button:hover {
+    background: #3193e7;
+}
+
+
+/* =====================================================
+   BOŞ KONUŞMA LİSTESİ
+   ===================================================== */
+
+.messages-page .no-conversations {
+    padding: 20px 12px;
+
+    color: #8193a8;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.messages-page .no-conversations strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #fff;
+}
+
 
 /* =====================================================
    MOBİL
@@ -409,28 +497,41 @@
 @media (max-width: 800px) {
 
     .messages-page {
-        padding: 15px !important;
+        padding: 15px;
     }
 
     .messages-page .messages-container {
-        height: calc(100vh - 120px) !important;
-        grid-template-columns: 1fr !important;
+        height: calc(100vh - 120px);
+
+        grid-template-columns: 1fr;
     }
 
     .messages-page .conversations-panel {
-        display: none !important;
+        display: none;
     }
 
     .messages-page .message-bubble {
-        max-width: 85% !important;
+        max-width: 85%;
     }
 
-    .messages-page .message-form,
-    .messages-page #messageForm {
-        padding: 12px !important;
+    .messages-page #messageForm,
+    .messages-page .message-form {
+        padding: 12px;
     }
 
     .messages-page .phone-warning {
-        margin: 0 12px 10px !important;
+        margin: 0 12px 10px;
+    }
+
+    .messages-page .chat-header {
+        padding: 14px;
+    }
+
+    .messages-page .chat-header-badge {
+        display: none;
+    }
+
+    .messages-page #messageList {
+        padding: 16px;
     }
 }

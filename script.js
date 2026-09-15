@@ -1090,3 +1090,115 @@ async function initContactSellerButton() {
 }
 
 initContactSellerButton();
+initContactSellerButton();
+// ==========================================
+// MESAJLAR SAYFASI
+// ==========================================
+
+async function initMessagesPage() {
+  const conversationList = document.getElementById("conversationList");
+
+  // messages.html sayfasında değilsek çalışmasın
+  if (!conversationList) return;
+
+  const accessToken = localStorage.getItem("royale2_access_token");
+  const userData = localStorage.getItem("royale2_user");
+
+  if (!accessToken || !userData) {
+    alert("Mesajları görüntülemek için giriş yapmalısınız.");
+    window.location.href = "account.html";
+    return;
+  }
+
+  const currentUser = JSON.parse(userData);
+  const currentUserId = currentUser.id;
+
+  try {
+    // Kullanıcının alıcı olduğu konuşmalar
+    const buyerResponse = await fetch(
+      `${window.SUPABASE_API_URL}conversations?buyer_id=eq.${encodeURIComponent(currentUserId)}&select=*&order=created_at.desc`,
+      {
+        headers: {
+          "apikey": window.SUPABASE_KEY,
+          "Authorization": `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    // Kullanıcının satıcı olduğu konuşmalar
+    const sellerResponse = await fetch(
+      `${window.SUPABASE_API_URL}conversations?seller_id=eq.${encodeURIComponent(currentUserId)}&select=*&order=created_at.desc`,
+      {
+        headers: {
+          "apikey": window.SUPABASE_KEY,
+          "Authorization": `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    if (!buyerResponse.ok || !sellerResponse.ok) {
+      throw new Error("Konuşmalar alınamadı.");
+    }
+
+    const buyerConversations = await buyerResponse.json();
+    const sellerConversations = await sellerResponse.json();
+
+    // İki listeyi birleştir
+    const conversations = [
+      ...buyerConversations,
+      ...sellerConversations
+    ];
+
+    // Aynı konuşma iki kere gelirse temizle
+    const uniqueConversations = Array.from(
+      new Map(conversations.map(item => [item.id, item])).values()
+    );
+
+    // Yeniden eskiye sırala
+    uniqueConversations.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+
+    if (uniqueConversations.length === 0) {
+      conversationList.innerHTML = `
+        <div class="no-conversations">
+          <strong>Henüz mesajınız yok.</strong>
+          <p>Bir ilandaki "Satıcıyla İletişime Geç" butonunu kullanarak konuşma başlatabilirsiniz.</p>
+        </div>
+      `;
+      return;
+    }
+
+    conversationList.innerHTML = "";
+
+    uniqueConversations.forEach(conversation => {
+      const item = document.createElement("button");
+
+      item.type = "button";
+      item.className = "conversation-item";
+
+      item.innerHTML = `
+        <strong>İlan Görüşmesi</strong>
+        <small>${new Date(conversation.created_at).toLocaleString("tr-TR")}</small>
+      `;
+
+      item.addEventListener("click", () => {
+        window.location.href =
+          `messages.html?conversation=${encodeURIComponent(conversation.id)}`;
+      });
+
+      conversationList.appendChild(item);
+    });
+
+  } catch (error) {
+    console.error("Mesajlar yüklenirken hata:", error);
+
+    conversationList.innerHTML = `
+      <div class="no-conversations">
+        Konuşmalar yüklenemedi.
+      </div>
+    `;
+  }
+}
+
+initMessagesPage();

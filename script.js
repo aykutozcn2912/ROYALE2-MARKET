@@ -4218,39 +4218,73 @@ async function initUnreadMessagesBadge() {
 }// ==========================================================
 // OKUNMAMIS MESAJ SAYACI - REALTIME
 // ==========================================================
+async function startUnreadMessagesRealtime() {
+    try {
+        const accessToken = await getValidAccessToken();
 
-function startUnreadMessagesRealtime() {
-const client = window.realtimeClient;
+        if (!accessToken) {
+            console.log("Unread Realtime: Kullanıcı giriş yapmamış.");
+            return;
+        }
 
-    if (!client) {
-        console.error("Unread Realtime: Supabase client bulunamadi.");
-        return;
-    }
+        if (
+            typeof supabase === "undefined" ||
+            typeof supabase.createClient !== "function"
+        ) {
+            console.error("Unread Realtime: Supabase kütüphanesi hazır değil.");
+            return;
+        }
 
-    // Ayni kanal daha once acildiysa tekrar acma
-    if (window.unreadMessagesRealtimeChannel) {
-        return;
-    }
+        if (window.unreadMessagesRealtimeChannel) {
+            return;
+        }
 
-    window.unreadMessagesRealtimeChannel = client
-        .channel("unread-messages-badge")
-        .on(
-            "postgres_changes",
+        const client = supabase.createClient(
+            window.SUPABASE_API_URL.replace("/rest/v1/", ""),
+            window.SUPABASE_KEY,
             {
-                event: "*",
-                schema: "public",
-                table: "messages"
-            },
-            async () => {
-                await initUnreadMessagesBadge();
+                auth: {
+                    persistSession: false,
+                    autoRefreshToken: false
+                }
             }
-        )
-        .subscribe((status) => {
-            console.log(
-                "Unread mesaj sayaci Realtime:",
-                status
-            );
-        });
+        );
+
+        await client.realtime.setAuth(accessToken);
+
+        window.unreadMessagesRealtimeClient = client;
+
+        window.unreadMessagesRealtimeChannel = client
+            .channel("unread-messages-badge")
+            .on(
+                "postgres_changes",
+                {
+                    event: "*",
+                    schema: "public",
+                    table: "messages"
+                },
+                async (payload) => {
+                    console.log(
+                        "UNREAD REALTIME EVENT:",
+                        payload
+                    );
+
+                    await initUnreadMessagesBadge();
+                }
+            )
+            .subscribe((status) => {
+                console.log(
+                    "Unread mesaj sayacı Realtime:",
+                    status
+                );
+            });
+
+    } catch (error) {
+        console.error(
+            "Unread Realtime başlatılamadı:",
+            error
+        );
+    }
 }
 // ==========================================================
 // SAYFAYI BAŞLAT

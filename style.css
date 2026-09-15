@@ -2817,3 +2817,57 @@ body > main .listing .listing-image img {
         margin-bottom: 13px;
     }
 }
+/* =========================================================
+   İLAN DETAY - ÇOKLU GÖRSEL KÜÇÜK ÖNİZLEMELER
+   ========================================================= */
+
+.listing-image-thumbnails {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 4px 0;
+    overflow-x: auto;
+    align-items: center;
+}
+
+.listing-image-thumbnail {
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid #1e2a39;
+    border-radius: 6px;
+    background: #0b1017;
+    cursor: pointer;
+    opacity: 0.72;
+    transition:
+        border-color 0.2s ease,
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.listing-image-thumbnail:hover {
+    opacity: 1;
+    border-color: #36a9ff;
+    transform: translateY(-2px);
+}
+
+.listing-image-thumbnail.active {
+    opacity: 1;
+    border-color: #36a9ff;
+}
+
+@media (max-width: 850px) {
+    .listing-image-thumbnails {
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .listing-image-thumbnail {
+        width: 60px;
+        height: 60px;
+        flex-basis: 60px;
+    }
+}

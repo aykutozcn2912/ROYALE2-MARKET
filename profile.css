@@ -1,1 +1,1321 @@
+/* =========================================================
+   ROYALE2 MARKET
+   PUBLIC SELLER PROFILE - PROFESSIONAL UI
+   ========================================================= */
 
+.r2-profile-page,
+.r2-profile-page *,
+.r2-profile-page *::before,
+.r2-profile-page *::after {
+    box-sizing: border-box;
+}
+
+.r2-profile-page {
+    --r2-bg: #060a0f;
+    --r2-panel: #0c131c;
+    --r2-panel-2: #101923;
+    --r2-panel-3: #131f2b;
+    --r2-border: #1d2d3d;
+    --r2-border-light: #29445d;
+    --r2-blue: #2388df;
+    --r2-blue-light: #55b4ff;
+    --r2-text: #f4f8fc;
+    --r2-muted: #8194a9;
+    --r2-muted-2: #61758b;
+    --r2-green: #36c978;
+
+    min-height: calc(100vh - 70px);
+    padding: 36px 20px 80px;
+
+    background:
+        radial-gradient(
+            circle at 72% -10%,
+            rgba(35, 136, 223, 0.14),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 10% 45%,
+            rgba(26, 91, 145, 0.06),
+            transparent 28%
+        ),
+        var(--r2-bg);
+
+    color: var(--r2-text);
+}
+
+.r2-profile-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.r2-profile-breadcrumb {
+    min-height: 34px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 14px;
+
+    color: var(--r2-muted-2);
+    font-size: 12px;
+}
+
+.r2-profile-breadcrumb a {
+    color: #91a6ba;
+    text-decoration: none;
+
+    transition: color .18s ease;
+}
+
+.r2-profile-breadcrumb a:hover {
+    color: var(--r2-blue-light);
+}
+
+
+/* =========================================================
+   ANA PROFİL KARTI
+   ========================================================= */
+
+.r2-profile-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.012),
+            transparent 45%
+        ),
+        var(--r2-panel);
+
+    border: 1px solid var(--r2-border);
+    border-radius: 18px;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+
+/* =========================================================
+   PROFİL KAPAK
+   ========================================================= */
+
+.r2-profile-cover {
+    position: relative;
+
+    height: 145px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(42, 151, 240, .24),
+            transparent 30%
+        ),
+        linear-gradient(
+            105deg,
+            #102b42 0%,
+            #0d1d2b 45%,
+            #0b141d 100%
+        );
+}
+
+.r2-profile-cover::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 13px
+        );
+
+    pointer-events: none;
+}
+
+.r2-profile-cover::after {
+    content: "ROYALE2 MARKET";
+
+    position: absolute;
+    right: 30px;
+    bottom: 19px;
+
+    color: rgba(255,255,255,.055);
+
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 4px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   PROFİL ANA BİLGİ
+   ========================================================= */
+
+.r2-profile-main {
+    position: relative;
+
+    min-height: 118px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+
+    padding: 0 32px 27px;
+}
+
+.r2-profile-identity {
+    min-width: 0;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.r2-profile-avatar {
+    position: relative;
+
+    width: 112px;
+    height: 112px;
+    flex: 0 0 112px;
+
+    margin-top: -47px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #319cf2,
+            #1265aa
+        );
+
+    border: 5px solid var(--r2-panel);
+    border-radius: 50%;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.38),
+        0 0 0 1px rgba(76,167,239,.18);
+
+    color: #fff;
+
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: .6px;
+}
+
+.r2-profile-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   KULLANICI BİLGİSİ
+   ========================================================= */
+
+.r2-profile-info {
+    min-width: 0;
+    padding-top: 18px;
+}
+
+.r2-profile-name-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.r2-profile-name-line h1 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.2;
+
+    letter-spacing: -.3px;
+
+    word-break: break-word;
+}
+
+.r2-verified {
+    width: 21px;
+    height: 21px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--r2-blue);
+
+    border: 2px solid rgba(255,255,255,.13);
+    border-radius: 50%;
+
+    box-shadow: 0 0 16px rgba(35,136,223,.28);
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.r2-profile-role {
+    position: relative;
+
+    margin: 7px 0 0;
+    padding-left: 15px;
+
+    color: #9aabba;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.r2-profile-role::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    transform: translateY(-50%);
+
+    background: var(--r2-green);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 3px rgba(54,201,120,.08),
+        0 0 10px rgba(54,201,120,.25);
+}
+
+.r2-profile-member {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--r2-muted-2);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PROFİL BUTONLARI
+   ========================================================= */
+
+.r2-profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding-top: 17px;
+}
+
+.r2-profile-button {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 19px;
+
+    background: #111c27;
+
+    border: 1px solid #2a4156;
+    border-radius: 9px;
+
+    color: #e7f0f8;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.02);
+
+    transition:
+        background .18s ease,
+        border-color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+.r2-profile-button:hover {
+    background: #172635;
+
+    border-color: #3a6f9d;
+
+    transform: translateY(-1px);
+}
+
+.r2-profile-button.primary {
+    background:
+        linear-gradient(
+            180deg,
+            #2a94eb,
+            #1e7dca
+        );
+
+    border-color: #3398e9;
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 22px rgba(26,126,207,.18),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.r2-profile-button.primary:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #39a2f5,
+            #2588da
+        );
+
+    border-color: #4aacf7;
+
+    box-shadow:
+        0 10px 26px rgba(26,126,207,.25);
+}
+
+
+/* =========================================================
+   İSTATİSTİKLER
+   ========================================================= */
+
+.r2-profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.008),
+            transparent
+        ),
+        #091119;
+
+    border-top: 1px solid var(--r2-border);
+}
+
+.r2-profile-stat {
+    position: relative;
+
+    min-height: 91px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 17px 12px;
+
+    text-align: center;
+
+    border-right: 1px solid var(--r2-border);
+}
+
+.r2-profile-stat:last-child {
+    border-right: 0;
+}
+
+.r2-profile-stat strong {
+    display: block;
+
+    color: #fff;
+
+    font-size: 23px;
+    font-weight: 850;
+    line-height: 1;
+}
+
+.r2-profile-stat span {
+    display: block;
+
+    margin-top: 9px;
+
+    color: #70849a;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .75px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ALT YAPI
+   ========================================================= */
+
+.r2-profile-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    align-items: start;
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+.r2-profile-section {
+    min-width: 0;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.009),
+            transparent 50%
+        ),
+        var(--r2-panel);
+
+    border: 1px solid var(--r2-border);
+    border-radius: 14px;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.12);
+}
+
+
+/* =========================================================
+   BÖLÜM BAŞLIĞI
+   ========================================================= */
+
+.r2-section-header {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 0 21px;
+
+    background: rgba(255,255,255,.008);
+
+    border-bottom: 1px solid var(--r2-border);
+}
+
+.r2-section-header h2 {
+    position: relative;
+
+    margin: 0;
+    padding-left: 13px;
+
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.r2-section-header h2::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    width: 4px;
+    height: 17px;
+
+    transform: translateY(-50%);
+
+    background: var(--r2-blue);
+
+    border-radius: 4px;
+}
+
+.r2-section-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 52px;
+    min-height: 25px;
+
+    padding: 4px 10px;
+
+    background: rgba(35,136,223,.10);
+
+    border: 1px solid rgba(67,159,232,.25);
+    border-radius: 20px;
+
+    color: #6abaff;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   İLAN GRID
+   ========================================================= */
+
+.r2-profile-listings {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+
+    padding: 18px;
+}
+
+
+/* =========================================================
+   İLAN KARTI
+   ========================================================= */
+
+.r2-profile-listing {
+    position: relative;
+
+    min-width: 0;
+    min-height: 145px;
+
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.012),
+            transparent 55%
+        ),
+        var(--r2-panel-2);
+
+    border: 1px solid #1e3041;
+    border-radius: 11px;
+
+    color: inherit;
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.10);
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
+}
+
+.r2-profile-listing::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(42,151,240,.55),
+            transparent
+        );
+
+    opacity: 0;
+
+    transition: opacity .18s ease;
+}
+
+.r2-profile-listing:hover {
+    transform: translateY(-3px);
+
+    background: #121e2a;
+
+    border-color: #3174aa;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.20);
+}
+
+.r2-profile-listing:hover::after {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   İLAN RESMİ
+   ========================================================= */
+
+.r2-listing-image {
+    position: relative;
+
+    min-height: 145px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle,
+            #132233,
+            #080d13
+        );
+
+    border-right: 1px solid #1d2d3d;
+
+    color: #405c75;
+
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.r2-listing-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform .28s ease;
+}
+
+.r2-profile-listing:hover .r2-listing-image img {
+    transform: scale(1.035);
+}
+
+
+/* =========================================================
+   İLAN BİLGİLERİ
+   ========================================================= */
+
+.r2-listing-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 16px;
+}
+
+.r2-listing-title {
+    margin: 0;
+
+    display: -webkit-box;
+    overflow: hidden;
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    color: #f5f8fb;
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.45;
+}
+
+.r2-listing-meta {
+    margin-top: 7px;
+
+    color: #6f8398;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.r2-listing-price {
+    margin-top: auto;
+    padding-top: 13px;
+
+    color: var(--r2-blue-light);
+
+    font-size: 19px;
+    font-weight: 900;
+
+    letter-spacing: -.25px;
+}
+
+
+/* =========================================================
+   BOŞ / YÜKLENİYOR DURUMU
+   ========================================================= */
+
+.r2-profile-state {
+    grid-column: 1 / -1;
+
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #74879b;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.r2-profile-state::before {
+    content: "R2";
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    background: #101d29;
+
+    border: 1px solid #21394e;
+    border-radius: 12px;
+
+    color: #3f87bf;
+
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.r2-profile-state strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #eaf1f7;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SAĞ PANEL
+   ========================================================= */
+
+.r2-profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.r2-side-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.012),
+            transparent 55%
+        ),
+        var(--r2-panel);
+
+    border: 1px solid var(--r2-border);
+    border-radius: 14px;
+
+    box-shadow:
+        0 16px 40px rgba(0,0,0,.10);
+}
+
+.r2-side-card h3 {
+    position: relative;
+
+    margin: 0 0 13px;
+    padding-left: 12px;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.r2-side-card h3::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 2px;
+
+    width: 3px;
+    height: 15px;
+
+    background: var(--r2-blue);
+
+    border-radius: 3px;
+}
+
+.r2-side-card p {
+    margin: 0;
+
+    color: #8194a8;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.r2-profile-bio {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   GÜVENLİ TİCARET
+   ========================================================= */
+
+.r2-safe-card {
+    background:
+        radial-gradient(
+            circle at 100% 0,
+            rgba(35,136,223,.10),
+            transparent 38%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.01),
+            transparent
+        ),
+        var(--r2-panel);
+}
+
+.r2-safe-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(41,145,230,.17),
+            rgba(41,145,230,.07)
+        );
+
+    border: 1px solid rgba(64,160,238,.25);
+    border-radius: 11px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    font-size: 19px;
+}
+
+.r2-safety-list {
+    margin: 17px 0 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.r2-safety-list li {
+    position: relative;
+
+    margin-top: 11px;
+    padding-left: 20px;
+
+    color: #8194a8;
+
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+.r2-safety-list li::before {
+    content: "✓";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    color: #48aaf6;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   HATA EKRANI
+   ========================================================= */
+
+.r2-profile-error {
+    display: none;
+
+    max-width: 700px;
+
+    margin: 70px auto;
+    padding: 45px 30px;
+
+    text-align: center;
+
+    background: var(--r2-panel);
+
+    border: 1px solid #352a31;
+    border-radius: 15px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.20);
+}
+
+.r2-profile-error::before {
+    content: "!";
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 16px;
+
+    background: rgba(220,75,75,.08);
+
+    border: 1px solid rgba(220,75,75,.20);
+    border-radius: 50%;
+
+    color: #e77b7b;
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.r2-profile-error h2 {
+    margin: 0 0 9px;
+
+    color: #fff;
+
+    font-size: 21px;
+}
+
+.r2-profile-error p {
+    margin: 0 0 21px;
+
+    color: #8799aa;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.r2-profile-page ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.r2-profile-page ::-webkit-scrollbar-track {
+    background: #091019;
+}
+
+.r2-profile-page ::-webkit-scrollbar-thumb {
+    background: #263b4e;
+    border-radius: 10px;
+}
+
+.r2-profile-page ::-webkit-scrollbar-thumb:hover {
+    background: #31516c;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .r2-profile-content {
+        grid-template-columns: minmax(0, 1fr) 280px;
+    }
+
+    .r2-profile-listings {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    .r2-profile-page {
+        padding-top: 24px;
+    }
+
+    .r2-profile-content {
+        grid-template-columns: 1fr;
+    }
+
+    .r2-profile-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   MOBİL
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+    .r2-profile-page {
+        padding:
+            18px
+            12px
+            45px;
+    }
+
+    .r2-profile-breadcrumb {
+        margin-bottom: 10px;
+    }
+
+    .r2-profile-card {
+        border-radius: 13px;
+    }
+
+    .r2-profile-cover {
+        height: 105px;
+    }
+
+    .r2-profile-cover::after {
+        right: 15px;
+        bottom: 12px;
+
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+
+    .r2-profile-main {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+
+        padding:
+            0
+            18px
+            20px;
+    }
+
+    .r2-profile-identity {
+        align-items: flex-start;
+        gap: 13px;
+    }
+
+    .r2-profile-avatar {
+        width: 88px;
+        height: 88px;
+        flex-basis: 88px;
+
+        margin-top: -34px;
+
+        border-width: 4px;
+
+        font-size: 21px;
+    }
+
+    .r2-profile-info {
+        padding-top: 12px;
+    }
+
+    .r2-profile-name-line h1 {
+        font-size: 20px;
+    }
+
+    .r2-profile-role {
+        font-size: 11px;
+    }
+
+    .r2-profile-member {
+        font-size: 10px;
+    }
+
+    .r2-profile-actions {
+        width: 100%;
+
+        padding-top: 0;
+    }
+
+    .r2-profile-button {
+        flex: 1;
+
+        min-height: 42px;
+    }
+
+    .r2-profile-stat {
+        min-height: 77px;
+        padding: 12px 5px;
+    }
+
+    .r2-profile-stat strong {
+        font-size: 19px;
+    }
+
+    .r2-profile-stat span {
+        margin-top: 7px;
+
+        font-size: 8px;
+        letter-spacing: .35px;
+    }
+
+    .r2-profile-content {
+        gap: 14px;
+        margin-top: 14px;
+    }
+
+    .r2-section-header {
+        min-height: 57px;
+        padding: 0 15px;
+    }
+
+    .r2-profile-listings {
+        grid-template-columns: 1fr;
+
+        padding: 12px;
+    }
+
+    .r2-profile-listing {
+        grid-template-columns:
+            105px
+            minmax(0, 1fr);
+
+        min-height: 125px;
+    }
+
+    .r2-listing-image {
+        min-height: 125px;
+    }
+
+    .r2-listing-info {
+        padding: 13px;
+    }
+
+    .r2-listing-price {
+        font-size: 17px;
+    }
+
+    .r2-profile-sidebar {
+        display: flex;
+    }
+}
+
+
+/* =========================================================
+   KÜÇÜK TELEFON
+   ========================================================= */
+
+@media (max-width: 470px) {
+
+    .r2-profile-cover {
+        height: 92px;
+    }
+
+    .r2-profile-identity {
+        width: 100%;
+    }
+
+    .r2-profile-avatar {
+        width: 74px;
+        height: 74px;
+        flex-basis: 74px;
+
+        margin-top: -28px;
+
+        font-size: 18px;
+    }
+
+    .r2-profile-name-line h1 {
+        font-size: 18px;
+    }
+
+    .r2-profile-actions {
+        flex-direction: column;
+    }
+
+    .r2-profile-button {
+        width: 100%;
+    }
+
+    .r2-profile-stat {
+        min-width: 0;
+    }
+
+    .r2-profile-stat strong {
+        font-size: 17px;
+    }
+
+    .r2-profile-stat span {
+        white-space: normal;
+        line-height: 1.3;
+    }
+
+    .r2-profile-listing {
+        grid-template-columns:
+            92px
+            minmax(0, 1fr);
+    }
+
+    .r2-listing-title {
+        font-size: 13px;
+    }
+
+    .r2-listing-price {
+        font-size: 16px;
+    }
+}

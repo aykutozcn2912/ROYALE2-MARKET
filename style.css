@@ -1975,3 +1975,63 @@
         padding: 12px;
     }
 }
+
+/* =========================================
+   MESAJ BALONLARI - GONDEREN / ALICI
+========================================= */
+
+.message-item {
+    display: flex;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.message-item.message-sent {
+    justify-content: flex-end;
+}
+
+.message-item.message-received {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    max-width: 68%;
+    padding: 11px 14px 8px;
+    border-radius: 10px;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+/* Benim gönderdiğim mesaj */
+.message-sent .message-bubble {
+    background: linear-gradient(135deg, #1268a8, #0b4f82);
+    border: 1px solid #2384cc;
+    border-bottom-right-radius: 3px;
+    color: #ffffff;
+}
+
+/* Karşı tarafın mesajı */
+.message-received .message-bubble {
+    background: #151d26;
+    border: 1px solid #2a3745;
+    border-bottom-left-radius: 3px;
+    color: #e9eef4;
+}
+
+.message-text {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: pre-wrap;
+}
+
+.message-time {
+    display: block;
+    margin-top: 5px;
+    font-size: 10px;
+    opacity: 0.62;
+    text-align: right;
+}
+
+.message-received .message-time {
+    text-align: left;
+}

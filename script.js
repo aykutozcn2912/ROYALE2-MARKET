@@ -835,7 +835,31 @@ if (!imagesResponse.ok) {
 const listingImages = await imagesResponse.json();
 
 console.log("İlan görselleri:", listingImages);
-        // Sunucu isimleri
+// İlanın ana görselini göster
+const mainImage = document.getElementById("listingMainImage");
+const imagePlaceholder = document.getElementById("listingImagePlaceholder");
+
+if (listingImages.length > 0 && listingImages[0].image_url) {
+    if (mainImage) {
+        mainImage.src = listingImages[0].image_url;
+        mainImage.style.display = "block";
+    }
+
+    if (imagePlaceholder) {
+        imagePlaceholder.style.display = "none";
+    }
+} else {
+    if (mainImage) {
+        mainImage.style.display = "none";
+    }
+
+    if (imagePlaceholder) {
+        imagePlaceholder.style.display = "flex";
+    }
+}
+      
+      
+      // Sunucu isimleri
         const serverNames = {
             1: "Ephesus",
             2: "Teos",

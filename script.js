@@ -4284,6 +4284,9 @@ async function startUnreadMessagesRealtime() {
                     );
 
                     await initUnreadMessagesBadge();
+                  if (document.getElementById("conversationList")) {
+    await initMessagesPage();
+}
                 }
             )
             .subscribe((status) => {

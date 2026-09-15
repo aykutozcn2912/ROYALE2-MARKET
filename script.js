@@ -3868,15 +3868,6 @@ function initMessageForm() {
             )}&select=buyer_id,seller_id`
           );
 
-        if (
-    !conversation ||
-    (
-        conversation.buyer_id !== currentUser.id &&
-        conversation.seller_id !== currentUser.id
-    )
-) {
-
-}
 
 
         if (

@@ -937,7 +937,7 @@ if (contactSellerButton) {
 
     try {
       // Giriş yapan kullanıcıyı kontrol et
-      const accessToken = localStorage.getItem("sb-access-token");
+      const accessToken = localStorage.getItem("royale2_access_token");
 
       if (!accessToken) {
         alert("Mesaj gönderebilmek için giriş yapmalısınız.");

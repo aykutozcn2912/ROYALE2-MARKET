@@ -929,7 +929,45 @@ if (sellerElement) {
 
         // İlanı göster
         detailContainer.style.display = "";
+// Satıcıyla İletişime Geç butonu
+const contactSellerButton = document.getElementById("contactSellerButton");
 
+if (contactSellerButton) {
+  contactSellerButton.addEventListener("click", async () => {
+
+    try {
+      // Giriş yapan kullanıcıyı kontrol et
+      const accessToken = localStorage.getItem("sb-access-token");
+
+      if (!accessToken) {
+        alert("Mesaj gönderebilmek için giriş yapmalısınız.");
+        window.location.href = "account.html";
+        return;
+      }
+
+      const tokenData = JSON.parse(accessToken);
+      const currentUserId = tokenData.user?.id;
+
+      if (!currentUserId) {
+        alert("Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.");
+        return;
+      }
+
+      // Kendi ilanına mesaj gönderemez
+      if (currentUserId === listing.user_id) {
+        alert("Kendi ilanınıza mesaj gönderemezsiniz.");
+        return;
+      }
+
+      alert("Mesajlaşma sistemi çalışıyor!");
+
+    } catch (error) {
+      console.error("İletişim butonu hatası:", error);
+      alert("Bir hata oluştu.");
+    }
+
+  });
+}
         const descriptionSection =
             document.getElementById("listingDescriptionSection");
 

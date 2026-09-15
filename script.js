@@ -1176,9 +1176,15 @@ async function initMessagesPage() {
       }
     );
 
-    if (!buyerResponse.ok || !sellerResponse.ok) {
-      throw new Error("Konuşmalar alınamadı.");
-    }
+if (!buyerResponse.ok || !sellerResponse.ok) {
+    const buyerError = await buyerResponse.text();
+    const sellerError = await sellerResponse.text();
+
+    console.error("BUYER HATASI:", buyerResponse.status, buyerError);
+    console.error("SELLER HATASI:", sellerResponse.status, sellerError);
+
+    throw new Error("Konuşmalar alınamadı.");
+}
 
     const buyerConversations = await buyerResponse.json();
     const sellerConversations = await sellerResponse.json();

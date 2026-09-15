@@ -2838,7 +2838,7 @@ function renderMessage(
 
 let messagesRealtimeChannel = null;
 
-function startMessagesRealtime(conversationId, currentUserId) {
+async function startMessagesRealtime(conversationId, currentUserId) {
     if (!conversationId || !currentUserId) {
         return;
     }
@@ -2847,65 +2847,105 @@ function startMessagesRealtime(conversationId, currentUserId) {
         typeof supabase === "undefined" ||
         !supabase.createClient
     ) {
-        console.error("Supabase Realtime istemcisi yüklenemedi.");
+        console.error("Supabase Realtime istemcisi yüklenmedi.");
         return;
     }
 
     if (messagesRealtimeChannel) {
         try {
-            messagesRealtimeChannel.unsubscribe();
+            await messagesRealtimeChannel.unsubscribe();
         } catch (error) {
-            console.error("Eski Realtime bağlantısı kapatılamadı:", error);
+            console.error(
+                "Eski Realtime bağlantısı kapatılamadı:",
+                error
+            );
         }
 
         messagesRealtimeChannel = null;
     }
 
-    const realtimeClient = supabase.createClient(
-        window.SUPABASE_API_URL.replace("/rest/v1/", ""),
-        window.SUPABASE_KEY
-    );
+    try {
+        // Mevcut giriş yapan kullanıcının access token'ını al
+        const accessToken = await getValidAccessToken();
 
-    messagesRealtimeChannel = realtimeClient
-        .channel(
-            "messages-" + conversationId
-        )
-        .on(
-            "postgres_changes",
-            {
-                event: "INSERT",
-                schema: "public",
-                table: "messages",
-                filter:
-                    "conversation_id=eq." +
-                    conversationId
-            },
-            payload => {
-              console.log("REALTIME MESAJ GELDİ:", payload);
-              
-                const messageList =
-                    document.getElementById("messageList");
-
-                if (!messageList || !payload.new) {
-                    return;
-                }
-
-                renderMessage(
-                    messageList,
-                    payload.new,
-                    currentUserId
-                );
-
-                messageList.scrollTop =
-                    messageList.scrollHeight;
-            }
-        )
-        .subscribe(status => {
-            console.log(
-                "Mesaj Realtime durumu:",
-                status
+        if (!accessToken) {
+            console.error(
+                "Realtime için kullanıcı access token bulunamadı."
             );
-        });
+            return;
+        }
+
+        const realtimeClient = supabase.createClient(
+            window.SUPABASE_API_URL.replace("/rest/v1/", ""),
+            window.SUPABASE_KEY,
+            {
+                auth: {
+                    persistSession: false,
+                    autoRefreshToken: false
+                }
+            }
+        );
+
+        // Realtime bağlantısını giriş yapan kullanıcının JWT'si ile doğrula
+        await realtimeClient.realtime.setAuth(accessToken);
+
+        console.log("Realtime kullanıcı doğrulaması hazır.");
+
+        messagesRealtimeChannel = realtimeClient
+            .channel(
+                "messages-" + conversationId
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event: "INSERT",
+                    schema: "public",
+                    table: "messages",
+                    filter:
+                        "conversation_id=eq." +
+                        conversationId
+                },
+                payload => {
+                    console.log(
+                        "REALTIME MESAJ GELDİ:",
+                        payload
+                    );
+
+                    const messageList =
+                        document.getElementById(
+                            "messageList"
+                        );
+
+                    if (
+                        !messageList ||
+                        !payload.new
+                    ) {
+                        return;
+                    }
+
+                    renderMessage(
+                        messageList,
+                        payload.new,
+                        currentUserId
+                    );
+
+                    messageList.scrollTop =
+                        messageList.scrollHeight;
+                }
+            )
+            .subscribe(status => {
+                console.log(
+                    "Mesaj Realtime durumu:",
+                    status
+                );
+            });
+
+    } catch (error) {
+        console.error(
+            "Realtime başlatılırken hata oluştu:",
+            error
+        );
+    }
 }
 
 

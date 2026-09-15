@@ -931,3 +931,5 @@ if (listingImages.length > 0 && listingImages[0].image_url) {
     }
 
 })();
+
+initListingDetailPage();

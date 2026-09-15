@@ -3017,53 +3017,8 @@ if (
             error
         );
     });
-}.on(
-        "postgres_changes",
-        {
-            event: "UPDATE",
-            schema: "public",
-            table: "messages",
-            filter:
-                "conversation_id=eq." +
-                conversationId
-        },
-        payload => {
-            console.log(
-                "REALTIME MESAJ GÜNCELLENDİ:",
-                payload
-            );
 
-            if (
-                !payload.new ||
-                !payload.new.id
-            ) {
-                return;
-            }
 
-            const status =
-                document.querySelector(
-                    `.message-read-status[data-message-id="${payload.new.id}"]`
-                );
-
-            if (!status) {
-                return;
-            }
-
-            if (payload.new.read_at) {
-                status.textContent = "✓✓";
-                status.title = "Okundu";
-                status.style.color =
-                    "#4db8ff";
-            } else {
-                status.textContent = "✓";
-                status.title = "İletildi";
-                status.style.color =
-                    "#aab4bf";
-            }
-        }
-    )
-                }
-            )
             .subscribe(status => {
                 console.log(
                     "Mesaj Realtime durumu:",

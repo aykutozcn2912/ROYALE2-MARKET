@@ -1647,3 +1647,331 @@
         padding: 20px;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - PROFESYONEL MESAJLASMA
+   ========================================================= */
+
+.messages-page {
+    min-height: calc(100vh - 72px);
+    padding: 48px 24px;
+    background:
+        radial-gradient(circle at 70% 20%, rgba(23, 115, 190, 0.08), transparent 35%),
+        #070b10;
+}
+
+.messages-container {
+    width: 100%;
+    max-width: 1180px;
+    height: 720px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    background: #0b1119;
+    border: 1px solid #1d2d3d;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+/* SOL - KONUSMALAR */
+
+.conversations-panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #090e15;
+    border-right: 1px solid #1d2d3d;
+}
+
+.messages-panel-title {
+    min-height: 76px;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #1d2d3d;
+}
+
+.messages-panel-title h2 {
+    margin: 0;
+    color: #f3f7fb;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.conversation-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.conversation-item {
+    width: 100%;
+    display: block;
+    padding: 16px;
+    margin: 0 0 7px;
+    text-align: left;
+    color: #dbe7f3;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.conversation-item:hover {
+    background: #101a25;
+    border-color: #24384b;
+}
+
+.conversation-item strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #f5f8fb;
+    font-size: 14px;
+}
+
+.conversation-item small {
+    color: #71879c;
+    font-size: 11px;
+}
+
+/* SAG - SOHBET */
+
+.chat-panel {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: #0c121a;
+}
+
+.chat-empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #667b8f;
+}
+
+.chat-empty h2 {
+    margin: 0 0 8px;
+    color: #e9f1f8;
+    font-size: 21px;
+}
+
+.chat-empty p {
+    margin: 0;
+    font-size: 13px;
+}
+
+#chatArea {
+    height: 100%;
+    min-height: 0;
+    flex-direction: column;
+}
+
+.chat-header {
+    min-height: 76px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0d151f;
+    border-bottom: 1px solid #1d2d3d;
+}
+
+.chat-header strong {
+    display: block;
+    color: #f4f8fc;
+    font-size: 15px;
+}
+
+.chat-header small {
+    display: block;
+    margin-top: 5px;
+    color: #4caeff;
+    font-size: 11px;
+}
+
+/* MESAJLAR */
+
+.message-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.message-sent,
+.message-received {
+    display: flex;
+    width: 100%;
+}
+
+.message-sent {
+    justify-content: flex-end;
+}
+
+.message-received {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    max-width: 68%;
+    padding: 11px 14px 9px;
+    border-radius: 7px;
+    border: 1px solid #22364a;
+    background: #121d28;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.message-sent .message-bubble {
+    background: #0d4f82;
+    border-color: #176aa7;
+}
+
+.message-text {
+    color: #edf5fb;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.message-bubble small {
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    color: #8fa4b7;
+    font-size: 9px;
+}
+
+.message-sent .message-bubble small {
+    color: #b9d9ee;
+}
+
+/* GUVENLIK UYARISI */
+
+.phone-warning {
+    margin: 0 24px 14px;
+    padding: 10px 14px;
+    color: #d4a75d;
+    background: rgba(177, 119, 31, 0.08);
+    border: 1px solid rgba(196, 137, 48, 0.25);
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* MESAJ YAZMA ALANI */
+
+.message-form {
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    background: #090f16;
+    border-top: 1px solid #1d2d3d;
+}
+
+.message-form textarea {
+    flex: 1;
+    min-height: 46px;
+    max-height: 120px;
+    resize: vertical;
+    padding: 13px 15px;
+    color: #e8f1f8;
+    background: #111a24;
+    border: 1px solid #25384a;
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.message-form textarea:focus {
+    border-color: #278ed6;
+    box-shadow: 0 0 0 2px rgba(39, 142, 214, 0.08);
+}
+
+.message-form textarea::placeholder {
+    color: #607487;
+}
+
+.message-form button {
+    height: 46px;
+    min-width: 92px;
+    padding: 0 20px;
+    color: #ffffff;
+    background: #1675b9;
+    border: 1px solid #2994df;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.message-form button:hover {
+    background: #1d8bd5;
+    border-color: #49adf2;
+}
+
+/* SCROLLBAR */
+
+.conversation-list::-webkit-scrollbar,
+.message-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.conversation-list::-webkit-scrollbar-thumb,
+.message-list::-webkit-scrollbar-thumb {
+    background: #25384a;
+    border-radius: 10px;
+}
+
+/* TABLET / MOBIL */
+
+@media (max-width: 800px) {
+    .messages-page {
+        padding: 20px 12px;
+    }
+
+    .messages-container {
+        height: calc(100vh - 110px);
+        grid-template-columns: 260px minmax(0, 1fr);
+    }
+
+    .message-bubble {
+        max-width: 82%;
+    }
+}
+
+@media (max-width: 600px) {
+    .messages-container {
+        grid-template-columns: 1fr;
+    }
+
+    .conversations-panel {
+        display: none;
+    }
+
+    .message-list {
+        padding: 18px;
+    }
+
+    .phone-warning {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .message-form {
+        padding: 12px;
+    }
+}

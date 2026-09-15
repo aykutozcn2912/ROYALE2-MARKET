@@ -724,7 +724,19 @@ const selectedImages = listingImagesInput
     : [];
 
 console.log("Seçilen ilan görselleri:", selectedImages);
+if (selectedImages.length > 0) {
+    if (message) {
+        message.textContent = "İlan görselleri yükleniyor...";
+    }
 
+    await uploadListingImages(
+        selectedImages,
+        createdListing.id,
+        storedUser.id,
+        accessToken
+    );
+}
+          
             if (message) {
                 message.textContent = "İlanınız başarıyla yayınlandı.";
             }

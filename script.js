@@ -1242,3 +1242,82 @@ async function initMessagesPage() {
 }
 
 initMessagesPage();
+
+// ==========================================
+// MESAJ DETAYI - AKTIF KONUSMAYI AC
+// ==========================================
+
+async function initActiveConversation() {
+    const conversationList = document.getElementById("conversationList");
+    const chatArea = document.getElementById("chatArea");
+    const chatEmpty = document.getElementById("chatEmpty");
+    const messageList = document.getElementById("messageList");
+
+    // Sadece messages.html sayfasında çalış
+    if (!conversationList || !chatArea || !chatEmpty || !messageList) {
+        return;
+    }
+
+    const accessToken = localStorage.getItem("royale2_access_token");
+    const userData = localStorage.getItem("royale2_user");
+
+    if (!accessToken || !userData) {
+        return;
+    }
+
+    const currentUser = JSON.parse(userData);
+    const currentUserId = currentUser.id;
+
+    // URL'deki conversation değerini al
+    const params = new URLSearchParams(window.location.search);
+    const conversationId = params.get("conversation");
+
+    // Conversation seçilmemişse normal liste ekranında kal
+    if (!conversationId) {
+        return;
+    }
+
+    try {
+        // Konuşmayı getir
+        const response = await fetch(
+            `${window.SUPABASE_API_URL}conversations?id=eq.${encodeURIComponent(conversationId)}&select=*`,
+            {
+                headers: {
+                    "apikey": window.SUPABASE_KEY,
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Konuşma bilgisi alınamadı.");
+        }
+
+        const conversations = await response.json();
+
+        if (!conversations.length) {
+            throw new Error("Konuşma bulunamadı.");
+        }
+
+        const conversation = conversations[0];
+
+        // Güvenlik kontrolü
+        if (
+            conversation.buyer_id !== currentUserId &&
+            conversation.seller_id !== currentUserId
+        ) {
+            throw new Error("Bu konuşmaya erişim yetkiniz yok.");
+        }
+
+        // Sohbet alanını aç
+        chatEmpty.style.display = "none";
+        chatArea.style.display = "block";
+
+        console.log("Aktif konuşma başarıyla açıldı:", conversation);
+
+    } catch (error) {
+        console.error("Aktif konuşma açma hatası:", error);
+    }
+}
+
+initActiveConversation();

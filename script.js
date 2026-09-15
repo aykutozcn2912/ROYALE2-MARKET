@@ -2747,90 +2747,144 @@ function setAvatarText(
 
 
 function renderMessage(
-  messageList,
-  msg,
-  currentUserId
+    messageList,
+    msg,
+    currentUserId
 ) {
+    if (!messageList || !msg) {
+        return;
+    }
 
-  const messageItem =
-    document.createElement(
-      "div"
+    // Aynı mesaj Realtime ile ikinci kez gelirse tekrar gösterme
+    if (
+        msg.id &&
+        messageList.querySelector(
+            `[data-message-id="${msg.id}"]`
+        )
+    ) {
+        return;
+    }
+
+    const messageItem =
+        document.createElement(
+            "div"
+        );
+
+    const isMine =
+        msg.sender_id ===
+        currentUserId;
+
+    messageItem.className =
+        isMine
+            ? "message-item message-sent"
+            : "message-item message-received";
+
+    if (msg.id) {
+        messageItem.dataset.messageId =
+            msg.id;
+    }
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        isMine
+            ? "message-bubble own"
+            : "message-bubble";
+
+    const text =
+        document.createElement(
+            "div"
+        );
+
+    text.className =
+        "message-text";
+
+    text.textContent =
+        msg.message || "";
+
+    const meta =
+        document.createElement(
+            "div"
+        );
+
+    meta.style.cssText = `
+        display:flex;
+        align-items:center;
+        justify-content:flex-end;
+        gap:5px;
+        margin-top:4px;
+        font-size:10px;
+        opacity:.72;
+    `;
+
+    const time =
+        document.createElement(
+            "span"
+        );
+
+    time.className =
+        "message-time";
+
+    time.textContent =
+        new Date(
+            msg.created_at
+        ).toLocaleString(
+            "tr-TR"
+        );
+
+    meta.appendChild(time);
+
+    // Tik sadece kendi gönderdiğimiz mesajlarda görünsün
+    if (isMine) {
+        const status =
+            document.createElement(
+                "span"
+            );
+
+        status.className =
+            "message-read-status";
+
+        status.dataset.messageId =
+            msg.id || "";
+
+        status.textContent =
+            msg.read_at
+                ? "✓✓"
+                : "✓";
+
+        status.title =
+            msg.read_at
+                ? "Okundu"
+                : "İletildi";
+
+        status.style.cssText = `
+            font-size:13px;
+            font-weight:800;
+            line-height:1;
+            color:${
+                msg.read_at
+                    ? "#4db8ff"
+                    : "#aab4bf"
+            };
+        `;
+
+        meta.appendChild(status);
+    }
+
+    bubble.appendChild(text);
+    bubble.appendChild(meta);
+
+    messageItem.appendChild(
+        bubble
     );
 
-
-  const isMine =
-    msg.sender_id ===
-    currentUserId;
-
-
-  messageItem.className =
-    isMine
-      ? "message-item message-sent"
-      : "message-item message-received";
-
-
-  const bubble =
-    document.createElement(
-      "div"
+    messageList.appendChild(
+        messageItem
     );
-
-
-  bubble.className =
-    isMine
-      ? "message-bubble own"
-      : "message-bubble";
-
-
-  const text =
-    document.createElement(
-      "div"
-    );
-
-
-  text.className =
-    "message-text";
-
-
-  text.textContent =
-    msg.message || "";
-
-
-  const time =
-    document.createElement(
-      "small"
-    );
-
-
-  time.className =
-    "message-time";
-
-
-  time.textContent =
-    new Date(
-      msg.created_at
-    ).toLocaleString(
-      "tr-TR"
-    );
-
-
-  bubble.appendChild(
-    text
-  );
-
-
-  bubble.appendChild(
-    time
-  );
-
-
-  messageItem.appendChild(
-    bubble
-  );
-
-
-  messageList.appendChild(
-    messageItem
-  );
+}
 }
 /* =====================================================
    MESAJLAR - SUPABASE REALTIME

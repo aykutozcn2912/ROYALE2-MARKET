@@ -453,3 +453,26 @@ return;
         }
     });
 });
+
+/* =========================================================
+   İLAN OLUŞTURMA SİSTEMİ
+   ========================================================= */
+
+(function initCreateListingPage() {
+    const createListingForm = document.getElementById("createListingForm");
+
+    // Bu kod sadece create-listing.html sayfasında çalışır.
+    if (!createListingForm) return;
+
+    const accessToken = localStorage.getItem("royale2_access_token");
+    const userData = localStorage.getItem("royale2_user");
+
+    // Giriş yapılmamışsa ilan oluşturulamaz.
+    if (!accessToken || !userData) {
+        alert("İlan verebilmek için hesabınıza giriş yapmanız gerekiyor.");
+        window.location.href = "/";
+        return;
+    }
+
+    console.log("İlan oluşturma sayfası: kullanıcı oturumu bulundu.");
+})();

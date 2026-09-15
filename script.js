@@ -999,7 +999,7 @@ if (contactSellerButton) {
 
 })();
 
-initListingDetailPage();
+//initListingDetailPage();
 
 // ==========================================
 // SATICIYLA İLETİŞİME GEÇ

@@ -231,6 +231,75 @@ async function registerUser(username, displayName, phone, email, password) {
     }
 }
 
+  // ===============================
+// SUPABASE TOKEN YENILEME SISTEMI
+// ===============================
+
+async function refreshSupabaseSession() {
+    const refreshToken = localStorage.getItem("royale2_refresh_token");
+
+    if (!refreshToken) {
+        return null;
+    }
+
+    try {
+        const supabaseBaseUrl =
+            window.SUPABASE_API_URL.replace("/rest/v1/", "");
+
+        const response = await fetch(
+            `${supabaseBaseUrl}/auth/v1/token?grant_type=refresh_token`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": window.SUPABASE_KEY
+                },
+                body: JSON.stringify({
+                    refresh_token: refreshToken
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Token yenileme başarısız:", data);
+
+            localStorage.removeItem("royale2_access_token");
+            localStorage.removeItem("royale2_refresh_token");
+            localStorage.removeItem("royale2_user");
+
+            return null;
+        }
+
+        localStorage.setItem(
+            "royale2_access_token",
+            data.access_token
+        );
+
+        if (data.refresh_token) {
+            localStorage.setItem(
+                "royale2_refresh_token",
+                data.refresh_token
+            );
+        }
+
+        if (data.user) {
+            localStorage.setItem(
+                "royale2_user",
+                JSON.stringify(data.user)
+            );
+        }
+
+        console.log("Supabase oturumu yenilendi.");
+
+        return data.access_token;
+
+    } catch (error) {
+        console.error("Token yenileme hatası:", error);
+        return null;
+    }
+}
  
 }// ===============================
 // OTURUM / KULLANICI MENÜSÜ

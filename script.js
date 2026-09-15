@@ -2219,7 +2219,7 @@ if (sellerAvatar) {
         initials || "R2";
 
 }
-    }
+    
 
 
     const serverElement =

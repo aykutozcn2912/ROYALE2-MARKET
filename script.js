@@ -4218,7 +4218,16 @@ async function initUnreadMessagesBadge() {
 // ==========================================================
 
 function startUnreadMessagesRealtime() {
-    const client = window.supabaseClient;
+    const client = supabase.createClient(
+    window.SUPABASE_API_URL.replace("/rest/v1/", ""),
+    window.SUPABASE_KEY,
+    {
+        auth: {
+            persistSession: false,
+            autoRefreshToken: false
+        }
+    }
+);
 
     if (!client) {
         console.error("Unread Realtime: Supabase client bulunamadi.");

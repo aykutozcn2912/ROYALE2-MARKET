@@ -4213,6 +4213,42 @@ async function initUnreadMessagesBadge() {
             error
         );
     }
+}// ==========================================================
+// OKUNMAMIS MESAJ SAYACI - REALTIME
+// ==========================================================
+
+function startUnreadMessagesRealtime() {
+    const client = getSupabaseClient();
+
+    if (!client) {
+        console.error("Unread Realtime: Supabase client bulunamadi.");
+        return;
+    }
+
+    // Ayni kanal daha once acildiysa tekrar acma
+    if (window.unreadMessagesRealtimeChannel) {
+        return;
+    }
+
+    window.unreadMessagesRealtimeChannel = client
+        .channel("unread-messages-badge")
+        .on(
+            "postgres_changes",
+            {
+                event: "*",
+                schema: "public",
+                table: "messages"
+            },
+            async () => {
+                await initUnreadMessagesBadge();
+            }
+        )
+        .subscribe((status) => {
+            console.log(
+                "Unread mesaj sayaci Realtime:",
+                status
+            );
+        });
 }
 // ==========================================================
 // SAYFAYI BAŞLAT
@@ -4224,6 +4260,7 @@ document.addEventListener(
 
     initContactSellerButton();
     await initUnreadMessagesBadge();
+    startUnreadMessagesRealtime();
 
 
     if (

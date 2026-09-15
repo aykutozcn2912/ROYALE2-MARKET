@@ -1080,7 +1080,60 @@ async function loadListings() {
     listings =
       await response.json();
 
+// ==========================================================
+// ANA SAYFA İLAN KAPAK GÖRSELLERİ
+// ==========================================================
 
+const listingImagesResponse =
+  await fetch(
+    `${window.SUPABASE_API_URL}listing_images?select=listing_id,image_url,sort_order&order=sort_order.asc`,
+    {
+      headers: {
+        "apikey":
+          window.SUPABASE_KEY
+      }
+    }
+  );
+
+if (listingImagesResponse.ok) {
+
+  const listingImages =
+    await listingImagesResponse.json();
+
+  const firstImageByListing =
+    new Map();
+
+  listingImages.forEach(
+    image => {
+
+      if (
+        image.listing_id &&
+        image.image_url &&
+        !firstImageByListing.has(
+          String(image.listing_id)
+        )
+      ) {
+
+        firstImageByListing.set(
+          String(image.listing_id),
+          image.image_url
+        );
+      }
+    }
+  );
+
+  listings =
+    listings.map(
+      item => ({
+        ...item,
+
+        cover_image:
+          firstImageByListing.get(
+            String(item.id)
+          ) || ""
+      })
+    );
+}
     renderListings();
 
 
@@ -1147,7 +1200,19 @@ function renderListings() {
     data.map(
       item => `
         <article class="listing">
-
+${
+  item.cover_image
+    ? `
+      <div class="listing-image">
+        <img
+          src="${item.cover_image}"
+          alt="${item.title || "İlan görseli"}"
+          loading="lazy"
+        >
+      </div>
+    `
+    : ""
+}
           <div class="listing-top">
 
             <span class="server-tag">

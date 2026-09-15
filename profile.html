@@ -1,1 +1,1470 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Kullanıcı Profili | Royale2 Market</title>
+    <meta
+        name="description"
+        content="Royale2 Market kullanıcı profili ve aktif ilanları."
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================================
+           ROYALE2 MARKET - PUBLIC PROFILE
+           ========================================================= */
+
+        .r2-profile-page,
+        .r2-profile-page *,
+        .r2-profile-page *::before,
+        .r2-profile-page *::after {
+            box-sizing: border-box;
+        }
+
+        .r2-profile-page {
+            min-height: calc(100vh - 75px);
+            padding: 42px 20px 70px;
+            background:
+                radial-gradient(
+                    circle at 75% 0%,
+                    rgba(26, 118, 201, .10),
+                    transparent 34%
+                ),
+                #070b10;
+            color: #f4f7fb;
+        }
+
+        .r2-profile-container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        /* =========================================================
+           BREADCRUMB
+           ========================================================= */
+
+        .r2-profile-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+            color: #728398;
+            font-size: 13px;
+        }
+
+        .r2-profile-breadcrumb a {
+            color: #9bacbf;
+            text-decoration: none;
+        }
+
+        .r2-profile-breadcrumb a:hover {
+            color: #45a3f3;
+        }
+
+        /* =========================================================
+           PROFİL KARTI
+           ========================================================= */
+
+        .r2-profile-card {
+            overflow: hidden;
+
+            background: #0c131c;
+            border: 1px solid #1d2b3a;
+            border-radius: 16px;
+
+            box-shadow: 0 22px 60px rgba(0, 0, 0, .25);
+        }
+
+        .r2-profile-cover {
+            height: 115px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(19, 105, 180, .28),
+                    rgba(7, 11, 16, .15)
+                ),
+                repeating-linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.018) 0,
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px,
+                    transparent 12px
+                ),
+                #0d1721;
+
+            border-bottom: 1px solid #1d2b3a;
+        }
+
+        .r2-profile-main {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+
+            padding: 0 30px 27px;
+        }
+
+        .r2-profile-identity {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+
+            min-width: 0;
+        }
+
+        .r2-profile-avatar {
+            width: 105px;
+            height: 105px;
+            flex: 0 0 105px;
+
+            margin-top: -43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(145deg, #268de4, #125c9c);
+
+            border: 5px solid #0c131c;
+            border-radius: 50%;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,.35);
+
+            color: #fff;
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+
+        .r2-profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .r2-profile-info {
+            min-width: 0;
+            padding-top: 18px;
+        }
+
+        .r2-profile-name-line {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .r2-profile-name-line h1 {
+            margin: 0;
+
+            color: #fff;
+            font-size: 25px;
+            line-height: 1.2;
+
+            word-break: break-word;
+        }
+
+        .r2-verified {
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 20px;
+            height: 20px;
+
+            background: #2388df;
+            border-radius: 50%;
+
+            color: #fff;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .r2-profile-role {
+            margin: 6px 0 0;
+
+            color: #8294a8;
+            font-size: 13px;
+        }
+
+        .r2-profile-member {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #64778d;
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           PROFİL AKSİYONLARI
+           ========================================================= */
+
+        .r2-profile-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding-top: 18px;
+        }
+
+        .r2-profile-button {
+            min-height: 42px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 0 18px;
+
+            border: 1px solid #2a4258;
+            border-radius: 8px;
+
+            background: #111c27;
+            color: #e9f2fa;
+
+            text-decoration: none;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background .18s ease,
+                border-color .18s ease,
+                transform .18s ease;
+        }
+
+        .r2-profile-button:hover {
+            background: #172636;
+            border-color: #3973a5;
+            transform: translateY(-1px);
+        }
+
+        .r2-profile-button.primary {
+            background: #2386d8;
+            border-color: #2386d8;
+            color: #fff;
+        }
+
+        .r2-profile-button.primary:hover {
+            background: #3197ea;
+            border-color: #3197ea;
+        }
+
+        /* =========================================================
+           İSTATİSTİKLER
+           ========================================================= */
+
+        .r2-profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            border-top: 1px solid #1d2b3a;
+            background: #0a1119;
+        }
+
+        .r2-profile-stat {
+            padding: 21px 15px;
+
+            text-align: center;
+
+            border-right: 1px solid #1d2b3a;
+        }
+
+        .r2-profile-stat:last-child {
+            border-right: 0;
+        }
+
+        .r2-profile-stat strong {
+            display: block;
+
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .r2-profile-stat span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #71849a;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        /* =========================================================
+           ALT İÇERİK
+           ========================================================= */
+
+        .r2-profile-content {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 310px;
+            gap: 22px;
+
+            margin-top: 22px;
+        }
+
+        .r2-profile-section {
+            background: #0c131c;
+            border: 1px solid #1d2b3a;
+            border-radius: 13px;
+        }
+
+        .r2-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            padding: 19px 21px;
+
+            border-bottom: 1px solid #1d2b3a;
+        }
+
+        .r2-section-header h2 {
+            margin: 0;
+
+            color: #fff;
+            font-size: 17px;
+        }
+
+        .r2-section-count {
+            padding: 5px 9px;
+
+            background: #132333;
+            border: 1px solid #23425d;
+            border-radius: 20px;
+
+            color: #69b7f7;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           İLANLAR
+           ========================================================= */
+
+        .r2-profile-listings {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+
+            padding: 18px;
+        }
+
+        .r2-profile-listing {
+            display: grid;
+            grid-template-columns: 105px minmax(0, 1fr);
+
+            min-height: 120px;
+
+            overflow: hidden;
+
+            background: #0f1822;
+            border: 1px solid #1e2e3e;
+            border-radius: 10px;
+
+            color: inherit;
+            text-decoration: none;
+
+            transition:
+                transform .18s ease,
+                border-color .18s ease,
+                background .18s ease;
+        }
+
+        .r2-profile-listing:hover {
+            transform: translateY(-2px);
+            border-color: #2b75b3;
+            background: #111d29;
+        }
+
+        .r2-listing-image {
+            min-height: 120px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background: #080d13;
+
+            color: #36516a;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .r2-listing-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .r2-listing-info {
+            min-width: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 14px;
+        }
+
+        .r2-listing-title {
+            margin: 0;
+
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+
+            color: #f4f7fb;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .r2-listing-meta {
+            margin-top: 6px;
+
+            color: #708399;
+            font-size: 11px;
+        }
+
+        .r2-listing-price {
+            margin-top: auto;
+            padding-top: 10px;
+
+            color: #58b4ff;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           YÜKLENİYOR / BOŞ / HATA
+           ========================================================= */
+
+        .r2-profile-state {
+            grid-column: 1 / -1;
+
+            padding: 55px 20px;
+
+            text-align: center;
+
+            color: #74879b;
+        }
+
+        .r2-profile-state strong {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #eaf1f7;
+            font-size: 15px;
+        }
+
+        /* =========================================================
+           SAĞ PANEL
+           ========================================================= */
+
+        .r2-profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .r2-side-card {
+            padding: 20px;
+
+            background: #0c131c;
+            border: 1px solid #1d2b3a;
+            border-radius: 13px;
+        }
+
+        .r2-side-card h3 {
+            margin: 0 0 12px;
+
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .r2-side-card p {
+            margin: 0;
+
+            color: #7f91a5;
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        .r2-safe-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(32, 126, 204, .08),
+                    transparent 60%
+                ),
+                #0c131c;
+        }
+
+        .r2-safe-icon {
+            width: 39px;
+            height: 39px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 13px;
+
+            background: rgba(40, 143, 226, .12);
+            border: 1px solid rgba(40, 143, 226, .28);
+            border-radius: 9px;
+
+            font-size: 18px;
+        }
+
+        .r2-safety-list {
+            margin: 15px 0 0;
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .r2-safety-list li {
+            position: relative;
+
+            margin-top: 10px;
+            padding-left: 18px;
+
+            color: #8092a6;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .r2-safety-list li::before {
+            content: "✓";
+
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            color: #3ca1f2;
+            font-weight: 800;
+        }
+
+        .r2-profile-bio {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* =========================================================
+           ERROR
+           ========================================================= */
+
+        .r2-profile-error {
+            display: none;
+
+            max-width: 720px;
+            margin: 70px auto;
+            padding: 35px;
+
+            text-align: center;
+
+            background: #0c131c;
+            border: 1px solid #35232a;
+            border-radius: 13px;
+        }
+
+        .r2-profile-error h2 {
+            margin: 0 0 10px;
+            color: #fff;
+        }
+
+        .r2-profile-error p {
+            margin: 0 0 20px;
+            color: #8a9caf;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 900px) {
+            .r2-profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .r2-profile-sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .r2-profile-page {
+                padding: 22px 12px 45px;
+            }
+
+            .r2-profile-cover {
+                height: 90px;
+            }
+
+            .r2-profile-main {
+                align-items: flex-start;
+                flex-direction: column;
+
+                padding: 0 18px 22px;
+            }
+
+            .r2-profile-identity {
+                align-items: flex-start;
+            }
+
+            .r2-profile-avatar {
+                width: 86px;
+                height: 86px;
+                flex-basis: 86px;
+
+                margin-top: -32px;
+
+                font-size: 21px;
+            }
+
+            .r2-profile-info {
+                padding-top: 12px;
+            }
+
+            .r2-profile-name-line h1 {
+                font-size: 20px;
+            }
+
+            .r2-profile-actions {
+                width: 100%;
+                padding-top: 0;
+            }
+
+            .r2-profile-button {
+                flex: 1;
+            }
+
+            .r2-profile-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .r2-profile-stat {
+                padding: 17px 7px;
+            }
+
+            .r2-profile-stat strong {
+                font-size: 18px;
+            }
+
+            .r2-profile-stat span {
+                font-size: 9px;
+            }
+
+            .r2-profile-listings {
+                grid-template-columns: 1fr;
+                padding: 12px;
+            }
+
+            .r2-profile-sidebar {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 470px) {
+            .r2-profile-identity {
+                gap: 12px;
+            }
+
+            .r2-profile-avatar {
+                width: 72px;
+                height: 72px;
+                flex-basis: 72px;
+            }
+
+            .r2-profile-actions {
+                flex-direction: column;
+            }
+
+            .r2-profile-button {
+                width: 100%;
+            }
+
+            .r2-profile-listing {
+                grid-template-columns: 90px minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         ÜST MENÜ
+         ===================================================== -->
+    <header class="site-header">
+        <div class="header-inner">
+
+            <a href="index.html" class="brand">
+                <span class="brand-mark">R2</span>
+
+                <span class="brand-text">
+                    <strong>ROYALE2</strong>
+                    <small>MARKET</small>
+                </span>
+            </a>
+
+            <nav>
+                <a href="index.html">İlan Pazarı</a>
+                <a href="index.html#servers">Sunucular</a>
+                <a href="index.html#how">Nasıl Çalışır?</a>
+            </nav>
+
+            <div class="actions">
+                <a class="login" href="account.html">
+                    Giriş Yap
+                </a>
+
+                <a class="sell" href="create-listing.html">
+                    + İlan Ver
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =====================================================
+         PROFİL
+         ===================================================== -->
+    <main class="r2-profile-page">
+
+        <div class="r2-profile-container">
+
+            <div class="r2-profile-breadcrumb">
+                <a href="index.html">Royale2 Market</a>
+                <span>›</span>
+                <span>Kullanıcı Profili</span>
+            </div>
+
+
+            <!-- HATA EKRANI -->
+            <section
+                id="publicProfileError"
+                class="r2-profile-error"
+            >
+                <h2>Profil bulunamadı</h2>
+
+                <p id="publicProfileErrorText">
+                    Aradığınız kullanıcı profiline ulaşılamadı.
+                </p>
+
+                <a
+                    href="index.html"
+                    class="r2-profile-button primary"
+                >
+                    İlan Pazarına Dön
+                </a>
+            </section>
+
+
+            <!-- ANA PROFİL -->
+            <div id="publicProfileContent">
+
+                <section class="r2-profile-card">
+
+                    <div class="r2-profile-cover"></div>
+
+                    <div class="r2-profile-main">
+
+                        <div class="r2-profile-identity">
+
+                            <div
+                                id="publicProfileAvatar"
+                                class="r2-profile-avatar"
+                            >
+                                R2
+                            </div>
+
+                            <div class="r2-profile-info">
+
+                                <div class="r2-profile-name-line">
+
+                                    <h1 id="publicProfileUsername">
+                                        Kullanıcı yükleniyor...
+                                    </h1>
+
+                                    <span
+                                        id="publicProfileVerified"
+                                        class="r2-verified"
+                                        title="Doğrulanmış kullanıcı"
+                                    >
+                                        ✓
+                                    </span>
+
+                                </div>
+
+                                <p class="r2-profile-role">
+                                    Royale2 Market Üyesi
+                                </p>
+
+                                <span
+                                    id="publicProfileMemberSince"
+                                    class="r2-profile-member"
+                                >
+                                    Üyelik bilgisi yükleniyor...
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="r2-profile-actions">
+
+                            <a
+                                id="publicProfileMessageButton"
+                                href="messages.html"
+                                class="r2-profile-button primary"
+                            >
+                                Mesaj Gönder
+                            </a>
+
+                            <a
+                                href="index.html"
+                                class="r2-profile-button"
+                            >
+                                İlanlara Dön
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="r2-profile-stats">
+
+                        <div class="r2-profile-stat">
+                            <strong id="publicProfileActiveListings">
+                                0
+                            </strong>
+                            <span>Aktif İlan</span>
+                        </div>
+
+                        <div class="r2-profile-stat">
+                            <strong>—</strong>
+                            <span>Tamamlanan Satış</span>
+                        </div>
+
+                        <div class="r2-profile-stat">
+                            <strong>—</strong>
+                            <span>Başarı Oranı</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <div class="r2-profile-content">
+
+                    <!-- =========================================
+                         AKTİF İLANLAR
+                         ========================================= -->
+                    <section class="r2-profile-section">
+
+                        <div class="r2-section-header">
+
+                            <h2>Aktif İlanlar</h2>
+
+                            <span
+                                id="publicProfileListingCount"
+                                class="r2-section-count"
+                            >
+                                0 İlan
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="publicProfileListings"
+                            class="r2-profile-listings"
+                        >
+                            <div class="r2-profile-state">
+                                İlanlar yükleniyor...
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                    <!-- =========================================
+                         SAĞ TARAF
+                         ========================================= -->
+                    <aside class="r2-profile-sidebar">
+
+                        <section class="r2-side-card">
+
+                            <h3>Satıcı Hakkında</h3>
+
+                            <p
+                                id="publicProfileBio"
+                                class="r2-profile-bio"
+                            >
+                                Kullanıcı bilgileri yükleniyor...
+                            </p>
+
+                        </section>
+
+
+                        <section class="r2-side-card r2-safe-card">
+
+                            <div class="r2-safe-icon">
+                                🛡️
+                            </div>
+
+                            <h3>Güvenli Ticaret</h3>
+
+                            <p>
+                                Güvenliğiniz için görüşmelerinizi ve
+                                alışveriş sürecinizi Royale2 Market
+                                üzerinden yürütün.
+                            </p>
+
+                            <ul class="r2-safety-list">
+                                <li>
+                                    Site dışı ödeme taleplerine dikkat edin.
+                                </li>
+
+                                <li>
+                                    Telefon ve özel iletişim bilgilerinizi
+                                    paylaşmayın.
+                                </li>
+
+                                <li>
+                                    Şüpheli kullanıcı ve ilanları yönetime
+                                    bildirin.
+                                </li>
+                            </ul>
+
+                        </section>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="script.js?v=7"></script>
+
+    <!-- =========================================================
+         SADECE PUBLIC PROFILE SAYFASI İÇİN JS
+         Çalışan ana script.js yapısını değiştirmez.
+         ===================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+
+            const content =
+                document.getElementById("publicProfileContent");
+
+            const errorBox =
+                document.getElementById("publicProfileError");
+
+            const errorText =
+                document.getElementById("publicProfileErrorText");
+
+            const usernameEl =
+                document.getElementById("publicProfileUsername");
+
+            const avatarEl =
+                document.getElementById("publicProfileAvatar");
+
+            const verifiedEl =
+                document.getElementById("publicProfileVerified");
+
+            const memberSinceEl =
+                document.getElementById("publicProfileMemberSince");
+
+            const bioEl =
+                document.getElementById("publicProfileBio");
+
+            const activeListingsEl =
+                document.getElementById("publicProfileActiveListings");
+
+            const listingCountEl =
+                document.getElementById("publicProfileListingCount");
+
+            const listingsEl =
+                document.getElementById("publicProfileListings");
+
+            const messageButton =
+                document.getElementById("publicProfileMessageButton");
+
+
+            function showError(message) {
+                if (content) {
+                    content.style.display = "none";
+                }
+
+                if (errorText) {
+                    errorText.textContent =
+                        message || "Profil yüklenemedi.";
+                }
+
+                if (errorBox) {
+                    errorBox.style.display = "block";
+                }
+            }
+
+
+            function escapeHtml(value) {
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+
+            function getInitials(name) {
+                const cleanName =
+                    String(name || "R2").trim();
+
+                if (!cleanName) {
+                    return "R2";
+                }
+
+                const pieces =
+                    cleanName
+                        .split(/\s+/)
+                        .filter(Boolean);
+
+                if (pieces.length >= 2) {
+                    return (
+                        pieces[0][0] +
+                        pieces[1][0]
+                    ).toUpperCase();
+                }
+
+                return cleanName
+                    .slice(0, 2)
+                    .toUpperCase();
+            }
+
+
+            function formatPrice(price, currency) {
+                const number = Number(price);
+
+                if (!Number.isFinite(number)) {
+                    return "Fiyat belirtilmedi";
+                }
+
+                try {
+                    return new Intl.NumberFormat(
+                        "tr-TR",
+                        {
+                            style: "currency",
+                            currency: currency || "TRY",
+                            maximumFractionDigits: 2
+                        }
+                    ).format(number);
+                } catch (error) {
+                    return (
+                        number.toLocaleString("tr-TR") +
+                        " " +
+                        (currency || "TRY")
+                    );
+                }
+            }
+
+
+            function formatMemberDate(dateValue) {
+                if (!dateValue) {
+                    return "Royale2 Market Üyesi";
+                }
+
+                const date = new Date(dateValue);
+
+                if (Number.isNaN(date.getTime())) {
+                    return "Royale2 Market Üyesi";
+                }
+
+                return (
+                    date.toLocaleDateString(
+                        "tr-TR",
+                        {
+                            month: "long",
+                            year: "numeric"
+                        }
+                    ) +
+                    " tarihinden beri üye"
+                );
+            }
+
+
+            async function publicSupabaseFetch(path) {
+
+                if (
+                    !window.SUPABASE_API_URL ||
+                    !window.SUPABASE_KEY
+                ) {
+                    throw new Error(
+                        "Supabase bağlantı bilgileri bulunamadı."
+                    );
+                }
+
+                return fetch(
+                    window.SUPABASE_API_URL + path,
+                    {
+                        headers: {
+                            "apikey": window.SUPABASE_KEY,
+                            "Authorization":
+                                "Bearer " + window.SUPABASE_KEY
+                        }
+                    }
+                );
+            }
+
+
+            try {
+
+                /* =============================================
+                   PROFİL ID
+                   ============================================= */
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+                const profileId =
+                    params.get("id");
+
+                if (!profileId) {
+                    showError(
+                        "Profil bağlantısında kullanıcı bilgisi bulunamadı."
+                    );
+                    return;
+                }
+
+
+                /* =============================================
+                   PROFİLİ GETİR
+                   ============================================= */
+
+                const profileResponse =
+                    await publicSupabaseFetch(
+                        "profiles?id=eq." +
+                        encodeURIComponent(profileId) +
+                        "&select=id,username,display_name,avatar_url,bio,is_verified,created_at"
+                    );
+
+                if (!profileResponse.ok) {
+                    throw new Error(
+                        "Profil bilgileri alınamadı."
+                    );
+                }
+
+                const profiles =
+                    await profileResponse.json();
+
+                if (!profiles.length) {
+                    showError(
+                        "Bu kullanıcı profili bulunamadı."
+                    );
+                    return;
+                }
+
+                const profile = profiles[0];
+
+                const displayName =
+                    profile.username ||
+                    profile.display_name ||
+                    "Royale2 Kullanıcısı";
+
+
+                /* =============================================
+                   PROFİL BİLGİLERİ
+                   ============================================= */
+
+                usernameEl.textContent = displayName;
+
+                document.title =
+                    displayName +
+                    " | Royale2 Market";
+
+                memberSinceEl.textContent =
+                    formatMemberDate(
+                        profile.created_at
+                    );
+
+                bioEl.textContent =
+                    profile.bio?.trim()
+                        ? profile.bio
+                        : "Bu kullanıcı henüz profil açıklaması eklememiş.";
+
+
+                /* =============================================
+                   AVATAR
+                   ============================================= */
+
+                if (profile.avatar_url) {
+
+                    const image =
+                        document.createElement("img");
+
+                    image.src =
+                        profile.avatar_url;
+
+                    image.alt =
+                        displayName + " profil resmi";
+
+                    image.addEventListener(
+                        "error",
+                        function () {
+                            avatarEl.innerHTML = "";
+                            avatarEl.textContent =
+                                getInitials(displayName);
+                        }
+                    );
+
+                    avatarEl.innerHTML = "";
+                    avatarEl.appendChild(image);
+
+                } else {
+
+                    avatarEl.textContent =
+                        getInitials(displayName);
+
+                }
+
+
+                /* =============================================
+                   DOĞRULANMIŞ KULLANICI
+                   ============================================= */
+
+                if (
+                    profile.is_verified &&
+                    verifiedEl
+                ) {
+                    verifiedEl.style.display =
+                        "inline-flex";
+                }
+
+
+                /* =============================================
+                   MESAJ BUTONU
+
+                   Profil sayfasından doğrudan konuşma
+                   oluşturmayacağız. Mesaj sistemi ilan
+                   üzerinden konuşma başlattığı için kullanıcıyı
+                   satıcının ilanlarına yönlendiriyoruz.
+                   ============================================= */
+
+                if (messageButton) {
+                    messageButton.href =
+                        "#publicProfileListings";
+
+                    messageButton.textContent =
+                        "Satıcının İlanları";
+                }
+
+
+                /* =============================================
+                   AKTİF İLANLARI GETİR
+                   ============================================= */
+
+                const listingResponse =
+                    await publicSupabaseFetch(
+                        "listings?user_id=eq." +
+                        encodeURIComponent(profile.id) +
+                        "&status=eq.active" +
+                        "&select=id,title,price,currency,created_at" +
+                        "&order=created_at.desc"
+                    );
+
+                if (!listingResponse.ok) {
+                    throw new Error(
+                        "Kullanıcının ilanları alınamadı."
+                    );
+                }
+
+                const listings =
+                    await listingResponse.json();
+
+
+                activeListingsEl.textContent =
+                    listings.length;
+
+                listingCountEl.textContent =
+                    listings.length + " İlan";
+
+
+                /* =============================================
+                   İLAN YOKSA
+                   ============================================= */
+
+                if (!listings.length) {
+
+                    listingsEl.innerHTML = `
+                        <div class="r2-profile-state">
+                            <strong>Aktif ilan bulunmuyor.</strong>
+                            Bu kullanıcının şu anda yayında
+                            olan bir ilanı yok.
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                /* =============================================
+                   İLANLARI OLUŞTUR
+                   ============================================= */
+
+                listingsEl.innerHTML = "";
+
+
+                for (const listing of listings) {
+
+                    let imageUrl = "";
+
+
+                    /* =========================================
+                       İLANIN İLK FOTOĞRAFI
+                       ========================================= */
+
+                    try {
+
+                        const imageResponse =
+                            await publicSupabaseFetch(
+                                "listing_images?listing_id=eq." +
+                                encodeURIComponent(listing.id) +
+                                "&select=image_url" +
+                                "&limit=1"
+                            );
+
+                        if (imageResponse.ok) {
+
+                            const images =
+                                await imageResponse.json();
+
+                            imageUrl =
+                                images?.[0]?.image_url || "";
+
+                        }
+
+                    } catch (imageError) {
+
+                        console.error(
+                            "İlan resmi alınamadı:",
+                            imageError
+                        );
+
+                    }
+
+
+                    const listingLink =
+                        document.createElement("a");
+
+                    listingLink.className =
+                        "r2-profile-listing";
+
+                    listingLink.href =
+                        "listing.html?id=" +
+                        encodeURIComponent(
+                            listing.id
+                        );
+
+
+                    const imageHtml =
+                        imageUrl
+                            ? `
+                                <img
+                                    src="${escapeHtml(imageUrl)}"
+                                    alt=""
+                                    loading="lazy"
+                                >
+                              `
+                            : "R2";
+
+
+                    listingLink.innerHTML = `
+                        <div class="r2-listing-image">
+                            ${imageHtml}
+                        </div>
+
+                        <div class="r2-listing-info">
+
+                            <h3 class="r2-listing-title">
+                                ${escapeHtml(listing.title)}
+                            </h3>
+
+                            <div class="r2-listing-meta">
+                                Royale2 Market
+                            </div>
+
+                            <div class="r2-listing-price">
+                                ${escapeHtml(
+                                    formatPrice(
+                                        listing.price,
+                                        listing.currency
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+                    `;
+
+                    listingsEl.appendChild(
+                        listingLink
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Public profil yükleme hatası:",
+                    error
+                );
+
+                showError(
+                    "Profil şu anda yüklenemedi. Lütfen daha sonra tekrar deneyin."
+                );
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>

@@ -2832,6 +2832,79 @@ function renderMessage(
     messageItem
   );
 }
+/* =====================================================
+   MESAJLAR - SUPABASE REALTIME
+   ===================================================== */
+
+let messagesRealtimeChannel = null;
+
+function startMessagesRealtime(conversationId, currentUserId) {
+    if (!conversationId || !currentUserId) {
+        return;
+    }
+
+    if (
+        typeof supabase === "undefined" ||
+        !supabase.createClient
+    ) {
+        console.error("Supabase Realtime istemcisi yüklenemedi.");
+        return;
+    }
+
+    if (messagesRealtimeChannel) {
+        try {
+            messagesRealtimeChannel.unsubscribe();
+        } catch (error) {
+            console.error("Eski Realtime bağlantısı kapatılamadı:", error);
+        }
+
+        messagesRealtimeChannel = null;
+    }
+
+    const realtimeClient = supabase.createClient(
+        window.SUPABASE_API_URL.replace("/rest/v1/", ""),
+        window.SUPABASE_KEY
+    );
+
+    messagesRealtimeChannel = realtimeClient
+        .channel(
+            "messages-" + conversationId
+        )
+        .on(
+            "postgres_changes",
+            {
+                event: "INSERT",
+                schema: "public",
+                table: "messages",
+                filter:
+                    "conversation_id=eq." +
+                    conversationId
+            },
+            payload => {
+                const messageList =
+                    document.getElementById("messageList");
+
+                if (!messageList || !payload.new) {
+                    return;
+                }
+
+                renderMessage(
+                    messageList,
+                    payload.new,
+                    currentUserId
+                );
+
+                messageList.scrollTop =
+                    messageList.scrollHeight;
+            }
+        )
+        .subscribe(status => {
+            console.log(
+                "Mesaj Realtime durumu:",
+                status
+            );
+        });
+}
 
 
 // ==========================================================
@@ -3434,11 +3507,16 @@ async function initActiveConversation() {
     );
 
 
-    messageList.scrollTop =
-      messageList.scrollHeight;
+messageList.scrollTop =
+    messageList.scrollHeight;
 
+// Bu konuşma için anlık mesaj dinlemeyi başlat
+startMessagesRealtime(
+    conversationId,
+    currentUserId
+);
 
-  } catch (error) {
+} catch (error) {
 
     console.error(
       "Aktif konuşma açma hatası:",

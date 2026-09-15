@@ -2985,7 +2985,40 @@ async function startMessagesRealtime(conversationId, currentUserId) {
 
                     messageList.scrollTop =
                         messageList.scrollHeight;
-                      .on(
+                      // Karşı taraftan gelen mesaj, konuşma açık olduğu için
+// anında okundu olarak işaretlenir.
+if (
+    payload.new.sender_id !== currentUserId &&
+    !payload.new.read_at
+) {
+    supabaseAuthFetch(
+        `${window.SUPABASE_API_URL}messages?id=eq.${encodeURIComponent(
+            payload.new.id
+        )}&read_at=is.null`,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal"
+            },
+            body: JSON.stringify({
+                read_at: new Date().toISOString()
+            })
+        }
+    ).then(async response => {
+        if (!response.ok) {
+            console.error(
+                "Yeni mesaj okundu yapılamadı:",
+                await response.text()
+            );
+        }
+    }).catch(error => {
+        console.error(
+            "Yeni mesaj okundu hatası:",
+            error
+        );
+    });
+}.on(
         "postgres_changes",
         {
             event: "UPDATE",

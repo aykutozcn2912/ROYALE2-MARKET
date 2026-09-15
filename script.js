@@ -3062,7 +3062,7 @@ async function startMessagesRealtime(conversationId, currentUserId) {
             error
         );
     }
-
+}
 
 // ==========================================================
 // MESAJLAR SAYFASI - KONUŞMA LİSTESİ

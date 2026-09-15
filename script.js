@@ -1332,6 +1332,8 @@ const messageForm = document.getElementById("messageForm");
 if (messageForm) {
     messageForm.addEventListener("submit", async function (event) {
         event.preventDefault();
+      console.log("GONDER BUTONU CALISTI!");
+alert("GONDER BUTONU CALISTI!");
 
         const messageInput = document.getElementById("messageInput");
 

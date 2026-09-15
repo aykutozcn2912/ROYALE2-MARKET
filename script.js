@@ -3852,6 +3852,16 @@ function initMessageForm() {
             )}&select=buyer_id,seller_id`
           );
 
+        if (
+    !conversation ||
+    (
+        conversation.buyer_id !== currentUser.id &&
+        conversation.seller_id !== currentUser.id
+    )
+) {
+    ...
+}
+
 
         if (
           !conversationResponse.ok
@@ -3887,7 +3897,38 @@ function initMessageForm() {
             "Bu konuşmaya mesaj gönderme yetkiniz yok."
           );
         }
+// ============================================
+// BU KONUŞMADAKİ GELEN MESAJLARI OKUNDU YAP
+// ============================================
 
+const markReadResponse =
+    await supabaseAuthFetch(
+        `${window.SUPABASE_API_URL}messages?conversation_id=eq.${encodeURIComponent(
+            conversationId
+        )}&sender_id=neq.${encodeURIComponent(
+            currentUser.id
+        )}&read_at=is.null`,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type":
+                    "application/json",
+                "Prefer":
+                    "return=minimal"
+            },
+            body: JSON.stringify({
+                read_at:
+                    new Date().toISOString()
+            })
+        }
+    );
+
+if (!markReadResponse.ok) {
+    console.error(
+        "Mesajlar okundu olarak işaretlenemedi:",
+        await markReadResponse.text()
+    );
+}
 
         const response =
           await supabaseAuthFetch(

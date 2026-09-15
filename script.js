@@ -1314,7 +1314,49 @@ async function initActiveConversation() {
         chatArea.style.display = "block";
 
         console.log("Aktif konuşma başarıyla açıldı:", conversation);
+// Bu konuşmaya ait mesajları getir
+const messagesResponse = await fetch(
+    `${window.SUPABASE_API_URL}messages?conversation_id=eq.${encodeURIComponent(conversationId)}&select=*&order=created_at.asc`,
+    {
+        headers: {
+            "apikey": window.SUPABASE_KEY,
+            "Authorization": `Bearer ${accessToken}`
+        }
+    }
+);
 
+if (!messagesResponse.ok) {
+    throw new Error("Mesajlar alınamadı.");
+}
+
+const messages = await messagesResponse.json();
+
+messageList.innerHTML = "";
+
+messages.forEach(msg => {
+    const messageItem = document.createElement("div");
+
+    const isMine = msg.sender_id === currentUserId;
+
+    messageItem.className = isMine
+        ? "message-item message-sent"
+        : "message-item message-received";
+
+    messageItem.innerHTML = `
+        <div class="message-bubble">
+            <div class="message-text"></div>
+            <small class="message-time">
+                ${new Date(msg.created_at).toLocaleString("tr-TR")}
+            </small>
+        </div>
+    `;
+
+    messageItem.querySelector(".message-text").textContent = msg.message;
+
+    messageList.appendChild(messageItem);
+});
+
+messageList.scrollTop = messageList.scrollHeight;
     } catch (error) {
         console.error("Aktif konuşma açma hatası:", error);
     }

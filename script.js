@@ -2904,21 +2904,20 @@ async function startMessagesRealtime(conversationId, currentUserId) {
         return;
     }
 
-    if (messagesRealtimeChannel) {
-        try {
-            await messagesRealtimeChannel.unsubscribe();
-        } catch (error) {
-            console.error(
-                "Eski Realtime bağlantısı kapatılamadı:",
-                error
-            );
+    try {
+        if (messagesRealtimeChannel) {
+            try {
+                await messagesRealtimeChannel.unsubscribe();
+            } catch (error) {
+                console.error(
+                    "Eski Realtime bağlantısı kapatılamadı:",
+                    error
+                );
+            }
+
+            messagesRealtimeChannel = null;
         }
 
-        messagesRealtimeChannel = null;
-    }
-
-    try {
-        // Mevcut giriş yapan kullanıcının access token'ını al
         const accessToken = await getValidAccessToken();
 
         if (!accessToken) {
@@ -2939,15 +2938,13 @@ async function startMessagesRealtime(conversationId, currentUserId) {
             }
         );
 
-        // Realtime bağlantısını giriş yapan kullanıcının JWT'si ile doğrula
         await realtimeClient.realtime.setAuth(accessToken);
 
         console.log("Realtime kullanıcı doğrulaması hazır.");
 
         messagesRealtimeChannel = realtimeClient
-            .channel(
-                "messages-" + conversationId
-            )
+            .channel("messages-" + conversationId)
+
             .on(
                 "postgres_changes",
                 {
@@ -2965,14 +2962,9 @@ async function startMessagesRealtime(conversationId, currentUserId) {
                     );
 
                     const messageList =
-                        document.getElementById(
-                            "messageList"
-                        );
+                        document.getElementById("messageList");
 
-                    if (
-                        !messageList ||
-                        !payload.new
-                    ) {
+                    if (!messageList || !payload.new) {
                         return;
                     }
 
@@ -2984,40 +2976,78 @@ async function startMessagesRealtime(conversationId, currentUserId) {
 
                     messageList.scrollTop =
                         messageList.scrollHeight;
-                      // Karşı taraftan gelen mesaj, konuşma açık olduğu için
-// anında okundu olarak işaretlenir.
-if (
-    payload.new.sender_id !== currentUserId &&
-    !payload.new.read_at
-) {
-    supabaseAuthFetch(
-        `${window.SUPABASE_API_URL}messages?id=eq.${encodeURIComponent(
-            payload.new.id
-        )}&read_at=is.null`,
-        {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Prefer": "return=minimal"
-            },
-            body: JSON.stringify({
-                read_at: new Date().toISOString()
-            })
-        }
-    ).then(async response => {
-        if (!response.ok) {
-            console.error(
-                "Yeni mesaj okundu yapılamadı:",
-                await response.text()
-            );
-        }
-    }).catch(error => {
-        console.error(
-            "Yeni mesaj okundu hatası:",
-            error
-        );
-    });
 
+                    // Karşı taraftan gelen mesajı,
+                    // konuşma açık olduğu için okundu yap.
+                    if (
+                        payload.new.sender_id !== currentUserId &&
+                        !payload.new.read_at &&
+                        payload.new.id
+                    ) {
+                        supabaseAuthFetch(
+                            `${window.SUPABASE_API_URL}messages?id=eq.${encodeURIComponent(
+                                payload.new.id
+                            )}&read_at=is.null`,
+                            {
+                                method: "PATCH",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Prefer": "return=minimal"
+                                },
+                                body: JSON.stringify({
+                                    read_at: new Date().toISOString()
+                                })
+                            }
+                        ).catch(error => {
+                            console.error(
+                                "Yeni mesaj okundu hatası:",
+                                error
+                            );
+                        });
+                    }
+                }
+            )
+
+            .on(
+                "postgres_changes",
+                {
+                    event: "UPDATE",
+                    schema: "public",
+                    table: "messages",
+                    filter:
+                        "conversation_id=eq." +
+                        conversationId
+                },
+                payload => {
+                    console.log(
+                        "REALTIME MESAJ GÜNCELLENDİ:",
+                        payload
+                    );
+
+                    if (!payload.new || !payload.new.id) {
+                        return;
+                    }
+
+                    const status =
+                        document.querySelector(
+                            `.message-read-status[data-message-id="${payload.new.id}"]`
+                        );
+
+                    if (!status) {
+                        return;
+                    }
+
+                    if (payload.new.read_at) {
+                        status.textContent = "✓✓";
+                        status.title = "Okundu";
+                        status.style.color = "#4db8ff";
+                    } else {
+                        status.textContent = "✓";
+                        status.title = "İletildi";
+                        status.style.color = "#aaa4bf";
+                    }
+                }
+            )
 
             .subscribe(status => {
                 console.log(
@@ -3032,7 +3062,6 @@ if (
             error
         );
     }
-}
 
 
 // ==========================================================

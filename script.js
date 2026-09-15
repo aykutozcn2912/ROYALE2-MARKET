@@ -3207,15 +3207,12 @@ for (const conversation of uniqueConversations) {
     conversation.lastMessage = null;
   }
 }
-    uniqueConversations.sort(
-      (a, b) =>
-        new Date(
-          b.created_at
-        ) -
-        new Date(
-          a.created_at
-        )
-    );
+uniqueConversations.sort((a, b) => {
+    const dateA = a.lastMessage?.created_at || a.created_at;
+    const dateB = b.lastMessage?.created_at || b.created_at;
+
+    return new Date(dateB) - new Date(dateA);
+});
 
 
     if (

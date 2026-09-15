@@ -2391,3 +2391,62 @@
     flex: 0 0 auto !important;
     white-space: nowrap !important;
 }
+/* ===== ROYALE2 CHAT FINAL FIX ===== */
+
+#chatArea {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+#chatArea .chat-header,
+#chatArea .message-list,
+#chatArea .phone-warning,
+#chatArea .message-form {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+#chatArea .message-list {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 20px !important;
+}
+
+#chatArea .message-item {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+}
+
+#chatArea .message-item.message-sent {
+    justify-content: flex-end !important;
+}
+
+#chatArea .message-item.message-received {
+    justify-content: flex-start !important;
+}
+
+#chatArea .message-bubble {
+    display: block !important;
+    width: fit-content !important;
+    min-width: 120px !important;
+    max-width: 70% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 11px 14px !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    flex: none !important;
+}
+
+#chatArea .message-sent .message-bubble {
+    margin-left: auto !important;
+}
+
+#chatArea .message-received .message-bubble {
+    margin-right: auto !important;
+}

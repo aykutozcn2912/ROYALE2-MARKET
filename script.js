@@ -2152,53 +2152,117 @@ const profileResponse = await fetch(
       );
 
 
-    if (
-      listingImages.length &&
-      listingImages[0].image_url
-    ) {
+const imageThumbnails =
+    document.getElementById(
+        "listingImageThumbnails"
+    );
 
-      if (mainImage) {
+if (
+    listingImages.length &&
+    listingImages[0].image_url
+) {
 
+    // İlk görsel büyük ana görsel olarak gösterilir
+    if (mainImage) {
         mainImage.src =
-          listingImages[0]
-            .image_url;
-
+            listingImages[0].image_url;
 
         mainImage.style.display =
-          "block";
-      }
-
-
-      if (
-        imagePlaceholder
-      ) {
-
-        imagePlaceholder
-          .style
-          .display =
-          "none";
-      }
-
-
-    } else {
-
-      if (mainImage) {
-
-        mainImage.style.display =
-          "none";
-      }
-
-
-      if (
-        imagePlaceholder
-      ) {
-
-        imagePlaceholder
-          .style
-          .display =
-          "flex";
-      }
+            "block";
     }
+
+    // Placeholder gizlenir
+    if (imagePlaceholder) {
+        imagePlaceholder.style.display =
+            "none";
+    }
+
+    // Küçük görseller hazırlanır
+    if (imageThumbnails) {
+
+        imageThumbnails.innerHTML = "";
+
+        listingImages.forEach(
+            (image, index) => {
+
+                if (!image.image_url) {
+                    return;
+                }
+
+                const thumbnail =
+                    document.createElement("img");
+
+                thumbnail.src =
+                    image.image_url;
+
+                thumbnail.alt =
+                    `İlan görseli ${index + 1}`;
+
+                thumbnail.className =
+                    "listing-image-thumbnail";
+
+                if (index === 0) {
+                    thumbnail.classList.add(
+                        "active"
+                    );
+                }
+
+                thumbnail.addEventListener(
+                    "click",
+                    () => {
+
+                        if (mainImage) {
+                            mainImage.src =
+                                image.image_url;
+                        }
+
+                        imageThumbnails
+                            .querySelectorAll(
+                                ".listing-image-thumbnail"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+                        thumbnail.classList.add(
+                            "active"
+                        );
+                    }
+                );
+
+                imageThumbnails.appendChild(
+                    thumbnail
+                );
+            }
+        );
+
+        imageThumbnails.style.display =
+            listingImages.length > 1
+                ? "flex"
+                : "none";
+    }
+
+} else {
+
+    if (mainImage) {
+        mainImage.style.display =
+            "none";
+    }
+
+    if (imagePlaceholder) {
+        imagePlaceholder.style.display =
+            "flex";
+    }
+
+    if (imageThumbnails) {
+        imageThumbnails.innerHTML = "";
+        imageThumbnails.style.display =
+            "none";
+    }
+}
 
 
     const serverNames = {

@@ -2011,18 +2011,14 @@ let sellerUsername =
 
     try {
 
-      const profileResponse =
-        await fetch(
-          `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
-            listing.user_id
-})&select=username,display_name,avatar_url,is_verified`,
-          {
-            headers: {
-              "apikey":
-                window.SUPABASE_KEY
-            }
-          }
-        );
+const profileResponse = await fetch(
+    `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(listing.user_id)}&select=username,display_name,avatar_url,is_verified`,
+    {
+        headers: {
+            "apikey": window.SUPABASE_KEY
+        }
+    }
+);
 
 
       if (

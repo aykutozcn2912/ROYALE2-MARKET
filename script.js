@@ -962,3 +962,131 @@ if (sellerElement) {
 })();
 
 initListingDetailPage();
+
+// ==========================================
+// SATICIYLA İLETİŞİME GEÇ
+// ==========================================
+
+async function initContactSellerButton() {
+  const contactButton = document.getElementById("contactSellerButton");
+
+  // Bu buton sadece listing.html sayfasında var
+  if (!contactButton) return;
+
+  contactButton.addEventListener("click", async () => {
+    try {
+      // Giriş yapan kullanıcıyı al
+      const accessToken = localStorage.getItem("royale2_access_token");
+      const userData = localStorage.getItem("royale2_user");
+
+      if (!accessToken || !userData) {
+        alert("Satıcıyla iletişime geçmek için giriş yapmalısınız.");
+        window.location.href = "account.html";
+        return;
+      }
+
+      const currentUser = JSON.parse(userData);
+
+      // URL'den ilan ID'sini al
+      const params = new URLSearchParams(window.location.search);
+      const listingId = params.get("id");
+
+      if (!listingId) {
+        alert("İlan bilgisi bulunamadı.");
+        return;
+      }
+
+      // İlanı getir ve satıcı ID'sini öğren
+      const listingResponse = await fetch(
+        `${window.SUPABASE_API_URL}listings?id=eq.${encodeURIComponent(listingId)}&select=id,user_id`,
+        {
+          headers: {
+            "apikey": window.SUPABASE_KEY,
+            "Authorization": `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      if (!listingResponse.ok) {
+        throw new Error("İlan bilgisi alınamadı.");
+      }
+
+      const listings = await listingResponse.json();
+
+      if (!listings.length) {
+        throw new Error("İlan bulunamadı.");
+      }
+
+      const sellerId = listings[0].user_id;
+      const buyerId = currentUser.id;
+
+      if (buyerId === sellerId) {
+        alert("Kendi ilanınız için kendinizle mesajlaşamazsınız.");
+        return;
+      }
+
+      // Daha önce bu ilan için konuşma var mı?
+      const conversationResponse = await fetch(
+        `${window.SUPABASE_API_URL}conversations?listing_id=eq.${listingId}&buyer_id=eq.${buyerId}&seller_id=eq.${sellerId}&select=id`,
+        {
+          headers: {
+            "apikey": window.SUPABASE_KEY,
+            "Authorization": `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      if (!conversationResponse.ok) {
+        throw new Error("Konuşma bilgisi alınamadı.");
+      }
+
+      const conversations = await conversationResponse.json();
+      let conversationId;
+
+      if (conversations.length > 0) {
+
+        // Mevcut konuşmayı kullan
+        conversationId = conversations[0].id;
+
+      } else {
+
+        // Yeni konuşma oluştur
+        const createResponse = await fetch(
+          `${window.SUPABASE_API_URL}conversations`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": window.SUPABASE_KEY,
+              "Authorization": `Bearer ${accessToken}`,
+              "Prefer": "return=representation"
+            },
+            body: JSON.stringify({
+              listing_id: listingId,
+              buyer_id: buyerId,
+              seller_id: sellerId
+            })
+          }
+        );
+
+        if (!createResponse.ok) {
+          const errorText = await createResponse.text();
+          throw new Error(errorText);
+        }
+
+        const createdConversation = await createResponse.json();
+        conversationId = createdConversation[0].id;
+      }
+
+      // Mesajlaşma sayfasına gönder
+      window.location.href =
+        `messages.html?conversation=${encodeURIComponent(conversationId)}`;
+
+    } catch (error) {
+      console.error("Mesajlaşma başlatma hatası:", error);
+      alert("Mesajlaşma başlatılamadı. Lütfen tekrar deneyin.");
+    }
+  });
+}
+
+initContactSellerButton();

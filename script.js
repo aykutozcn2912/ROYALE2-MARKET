@@ -3551,7 +3551,26 @@ async function initActiveConversation() {
 
 messageList.scrollTop =
     messageList.scrollHeight;
+// Bu konuşmadaki karşı taraftan gelen mesajları okundu yap
+const readResponse = await supabaseFetch(
+    `${window.SUPABASE_API_URL}rpc/mark_conversation_messages_read`,
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            p_conversation_id: conversationId
+        })
+    }
+);
 
+if (!readResponse.ok) {
+    console.error(
+        "Mesajlar okundu olarak işaretlenemedi:",
+        await readResponse.text()
+    );
+}
 // Bu konuşma için anlık mesaj dinlemeyi başlat
 startMessagesRealtime(
     conversationId,

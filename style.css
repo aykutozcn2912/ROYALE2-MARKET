@@ -2035,3 +2035,106 @@
 .message-received .message-time {
     text-align: left;
 }
+
+/* =========================================
+   ROYALE2 MARKET - PROFESYONEL CHAT HEADER
+   ========================================= */
+
+.chat-header {
+    min-height: 76px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #0e1722;
+    border-bottom: 1px solid #25384a;
+}
+
+.chat-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.chat-user-avatar {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #1268a8, #0a3e69);
+    border: 1px solid #278bd1;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 0 3px rgba(39, 139, 209, 0.08);
+}
+
+.chat-user-details {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.chat-user-name-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+#chatUsername {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.chat-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #35c46a;
+    box-shadow: 0 0 7px rgba(53, 196, 106, 0.55);
+}
+
+#chatListingTitle {
+    display: block;
+    max-width: 420px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #738aa0;
+    font-size: 11px;
+}
+
+.chat-header-badge {
+    padding: 7px 10px;
+    border: 1px solid rgba(46, 139, 201, 0.35);
+    border-radius: 5px;
+    background: rgba(24, 111, 171, 0.08);
+    color: #56aee8;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .chat-header {
+        padding: 12px;
+    }
+
+    .chat-header-badge {
+        display: none;
+    }
+
+    #chatListingTitle {
+        max-width: 220px;
+    }
+}

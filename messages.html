@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mesajlar | Royale2 Market</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="index.html" class="brand">
+        <span class="brand-mark">R2</span>
+        <span class="brand-text">
+          <strong>ROYALE2</strong>
+          <small>MARKET</small>
+        </span>
+      </a>
+
+      <nav>
+        <a href="index.html">İlan Pazarı</a>
+        <a href="index.html#servers">Sunucular</a>
+        <a href="index.html#how">Nasıl Çalışır?</a>
+      </nav>
+
+      <div class="actions">
+        <a class="login" id="account-username" href="account.html">
+          Giriş Yap
+        </a>
+        <a class="sell" href="create-listing.html">+ İlan Ver</a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <main class="messages-page">
+
+    <div class="messages-container">
+
+      <aside class="conversations-panel">
+
+        <div class="messages-panel-title">
+          <h2>Mesajlar</h2>
+        </div>
+
+        <div id="conversationList">
+          <p>Konuşmalar yükleniyor...</p>
+        </div>
+
+      </aside>
+
+
+      <section class="chat-panel">
+
+        <div id="chatEmpty" class="chat-empty">
+          <h2>Royale2 Mesajlar</h2>
+          <p>Mesajlaşmak için bir konuşma seçin.</p>
+        </div>
+
+
+        <div id="chatArea" style="display:none;">
+
+          <div class="chat-header">
+
+            <div>
+              <strong id="chatUsername">Kullanıcı</strong>
+              <small id="chatListingTitle"></small>
+            </div>
+
+          </div>
+
+
+          <div id="messageList" class="message-list">
+          </div>
+
+
+          <div class="phone-warning">
+            ⚠ Telefon numarası veya site dışı iletişim bilgisi paylaşmak yasaktır.
+            Güvenliğiniz için işlemlerinizi Royale2 Market üzerinden tamamlayın.
+          </div>
+
+
+          <form id="messageForm" class="message-form">
+
+            <textarea
+              id="messageInput"
+              maxlength="1000"
+              placeholder="Mesajınızı yazın..."
+              required
+            ></textarea>
+
+            <button type="submit">
+              Gönder
+            </button>
+
+          </form>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <script src="script.js?v=5"></script>
+
+</body>
+</html>

@@ -3931,7 +3931,7 @@ async function initUnreadMessagesBadge() {
 
         // Kullanıcının dahil olduğu konuşmaları al
         const conversationsResponse =
-            await supabaseFetch(
+            await authSupabaseFetch(
                 `${window.SUPABASE_API_URL}conversations?or=(buyer_id.eq.${currentUser.id},seller_id.eq.${currentUser.id})&select=id`
             );
 
@@ -3958,7 +3958,7 @@ async function initUnreadMessagesBadge() {
                 conversationIds.join(",");
 
             const unreadResponse =
-                await supabaseFetch(
+                await authSupabaseFetch(
                     `${window.SUPABASE_API_URL}messages?conversation_id=in.(${ids})&sender_id=neq.${currentUser.id}&read_at=is.null&select=id`
                 );
 

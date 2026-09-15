@@ -3909,7 +3909,164 @@ function initMessageForm() {
   );
 }
 
+/* ==================================================
+   ÜST MENÜ - MESAJLAR / OKUNMAMIŞ MESAJ SAYISI
+   ================================================== */
 
+async function initUnreadMessagesBadge() {
+    try {
+        const currentUser =
+            getStoredUser();
+
+        if (!currentUser?.id) {
+            return;
+        }
+
+        const accessToken =
+            await getValidAccessToken();
+
+        if (!accessToken) {
+            return;
+        }
+
+        // Kullanıcının dahil olduğu konuşmaları al
+        const conversationsResponse =
+            await supabaseFetch(
+                `${window.SUPABASE_API_URL}conversations?or=(buyer_id.eq.${currentUser.id},seller_id.eq.${currentUser.id})&select=id`
+            );
+
+        if (!conversationsResponse.ok) {
+            console.error(
+                "Konuşmalar alınamadı:",
+                await conversationsResponse.text()
+            );
+            return;
+        }
+
+        const conversations =
+            await conversationsResponse.json();
+
+        const conversationIds =
+            conversations.map(
+                conversation => conversation.id
+            );
+
+        let unreadCount = 0;
+
+        if (conversationIds.length) {
+            const ids =
+                conversationIds.join(",");
+
+            const unreadResponse =
+                await supabaseFetch(
+                    `${window.SUPABASE_API_URL}messages?conversation_id=in.(${ids})&sender_id=neq.${currentUser.id}&read_at=is.null&select=id`
+                );
+
+            if (unreadResponse.ok) {
+                const unreadMessages =
+                    await unreadResponse.json();
+
+                unreadCount =
+                    unreadMessages.length;
+            }
+        }
+
+        // Üst menüde uygun alanı bul
+        const actions =
+            document.querySelector(
+                ".actions"
+            );
+
+        if (!actions) {
+            return;
+        }
+
+        // Daha önce oluşturulduysa tekrar oluşturma
+        let messagesLink =
+            document.getElementById(
+                "header-messages-link"
+            );
+
+        if (!messagesLink) {
+            messagesLink =
+                document.createElement("a");
+
+            messagesLink.id =
+                "header-messages-link";
+
+            messagesLink.href =
+                "messages";
+
+            messagesLink.style.cssText = `
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+                padding: 9px 12px;
+                color: #ffffff;
+                text-decoration: none;
+                font-weight: 600;
+                border-radius: 7px;
+                white-space: nowrap;
+            `;
+
+            messagesLink.innerHTML = `
+                <span>💬 Mesajlar</span>
+                <span
+                    id="unread-messages-badge"
+                    style="
+                        display:none;
+                        min-width:18px;
+                        height:18px;
+                        padding:0 5px;
+                        align-items:center;
+                        justify-content:center;
+                        background:#ef4444;
+                        color:#ffffff;
+                        border-radius:999px;
+                        font-size:11px;
+                        font-weight:700;
+                        line-height:18px;
+                    "
+                ></span>
+            `;
+
+            actions.insertBefore(
+                messagesLink,
+                actions.firstChild
+            );
+        }
+
+        const badge =
+            document.getElementById(
+                "unread-messages-badge"
+            );
+
+        if (!badge) {
+            return;
+        }
+
+        if (unreadCount > 0) {
+            badge.textContent =
+                unreadCount > 99
+                    ? "99+"
+                    : String(unreadCount);
+
+            badge.style.display =
+                "inline-flex";
+        } else {
+            badge.textContent = "";
+            badge.style.display =
+                "none";
+        }
+
+    } catch (error) {
+        console.error(
+            "Okunmamış mesaj sayısı alınamadı:",
+            error
+        );
+    }
+}
 // ==========================================================
 // SAYFAYI BAŞLAT
 // ==========================================================
@@ -3919,6 +4076,7 @@ document.addEventListener(
   async () => {
 
     initContactSellerButton();
+    await initUnreadMessagesBadge();
 
 
     if (
@@ -3932,6 +4090,7 @@ document.addEventListener(
       await initActiveConversation();
 
       initMessageForm();
+
     }
   }
 );

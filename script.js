@@ -3357,6 +3357,25 @@ lastMessageText.className =
 lastMessageText.textContent =
     conversation.lastMessage?.message ||
     "Henüz mesaj yok.";
+      const unreadCount =
+    conversation.lastMessage &&
+    conversation.lastMessage.sender_id !== currentUserId &&
+    !conversation.lastMessage.read_at
+        ? 1
+        : 0;
+
+const unreadBadge =
+    document.createElement("span");
+
+unreadBadge.className =
+    "conversation-unread-badge";
+
+unreadBadge.textContent =
+    unreadCount;
+
+if (!unreadCount) {
+    unreadBadge.style.display = "none";
+}
       const small =
         document.createElement(
           "small"
@@ -3381,6 +3400,9 @@ item.appendChild(
 
 item.appendChild(
     lastMessageText
+);
+item.appendChild(
+    unreadBadge
 );
 
 item.appendChild(

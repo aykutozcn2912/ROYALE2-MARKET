@@ -3552,7 +3552,7 @@ async function initActiveConversation() {
 messageList.scrollTop =
     messageList.scrollHeight;
 // Bu konuşmadaki karşı taraftan gelen mesajları okundu yap
-const readResponse = await supabaseFetch(
+const readResponse = await supabaseAuthFetch(
     `${window.SUPABASE_API_URL}rpc/mark_conversation_messages_read`,
     {
         method: "POST",

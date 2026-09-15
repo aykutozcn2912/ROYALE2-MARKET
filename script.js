@@ -670,3 +670,123 @@ async function createListingInDatabase(listingData, accessToken) {
     });
 
 })();
+
+
+/* ==================================================
+   İLAN DETAY SAYFASI
+================================================== */
+
+(async function initListingDetailPage() {
+
+    const detailContainer = document.getElementById("listingDetail");
+
+    // Bu kod sadece listing.html sayfasında çalışır.
+    if (!detailContainer) return;
+
+    const loading = document.getElementById("listingLoading");
+    const errorBox = document.getElementById("listingError");
+
+    try {
+
+        // URL'den ilan ID'sini al
+        const params = new URLSearchParams(window.location.search);
+        const listingId = params.get("id");
+
+        if (!listingId) {
+            throw new Error("İlan ID bulunamadı.");
+        }
+
+        // Supabase'den ilanı getir
+        const response = await fetch(
+            `${window.SUPABASE_API_URL}listings?id=eq.${encodeURIComponent(listingId)}&select=*`,
+            {
+                headers: {
+                    "apikey": window.SUPABASE_KEY
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("İlan bilgileri alınamadı.");
+        }
+
+        const listings = await response.json();
+
+        if (!listings || listings.length === 0) {
+            throw new Error("İlan bulunamadı.");
+        }
+
+        const listing = listings[0];
+
+        // Sunucu isimleri
+        const serverNames = {
+            1: "Ephesus",
+            2: "Teos",
+            3: "Pergamon",
+            4: "Akademi Teos"
+        };
+
+        // Kategori isimleri
+        const categoryNames = {
+            1: "Item",
+            2: "Yang",
+            3: "Karakter",
+            4: "Hesap"
+        };
+
+        // Bilgileri ekrana yaz
+        document.getElementById("listingServer").textContent =
+            serverNames[listing.server_id] || "Sunucu";
+
+        document.getElementById("listingCategory").textContent =
+            categoryNames[listing.category_id] || "Kategori";
+
+        document.getElementById("listingDetailTitle").textContent =
+            listing.title || "İlan";
+
+        document.getElementById("listingDetailDescription").textContent =
+            listing.description || "Açıklama belirtilmemiş.";
+
+        document.getElementById("listingDetailPrice").textContent =
+            Number(listing.price).toLocaleString("tr-TR") + " ₺";
+
+        // Sayfa başlığını değiştir
+        document.title =
+            (listing.title || "İlan") + " | Royale2 Market";
+
+        // Yükleniyor yazısını kapat
+        if (loading) loading.style.display = "none";
+
+        // İlanı göster
+        detailContainer.style.display = "";
+
+        const descriptionSection =
+            document.getElementById("listingDescriptionSection");
+
+        const securitySection =
+            document.getElementById("listingSecuritySection");
+
+        if (descriptionSection) {
+            descriptionSection.style.display = "";
+        }
+
+        if (securitySection) {
+            securitySection.style.display = "";
+        }
+
+    } catch (error) {
+
+        console.error("İlan detay hatası:", error);
+
+        if (loading) {
+            loading.style.display = "none";
+        }
+
+        if (errorBox) {
+            errorBox.style.display = "";
+            errorBox.textContent =
+                error.message || "İlan bulunamadı.";
+        }
+    }
+
+})();

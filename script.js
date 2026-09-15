@@ -2939,6 +2939,8 @@ async function startMessagesRealtime(conversationId, currentUserId) {
         );
 
         await realtimeClient.realtime.setAuth(accessToken);
+      
+      window.realtimeClient = realtimeClient;
 
         console.log("Realtime kullanıcı doğrulaması hazır.");
 
@@ -4218,16 +4220,7 @@ async function initUnreadMessagesBadge() {
 // ==========================================================
 
 function startUnreadMessagesRealtime() {
-    const client = window.supabase.createClient(
-    window.SUPABASE_API_URL.replace("/rest/v1/", ""),
-    window.SUPABASE_KEY,
-    {
-        auth: {
-            persistSession: false,
-            autoRefreshToken: false
-        }
-    }
-);
+const client = window.realtimeClient;
 
     if (!client) {
         console.error("Unread Realtime: Supabase client bulunamadi.");

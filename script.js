@@ -1090,7 +1090,6 @@ async function initContactSellerButton() {
 }
 
 initContactSellerButton();
-initContactSellerButton();
 // ==========================================
 // MESAJLAR SAYFASI
 // ==========================================

@@ -1332,8 +1332,7 @@ const messageForm = document.getElementById("messageForm");
 if (messageForm) {
     messageForm.addEventListener("submit", async function (event) {
         event.preventDefault();
-      console.log("GONDER BUTONU CALISTI!");
-alert("GONDER BUTONU CALISTI!");
+
 
         const messageInput = document.getElementById("messageInput");
 
@@ -1348,12 +1347,17 @@ alert("GONDER BUTONU CALISTI!");
             return;
         }
 
+      
         const params = new URLSearchParams(window.location.search);
         const conversationId = params.get("conversation");
 
-        if (!conversationId) {
-            alert("Konusma bilgisi bulunamadi.");
-            return;
+console.log("MESAJ OKUNDU:", message);
+console.log("CONVERSATION ID:", conversationId);
+
+if (!conversationId) {
+    alert("Konuşma bilgisi bulunamadı.");
+    return;
+}
         }
 
         const accessToken = localStorage.getItem("royale2_access_token");

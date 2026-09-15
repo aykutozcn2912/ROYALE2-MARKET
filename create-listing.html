@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>İlan Ver | Royale2 Market</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="create-listing-page">
+
+  <!-- HEADER -->
+  <header class="create-header">
+    <div class="create-header-inner">
+
+      <a href="/" class="create-logo">
+        <span class="create-logo-main">ROYALE2</span>
+        <span class="create-logo-sub">MARKET</span>
+      </a>
+
+      <div class="create-header-right">
+        <a href="/" class="create-back-link">
+          ← Pazara Dön
+        </a>
+
+        <a href="/account.html" class="create-account-link">
+          Hesabım
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- PAGE -->
+  <main class="create-page-container">
+
+    <!-- TITLE -->
+    <section class="create-page-heading">
+
+      <div>
+        <span class="create-eyebrow">ROYALE2 MARKET</span>
+        <h1>Yeni İlan Oluştur</h1>
+
+        <p>
+          İlan bilgilerini eksiksiz doldurarak ürününü
+          Royale2 oyuncularıyla buluştur.
+        </p>
+      </div>
+
+      <div class="create-step-indicator">
+        <span>İLAN OLUŞTURMA</span>
+        <strong>1 / 1</strong>
+      </div>
+
+    </section>
+
+
+    <!-- FORM -->
+    <form id="createListingForm" class="listing-create-form">
+
+      <!-- SERVER -->
+      <section class="listing-form-card">
+
+        <div class="listing-card-title">
+          <span class="listing-step-number">01</span>
+
+          <div>
+            <h2>Sunucu Seçimi</h2>
+            <p>İlanın hangi Royale2 sunucusuna ait olduğunu seç.</p>
+          </div>
+        </div>
+
+        <div class="server-selection">
+
+          <label class="server-option">
+            <input type="radio" name="server" value="1" required>
+            <span>
+              <strong>EPHESUS</strong>
+              <small>Royale2</small>
+            </span>
+          </label>
+
+          <label class="server-option">
+            <input type="radio" name="server" value="2">
+            <span>
+              <strong>TEOS</strong>
+              <small>Royale2</small>
+            </span>
+          </label>
+
+          <label class="server-option">
+            <input type="radio" name="server" value="3">
+            <span>
+              <strong>PERGAMON</strong>
+              <small>Royale2</small>
+            </span>
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- CATEGORY -->
+      <section class="listing-form-card">
+
+        <div class="listing-card-title">
+          <span class="listing-step-number">02</span>
+
+          <div>
+            <h2>Kategori</h2>
+            <p>Satışını yapacağın ilan türünü belirle.</p>
+          </div>
+        </div>
+
+        <div class="category-selection">
+
+          <label class="category-option">
+            <input type="radio" name="category" value="1" required>
+            <span>
+              <strong>⚔ Item</strong>
+              <small>Silah, zırh, aksesuar ve diğer eşyalar</small>
+            </span>
+          </label>
+
+          <label class="category-option">
+            <input type="radio" name="category" value="2">
+            <span>
+              <strong>💰 Yang</strong>
+              <small>Oyun parası satış ilanları</small>
+            </span>
+          </label>
+
+          <label class="category-option">
+            <input type="radio" name="category" value="3">
+            <span>
+              <strong>♟ Karakter</strong>
+              <small>Karakter satış ilanları</small>
+            </span>
+          </label>
+
+          <label class="category-option">
+            <input type="radio" name="category" value="4">
+            <span>
+              <strong>👤 Hesap</strong>
+              <small>Royale2 hesap satış ilanları</small>
+            </span>
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- LISTING DETAILS -->
+      <section class="listing-form-card">
+
+        <div class="listing-card-title">
+          <span class="listing-step-number">03</span>
+
+          <div>
+            <h2>İlan Bilgileri</h2>
+            <p>Alıcıların göreceği temel ilan bilgilerini gir.</p>
+          </div>
+        </div>
+
+
+        <div class="listing-fields">
+
+          <div class="listing-field listing-field-full">
+
+            <label for="listingTitle">
+              İlan Başlığı
+            </label>
+
+            <input
+              type="text"
+              id="listingTitle"
+              maxlength="80"
+              placeholder="Örn: +9 Dolunay Kılıcı 45 Ort."
+              required
+            >
+
+            <small>
+              Açık, anlaşılır ve ürünü doğru tanımlayan bir başlık kullan.
+            </small>
+
+          </div>
+
+
+          <div class="listing-field listing-field-full">
+
+            <label for="listingDescription">
+              İlan Açıklaması
+            </label>
+
+            <textarea
+              id="listingDescription"
+              rows="7"
+              maxlength="3000"
+              placeholder="Ürünün özelliklerini, efsunlarını ve diğer önemli bilgileri detaylı şekilde açıklayın..."
+              required
+            ></textarea>
+
+          </div>
+
+
+          <div class="listing-field">
+
+            <label for="listingPrice">
+              Satış Fiyatı
+            </label>
+
+            <div class="price-input-wrapper">
+
+              <input
+                type="number"
+                id="listingPrice"
+                min="1"
+                step="0.01"
+                placeholder="0"
+                required
+              >
+
+              <span>₺</span>
+
+            </div>
+
+          </div>
+
+
+          <div class="listing-field">
+
+            <label>
+              Para Birimi
+            </label>
+
+            <div class="currency-display">
+              TRY — Türk Lirası
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- IMAGES -->
+      <section class="listing-form-card">
+
+        <div class="listing-card-title">
+          <span class="listing-step-number">04</span>
+
+          <div>
+            <h2>İlan Görselleri</h2>
+            <p>Ürünün gerçek ve net ekran görüntülerini yükle.</p>
+          </div>
+        </div>
+
+
+        <label class="listing-upload-area" for="listingImages">
+
+          <input
+            type="file"
+            id="listingImages"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            hidden
+          >
+
+          <div class="upload-icon">＋</div>
+
+          <strong>Görsel yüklemek için tıkla</strong>
+
+          <span>
+            JPEG, PNG veya WEBP • Görsel başına maksimum 5 MB
+          </span>
+
+        </label>
+
+
+        <div id="imagePreview" class="listing-image-preview"></div>
+
+        <div class="listing-photo-notice">
+          İlk yüklediğin görsel ilanının kapak fotoğrafı olarak kullanılacaktır.
+        </div>
+
+      </section>
+
+
+      <!-- SECURITY -->
+      <section class="listing-security-box">
+
+        <div class="security-icon">✓</div>
+
+        <div>
+          <strong>Güvenli İlan Politikası</strong>
+
+          <p>
+            İlanında doğru ve güncel bilgiler kullan.
+            Hesap şifresi, kişisel iletişim bilgileri veya hassas
+            bilgileri ilan açıklamasında paylaşma.
+          </p>
+        </div>
+
+      </section>
+
+
+      <!-- SUBMIT -->
+      <div class="listing-submit-area">
+
+        <a href="/" class="listing-cancel-button">
+          Vazgeç
+        </a>
+
+        <button
+          type="submit"
+          id="publishListingButton"
+          class="listing-publish-button"
+        >
+          İlanı Yayınla
+        </button>
+
+      </div>
+
+
+      <div
+        id="listingFormMessage"
+        class="listing-form-message"
+        aria-live="polite"
+      ></div>
+
+    </form>
+
+  </main>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>

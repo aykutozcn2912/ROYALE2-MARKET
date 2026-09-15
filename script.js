@@ -2881,6 +2881,8 @@ function startMessagesRealtime(conversationId, currentUserId) {
                     conversationId
             },
             payload => {
+              console.log("REALTIME MESAJ GELDİ:", payload);
+              
                 const messageList =
                     document.getElementById("messageList");
 

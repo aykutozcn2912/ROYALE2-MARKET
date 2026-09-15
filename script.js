@@ -102,7 +102,7 @@ function render() {
           <small>TL</small>
         </div>
 
-        <a class="view" href="#login">İLANI GÖR →</a>
+        <a class="view" href="listing.html?id=${x.id}">İLANI GÖR →</a>
       </div>
     </article>
   `).join("") || `

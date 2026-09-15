@@ -1,127 +1,199 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mesajlar | Royale2 Market</title>
+    <title>Mesajlar | Royale2 Market</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="messages.css?v=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="messages.css?v=2">
 </head>
 
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
+    <!-- =========================================
+         ÜST MENÜ
+    ========================================== -->
+    <header class="site-header">
+        <div class="header-inner">
 
-      <a href="index.html" class="brand">
-        <span class="brand-mark">R2</span>
-        <span class="brand-text">
-          <strong>ROYALE2</strong>
-          <small>MARKET</small>
-        </span>
-      </a>
+            <a href="index.html" class="brand">
+                <span class="brand-mark">R2</span>
 
-      <nav>
-        <a href="index.html">İlan Pazarı</a>
-        <a href="index.html#servers">Sunucular</a>
-        <a href="index.html#how">Nasıl Çalışır?</a>
-      </nav>
+                <span class="brand-text">
+                    <strong>ROYALE2</strong>
+                    <small>MARKET</small>
+                </span>
+            </a>
 
-      <div class="actions">
-        <a class="login" id="account-username" href="account.html">
-          Giriş Yap
-        </a>
-        <a class="sell" href="create-listing.html">+ İlan Ver</a>
-      </div>
+            <nav>
+                <a href="index.html">İlan Pazarı</a>
+                <a href="index.html#servers">Sunucular</a>
+                <a href="index.html#how">Nasıl Çalışır?</a>
+            </nav>
 
-    </div>
-  </header>
+            <div class="actions">
+                <a class="login" href="#login">
+                    Giriş Yap
+                </a>
 
-
-  <main class="messages-page">
-
-    <div class="messages-container">
-
-      <aside class="conversations-panel">
-
-        <div class="messages-panel-title">
-          <h2>Mesajlar</h2>
-        </div>
-
-        <div id="conversationList">
-          <p>Konuşmalar yükleniyor...</p>
-        </div>
-
-      </aside>
-
-
-      <section class="chat-panel">
-
-        <div id="chatEmpty" class="chat-empty">
-          <h2>Royale2 Mesajlar</h2>
-          <p>Mesajlaşmak için bir konuşma seçin.</p>
-        </div>
-
-
-        <div id="chatArea" style="display:none;">
-
-<div class="chat-header">
-
-    <div class="chat-user-profile">
-        <div class="chat-user-avatar" id="chatUserAvatar">R2</div>
-
-        <div class="chat-user-details">
-            <div class="chat-user-name-row">
-                <strong id="chatUsername">Kullanıcı</strong>
-                <span class="chat-status-dot"></span>
+                <a class="sell" href="create-listing.html">
+                    + İlan Ver
+                </a>
             </div>
 
-            <small id="chatListingTitle">İlan Görüşmesi</small>
         </div>
-    </div>
-
-    <div class="chat-header-badge">
-        GÜVENLİ MESAJLAŞMA
-    </div>
+    </header>
 
 
-          <div id="messageList" class="message-list">
-          </div>
+    <!-- =========================================
+         MESAJLAR SAYFASI
+    ========================================== -->
+    <main class="messages-page">
+
+        <div class="messages-container">
 
 
-          <div class="phone-warning">
-            ⚠ Telefon numarası veya site dışı iletişim bilgisi paylaşmak yasaktır.
-            Güvenliğiniz için işlemlerinizi Royale2 Market üzerinden tamamlayın.
-          </div>
+            <!-- =================================
+                 SOL TARAF - KONUŞMALAR
+            ================================== -->
+            <aside class="conversations-panel">
+
+                <div class="messages-panel-title">
+                    <h2>Mesajlar</h2>
+                </div>
+
+                <div id="conversationList">
+                    <p>Konuşmalar yükleniyor...</p>
+                </div>
+
+            </aside>
 
 
-          <form id="messageForm" class="message-form">
+            <!-- =================================
+                 SAĞ TARAF - SOHBET
+            ================================== -->
+            <section class="chat-panel">
 
-            <textarea
-              id="messageInput"
-              maxlength="1000"
-              placeholder="Mesajınızı yazın..."
-              required
-            ></textarea>
 
-            <button type="submit">
-              Gönder
-            </button>
+                <!-- Konuşma seçilmediğinde -->
+                <div id="chatEmpty" class="chat-empty">
 
-          </form>
+                    <h2>Royale2 Mesajlar</h2>
+
+                    <p>
+                        Mesajlaşmak için bir konuşma seçin.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================
+                     AKTİF SOHBET
+                ================================== -->
+                <div id="chatArea" style="display: none;">
+
+
+                    <!-- SOHBET ÜST BİLGİ -->
+                    <div class="chat-header">
+
+                        <div class="chat-user-profile">
+
+                            <div
+                                class="chat-user-avatar"
+                                id="chatUserAvatar"
+                            >
+                                R2
+                            </div>
+
+                            <div class="chat-user-details">
+
+                                <div class="chat-user-name-row">
+
+                                    <strong id="chatUsername">
+                                        Kullanıcı
+                                    </strong>
+
+                                    <span class="chat-status-dot"></span>
+
+                                </div>
+
+                                <small id="chatListingTitle">
+                                    İlan Görüşmesi
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chat-header-badge">
+                            GÜVENLİ MESAJLAŞMA
+                        </div>
+
+                    </div>
+                    <!-- chat-header BURADA KAPANIYOR -->
+
+
+                    <!-- =================================
+                         MESAJ LİSTESİ
+                    ================================== -->
+                    <div
+                        id="messageList"
+                        class="message-list"
+                    ></div>
+
+
+                    <!-- =================================
+                         GÜVENLİK UYARISI
+                    ================================== -->
+                    <div class="phone-warning">
+                        ⚠ Telefon numarası veya site dışı iletişim bilgisi
+                        paylaşmak yasaktır. Güvenliğiniz için işlemlerinizi
+                        Royale2 Market üzerinden tamamlayın.
+                    </div>
+
+
+                    <!-- =================================
+                         MESAJ GÖNDERME FORMU
+                    ================================== -->
+                    <form
+                        id="messageForm"
+                        class="message-form"
+                    >
+
+                        <textarea
+                            id="messageInput"
+                            maxlength="1000"
+                            placeholder="Mesajınızı yazın..."
+                            autocomplete="off"
+                            required
+                        ></textarea>
+
+                        <button type="submit">
+                            Gönder
+                        </button>
+
+                    </form>
+
+                </div>
+                <!-- /chatArea -->
+
+
+            </section>
+            <!-- /chat-panel -->
+
 
         </div>
+        <!-- /messages-container -->
 
-      </section>
-
-    </div>
-
-  </main>
+    </main>
 
 
-  <script src="script.js?v=5"></script>
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+    <script src="script.js?v=6"></script>
 
 </body>
 </html>

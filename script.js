@@ -3189,7 +3189,24 @@ async function initMessagesPage() {
         ).values()
       );
 
+for (const conversation of uniqueConversations) {
+  const lastMessageResponse =
+    await supabaseAuthFetch(
+      `${window.SUPABASE_API_URL}messages?conversation_id=eq.${encodeURIComponent(
+        conversation.id
+      )}&select=id,message,created_at,sender_id,read_at&order=created_at.desc&limit=1`
+    );
 
+  if (lastMessageResponse.ok) {
+    const lastMessages =
+      await lastMessageResponse.json();
+
+    conversation.lastMessage =
+      lastMessages?.[0] || null;
+  } else {
+    conversation.lastMessage = null;
+  }
+}
     uniqueConversations.sort(
       (a, b) =>
         new Date(

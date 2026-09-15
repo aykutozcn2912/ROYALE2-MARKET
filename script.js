@@ -2005,8 +2005,8 @@ async function uploadListingImages(
       result[0];
 
 
-    let sellerUsername =
-      "Kullanıcı";
+let sellerUsername =
+    "Kullanıcı";
 
 
     try {
@@ -2015,7 +2015,7 @@ async function uploadListingImages(
         await fetch(
           `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
             listing.user_id
-          )}&select=username`,
+})&select=username,display_name,avatar_url,is_verified`,
           {
             headers: {
               "apikey":
@@ -2156,16 +2156,69 @@ async function uploadListingImages(
     };
 
 
-    const sellerElement =
-      document.getElementById(
+const sellerElement =
+    document.getElementById(
         "listingSeller"
-      );
+    );
+
+const sellerProfileLink =
+    document.getElementById(
+        "listingSellerProfile"
+    );
+
+const sellerAvatar =
+    document.getElementById(
+        "listingSellerAvatar"
+    );
 
 
-    if (sellerElement) {
+/* =================================================
+   SATICI KULLANICI ADI
+   ================================================= */
 
-      sellerElement.textContent =
+if (sellerElement) {
+
+    sellerElement.textContent =
         sellerUsername;
+
+}
+
+
+/* =================================================
+   SATICI PROFİL BAĞLANTISI
+   ================================================= */
+
+if (sellerProfileLink && listing.user_id) {
+
+    sellerProfileLink.href =
+        "profile.html?id=" +
+        encodeURIComponent(
+            listing.user_id
+        );
+
+}
+
+
+/* =================================================
+   SATICI AVATARI
+   ================================================= */
+
+if (sellerAvatar) {
+
+    const cleanSellerName =
+        String(
+            sellerUsername || "R2"
+        ).trim();
+
+    const initials =
+        cleanSellerName
+            .slice(0, 2)
+            .toUpperCase();
+
+    sellerAvatar.textContent =
+        initials || "R2";
+
+}
     }
 
 

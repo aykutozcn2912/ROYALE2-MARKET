@@ -418,7 +418,16 @@ await registerUser({
     password
 });
 
-            message.textContent = "Hesabınız başarıyla oluşturuldu. E-posta doğrulaması açıksa gelen kutunuzu kontrol edin.";
+message.textContent = "Hesabınız başarıyla oluşturuldu. Giriş yapılıyor...";
+
+const loginData = await loginUser(email, password);
+
+localStorage.setItem("royale2_access_token", loginData.access_token);
+localStorage.setItem("royale2_refresh_token", loginData.refresh_token);
+localStorage.setItem("royale2_user", JSON.stringify(loginData.user));
+
+window.location.href = "/";
+return;
 
         } catch (error) {
             const errorText = String(error?.message || error || "");

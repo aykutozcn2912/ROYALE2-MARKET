@@ -4218,7 +4218,7 @@ async function initUnreadMessagesBadge() {
 // ==========================================================
 
 function startUnreadMessagesRealtime() {
-    const client = supabase.createClient(
+    const client = window.supabase.createClient(
     window.SUPABASE_API_URL.replace("/rest/v1/", ""),
     window.SUPABASE_KEY,
     {

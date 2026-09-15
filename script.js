@@ -1358,7 +1358,7 @@ if (!conversationId) {
     alert("Konuşma bilgisi bulunamadı.");
     return;
 }
-        }
+        
 
         const accessToken = localStorage.getItem("royale2_access_token");
         const userData = localStorage.getItem("royale2_user");

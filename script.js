@@ -3875,7 +3875,7 @@ function initMessageForm() {
         conversation.seller_id !== currentUser.id
     )
 ) {
-    ...
+
 }
 
 

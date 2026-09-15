@@ -3681,70 +3681,73 @@ async function initActiveConversation() {
       );
 
 
-    if (
-      !messagesResponse.ok
-    ) {
+   if (!messagesResponse.ok) {
 
-      const errorText =
+    const errorText =
         await messagesResponse.text();
 
-
-      console.error(
+    console.error(
         "Mesaj alma hatası:",
         messagesResponse.status,
         errorText
-      );
-
-
-      throw new Error(
-        "Mesajlar alınamadı."
-      );
-    }
-
-
-    const messages =
-      await messagesResponse.json();
-
-
-    messageList.innerHTML =
-      "";
-
-
-    messages.forEach(
-      msg => {
-
-        renderMessage(
-          messageList,
-          msg,
-          currentUserId
-        );
-      }
     );
 
+    throw new Error(
+        "Mesajlar alınamadı."
+    );
+}
 
-messageList.scrollTop =
-    messageList.scrollHeight;
-// Bu konuşmadaki karşı taraftan gelen mesajları okundu yap
-const readResponse = await supabaseAuthFetch(
-    `${window.SUPABASE_API_URL}rpc/mark_conversation_messages_read`,
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            p_conversation_id: conversationId
-        })
+const messages =
+    await messagesResponse.json();
+
+messageList.innerHTML =
+    "";
+
+messages.forEach(
+    msg => {
+        renderMessage(
+            messageList,
+            msg,
+            currentUserId
+        );
     }
 );
 
+messageList.scrollTop =
+    messageList.scrollHeight;
+
+// Bu konuşmadaki karşı taraftan gelen mesajları okundu yap
+const readResponse =
+    await supabaseAuthFetch(
+        `${window.SUPABASE_API_URL}rpc/mark_conversation_messages_read`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                p_conversation_id: conversationId
+            })
+        }
+    );
+
 if (!readResponse.ok) {
+
     console.error(
         "Mesajlar okundu olarak işaretlenemedi:",
         await readResponse.text()
     );
+
+} else {
+
+    // Üst menü okunmamış mesaj sayısını hemen güncelle
+    await initUnreadMessagesBadge();
 }
-// Bu konuşma için anlık mesaj dinlemeyi başlat
+
+// Sol konuşma listesini de güncelle
+await initMessagesPage();
+
+// Realtime mesaj dinlemeyi başlat
 startMessagesRealtime(
     conversationId,
     currentUserId

@@ -3203,7 +3203,24 @@ for (const conversation of uniqueConversations) {
 
     conversation.lastMessage =
       lastMessages?.[0] || null;
-  } else {
+ const unreadResponse =
+    await supabaseAuthFetch(
+        `${window.SUPABASE_API_URL}messages?conversation_id=eq.${encodeURIComponent(
+            conversation.id
+        )}&sender_id=neq.${encodeURIComponent(
+            currentUserId
+        )}&read_at=is.null&select=id`
+    );
+
+if (unreadResponse.ok) {
+    const unreadMessages =
+        await unreadResponse.json();
+
+    conversation.unreadCount =
+        unreadMessages.length;
+} else {
+    conversation.unreadCount = 0;
+} } else {
     conversation.lastMessage = null;
   }
 }
@@ -3357,12 +3374,8 @@ lastMessageText.className =
 lastMessageText.textContent =
     conversation.lastMessage?.message ||
     "Henüz mesaj yok.";
-      const unreadCount =
-    conversation.lastMessage &&
-    conversation.lastMessage.sender_id !== currentUserId &&
-    !conversation.lastMessage.read_at
-        ? 1
-        : 0;
+const unreadCount =
+    conversation.unreadCount || 0;
 
 const unreadBadge =
     document.createElement("span");

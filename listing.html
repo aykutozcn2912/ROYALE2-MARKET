@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>İlan Detayı | Royale2 Market</title>
+
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+
+<body>
+
+<header class="topbar">
+    <a class="brand" href="index.html">
+        <span class="brand-mark">R2</span>
+        <span>
+            <strong>ROYALE2</strong>
+            <small>MARKET</small>
+        </span>
+    </a>
+
+    <nav>
+        <a href="index.html#market">İlan Pazarı</a>
+        <a href="index.html#servers">Sunucular</a>
+        <a href="index.html#how">Nasıl Çalışır?</a>
+    </nav>
+
+    <div class="actions">
+        <a class="login" id="account-username" href="account.html">Hesabım</a>
+        <a class="sell" href="create-listing.html">+ İlan Ver</a>
+    </div>
+</header>
+
+
+<main class="listing-detail-page">
+
+    <div class="listing-detail-container">
+
+        <a href="index.html" class="listing-back-link">
+            ← İlan Pazarına Dön
+        </a>
+
+
+        <div id="listingLoading" class="listing-detail-status">
+            İlan bilgileri yükleniyor...
+        </div>
+
+
+        <div id="listingError"
+             class="listing-detail-status"
+             style="display:none;">
+            İlan bulunamadı.
+        </div>
+
+
+        <section id="listingDetail"
+                 class="listing-detail-layout"
+                 style="display:none;">
+
+
+            <!-- SOL TARAF / GÖRSELLER -->
+
+            <div class="listing-detail-gallery">
+
+                <div class="listing-main-image">
+
+                    <div class="listing-image-placeholder">
+                        R2
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAĞ TARAF / İLAN BİLGİLERİ -->
+
+            <div class="listing-detail-info">
+
+                <div class="listing-detail-meta">
+
+                    <span id="listingServer">
+                        Sunucu
+                    </span>
+
+                    <span id="listingCategory">
+                        Kategori
+                    </span>
+
+                </div>
+
+
+                <h1 id="listingDetailTitle">
+                    İlan Başlığı
+                </h1>
+
+
+                <div class="listing-detail-price"
+                     id="listingDetailPrice">
+
+                    0 ₺
+
+                </div>
+
+
+                <div class="listing-detail-seller">
+
+                    <span class="seller-label">
+                        Satıcı
+                    </span>
+
+                    <strong id="listingSeller">
+                        Kullanıcı
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="listing-contact-button"
+                    id="contactSellerButton">
+
+                    Satıcıyla İletişime Geç
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="listing-favorite-button"
+                    id="favoriteListingButton">
+
+                    ♡ Favorilere Ekle
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- AÇIKLAMA -->
+
+        <section
+            id="listingDescriptionSection"
+            class="listing-description-card"
+            style="display:none;">
+
+            <h2>İlan Açıklaması</h2>
+
+            <p id="listingDetailDescription">
+                İlan açıklaması.
+            </p>
+
+        </section>
+
+
+        <!-- GÜVENLİK -->
+
+        <section
+            id="listingSecuritySection"
+            class="listing-security-card"
+            style="display:none;">
+
+            <strong>Güvenli Alışveriş</strong>
+
+            <p>
+                Ödeme yapmadan önce ürün ve satıcı bilgilerini
+                kontrol edin. Şifrenizi veya hesap bilgilerinizi
+                başka kullanıcılarla paylaşmayın.
+            </p>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script src="script.js?v=4"></script>
+
+</body>
+</html>

@@ -1360,3 +1360,290 @@
 .server-grid {
     grid-template-columns: repeat(4, 1fr);
 }
+
+
+/* ==================================================
+   ROYALE2 MARKET - İLAN DETAY SAYFASI
+================================================== */
+
+.listing-detail-page {
+    min-height: calc(100vh - 72px);
+    background:
+        radial-gradient(circle at 15% 10%, rgba(212, 166, 35, 0.05), transparent 30%),
+        #070a0f;
+    padding: 42px 20px 80px;
+}
+
+.listing-detail-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.listing-back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 22px;
+    color: #8e9bae;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.listing-back-link:hover {
+    color: #f0bd2d;
+}
+
+.listing-detail-status {
+    background: #0d131c;
+    border: 1px solid #202b39;
+    border-radius: 8px;
+    padding: 25px;
+    color: #9aa8ba;
+}
+
+/* ANA İLAN ALANI */
+
+.listing-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.85fr);
+    gap: 22px;
+    align-items: stretch;
+}
+
+/* GÖRSEL ALANI */
+
+.listing-detail-gallery {
+    background: #0d131c;
+    border: 1px solid #202b39;
+    border-radius: 8px;
+    padding: 18px;
+    min-height: 460px;
+}
+
+.listing-main-image {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at center, rgba(43, 144, 230, 0.09), transparent 45%),
+        #080d14;
+    border: 1px solid #1b2735;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.listing-image-placeholder {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #276ba0;
+    background: #0a1722;
+    color: #3aa7ff;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* SAĞ BİLGİ KARTI */
+
+.listing-detail-info {
+    background: #0d131c;
+    border: 1px solid #202b39;
+    border-radius: 8px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-detail-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 17px;
+}
+
+.listing-detail-meta span {
+    display: inline-flex;
+    align-items: center;
+    background: #101923;
+    border: 1px solid #273547;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #91a5bb;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#listingDetailTitle {
+    margin: 0;
+    color: #f5f7fa;
+    font-size: 27px;
+    line-height: 1.25;
+    font-weight: 800;
+}
+
+.listing-detail-price {
+    margin: 24px 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #202b39;
+    color: #f2bd2c;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+/* SATICI */
+
+.listing-detail-seller {
+    background: #091019;
+    border: 1px solid #1d2b3a;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 18px;
+}
+
+.seller-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #66798f;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+#listingSeller {
+    color: #f1f4f8;
+    font-size: 15px;
+}
+
+/* BUTONLAR */
+
+.listing-contact-button,
+.listing-favorite-button {
+    width: 100%;
+    min-height: 46px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.listing-contact-button {
+    border: 1px solid #d5a51e;
+    background: #d5a51e;
+    color: #090b0e;
+    margin-bottom: 10px;
+}
+
+.listing-contact-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+.listing-favorite-button {
+    border: 1px solid #2a394a;
+    background: #101720;
+    color: #c1ccd8;
+}
+
+.listing-favorite-button:hover {
+    border-color: #d5a51e;
+    color: #f0bd2d;
+}
+
+/* AÇIKLAMA */
+
+.listing-description-card,
+.listing-security-card {
+    margin-top: 22px;
+    background: #0d131c;
+    border: 1px solid #202b39;
+    border-radius: 8px;
+    padding: 25px 28px;
+}
+
+.listing-description-card h2 {
+    margin: 0 0 18px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #202b39;
+    color: #f4f6f9;
+    font-size: 17px;
+}
+
+.listing-description-card p {
+    margin: 0;
+    color: #aab6c5;
+    font-size: 14px;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+/* GÜVENLİK KUTUSU */
+
+.listing-security-card {
+    border-color: rgba(213, 165, 30, 0.25);
+    background: rgba(213, 165, 30, 0.035);
+}
+
+.listing-security-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #e8b72d;
+    font-size: 14px;
+}
+
+.listing-security-card p {
+    margin: 0;
+    color: #8998aa;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* TABLET / MOBİL */
+
+@media (max-width: 900px) {
+
+    .listing-detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .listing-detail-gallery {
+        min-height: 350px;
+    }
+
+    .listing-main-image {
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .listing-detail-page {
+        padding: 25px 14px 60px;
+    }
+
+    .listing-detail-info {
+        padding: 20px;
+    }
+
+    #listingDetailTitle {
+        font-size: 22px;
+    }
+
+    .listing-detail-price {
+        font-size: 27px;
+    }
+
+    .listing-description-card,
+    .listing-security-card {
+        padding: 20px;
+    }
+}

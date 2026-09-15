@@ -1319,8 +1319,7 @@ const profileResponse = await fetch(
 
 if (profileResponse.ok) {
     const profiles = await profileResponse.json();
-console.log("Karşı kullanıcı ID:", otherUserId);
-console.log("Karşı kullanıcı profil sonucu:", profiles);
+
   
     if (profiles.length > 0) {
         const otherProfile = profiles[0];

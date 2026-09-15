@@ -3348,7 +3348,15 @@ uniqueConversations.sort((a, b) => {
         listing?.title ||
         "İlan Görüşmesi";
 
+const lastMessageText =
+    document.createElement("div");
 
+lastMessageText.className =
+    "conversation-last-message";
+
+lastMessageText.textContent =
+    conversation.lastMessage?.message ||
+    "Henüz mesaj yok.";
       const small =
         document.createElement(
           "small"
@@ -3357,28 +3365,27 @@ uniqueConversations.sort((a, b) => {
 
       small.textContent =
         new Date(
-          conversation.created_at
+conversation.lastMessage?.created_at ||
+conversation.created_at
         ).toLocaleString(
           "tr-TR"
         );
 
+item.appendChild(
+    strong
+);
 
-      item.appendChild(
-        strong
-      );
+item.appendChild(
+    listingTitle
+);
 
+item.appendChild(
+    lastMessageText
+);
 
-      item.appendChild(
-        listingTitle
-      );
-
-
-      item.appendChild(
-        small
-      );
-
-
-      item.addEventListener(
+item.appendChild(
+    small
+);      item.addEventListener(
         "click",
         () => {
 

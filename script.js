@@ -818,7 +818,23 @@ return;
         }
 
         const listing = listings[0];
+// İlana ait görselleri getir
+const imagesResponse = await fetch(
+    `${window.SUPABASE_API_URL}listing_images?listing_id=eq.${encodeURIComponent(listingId)}&select=*&order=sort_order.asc`,
+    {
+        headers: {
+            "apikey": window.SUPABASE_KEY
+        }
+    }
+);
 
+if (!imagesResponse.ok) {
+    throw new Error("İlan görselleri alınamadı.");
+}
+
+const listingImages = await imagesResponse.json();
+
+console.log("İlan görselleri:", listingImages);
         // Sunucu isimleri
         const serverNames = {
             1: "Ephesus",

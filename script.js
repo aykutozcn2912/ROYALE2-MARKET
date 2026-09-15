@@ -476,3 +476,28 @@ return;
 
     console.log("İlan oluşturma sayfası: kullanıcı oturumu bulundu.");
 })();
+/* =========================================================
+   HESAP SAYFASI - KULLANICI ADI SENKRONİZASYONU
+   ========================================================= */
+
+(function syncAccountUsername() {
+    const sidebarUsername = document.getElementById("sidebar-username");
+
+    if (!sidebarUsername) return;
+
+    try {
+        const storedUser = JSON.parse(
+            localStorage.getItem("royale2_user") || "{}"
+        );
+
+        const username =
+            storedUser?.user_metadata?.username ||
+            storedUser?.username ||
+            "Kullanıcı";
+
+        sidebarUsername.textContent = username;
+    } catch (error) {
+        console.error("Kullanıcı adı yüklenemedi:", error);
+        sidebarUsername.textContent = "Kullanıcı";
+    }
+})();

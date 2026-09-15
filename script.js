@@ -742,7 +742,9 @@ if (selectedImages.length > 0) {
             }
 
             alert("İlanınız başarıyla yayınlandı!");
-
+window.location.href = `/listing?id=${createdListing.id}`;
+return;
+          
         } catch (error) {
 
             console.error("İlan yayınlama hatası:", error);

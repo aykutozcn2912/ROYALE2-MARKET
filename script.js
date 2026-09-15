@@ -1321,3 +1321,93 @@ async function initActiveConversation() {
 }
 
 initActiveConversation();
+
+
+// ========================================
+// MESAJ GONDERME SISTEMI
+// ========================================
+
+const messageForm = document.getElementById("messageForm");
+
+if (messageForm) {
+    messageForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const messageInput = document.getElementById("messageInput");
+
+        if (!messageInput) {
+            console.error("messageInput bulunamadi.");
+            return;
+        }
+
+        const message = messageInput.value.trim();
+
+        if (!message) {
+            return;
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const conversationId = params.get("conversation");
+
+        if (!conversationId) {
+            alert("Konusma bilgisi bulunamadi.");
+            return;
+        }
+
+        const accessToken = localStorage.getItem("royale2_access_token");
+        const userData = localStorage.getItem("royale2_user");
+
+        if (!accessToken || !userData) {
+            alert("Mesaj gondermek icin giris yapmalisiniz.");
+            window.location.href = "account.html";
+            return;
+        }
+
+        try {
+            const currentUser = JSON.parse(userData);
+            const senderId = currentUser.id;
+
+            if (!senderId) {
+                throw new Error("Kullanici ID bulunamadi.");
+            }
+
+            const response = await fetch(
+                `${window.SUPABASE_API_URL}messages`,
+                {
+                    method: "POST",
+                    headers: {
+                        "apikey": window.SUPABASE_KEY,
+                        "Authorization": `Bearer ${accessToken}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=representation"
+                    },
+                    body: JSON.stringify({
+                        conversation_id: conversationId,
+                        sender_id: senderId,
+                        message: message
+                    })
+                }
+            );
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Mesaj gonderme Supabase hatasi:", errorText);
+                throw new Error(errorText || "Mesaj gonderilemedi.");
+            }
+
+            const result = await response.json();
+
+            console.log("Mesaj gonderildi:", result);
+
+            messageInput.value = "";
+
+            // Sayfayi ayni konusma ID'siyle yenile
+            window.location.href =
+                `messages.html?conversation=${encodeURIComponent(conversationId)}`;
+
+        } catch (error) {
+            console.error("Mesaj gonderme hatasi:", error);
+            alert("Mesaj gonderilemedi. Lutfen tekrar deneyin.");
+        }
+    });
+}

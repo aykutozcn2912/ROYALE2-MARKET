@@ -637,6 +637,12 @@ async function createListingInDatabase(listingData, accessToken) {
             );
 
             console.log("İlan başarıyla oluşturuldu:", createdListing);
+          const listingImagesInput = document.getElementById("listingImages");
+const selectedImages = listingImagesInput
+    ? Array.from(listingImagesInput.files)
+    : [];
+
+console.log("Seçilen ilan görselleri:", selectedImages);
 
             if (message) {
                 message.textContent = "İlanınız başarıyla yayınlandı.";

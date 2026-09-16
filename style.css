@@ -4516,7 +4516,7 @@ body {
    ========================================================= */
 
 .stats {
-    width: calc(100% - 28px) !important;t;
+    width: calc(100% - 28px) !important;
     max-width: 1040px !important;
     margin: 0 auto !important;
 
@@ -5591,213 +5591,291 @@ main,
         );
 }
 
-
 /* =========================================================
-   ROYALE2 MARKET - HERO TASARIM V2
+   ROYALE2 MARKET - PROFESSIONAL HERO FINAL
+   17.09.2026
+   Mevcut sistemlere dokunmaz; yalnızca ana sayfa hero görünümünü
+   tek bir nihai kuralla sabitler.
    ========================================================= */
 
-.hero {
-    position: relative;
-    min-height: 610px;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 50% 45%, rgba(25, 61, 82, 0.30) 0%, rgba(5, 11, 16, 0.20) 35%, rgba(3, 7, 10, 0.95) 78%),
-        linear-gradient(180deg, #071019 0%, #04090d 100%);
-}
-
-/* Karakter görseli */
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("images/hero-characters.png") !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: contain !important;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Ortadaki içerik */
-.hero-content {
-    position: relative;
-    z-index: 3;
-    width: min(560px, 90%);
-    min-height: 610px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 40px 20px;
-    box-sizing: border-box;
-}
-
-/* Sunucu isimleri */
-.hero .eyebrow {
-    color: #d7a84a;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
-}
-
-/* ROYALE2 MARKET */
-.hero h1 {
-    margin: 0 0 16px;
-    font-size: clamp(42px, 4vw, 66px);
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: 2px;
-    color: #f5f5f5;
-    text-shadow: 0 4px 25px rgba(0, 0, 0, 0.85);
-}
-
-.hero h1 span {
-    color: #d99a2b;
-}
-
-/* Açıklama */
-.hero-content > p {
-    max-width: 520px;
-    margin: 0 auto 25px;
-    color: #d2d8dd;
-    font-size: 15px;
-    line-height: 1.7;
-    text-shadow: 0 2px 8px #000;
-}
-
-/* Butonlar */
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-/* Alttaki sunucu/trust kısmı */
-.hero .trust {
-    margin-top: 28px;
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    flex-wrap: wrap;
-    color: #c8d0d6;
-}
-
-/* Mobil */
-@media (max-width: 768px) {
-    .hero {
-        min-height: 520px;
-    }
-
-    .hero-content {
-        min-height: 520px;
-        width: 92%;
-    }
-
-    .hero-bg {
-        background-size: cover !important;
-        opacity: 0.55;
-    }
-
-    .hero h1 {
-        font-size: 38px;
-    }
-}
-
-
-/* =========================================================
-   ROYALE2 MARKET - HERO V3 KONUMLANDIRMA
-   ========================================================= */
-
-.hero {
+body > main > .hero {
+    position: relative !important;
+    width: 100% !important;
     min-height: 610px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    height: 610px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 58% 42%, rgba(24, 55, 73, 0.12), transparent 34%),
+        linear-gradient(180deg, #05090d 0%, #05080c 100%) !important;
+    border-bottom: 1px solid rgba(73, 98, 119, 0.24);
 }
 
-/* Savaşçı + Şaman */
-.hero-bg {
+/* Şeffaf savaşçı + şaman PNG */
+body > main > .hero > .hero-bg {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    opacity: 1 !important;
 
     background-image: url("images/hero-characters.png") !important;
     background-repeat: no-repeat !important;
 
-    /* Karakterleri iki yana doğru büyüt */
-    background-size: 100% auto !important;
-    background-position: center bottom !important;
-
-    z-index: 1 !important;
-    pointer-events: none !important;
+    /* 1664x864 görseli yaklaşık %65 ölçekler:
+       savaşçı solda, şaman orta bölgede kalır. */
+    background-size: auto 92% !important;
+    background-position: max(24px, calc(50% - 810px)) bottom !important;
 }
 
-/* Ortadaki ROYALE2 MARKET alanı */
-.hero-content {
-    position: relative !important;
-    z-index: 5 !important;
+/* Metnin okunabilirliğini artıran sağ taraftaki çok hafif katman */
+body > main > .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 57%,
+            rgba(5, 8, 12, 0.18) 65%,
+            rgba(5, 8, 12, 0.68) 100%
+        );
+}
 
-    width: 520px !important;
-    max-width: 42vw !important;
+/* Hero metin alanı */
+body > main > .hero > .hero-content {
+    position: relative !important;
+    z-index: 3 !important;
+
+    width: calc(100% - 48px) !important;
+    max-width: 1320px !important;
     min-height: 610px !important;
+    height: 610px !important;
 
     margin: 0 auto !important;
-    padding: 0 20px !important;
+    padding: 0 34px !important;
+    box-sizing: border-box !important;
 
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    align-items: center !important;
+    align-items: flex-end !important;
 
-    text-align: center !important;
-
+    text-align: left !important;
     transform: none !important;
     left: auto !important;
     right: auto !important;
 }
 
-/* Başlık */
-.hero-content h1 {
-    width: 100% !important;
-    text-align: center !important;
-    white-space: nowrap !important;
+/* Sağdaki gerçek içerik genişliği */
+body > main > .hero > .hero-content > * {
+    width: min(390px, 31vw);
+    max-width: 390px;
+    box-sizing: border-box;
 }
 
-/* Açıklama */
-.hero-content > p {
-    width: 100% !important;
-    text-align: center !important;
+body > main > .hero .eyebrow,
+body > main > .hero .hero-eyebrow {
+    margin: 0 0 13px !important;
+    color: #d7a84a !important;
+    font-family: Rajdhani, Inter, Arial, sans-serif;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px !important;
+    text-align: left !important;
+}
+
+body > main > .hero h1,
+body > main > .hero .hero-content h1 {
+    margin: 0 0 16px !important;
+    color: #f3f5f7 !important;
+    font-family: Rajdhani, Inter, Arial, sans-serif !important;
+    font-size: clamp(42px, 3.25vw, 58px) !important;
+    line-height: 0.98 !important;
+    font-weight: 800 !important;
+    letter-spacing: 2px !important;
+    white-space: nowrap !important;
+    text-align: left !important;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.85);
+}
+
+body > main > .hero h1 span {
+    color: #d99a2b !important;
+}
+
+body > main > .hero .hero-content > p {
+    margin: 0 0 22px !important;
+    color: #d0d5da !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+/* Hero arama alanı varsa */
+body > main > .hero .hero-search,
+body > main > .hero .hero-search-form {
+    margin: 0 0 18px !important;
 }
 
 /* Butonlar */
-.hero-buttons {
-    width: 100% !important;
-    justify-content: center !important;
+body > main > .hero .hero-buttons,
+body > main > .hero .hero-actions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+    text-align: left !important;
 }
 
-/* Alt sunucu isimleri */
-.hero .trust {
-    width: 100% !important;
-    justify-content: center !important;
+/* Güven / sunucu satırı */
+body > main > .hero .trust,
+body > main > .hero .hero-trust,
+body > main > .hero .hero-checks {
+    display: flex !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 10px 16px !important;
+    margin-top: 0 !important;
+    color: #8e9ba8 !important;
+    font-size: 10px !important;
+    text-align: left !important;
+}
+
+/* Geniş ekran */
+@media (min-width: 1800px) {
+    body > main > .hero > .hero-bg {
+        background-size: auto 94% !important;
+        background-position: calc(50% - 850px) bottom !important;
+    }
+
+    body > main > .hero > .hero-content {
+        max-width: 1380px !important;
+    }
+}
+
+/* Laptop */
+@media (max-width: 1300px) {
+    body > main > .hero {
+        min-height: 560px !important;
+        height: 560px !important;
+    }
+
+    body > main > .hero > .hero-bg {
+        background-size: auto 88% !important;
+        background-position: -20px bottom !important;
+        opacity: 0.82 !important;
+    }
+
+    body > main > .hero > .hero-content {
+        min-height: 560px !important;
+        height: 560px !important;
+        width: calc(100% - 36px) !important;
+        padding: 0 24px !important;
+    }
+
+    body > main > .hero > .hero-content > * {
+        width: min(360px, 34vw);
+        max-width: 360px;
+    }
+
+    body > main > .hero h1,
+    body > main > .hero .hero-content h1 {
+        font-size: clamp(38px, 4vw, 52px) !important;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    body > main > .hero {
+        min-height: 500px !important;
+        height: auto !important;
+    }
+
+    body > main > .hero > .hero-bg {
+        background-size: auto 86% !important;
+        background-position: center bottom !important;
+        opacity: 0.24 !important;
+    }
+
+    body > main > .hero::after {
+        background: rgba(5, 8, 12, 0.46);
+    }
+
+    body > main > .hero > .hero-content {
+        width: calc(100% - 28px) !important;
+        max-width: 760px !important;
+        min-height: 500px !important;
+        height: auto !important;
+        padding: 48px 20px !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    body > main > .hero > .hero-content > * {
+        width: min(560px, 100%);
+        max-width: 560px;
+    }
+
+    body > main > .hero .eyebrow,
+    body > main > .hero .hero-eyebrow,
+    body > main > .hero h1,
+    body > main > .hero .hero-content h1,
+    body > main > .hero .hero-content > p {
+        text-align: center !important;
+    }
+
+    body > main > .hero .hero-buttons,
+    body > main > .hero .hero-actions,
+    body > main > .hero .trust,
+    body > main > .hero .hero-trust,
+    body > main > .hero .hero-checks {
+        justify-content: center !important;
+        text-align: center !important;
+    }
 }
 
 /* Mobil */
-@media (max-width: 768px) {
-    .hero-bg {
-        background-size: auto 90% !important;
-        background-position: center bottom !important;
-        opacity: 0.35;
+@media (max-width: 600px) {
+    body > main > .hero {
+        min-height: 470px !important;
     }
 
-    .hero-content {
-        width: 92% !important;
-        max-width: 92% !important;
+    body > main > .hero > .hero-bg {
+        background-size: auto 74% !important;
+        background-position: center bottom !important;
+        opacity: 0.16 !important;
+    }
+
+    body > main > .hero > .hero-content {
+        width: calc(100% - 20px) !important;
+        min-height: 470px !important;
+        padding: 40px 12px !important;
+    }
+
+    body > main > .hero h1,
+    body > main > .hero .hero-content h1 {
+        font-size: clamp(34px, 11vw, 46px) !important;
+        white-space: normal !important;
+    }
+
+    body > main > .hero .hero-content > p {
+        font-size: 12px !important;
+    }
+
+    body > main > .hero .hero-buttons,
+    body > main > .hero .hero-actions {
+        gap: 9px !important;
     }
 }

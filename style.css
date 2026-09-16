@@ -4506,3 +4506,60 @@ body {
         margin-bottom: 14px !important;
     }
 }
+
+
+/* =========================================================
+   STATS BAR - COMPACT
+   ========================================================= */
+
+.stats {
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.stats > * {
+    min-height: 54px !important;
+}
+
+.stat {
+    min-height: 54px !important;
+    padding: 9px 18px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+/* 3 / 4 / 24/7 / R2 */
+.stat strong,
+.stat-value {
+    margin: 0 0 2px 0 !important;
+    line-height: 1 !important;
+}
+
+/* Alt açıklamalar */
+.stat span,
+.stat-label {
+    margin: 0 !important;
+    line-height: 1.15 !important;
+}
+
+/* Stats ile büyük banner arasındaki mesafe */
+.market-slider {
+    margin-top: 10px !important;
+}
+
+
+/* MOBİL */
+@media (max-width: 600px) {
+
+    .stat {
+        min-height: 48px !important;
+        padding: 7px 10px !important;
+    }
+
+    .market-slider {
+        margin-top: 8px !important;
+    }
+}

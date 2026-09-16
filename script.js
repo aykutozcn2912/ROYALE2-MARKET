@@ -5485,3 +5485,59 @@ window.addEventListener("load", () => {
         startRoyaleYangVisualMarket();
     }, 1800);
 });
+
+
+/* =====================================================
+   ROYALE2 MARKET - YANG FİYAT HAREKET FLASH
+   Yükseliş = Yeşil / Düşüş = Kırmızı
+   ===================================================== */
+
+.yang-rate-card.yang-tick-up {
+    animation: royaleYangFlashUp 650ms ease-out !important;
+}
+
+.yang-rate-card.yang-tick-down {
+    animation: royaleYangFlashDown 650ms ease-out !important;
+}
+
+@keyframes royaleYangFlashUp {
+    0% {
+        box-shadow:
+            0 0 0 1px rgba(0, 255, 170, 0.85),
+            0 0 8px rgba(0, 255, 170, 0.45);
+        background-color: rgba(0, 255, 170, 0.12);
+    }
+
+    45% {
+        box-shadow:
+            0 0 0 1px rgba(0, 255, 170, 1),
+            0 0 22px rgba(0, 255, 170, 0.70);
+        background-color: rgba(0, 255, 170, 0.20);
+    }
+
+    100% {
+        box-shadow: none;
+        background-color: transparent;
+    }
+}
+
+@keyframes royaleYangFlashDown {
+    0% {
+        box-shadow:
+            0 0 0 1px rgba(255, 60, 80, 0.85),
+            0 0 8px rgba(255, 60, 80, 0.45);
+        background-color: rgba(255, 60, 80, 0.12);
+    }
+
+    45% {
+        box-shadow:
+            0 0 0 1px rgba(255, 60, 80, 1),
+            0 0 22px rgba(255, 60, 80, 0.70);
+        background-color: rgba(255, 60, 80, 0.20);
+    }
+
+    100% {
+        box-shadow: none;
+        background-color: transparent;
+    }
+}

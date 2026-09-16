@@ -4794,22 +4794,3 @@ body {
   }
 }
 
-/* =========================================
-   ANA İÇERİK SAĞ BOŞLUK DÜZELTME
-   ========================================= */
-
-@media (min-width: 1201px) {
-    .market-header,
-    .header-main,
-    .header-nav,
-    .hero-content,
-    .stats,
-    .section,
-    .market-slider,
-    .cta {
-        width: calc(100% - 28px) !important;
-        max-width: none !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-}

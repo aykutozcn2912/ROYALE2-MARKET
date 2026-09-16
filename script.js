@@ -4783,3 +4783,176 @@ document.addEventListener("DOMContentLoaded", () => {
     showSlide(0);
     startAutoPlay();
 });
+
+
+// =====================================================
+// ROYALE MARKET - CANLI YANG KURLARI
+// Supabase: public.yang_rates
+// =====================================================
+
+async function loadYangRates() {
+    const rateBoard = document.querySelector(".yang-rates");
+
+    // Bu bölüm sadece Yang Kurları alanının bulunduğu sayfada çalışsın.
+    if (!rateBoard) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${window.SUPABASE_API_URL}yang_rates?select=server,unit,current_price,previous_price,updated_at&order=server.asc`,
+            {
+                method: "GET",
+                headers: {
+                    apikey: window.SUPABASE_KEY,
+                    Authorization: `Bearer ${window.SUPABASE_KEY}`,
+                    Accept: "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Yang kurları alınamadı. HTTP ${response.status}`
+            );
+        }
+
+        const rates = await response.json();
+
+        if (!Array.isArray(rates) || rates.length === 0) {
+            console.warn("Yang kuru verisi bulunamadı.");
+            return;
+        }
+
+        rates.forEach((rate) => {
+            const serverName = String(rate.server || "").trim();
+
+            const card = document.querySelector(
+                `[data-yang-server="${serverName}"]`
+            );
+
+            if (!card) {
+                return;
+            }
+
+            const currentPrice = Number(rate.current_price);
+            const previousPrice = Number(rate.previous_price);
+
+            const priceElement =
+                card.querySelector(".yang-current-price");
+
+            const changeElement =
+                card.querySelector(".yang-change");
+
+            const previousElement =
+                card.querySelector(".yang-previous-price");
+
+            if (priceElement && Number.isFinite(currentPrice)) {
+                priceElement.textContent =
+                    `${currentPrice.toLocaleString("tr-TR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })} TL`;
+            }
+
+            if (
+                previousElement &&
+                Number.isFinite(previousPrice)
+            ) {
+                previousElement.textContent =
+                    `Önceki: ${previousPrice.toLocaleString("tr-TR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })} TL`;
+            }
+
+            if (
+                changeElement &&
+                Number.isFinite(currentPrice) &&
+                Number.isFinite(previousPrice) &&
+                previousPrice !== 0
+            ) {
+                const difference =
+                    currentPrice - previousPrice;
+
+                const percentage =
+                    (difference / previousPrice) * 100;
+
+                changeElement.classList.remove(
+                    "yang-up",
+                    "yang-down",
+                    "yang-neutral"
+                );
+
+                if (difference > 0) {
+                    changeElement.classList.add("yang-up");
+
+                    changeElement.textContent =
+                        `▲ +${percentage.toLocaleString("tr-TR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })}%`;
+                } else if (difference < 0) {
+                    changeElement.classList.add("yang-down");
+
+                    changeElement.textContent =
+                        `▼ ${percentage.toLocaleString("tr-TR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })}%`;
+                } else {
+                    changeElement.classList.add("yang-neutral");
+                    changeElement.textContent = "● %0,00";
+                }
+            }
+        });
+
+        // En son güncellenen kaydı bul.
+        const validDates = rates
+            .map((rate) => new Date(rate.updated_at))
+            .filter((date) => !Number.isNaN(date.getTime()));
+
+        if (validDates.length > 0) {
+            const latestDate = new Date(
+                Math.max(...validDates.map((date) => date.getTime()))
+            );
+
+            const updateElement =
+                document.querySelector(".yang-last-update");
+
+            if (updateElement) {
+                updateElement.textContent =
+                    `Son Güncelleme: ${latestDate.toLocaleString(
+                        "tr-TR",
+                        {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        }
+                    )}`;
+            }
+        }
+
+        console.log(
+            "Royale Market Yang kurları Supabase'den güncellendi.",
+            rates
+        );
+
+    } catch (error) {
+        console.error(
+            "Yang kurları yüklenirken hata oluştu:",
+            error
+        );
+    }
+}
+
+
+// Sayfa açıldığında Yang kurlarını getir.
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        loadYangRates();
+    }
+);

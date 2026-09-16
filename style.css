@@ -6050,3 +6050,25 @@ body > main > .hero.hero-v2 > .hero-v2-bg {
 
     pointer-events: none !important;
 }
+
+
+/* =========================================================
+   HERO V2 — KARAKTER YERLEŞİMİ
+   ========================================================= */
+
+body > main > .hero.hero-v2 > .hero-v2-characters {
+    width: 1320px !important;
+    max-width: none !important;
+    height: auto !important;
+
+    left: 50% !important;
+    top: 51% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    object-fit: contain !important;
+    pointer-events: none !important;
+
+    /* Ağır görsel efekt kullanmıyoruz */
+    filter: none !important;
+}

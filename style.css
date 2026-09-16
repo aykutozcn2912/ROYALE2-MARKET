@@ -5214,3 +5214,90 @@ body {
         align-items: flex-start;
     }
 }
+/* =====================================================
+   ROYALE2 MARKET - YANG FIYAT HAREKET ANIMASYONU
+   Yukselis = Yesil / Dusus = Kirmizi
+   ===================================================== */
+
+.yang-current-price {
+    display: inline-block;
+    border-radius: 6px;
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        background-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+/* Fiyat yükseldiğinde */
+.yang-rate-card.yang-tick-up .yang-current-price,
+[data-yang-server].yang-tick-up .yang-current-price {
+    color: #35f5a5 !important;
+    background: rgba(20, 220, 140, 0.10);
+    box-shadow: 0 0 16px rgba(20, 220, 140, 0.20);
+    text-shadow: 0 0 10px rgba(53, 245, 165, 0.65);
+    animation: yangPriceUpFlash 650ms ease-out;
+}
+
+/* Fiyat düştüğünde */
+.yang-rate-card.yang-tick-down .yang-current-price,
+[data-yang-server].yang-tick-down .yang-current-price {
+    color: #ff5c68 !important;
+    background: rgba(255, 70, 85, 0.10);
+    box-shadow: 0 0 16px rgba(255, 70, 85, 0.20);
+    text-shadow: 0 0 10px rgba(255, 92, 104, 0.65);
+    animation: yangPriceDownFlash 650ms ease-out;
+}
+
+@keyframes yangPriceUpFlash {
+    0% {
+        transform: translateY(1px);
+        filter: brightness(1);
+    }
+
+    35% {
+        transform: translateY(-1px);
+        filter: brightness(1.35);
+    }
+
+    100% {
+        transform: translateY(0);
+        filter: brightness(1);
+    }
+}
+
+@keyframes yangPriceDownFlash {
+    0% {
+        transform: translateY(-1px);
+        filter: brightness(1);
+    }
+
+    35% {
+        transform: translateY(1px);
+        filter: brightness(1.35);
+    }
+
+    100% {
+        transform: translateY(0);
+        filter: brightness(1);
+    }
+}
+
+/* Realtime ile Supabase'den gerçek fiyat geldiğinde kart vurgusu */
+.yang-rate-live-update {
+    animation: yangRealtimePulse 1.2s ease-out;
+}
+
+@keyframes yangRealtimePulse {
+    0% {
+        box-shadow: 0 0 0 rgba(30, 170, 255, 0);
+    }
+
+    35% {
+        box-shadow: 0 0 22px rgba(30, 170, 255, 0.20);
+    }
+
+    100% {
+        box-shadow: 0 0 0 rgba(30, 170, 255, 0);
+    }
+}

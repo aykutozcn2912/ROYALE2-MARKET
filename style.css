@@ -5708,3 +5708,96 @@ main,
         font-size: 38px;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - HERO V3 KONUMLANDIRMA
+   ========================================================= */
+
+.hero {
+    min-height: 610px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Savaşçı + Şaman */
+.hero-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    background-image: url("images/hero-characters.png") !important;
+    background-repeat: no-repeat !important;
+
+    /* Karakterleri iki yana doğru büyüt */
+    background-size: 100% auto !important;
+    background-position: center bottom !important;
+
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+/* Ortadaki ROYALE2 MARKET alanı */
+.hero-content {
+    position: relative !important;
+    z-index: 5 !important;
+
+    width: 520px !important;
+    max-width: 42vw !important;
+    min-height: 610px !important;
+
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    text-align: center !important;
+
+    transform: none !important;
+    left: auto !important;
+    right: auto !important;
+}
+
+/* Başlık */
+.hero-content h1 {
+    width: 100% !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+
+/* Açıklama */
+.hero-content > p {
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* Butonlar */
+.hero-buttons {
+    width: 100% !important;
+    justify-content: center !important;
+}
+
+/* Alt sunucu isimleri */
+.hero .trust {
+    width: 100% !important;
+    justify-content: center !important;
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+    .hero-bg {
+        background-size: auto 90% !important;
+        background-position: center bottom !important;
+        opacity: 0.35;
+    }
+
+    .hero-content {
+        width: 92% !important;
+        max-width: 92% !important;
+    }
+}

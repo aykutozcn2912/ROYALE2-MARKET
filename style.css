@@ -3473,3 +3473,372 @@ body > main .listing .listing-image img {
         height: 36px;
     }
 }
+/* =========================================================
+   ROYALE2 MARKET - MARKETPLACE HEADER V1
+   ========================================================= */
+
+.market-header {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    background: #080d12;
+    border-bottom: 1px solid #1d2b38;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+}
+
+/* ÜST ANA SATIR */
+.header-main {
+    width: calc(100% - 48px);
+    max-width: 1320px;
+    min-height: 82px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 210px minmax(300px, 1fr) auto;
+    align-items: center;
+    gap: 28px;
+}
+
+/* LOGO */
+.market-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.market-brand-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #249cff;
+    background: linear-gradient(145deg, #102536, #08111a);
+
+    color: #43adff;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    box-shadow: inset 0 0 18px rgba(36, 156, 255, 0.08);
+}
+
+.market-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.market-brand-text strong {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.market-brand-text small {
+    margin-top: 6px;
+
+    color: #74899b;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+/* ARAMA */
+.market-search {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    justify-self: center;
+}
+
+.market-search input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 58px 0 18px;
+
+    border: 1px solid #223442;
+    border-radius: 6px;
+
+    outline: none;
+
+    background: #0d151d;
+    color: #eaf4ff;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.market-search input::placeholder {
+    color: #637687;
+}
+
+.market-search input:focus {
+    border-color: #249cff;
+    background: #101b25;
+
+    box-shadow:
+        0 0 0 3px rgba(36, 156, 255, 0.08);
+}
+
+.market-search button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    width: 36px;
+    height: 36px;
+
+    border: 0;
+    border-radius: 5px;
+
+    background: #168ee3;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+.market-search button:hover {
+    background: #28a4ff;
+}
+
+/* SAĞ BUTONLAR */
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    white-space: nowrap;
+}
+
+.header-actions a {
+    text-decoration: none;
+}
+
+.header-message {
+    padding: 10px 10px;
+
+    color: #aebdca;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.header-message:hover {
+    color: #ffffff;
+}
+
+.header-login,
+.header-register {
+    padding: 10px 12px;
+
+    border: 1px solid #263746;
+    border-radius: 4px;
+
+    color: #c4d0da;
+    font-size: 11px;
+    font-weight: 700;
+
+    background: #0d151d;
+}
+
+.header-login:hover,
+.header-register:hover {
+    color: #ffffff;
+    border-color: #3a5368;
+    background: #111e29;
+}
+
+.header-sell {
+    padding: 12px 16px;
+
+    border: 1px solid #269eff;
+    border-radius: 4px;
+
+    background: #168ee3;
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 900;
+
+    box-shadow: 0 5px 18px rgba(22, 142, 227, 0.18);
+}
+
+.header-sell:hover {
+    background: #28a4ff;
+}
+
+/* ALT NAVİGASYON */
+.header-nav-wrap {
+    width: 100%;
+    border-top: 1px solid #131f29;
+    background: #0a1016;
+}
+
+.market-nav {
+    width: calc(100% - 48px);
+    max-width: 1320px;
+    min-height: 48px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.market-nav a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 48px;
+    padding: 0 15px;
+
+    color: #8fa0ae;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.market-nav a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.market-nav a.active {
+    color: #ffffff;
+}
+
+.market-nav a.active::after {
+    content: "";
+
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+
+    height: 2px;
+
+    background: #249cff;
+}
+
+.market-nav .nav-discord {
+    margin-left: auto;
+
+    color: #8ca6ff;
+}
+
+.market-nav .nav-discord:hover {
+    color: #b2c1ff;
+}
+
+/* ESKİ HEADER ÇAKIŞMASINI ENGELLE */
+body > .topbar {
+    display: none !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .header-main {
+        grid-template-columns: 180px minmax(220px, 1fr) auto;
+        gap: 15px;
+    }
+
+    .header-message {
+        display: none;
+    }
+
+    .market-nav a {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .header-main {
+        width: calc(100% - 28px);
+
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+
+        padding: 14px 0;
+    }
+
+    .market-search {
+        grid-column: 1 / -1;
+        grid-row: 2;
+
+        max-width: none;
+    }
+
+    .market-nav {
+        width: calc(100% - 28px);
+        overflow-x: auto;
+    }
+
+    .market-nav a {
+        flex: 0 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .header-main {
+        width: calc(100% - 20px);
+    }
+
+    .market-brand-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .market-brand-text strong {
+        font-size: 15px;
+    }
+
+    .header-register {
+        display: none;
+    }
+
+    .header-login {
+        padding: 9px;
+    }
+
+    .header-sell {
+        padding: 10px;
+    }
+
+    .market-nav {
+        width: calc(100% - 20px);
+    }
+}

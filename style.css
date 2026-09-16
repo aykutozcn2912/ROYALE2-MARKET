@@ -4715,15 +4715,15 @@ body {
 /* HERO - DAHA KOMPAKT */
 .hero {
   width: 100% !important;
-  min-height: 315px !important;
+  min-height: 270px !important;
   height: auto !important;
   display: flex !important;
   align-items: center !important;
 }
 
 .hero-content {
-  padding-top: 38px !important;
-  padding-bottom: 32px !important;
+  padding-top: 30px !important;
+  padding-bottom: 24px !important;
 }
 
 .hero-content h1 {

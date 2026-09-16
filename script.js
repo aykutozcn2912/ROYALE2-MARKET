@@ -5162,17 +5162,20 @@ function royaleYangCreateState(card) {
 }
 
 
-function royaleYangUpdateChange(card, currentPrice) {
+function royaleYangUpdateChange(card, currentPrice, suppliedPreviousPrice = null) {
     const changeElement = royaleYangGetChangeElement(card);
     const previousElement = royaleYangGetPreviousElement(card);
 
     if (!changeElement || !previousElement) return;
 
-    const previousPrice = royaleYangParsePrice(
-        previousElement.textContent
-            .replace("Önceki:", "")
-            .trim()
-    );
+const previousPrice =
+    Number.isFinite(Number(suppliedPreviousPrice))
+        ? Number(suppliedPreviousPrice)
+        : royaleYangParsePrice(
+            previousElement.textContent
+                .replace("Önceki:", "")
+                .trim()
+        );
 
     if (
         !Number.isFinite(previousPrice) ||
@@ -5330,10 +5333,6 @@ function royaleYangMove(state) {
     // YÜZDE DEĞİŞİMİNİ GÜNCELLE
     // --------------------------------------------------------
 
-    royaleYangUpdateChange(
-        state.card,
-        newPrice
-    );
 
 
     // --------------------------------------------------------

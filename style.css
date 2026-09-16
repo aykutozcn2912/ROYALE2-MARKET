@@ -2991,862 +2991,6 @@ body > main .listing .listing-image img {
     }
 }
 
-/* =========================================================
-   ROYALE2 MARKET - ANA SAYFA MANSET SLIDER
-   ========================================================= */
-
-.market-slider {
-    position: relative;
-    width: min(1180px, calc(100% - 40px));
-    aspect-ratio: 16 / 5;
-    margin: 26px auto 30px;
-    overflow: hidden;
-    border: 1px solid #243244;
-    border-radius: 14px;
-    background: #080d13;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-}
-
-.slider-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slider-item {
-    position: absolute;
-    inset: 0;
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.55s ease, visibility 0.55s ease;
-}
-
-.slider-item.active {
-    opacity: 1;
-    visibility: visible;
-    z-index: 2;
-}
-
-.slider-item img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Hafif premium karartma */
-.slider-item::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-        90deg,
-        rgba(4, 8, 13, 0.18),
-        transparent 35%,
-        transparent 65%,
-        rgba(4, 8, 13, 0.18)
-    );
-}
-
-/* Sag / Sol Butonlari */
-
-.slider-arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 10;
-    width: 46px;
-    height: 46px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    background: rgba(5, 10, 16, 0.78);
-    color: #ffffff;
-    font-size: 24px;
-    cursor: pointer;
-    transform: translateY(-50%);
-    transition: 0.2s ease;
-    backdrop-filter: blur(8px);
-}
-
-.slider-arrow:hover {
-    background: #d3a629;
-    color: #080b10;
-    border-color: #d3a629;
-    transform: translateY(-50%) scale(1.07);
-}
-
-.slider-prev {
-    left: 18px;
-}
-
-.slider-next {
-    right: 18px;
-}
-
-/* Alt Gecis Noktalari */
-
-.slider-dots {
-    position: absolute;
-    z-index: 10;
-    left: 50%;
-    bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    transform: translateX(-50%);
-}
-
-.slider-dot {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.42);
-    cursor: pointer;
-    transition: 0.25s ease;
-}
-
-.slider-dot.active {
-    width: 24px;
-    border-radius: 10px;
-    background: #d3a629;
-}
-
-/* Tablet */
-
-@media (max-width: 900px) {
-    .market-slider {
-        width: calc(100% - 28px);
-        aspect-ratio: 16 / 6;
-        margin: 18px auto 24px;
-        border-radius: 11px;
-    }
-
-    .slider-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
-
-    .slider-prev {
-        left: 12px;
-    }
-
-    .slider-next {
-        right: 12px;
-    }
-}
-
-/* Mobil */
-
-@media (max-width: 600px) {
-    .market-slider {
-        width: calc(100% - 20px);
-        aspect-ratio: 16 / 8;
-        margin: 14px auto 20px;
-        border-radius: 9px;
-    }
-
-    .slider-arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 17px;
-    }
-
-    .slider-prev {
-        left: 8px;
-    }
-
-    .slider-next {
-        right: 8px;
-    }
-
-    .slider-dots {
-        bottom: 9px;
-        gap: 5px;
-    }
-
-    .slider-dot {
-        width: 6px;
-        height: 6px;
-    }
-
-    .slider-dot.active {
-        width: 18px;
-    }
-}
-
-
-/* =========================================================
-   ROYALE2 MARKET - GENIS DESKTOP LAYOUT V2
-   ========================================================= */
-
-:root {
-    --site-width: 1200px;
-    --site-gap: 24px;
-}
-
-/* Ana sayfa genişliği */
-.hero-content,
-.stats,
-.section,
-.cta,
-.market-slider {
-    width: calc(100% - 48px) !important;
-    max-width: var(--site-width) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* HERO */
-.hero {
-    width: 100%;
-    min-height: 390px;
-}
-
-.hero-content {
-    padding-top: 70px;
-    padding-bottom: 70px;
-}
-
-.hero-content h1 {
-    font-size: clamp(42px, 5vw, 72px);
-}
-
-.hero-content p {
-    max-width: 680px;
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-/* İstatistik alanı */
-.stats {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.stats > div {
-    min-height: 90px;
-    padding: 20px 28px;
-}
-
-/* =========================================================
-   MANSET
-   ========================================================= */
-
-.market-slider {
-    position: relative;
-    margin-top: 32px !important;
-    margin-bottom: 55px !important;
-
-    aspect-ratio: 16 / 5;
-
-    overflow: hidden;
-
-    border-radius: 12px;
-
-    border: 1px solid #24394d;
-
-    background: #080d12;
-
-    box-shadow:
-        0 18px 50px rgba(0, 0, 0, .40);
-}
-
-.slider-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slider-item {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity .5s ease,
-        visibility .5s ease;
-}
-
-.slider-item.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.slider-item img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-/* Slider okları */
-
-.slider-arrow {
-    position: absolute;
-
-    top: 50%;
-    transform: translateY(-50%);
-
-    z-index: 10;
-
-    width: 44px;
-    height: 44px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.20);
-
-    background: rgba(5,10,15,.80);
-
-    color: white;
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    backdrop-filter: blur(8px);
-
-    transition: .2s ease;
-}
-
-.slider-arrow:hover {
-    background: #168ce8;
-    border-color: #168ce8;
-}
-
-.slider-prev {
-    left: 18px;
-}
-
-.slider-next {
-    right: 18px;
-}
-
-/* Slider noktaları */
-
-.slider-dots {
-    position: absolute;
-
-    left: 50%;
-    bottom: 14px;
-
-    transform: translateX(-50%);
-
-    z-index: 11;
-
-    display: flex;
-
-    gap: 7px;
-}
-
-/* =========================================================
-   SON ILANLAR
-   ========================================================= */
-
-.section {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.section-head {
-    margin-bottom: 24px;
-}
-
-/* Desktop'ta 5 ilan yan yana */
-
-.listing-grid {
-    display: grid !important;
-
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr)) !important;
-
-    gap: 14px !important;
-
-    width: 100%;
-}
-
-/* Kartların taşmasını engelle */
-.listing-grid > * {
-    min-width: 0;
-}
-
-/* =========================================================
-   SUNUCULAR
-   ========================================================= */
-
-.server-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 16px;
-}
-
-/* =========================================================
-   NASIL CALISIR
-   ========================================================= */
-
-.steps {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 18px;
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 1250px) {
-
-    :root {
-        --site-width: 1100px;
-    }
-
-    .listing-grid {
-        grid-template-columns:
-            repeat(4, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 900px) {
-
-    .hero-content,
-    .stats,
-    .section,
-    .cta,
-    .market-slider {
-        width: calc(100% - 28px) !important;
-    }
-
-    .listing-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr)) !important;
-    }
-
-    .server-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .stats {
-        grid-template-columns:
-            repeat(2, 1fr) !important;
-    }
-
-    .market-slider {
-        aspect-ratio: 16 / 7;
-    }
-}
-
-@media (max-width: 560px) {
-
-    .listing-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    .server-grid,
-    .steps {
-        grid-template-columns: 1fr;
-    }
-
-    .market-slider {
-        aspect-ratio: 16 / 9;
-    }
-
-    .slider-arrow {
-        width: 36px;
-        height: 36px;
-    }
-}
-/* =========================================================
-   ROYALE2 MARKET - MARKETPLACE HEADER V1
-   ========================================================= */
-
-.market-header {
-    position: relative;
-    z-index: 100;
-    width: calc(100% - 400px);
-max-width: var(--market-max-width);
-    margin-left: auto;
-    margin-right: auto;
-    background: #080d12;
-    border-bottom: 1px solid #1d2b38;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
-}
-
-/* ÜST ANA SATIR */
-.header-main {
-    width: calc(100% - 48px);
-    max-width: 1320px;
-    min-height: 82px;
-    margin: 0 auto;
-
-    display: grid;
-    grid-template-columns: 210px minmax(300px, 1fr) auto;
-    align-items: center;
-    gap: 28px;
-}
-
-/* LOGO */
-.market-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.market-brand-icon {
-    width: 44px;
-    height: 44px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid #249cff;
-    background: linear-gradient(145deg, #102536, #08111a);
-
-    color: #43adff;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1px;
-
-    box-shadow: inset 0 0 18px rgba(36, 156, 255, 0.08);
-}
-
-.market-brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-}
-
-.market-brand-text strong {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.market-brand-text small {
-    margin-top: 6px;
-
-    color: #74899b;
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 4px;
-}
-
-/* ARAMA */
-.market-search {
-    position: relative;
-    width: 100%;
-    max-width: 650px;
-    justify-self: center;
-}
-
-.market-search input {
-    width: 100%;
-    height: 46px;
-
-    padding: 0 58px 0 18px;
-
-    border: 1px solid #223442;
-    border-radius: 6px;
-
-    outline: none;
-
-    background: #0d151d;
-    color: #eaf4ff;
-
-    font-size: 13px;
-
-    transition:
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.market-search input::placeholder {
-    color: #637687;
-}
-
-.market-search input:focus {
-    border-color: #249cff;
-    background: #101b25;
-
-    box-shadow:
-        0 0 0 3px rgba(36, 156, 255, 0.08);
-}
-
-.market-search button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-
-    width: 36px;
-    height: 36px;
-
-    border: 0;
-    border-radius: 5px;
-
-    background: #168ee3;
-    color: #ffffff;
-
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 15px;
-}
-
-.market-search button:hover {
-    background: #28a4ff;
-}
-
-/* SAĞ BUTONLAR */
-.header-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-
-    white-space: nowrap;
-}
-
-.header-actions a {
-    text-decoration: none;
-}
-
-.header-message {
-    padding: 10px 10px;
-
-    color: #aebdca;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.header-message:hover {
-    color: #ffffff;
-}
-
-.header-login,
-.header-register {
-    padding: 10px 12px;
-
-    border: 1px solid #263746;
-    border-radius: 4px;
-
-    color: #c4d0da;
-    font-size: 11px;
-    font-weight: 700;
-
-    background: #0d151d;
-}
-
-.header-login:hover,
-.header-register:hover {
-    color: #ffffff;
-    border-color: #3a5368;
-    background: #111e29;
-}
-
-.header-sell {
-    padding: 12px 16px;
-
-    border: 1px solid #269eff;
-    border-radius: 4px;
-
-    background: #168ee3;
-    color: #ffffff;
-
-    font-size: 11px;
-    font-weight: 900;
-
-    box-shadow: 0 5px 18px rgba(22, 142, 227, 0.18);
-}
-
-.header-sell:hover {
-    background: #28a4ff;
-}
-
-/* ALT NAVİGASYON */
-.header-nav-wrap {
-    width: 100%;
-    border-top: 1px solid #131f29;
-    background: transparent;
-}
-
-.market-nav {
-    width: calc(100% - 48px);
-    max-width: 1320px;
-    min-height: 48px;
-
-    margin: 0 auto;
-
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.market-nav a {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-
-    min-height: 48px;
-    padding: 0 15px;
-
-    color: #8fa0ae;
-
-    font-size: 11px;
-    font-weight: 700;
-
-    text-decoration: none;
-
-    transition:
-        color 0.2s ease,
-        background 0.2s ease;
-}
-
-.market-nav a:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.025);
-}
-
-.market-nav a.active {
-    color: #ffffff;
-}
-
-.market-nav a.active::after {
-    content: "";
-
-    position: absolute;
-    left: 15px;
-    right: 15px;
-    bottom: 0;
-
-    height: 2px;
-
-    background: #249cff;
-}
-
-.market-nav .nav-discord {
-    margin-left: auto;
-
-    color: #8ca6ff;
-}
-
-.market-nav .nav-discord:hover {
-    color: #b2c1ff;
-}
-
-/* ESKİ HEADER ÇAKIŞMASINI ENGELLE */
-body > .topbar {
-    display: none !important;
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 1100px) {
-
-    .header-main {
-        grid-template-columns: 180px minmax(220px, 1fr) auto;
-        gap: 15px;
-    }
-
-    .header-message {
-        display: none;
-    }
-
-    .market-nav a {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-@media (max-width: 900px) {
-
-    .header-main {
-        width: calc(100% - 28px);
-
-        grid-template-columns: 1fr auto;
-        gap: 14px;
-
-        padding: 14px 0;
-    }
-
-    .market-search {
-        grid-column: 1 / -1;
-        grid-row: 2;
-
-        max-width: none;
-    }
-
-    .market-nav {
-        width: calc(100% - 28px);
-        overflow-x: auto;
-    }
-
-    .market-nav a {
-        flex: 0 0 auto;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .header-main {
-        width: calc(100% - 20px);
-    }
-
-    .market-brand-icon {
-        width: 38px;
-        height: 38px;
-    }
-
-    .market-brand-text strong {
-        font-size: 15px;
-    }
-
-    .header-register {
-        display: none;
-    }
-
-    .header-login {
-        padding: 9px;
-    }
-
-    .header-sell {
-        padding: 10px;
-    }
-
-    .market-nav {
-        width: calc(100% - 20px);
-    }
-}
-
-/* =========================================================
    ROYALE2 MARKET — DESKTOP MARKETPLACE OPTIMIZATION V1
    Mevcut çalışan tasarımı bozmadan genişlik / boşluk düzeni
    ========================================================= */
@@ -4243,6 +3387,7 @@ body {
 }
 
 /* =========================================================
+
    ROYALE2 MARKET - UST BANNER REKLAM ALANI
    ========================================================= */
 
@@ -4429,168 +3574,7 @@ body {
 
 
 /* =========================================================
-   ROYALE2 MARKET - HERO PROFESSIONAL COMPACT V1
-   ========================================================= */
 
-/* Ana hero alanı */
-.hero {
-    min-height: 280px !important;
-    padding: 42px 20px 34px !important;
-    display: flex;
-    align-items: center;
-}
-
-/* Hero içeriği */
-.hero-content {
-    width: 100%;
-}
-
-/* Üst küçük sunucu yazısı */
-.hero-eyebrow {
-    margin-bottom: 10px !important;
-}
-
-/* ROYALE2 MARKET başlığı */
-.hero h1 {
-    margin-top: 0 !important;
-    margin-bottom: 14px !important;
-    line-height: 1.05 !important;
-}
-
-/* Açıklama */
-.hero p {
-    margin-top: 0 !important;
-    margin-bottom: 22px !important;
-    max-width: 650px;
-    line-height: 1.6;
-}
-
-/* Buton grubu */
-.hero-actions {
-    margin-top: 0 !important;
-    margin-bottom: 18px !important;
-}
-
-/* Ephesus / Teos / Pergamon satırı */
-.hero-trust,
-.hero-checks {
-    margin-top: 0 !important;
-}
-
-
-/* TABLET */
-@media (max-width: 1000px) {
-
-    .hero {
-        min-height: 260px !important;
-        padding: 36px 20px 30px !important;
-    }
-
-}
-
-
-/* MOBİL */
-@media (max-width: 600px) {
-
-    .hero {
-        min-height: auto !important;
-        padding: 30px 16px 26px !important;
-    }
-
-    .hero h1 {
-        margin-bottom: 12px !important;
-    }
-
-    .hero p {
-        margin-bottom: 18px !important;
-    }
-
-    .hero-actions {
-        margin-bottom: 14px !important;
-    }
-}
-
-
-/* =========================================================
-   STATS BAR - COMPACT V2
-   ========================================================= */
-
-.stats {
-    width: calc(100% - 28px) !important;
-    max-width: 1040px !important;
-    margin: 0 auto !important;
-
-    min-height: 58px !important;
-    height: 64px !important;
-
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-}
-
-.stats > * {
-    min-height: 58px !important;
-    height: 64px !important;
-
-    padding: 0 24px !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-}
-
-.market-slider {
-    margin-top: 18px !important;
-}
-
-
-/* =========================================
-   HERO FINAL COMPACT
-   ========================================= */
-
-.hero {
-    min-height: auto !important;
-    padding-top: 38px !important;
-    padding-bottom: 28px !important;
-}
-
-.hero h1 {
-    margin-top: 0 !important;
-    margin-bottom: 14px !important;
-}
-
-.hero p {
-    margin-bottom: 20px !important;
-}
-
-.hero-actions {
-    margin-bottom: 14px !important;
-}
-
-.stats {
-    height: 58px !important;
-    min-height: 58px !important;
-}
-
-.stats > * {
-    height: 58px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    justify-content: center !important;
-}
-
-.market-slider {
-    margin-top: 12px !important;
-}
-
-/* MARKET SLIDER - FINAL ALIGN */
-.market-slider {
-    width: calc(100% - 48px) !important;
-    max-width: 1040px !important;
-    margin: 0 auto 30px !important;
-}
-
-
-/* =========================================
    SOL / SAG DIKEY REKLAM ALANLARI
    ========================================= */
 
@@ -4673,128 +3657,7 @@ body {
 
 
 /* =========================================================
-   ROYALE2 MARKET - DESKTOP LAYOUT FINAL V2
-   Header + Hero + Stats + Slider ortak hizalama
-   ========================================================= */
 
-:root {
-  --market-final-width: 1320px;
-  --market-side-space: 48px;
-}
-
-/* ORTAK ANA GENİŞLİK */
-.market-header,
-.header-main,
-.header-nav,
-.hero-content,
-.stats,
-.section,
-.market-slider,
-.cta {
-  width: calc(100% - var(--market-side-space)) !important;
-  max-width: var(--market-final-width) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
-}
-
-/* HEADER */
-.market-header {
-  position: relative;
-  z-index: 100;
-}
-
-.header-main {
-  min-height: 82px !important;
-}
-
-.header-nav {
-  min-height: 48px !important;
-}
-
-/* HERO - DAHA KOMPAKT */
-.hero {
-  width: 100% !important;
-  min-height: 270px !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-.hero-content {
-  padding-top: 30px !important;
-  padding-bottom: 24px !important;
-}
-
-.hero-content h1 {
-  margin-top: 8px !important;
-  margin-bottom: 18px !important;
-}
-
-.hero-content p {
-  margin-bottom: 22px !important;
-}
-
-/* İSTATİSTİKLER */
-.stats {
-  margin-top: 0 !important;
-  min-height: 78px !important;
-}
-
-/* SLIDER */
-.market-slider {
-  margin-top: 0 !important;
-  overflow: hidden !important;
-}
-
-/* GENİŞ MASAÜSTÜ */
-@media (min-width: 1500px) {
-  :root {
-    --market-final-width: 1320px;
-    --market-side-space: 48px;
-  }
-}
-
-/* LAPTOP */
-@media (max-width: 1200px) {
-  :root {
-    --market-final-width: 1040px;
-    --market-side-space: 36px;
-  }
-
-  .hero {
-    min-height: 300px !important;
-  }
-}
-
-/* TABLET + MOBİL */
-@media (max-width: 900px) {
-  :root {
-    --market-side-space: 28px;
-  }
-
-  .market-header,
-  .header-main,
-  .header-nav,
-  .hero-content,
-  .stats,
-  .section,
-  .market-slider,
-  .cta {
-    width: calc(100% - var(--market-side-space)) !important;
-  }
-
-  .hero {
-    min-height: auto !important;
-  }
-
-  .hero-content {
-    padding-top: 36px !important;
-    padding-bottom: 36px !important;
-  }
-}
-
-/* =====================================================
    ROYALE2 MARKET - SIDE ADS POSITION FIX
    Sağ / Sol reklamları ekran kenarına sabitle
    Ana içerik genişliğine müdahale etmez
@@ -5304,87 +4167,7 @@ body {
 
 
 /* =========================================================
-   ROYALE2 MARKET V2
-   PREMIUM METIN2 / MMORPG THEME
-   ========================================================= */
 
-:root {
-    --r2-bg: #07090a;
-    --r2-bg-deep: #030405;
-    --r2-panel: #0b0f11;
-    --r2-panel-soft: #101518;
-
-    --r2-gold: #c89542;
-    --r2-gold-light: #e4bd73;
-    --r2-gold-dark: #6f4a1d;
-
-    --r2-red: #8f1717;
-    --r2-red-bright: #c62a1c;
-    --r2-red-dark: #3b0808;
-
-    --r2-text: #f0ede6;
-    --r2-muted: #8e9499;
-
-    --r2-border: rgba(200, 149, 66, 0.32);
-    --r2-border-soft: rgba(200, 149, 66, 0.14);
-}
-
-/* ANA SAYFA ZEMİNİ */
-html,
-body {
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(125, 54, 17, 0.12) 0%,
-            rgba(7, 9, 10, 0) 38%
-        ),
-        linear-gradient(
-            180deg,
-            #080b0d 0%,
-            #050708 55%,
-            #030405 100%
-        ) !important;
-
-    color: var(--r2-text);
-}
-
-/* SAYFADAKİ GENEL KOYU PANELLER */
-main,
-.site-main {
-    background-color: transparent;
-}
-
-/* GENEL ALTIN VURGU */
-::selection {
-    background: rgba(198, 42, 28, 0.75);
-    color: #ffffff;
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #050607;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-        180deg,
-        var(--r2-gold-dark),
-        var(--r2-gold)
-    );
-    border-radius: 10px;
-    border: 2px solid #050607;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--r2-gold-light);
-}
-
-
-/* =========================================================
    ROYALE2 MARKET V2 - PREMIUM HEADER
    ========================================================= */
 
@@ -5592,296 +4375,7 @@ main,
 }
 
 /* =========================================================
-   ROYALE2 MARKET - PROFESSIONAL HERO FINAL
-   17.09.2026
-   Mevcut sistemlere dokunmaz; yalnızca ana sayfa hero görünümünü
-   tek bir nihai kuralla sabitler.
-   ========================================================= */
 
-body > main > .hero {
-    position: relative !important;
-    width: 100% !important;
-    min-height: 610px !important;
-    height: 610px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    display: block !important;
-    isolation: isolate;
-    background:
-        radial-gradient(circle at 58% 42%, rgba(24, 55, 73, 0.12), transparent 34%),
-        linear-gradient(180deg, #05090d 0%, #05080c 100%) !important;
-    border-bottom: 1px solid rgba(73, 98, 119, 0.24);
-}
-
-/* Şeffaf savaşçı + şaman PNG */
-body > main > .hero > .hero-bg {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
-    opacity: 1 !important;
-
-    background-image: url("images/hero-characters.png") !important;
-    background-repeat: no-repeat !important;
-
-    /* 1664x864 görseli yaklaşık %65 ölçekler:
-       savaşçı solda, şaman orta bölgede kalır. */
-    background-size: auto 92% !important;
-    background-position: max(24px, calc(50% - 810px)) bottom !important;
-}
-
-/* Metnin okunabilirliğini artıran sağ taraftaki çok hafif katman */
-body > main > .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background:
-        linear-gradient(
-            90deg,
-            transparent 0%,
-            transparent 57%,
-            rgba(5, 8, 12, 0.18) 65%,
-            rgba(5, 8, 12, 0.68) 100%
-        );
-}
-
-/* Hero metin alanı */
-body > main > .hero > .hero-content {
-    position: relative !important;
-    z-index: 3 !important;
-
-    width: calc(100% - 48px) !important;
-    max-width: 1320px !important;
-    min-height: 610px !important;
-    height: 610px !important;
-
-    margin: 0 auto !important;
-    padding: 0 34px !important;
-    box-sizing: border-box !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: flex-end !important;
-
-    text-align: left !important;
-    transform: none !important;
-    left: auto !important;
-    right: auto !important;
-}
-
-/* Sağdaki gerçek içerik genişliği */
-body > main > .hero > .hero-content > * {
-    width: min(390px, 31vw);
-    max-width: 390px;
-    box-sizing: border-box;
-}
-
-body > main > .hero .eyebrow,
-body > main > .hero .hero-eyebrow {
-    margin: 0 0 13px !important;
-    color: #d7a84a !important;
-    font-family: Rajdhani, Inter, Arial, sans-serif;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    letter-spacing: 3px !important;
-    text-align: left !important;
-}
-
-body > main > .hero h1,
-body > main > .hero .hero-content h1 {
-    margin: 0 0 16px !important;
-    color: #f3f5f7 !important;
-    font-family: Rajdhani, Inter, Arial, sans-serif !important;
-    font-size: clamp(42px, 3.25vw, 58px) !important;
-    line-height: 0.98 !important;
-    font-weight: 800 !important;
-    letter-spacing: 2px !important;
-    white-space: nowrap !important;
-    text-align: left !important;
-    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.85);
-}
-
-body > main > .hero h1 span {
-    color: #d99a2b !important;
-}
-
-body > main > .hero .hero-content > p {
-    margin: 0 0 22px !important;
-    color: #d0d5da !important;
-    font-size: 13px !important;
-    line-height: 1.6 !important;
-    text-align: left !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
-}
-
-/* Hero arama alanı varsa */
-body > main > .hero .hero-search,
-body > main > .hero .hero-search-form {
-    margin: 0 0 18px !important;
-}
-
-/* Butonlar */
-body > main > .hero .hero-buttons,
-body > main > .hero .hero-actions {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-    gap: 12px !important;
-    margin-top: 0 !important;
-    margin-bottom: 18px !important;
-    text-align: left !important;
-}
-
-/* Güven / sunucu satırı */
-body > main > .hero .trust,
-body > main > .hero .hero-trust,
-body > main > .hero .hero-checks {
-    display: flex !important;
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-    gap: 10px 16px !important;
-    margin-top: 0 !important;
-    color: #8e9ba8 !important;
-    font-size: 10px !important;
-    text-align: left !important;
-}
-
-/* Geniş ekran */
-@media (min-width: 1800px) {
-    body > main > .hero > .hero-bg {
-        background-size: auto 94% !important;
-        background-position: calc(50% - 850px) bottom !important;
-    }
-
-    body > main > .hero > .hero-content {
-        max-width: 1380px !important;
-    }
-}
-
-/* Laptop */
-@media (max-width: 1300px) {
-    body > main > .hero {
-        min-height: 560px !important;
-        height: 560px !important;
-    }
-
-    body > main > .hero > .hero-bg {
-        background-size: auto 88% !important;
-        background-position: -20px bottom !important;
-        opacity: 0.82 !important;
-    }
-
-    body > main > .hero > .hero-content {
-        min-height: 560px !important;
-        height: 560px !important;
-        width: calc(100% - 36px) !important;
-        padding: 0 24px !important;
-    }
-
-    body > main > .hero > .hero-content > * {
-        width: min(360px, 34vw);
-        max-width: 360px;
-    }
-
-    body > main > .hero h1,
-    body > main > .hero .hero-content h1 {
-        font-size: clamp(38px, 4vw, 52px) !important;
-    }
-}
-
-/* Tablet */
-@media (max-width: 1000px) {
-    body > main > .hero {
-        min-height: 500px !important;
-        height: auto !important;
-    }
-
-    body > main > .hero > .hero-bg {
-        background-size: auto 86% !important;
-        background-position: center bottom !important;
-        opacity: 0.24 !important;
-    }
-
-    body > main > .hero::after {
-        background: rgba(5, 8, 12, 0.46);
-    }
-
-    body > main > .hero > .hero-content {
-        width: calc(100% - 28px) !important;
-        max-width: 760px !important;
-        min-height: 500px !important;
-        height: auto !important;
-        padding: 48px 20px !important;
-        align-items: center !important;
-        text-align: center !important;
-    }
-
-    body > main > .hero > .hero-content > * {
-        width: min(560px, 100%);
-        max-width: 560px;
-    }
-
-    body > main > .hero .eyebrow,
-    body > main > .hero .hero-eyebrow,
-    body > main > .hero h1,
-    body > main > .hero .hero-content h1,
-    body > main > .hero .hero-content > p {
-        text-align: center !important;
-    }
-
-    body > main > .hero .hero-buttons,
-    body > main > .hero .hero-actions,
-    body > main > .hero .trust,
-    body > main > .hero .hero-trust,
-    body > main > .hero .hero-checks {
-        justify-content: center !important;
-        text-align: center !important;
-    }
-}
-
-/* Mobil */
-@media (max-width: 600px) {
-    body > main > .hero {
-        min-height: 470px !important;
-    }
-
-    body > main > .hero > .hero-bg {
-        background-size: auto 74% !important;
-        background-position: center bottom !important;
-        opacity: 0.16 !important;
-    }
-
-    body > main > .hero > .hero-content {
-        width: calc(100% - 20px) !important;
-        min-height: 470px !important;
-        padding: 40px 12px !important;
-    }
-
-    body > main > .hero h1,
-    body > main > .hero .hero-content h1 {
-        font-size: clamp(34px, 11vw, 46px) !important;
-        white-space: normal !important;
-    }
-
-    body > main > .hero .hero-content > p {
-        font-size: 12px !important;
-    }
-
-    body > main > .hero .hero-buttons,
-    body > main > .hero .hero-actions {
-        gap: 9px !important;
-    }
-}
-
-
-/* =========================================================
    ROYALE2 MARKET — HERO V2 FINAL
    Desktop + Tablet + Mobile
    ========================================================= */
@@ -6634,181 +5128,7 @@ body > main > .yang-rates-section::before {
 
 
 /* =========================================================
-   ROYALE2 MARKET - PREMIUM İSTATİSTİK ŞERİDİ
-   Yang panelinin altındaki 3 / 4 / 24/7 / R2 alanı
-   ========================================================= */
 
-body > main > .stats {
-    width: min(1020px, calc(100% - 32px)) !important;
-    margin: 14px auto 34px !important;
-
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(11, 22, 31, 0.94),
-            rgba(6, 13, 20, 0.98)
-        ) !important;
-
-    border: 1px solid rgba(82, 118, 145, 0.24) !important;
-    border-top-color: rgba(202, 151, 62, 0.30) !important;
-
-    border-radius: 8px !important;
-    overflow: hidden !important;
-
-    box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.20),
-        inset 0 1px 0 rgba(255, 255, 255, 0.018) !important;
-}
-
-
-/* Her istatistik kutusu */
-body > main > .stats > div {
-    position: relative !important;
-
-    min-width: 0 !important;
-    min-height: 82px !important;
-
-    padding: 17px 20px !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    gap: 5px !important;
-
-    background: transparent !important;
-    border: 0 !important;
-
-    transition:
-        background-color 180ms ease,
-        transform 180ms ease !important;
-}
-
-
-/* Kutular arasındaki ince ayırıcı */
-body > main > .stats > div:not(:last-child)::after {
-    content: "";
-    position: absolute;
-
-    top: 18px;
-    right: 0;
-    bottom: 18px;
-
-    width: 1px;
-
-    background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(79, 120, 150, 0.30),
-        rgba(202, 151, 62, 0.16),
-        transparent
-    );
-}
-
-
-/* Büyük değer */
-body > main > .stats > div > strong {
-    display: block !important;
-
-    margin: 0 !important;
-
-    color: #f4f7fa !important;
-
-    font-size: 24px !important;
-    font-weight: 800 !important;
-    line-height: 1 !important;
-    letter-spacing: 0.4px !important;
-
-    text-shadow:
-        0 1px 8px rgba(0, 0, 0, 0.40) !important;
-}
-
-
-/* Açıklama */
-body > main > .stats > div > span {
-    display: block !important;
-
-    margin: 0 !important;
-
-    color: #70889b !important;
-
-    font-size: 10px !important;
-    font-weight: 600 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0.65px !important;
-
-    text-transform: uppercase !important;
-}
-
-
-/* Hover - çok hafif premium vurgu */
-body > main > .stats > div:hover {
-    background:
-        linear-gradient(
-            180deg,
-            rgba(26, 91, 132, 0.08),
-            rgba(202, 151, 62, 0.025)
-        ) !important;
-}
-
-
-/* Hover sırasında rakam */
-body > main > .stats > div:hover > strong {
-    color: #ffffff !important;
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 800px) {
-
-    body > main > .stats {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-
-    body > main > .stats > div:nth-child(2)::after {
-        display: none !important;
-    }
-
-    body > main > .stats > div:nth-child(-n + 2) {
-        border-bottom: 1px solid rgba(82, 118, 145, 0.16) !important;
-    }
-}
-
-
-/* =========================================================
-   MOBİL
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-    body > main > .stats {
-        width: calc(100% - 24px) !important;
-        margin-top: 12px !important;
-        margin-bottom: 26px !important;
-    }
-
-    body > main > .stats > div {
-        min-height: 70px !important;
-        padding: 14px 16px !important;
-    }
-
-    body > main > .stats > div > strong {
-        font-size: 20px !important;
-    }
-
-    body > main > .stats > div > span {
-        font-size: 9px !important;
-    }
-}
-
-
-/* =========================================================
    ROYALE2 MARKET - PREMIUM ANA SAYFA MANŞET V2
    Slider sistemi / JS korunur
    ========================================================= */
@@ -7029,5 +5349,200 @@ body > main > .market-slider .slider-item img {
     body > main > .market-slider {
         width: calc(100% - 24px) !important;
         margin: 16px auto 32px !important;
+    }
+}
+
+/* =========================================================
+   ROYALE2 MARKET - 2026 CLEAN MASTER OVERRIDE
+   Tek merkez genişliği: 1300px
+   HTML / JS / Supabase yapısına dokunmaz.
+   ========================================================= */
+
+:root {
+    --market-master-width: 1300px;
+    --market-master-gutter: 40px;
+}
+
+/* Sayfa taşmasını engelle */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ana sayfa ortak merkez hattı */
+.market-header,
+.header-main,
+.header-nav,
+.hero-content,
+.yang-rates-section,
+body > main > .market-slider,
+body > main > .section,
+body > main > .servers,
+body > main > .how,
+body > main > .cta {
+    width: calc(100% - var(--market-master-gutter)) !important;
+    max-width: var(--market-master-width) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Çalışan HTML korunur; eski stats şeridi sadece görünmez */
+body > main > .stats {
+    display: none !important;
+}
+
+/* Hero -> Yang geçişi */
+body > main > .hero {
+    margin-bottom: 0 !important;
+}
+
+.yang-rates-section {
+    margin-top: 18px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Manşet Yang kutusuyla birebir aynı genişlikte */
+body > main > .market-slider {
+    width: calc(100% - var(--market-master-gutter)) !important;
+    max-width: var(--market-master-width) !important;
+    margin: 16px auto 48px !important;
+    padding: 0 !important;
+}
+
+/* Son ilanlar */
+#market.section {
+    padding: 28px 0 76px !important;
+    margin-top: 0 !important;
+}
+
+#market .section-head {
+    margin-bottom: 20px !important;
+}
+
+#market .filters {
+    margin-bottom: 22px !important;
+}
+
+#market .listing-grid {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+}
+
+#market .listing-grid > * {
+    min-width: 0 !important;
+}
+
+/* Büyük masaüstü reklamları */
+@media (min-width: 1550px) {
+    .side-ad {
+        display: flex !important;
+        width: 200px !important;
+        height: 820px !important;
+        top: 12px !important;
+    }
+
+    .side-ad-left {
+        left: 8px !important;
+        right: auto !important;
+    }
+
+    .side-ad-right {
+        right: 8px !important;
+        left: auto !important;
+    }
+}
+
+/* Reklamların içerikle çakışacağı çözünürlüklerde gizle */
+@media (max-width: 1549px) {
+    .side-ad {
+        display: none !important;
+    }
+}
+
+/* Laptop */
+@media (max-width: 1200px) {
+    :root {
+        --market-master-gutter: 36px;
+    }
+
+    #market .listing-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    :root {
+        --market-master-gutter: 28px;
+    }
+
+    .market-header,
+    .header-main,
+    .header-nav,
+    .hero-content,
+    .yang-rates-section,
+    body > main > .market-slider,
+    body > main > .section,
+    body > main > .servers,
+    body > main > .how,
+    body > main > .cta {
+        width: calc(100% - var(--market-master-gutter)) !important;
+    }
+
+    #market .listing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    .server-grid,
+    .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Mobil */
+@media (max-width: 600px) {
+    :root {
+        --market-master-gutter: 24px;
+    }
+
+    .yang-rates-section {
+        margin-top: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    body > main > .market-slider {
+        margin: 14px auto 32px !important;
+    }
+
+    #market.section {
+        padding-top: 18px !important;
+        padding-bottom: 56px !important;
+    }
+
+    #market .listing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 9px !important;
+    }
+
+    .server-grid,
+    .steps {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Çok küçük telefon */
+@media (max-width: 390px) {
+    :root {
+        --market-master-gutter: 20px;
+    }
+
+    #market .listing-grid {
+        grid-template-columns: 1fr !important;
     }
 }

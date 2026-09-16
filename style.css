@@ -4585,3 +4585,60 @@ body {
     max-width: 1040px !important;
     margin: 0 auto 30px !important;
 }
+
+
+/* =========================================
+   SOL / SAG DIKEY REKLAM ALANLARI
+   ========================================= */
+
+.side-ad {
+    position: fixed;
+    top: 330px;
+    width: 160px;
+    height: 600px;
+    background: #08131d;
+    border: 1px dashed #249be8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #7d91a5;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.side-ad span {
+    color: #49adf5;
+    border: 1px solid #24465e;
+    border-radius: 3px;
+    padding: 4px 7px;
+    margin-bottom: 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.side-ad strong {
+    color: #eaf4ff;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.side-ad-left {
+    left: max(15px, calc(50% - 800px));
+}
+
+.side-ad-right {
+    right: max(15px, calc(50% - 800px));
+}
+
+/* Ekran daralinca reklamlar otomatik gizlenir */
+@media (max-width: 1500px) {
+    .side-ad {
+        display: none;
+    }
+}

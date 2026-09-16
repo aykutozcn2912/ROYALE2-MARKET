@@ -4794,3 +4794,29 @@ body {
   }
 }
 
+/* =====================================================
+   ROYALE2 MARKET - SIDE ADS POSITION FIX
+   Sağ / Sol reklamları ekran kenarına sabitle
+   Ana içerik genişliğine müdahale etmez
+===================================================== */
+
+@media (min-width: 1550px) {
+
+    .side-ad {
+        width: 200px !important;
+        height: 820px !important;
+        top: 12px !important;
+        z-index: 50 !important;
+    }
+
+    .side-ad-left {
+        left: 8px !important;
+        right: auto !important;
+    }
+
+    .side-ad-right {
+        right: 8px !important;
+        left: auto !important;
+    }
+
+}

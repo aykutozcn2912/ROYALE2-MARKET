@@ -4538,3 +4538,43 @@ body {
 .market-slider {
     margin-top: 18px !important;
 }
+
+
+/* =========================================
+   HERO FINAL COMPACT
+   ========================================= */
+
+.hero {
+    min-height: auto !important;
+    padding-top: 38px !important;
+    padding-bottom: 28px !important;
+}
+
+.hero h1 {
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+}
+
+.hero p {
+    margin-bottom: 20px !important;
+}
+
+.hero-actions {
+    margin-bottom: 14px !important;
+}
+
+.stats {
+    height: 58px !important;
+    min-height: 58px !important;
+}
+
+.stats > * {
+    height: 58px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    justify-content: center !important;
+}
+
+.market-slider {
+    margin-top: 12px !important;
+}

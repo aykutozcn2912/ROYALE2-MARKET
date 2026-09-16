@@ -6987,7 +6987,7 @@ body > main > .stats {
 /* Ana sayfa manşeti */
 body > main > .market-slider {
     width: calc(100% - 40px) !important;
-    max-width: 1200px !important;
+    max-width: 1280px !important;
     margin: 24px auto 48px !important;
     padding: 0 !important;
     box-sizing: border-box !important;

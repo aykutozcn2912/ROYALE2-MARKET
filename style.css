@@ -3480,7 +3480,7 @@ body > main .listing .listing-image img {
 .market-header {
     position: relative;
     z-index: 100;
-    width: calc(100% - 432px);
+    width: calc(100% - 400px);
     max-width: 1320px;
     margin-left: auto;
     margin-right: auto;

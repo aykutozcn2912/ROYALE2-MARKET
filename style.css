@@ -4518,7 +4518,7 @@ body {
     margin: 0 auto !important;
 
     min-height: 58px !important;
-    height: 58px !important;
+    height: 64px !important;
 
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
@@ -4526,7 +4526,7 @@ body {
 
 .stats > * {
     min-height: 58px !important;
-    height: 58px !important;
+    height: 64px !important;
 
     padding: 0 24px !important;
 
@@ -4536,5 +4536,5 @@ body {
 }
 
 .market-slider {
-    margin-top: 12px !important;
+    margin-top: 18px !important;
 }

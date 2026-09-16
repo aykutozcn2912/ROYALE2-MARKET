@@ -5487,7 +5487,7 @@ window.addEventListener("load", () => {
 
     setInterval(() => {
         royaleYangSyncWithSupabase();
-    }, 1000);
+    }, 5000);
 });
 
 

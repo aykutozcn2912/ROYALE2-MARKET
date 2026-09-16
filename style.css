@@ -4642,3 +4642,27 @@ body {
         display: none;
     }
 }
+
+/* =========================================
+   SIDE ADS - GENIS FINAL
+   ========================================= */
+
+.side-ad {
+    width: 200px !important;
+    height: 600px !important;
+    top: 330px !important;
+}
+
+.side-ad-left {
+    left: 8px !important;
+}
+
+.side-ad-right {
+    right: 8px !important;
+}
+
+@media (max-width: 1550px) {
+    .side-ad {
+        display: none !important;
+    }
+}

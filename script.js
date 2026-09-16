@@ -1523,10 +1523,66 @@ async function createListingInDatabase(
 }
 
 
+
 // ==========================================================
-// İLAN GÖRSEL YÜKLEME
+// İLAN GÖRSEL SEÇİMİ VE ÖNİZLEME
 // ==========================================================
 
+(function initListingImagePreview() {
+
+  const imageInput =
+    document.getElementById("listingImages");
+
+  const imagePreview =
+    document.getElementById("imagePreview");
+
+  if (!imageInput || !imagePreview) {
+    return;
+  }
+
+  imageInput.addEventListener(
+    "change",
+    () => {
+
+      imagePreview.innerHTML = "";
+
+      const selectedFiles =
+        Array.from(imageInput.files || []);
+
+      console.log(
+        "Seçilen ilan görseli sayısı:",
+        selectedFiles.length
+      );
+
+      selectedFiles.forEach(
+        (file, index) => {
+
+          const image =
+            document.createElement("img");
+
+          image.src =
+            URL.createObjectURL(file);
+
+          image.alt =
+            `Seçilen görsel ${index + 1}`;
+
+          image.style.width = "110px";
+          image.style.height = "110px";
+          image.style.objectFit = "cover";
+          image.style.borderRadius = "10px";
+
+          image.onload = () => {
+            URL.revokeObjectURL(image.src);
+          };
+
+          imagePreview.appendChild(image);
+        }
+      );
+
+    }
+  );
+
+})();
 async function uploadListingImages(
   files,
   listingId,

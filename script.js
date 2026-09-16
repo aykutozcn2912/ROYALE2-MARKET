@@ -4855,7 +4855,7 @@ if (priceElement && Number.isFinite(currentPrice)) {
         })} TL`;
 
     // Supabase gerçek fiyatını görsel piyasa hareketinin merkezi yap.
-    const motionState = yangMarketMotion.get(serverName);
+    const motionState = royaleYangMarket.get(serverName);
 
     if (motionState) {
         motionState.basePrice = currentPrice;

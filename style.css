@@ -4670,3 +4670,107 @@ body {
         display: none !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - DESKTOP WIDTH FINAL FIX
+   Ana içerik + header + hero + slider hizalama
+   ========================================================= */
+
+:root {
+  --market-final-width: 1320px;
+}
+
+/* ANA MERKEZ ALANLAR */
+.market-header,
+.header-main,
+.header-nav,
+.hero-content,
+.stats,
+.section,
+.market-slider,
+.cta {
+  width: calc(100% - 48px) !important;
+  max-width: var(--market-final-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+.market-header {
+  position: relative;
+  z-index: 100;
+}
+
+/* ÜST HEADER */
+.header-main {
+  min-height: 82px;
+}
+
+/* ALT MENÜ */
+.header-nav {
+  min-height: 48px;
+}
+
+/* HERO */
+.hero {
+  width: 100% !important;
+  min-height: 360px !important;
+  height: auto !important;
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  padding-top: 55px !important;
+  padding-bottom: 45px !important;
+}
+
+/* İSTATİSTİK ALANI */
+.stats {
+  margin-top: 0 !important;
+  min-height: 92px;
+}
+
+/* SLIDER */
+.market-slider {
+  overflow: hidden;
+}
+
+/* GENİŞ MASAÜSTÜ */
+@media (min-width: 1500px) {
+  :root {
+    --market-final-width: 1320px;
+  }
+}
+
+/* LAPTOP */
+@media (max-width: 1200px) {
+  :root {
+    --market-final-width: 1040px;
+  }
+}
+
+/* TABLET VE MOBİL */
+@media (max-width: 900px) {
+  .market-header,
+  .header-main,
+  .header-nav,
+  .hero-content,
+  .stats,
+  .section,
+  .market-slider,
+  .cta {
+    width: calc(100% - 28px) !important;
+  }
+
+  .hero {
+    min-height: auto !important;
+  }
+
+  .hero-content {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}

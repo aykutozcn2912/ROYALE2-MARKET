@@ -5482,7 +5482,12 @@ function royaleYangSyncWithSupabase() {
 window.addEventListener("load", () => {
     setTimeout(() => {
         startRoyaleYangVisualMarket();
+        royaleYangSyncWithSupabase();
     }, 1800);
+
+    setInterval(() => {
+        royaleYangSyncWithSupabase();
+    }, 1000);
 });
 
 

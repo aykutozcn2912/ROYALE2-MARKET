@@ -4354,3 +4354,72 @@ body {
     }
 
 }
+
+/* =========================================
+   ÜST REKLAM ALANI - GENİŞ DESKTOP V2
+========================================= */
+
+.top-ad-area {
+    width: 100%;
+    padding: 14px 20px;
+    box-sizing: border-box;
+}
+
+.top-ad-link {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
+.top-ad-placeholder {
+    width: 100%;
+    height: 110px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px dashed #238bd2;
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #071018 0%,
+            #0a1b29 50%,
+            #071018 100%
+        );
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+    .top-ad-link {
+        max-width: 900px;
+    }
+
+    .top-ad-placeholder {
+        height: 90px;
+    }
+}
+
+/* MOBİL */
+@media (max-width: 600px) {
+    .top-ad-area {
+        padding: 8px 12px;
+    }
+
+    .top-ad-placeholder {
+        height: 65px;
+    }
+
+    .top-ad-placeholder strong {
+        font-size: 12px;
+    }
+
+    .top-ad-placeholder small {
+        display: none;
+    }
+}

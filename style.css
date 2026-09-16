@@ -6471,3 +6471,121 @@ body > main > .yang-rates-section {
     backdrop-filter: none !important;
     filter: none !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — GLOBAL SITE BACKGROUND V1
+   Tek görsel / performans odaklı
+   ========================================================= */
+
+/* Ana site zemini */
+html {
+    background: #070b0f !important;
+}
+
+body {
+    position: relative !important;
+    min-height: 100vh !important;
+
+    background-color: #070b0f !important;
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(4, 8, 12, 0.16) 0%,
+            rgba(4, 8, 12, 0.28) 35%,
+            rgba(4, 8, 12, 0.42) 70%,
+            rgba(4, 8, 12, 0.58) 100%
+        ),
+        url("./images/site-background.webp") !important;
+
+    background-position:
+        center top,
+        center top !important;
+
+    background-size:
+        100% 100%,
+        1920px auto !important;
+
+    background-repeat:
+        no-repeat,
+        repeat-y !important;
+
+    background-attachment: scroll !important;
+}
+
+/* Ana içerik kendi siyah zeminini oluşturmasın */
+body > main {
+    position: relative !important;
+    background: transparent !important;
+}
+
+/* Hero artık kendi ayrı arka planını kullanmayacak.
+   Global site-background.webp arkadan görünecek. */
+body > main > .hero.hero-v2 {
+    background: transparent !important;
+}
+
+/* Eski hero-background katmanını kapat */
+body > main > .hero.hero-v2 > .hero-v2-bg {
+    background: transparent !important;
+}
+
+/* Hero'nun global arka plana yumuşak geçişi */
+body > main > .hero.hero-v2::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3, 7, 10, 0.04) 0%,
+            rgba(3, 7, 10, 0.02) 55%,
+            rgba(3, 7, 10, 0.30) 100%
+        ) !important;
+}
+
+/* Karakterler ve hero içeriği arka planın üzerinde kalır */
+body > main > .hero.hero-v2 > .hero-v2-characters {
+    z-index: 1 !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-content {
+    z-index: 2 !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-benefits {
+    z-index: 3 !important;
+}
+
+/* Yang alanı çevresindeki eski düz zeminleri temizle */
+body > main > .yang-rates-section {
+    position: relative !important;
+    background: transparent !important;
+}
+
+/* Manşet alanı */
+body > main > .market-slider {
+    position: relative !important;
+    background-color: rgba(5, 10, 15, 0.78) !important;
+}
+
+/* İlan pazarı ve devamındaki ana bölümler */
+body > main > section:not(.hero):not(.market-slider) {
+    background-color: transparent !important;
+}
+
+/* Mobilde büyük arka plan dosyasını daha kontrollü kullan */
+@media (max-width: 768px) {
+    body {
+        background-size:
+            100% 100%,
+            auto 1200px !important;
+
+        background-position:
+            center top,
+            center top !important;
+    }
+}

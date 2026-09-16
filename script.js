@@ -4854,21 +4854,7 @@ if (priceElement && Number.isFinite(currentPrice)) {
             maximumFractionDigits: 2
         })} TL`;
 
-    // Supabase gerçek fiyatını görsel piyasa hareketinin merkezi yap.
-    const motionState = royaleYangMarket.get(serverName);
 
-    if (motionState) {
-        motionState.basePrice = currentPrice;
-
-        // Gerçek fiyat fazla değiştiyse görsel fiyatı da yeni merkeze taşı.
-        if (
-            !Number.isFinite(motionState.displayPrice) ||
-            Math.abs(motionState.displayPrice - currentPrice) > 0.05
-        ) {
-            motionState.displayPrice = currentPrice;
-        }
-    }
-}
             if (
                 previousElement &&
                 Number.isFinite(previousPrice)
@@ -4880,45 +4866,7 @@ if (priceElement && Number.isFinite(currentPrice)) {
                     })} TL`;
             }
 
-            if (
-                changeElement &&
-                Number.isFinite(currentPrice) &&
-                Number.isFinite(previousPrice) &&
-                previousPrice !== 0
-            ) {
-                const difference =
-                    currentPrice - previousPrice;
 
-                const percentage =
-                    (difference / previousPrice) * 100;
-
-                changeElement.classList.remove(
-                    "yang-up",
-                    "yang-down",
-                    "yang-neutral"
-                );
-
-                if (difference > 0) {
-                    changeElement.classList.add("yang-up");
-
-                    changeElement.textContent =
-                        `▲ +${percentage.toLocaleString("tr-TR", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })}%`;
-                } else if (difference < 0) {
-                    changeElement.classList.add("yang-down");
-
-                    changeElement.textContent =
-                        `▼ ${percentage.toLocaleString("tr-TR", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })}%`;
-                } else {
-                    changeElement.classList.add("yang-neutral");
-                    changeElement.textContent = "● %0,00";
-                }
-            }
         });
 
         // En son güncellenen kaydı bul.

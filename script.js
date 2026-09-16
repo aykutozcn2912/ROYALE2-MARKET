@@ -4656,3 +4656,130 @@ document.addEventListener(
     }
   }
 );
+
+// =========================================================
+// ROYALE2 MARKET - ANA SAYFA MANSET SLIDER
+// =========================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    const slider = document.querySelector(".market-slider");
+
+    // Slider bu sayfada yoksa hiçbir işlem yapma
+    if (!slider) return;
+
+    const slides = Array.from(slider.querySelectorAll(".slider-item"));
+    const prevButton = slider.querySelector(".slider-prev");
+    const nextButton = slider.querySelector(".slider-next");
+    const dotsContainer = slider.querySelector(".slider-dots");
+
+    if (!slides.length || !dotsContainer) return;
+
+    let currentSlide = 0;
+    let autoPlayTimer = null;
+    const AUTO_PLAY_DELAY = 5000;
+
+    // Alt noktaları otomatik oluştur
+    slides.forEach((slide, index) => {
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className = "slider-dot";
+        dot.setAttribute("aria-label", `Manşet ${index + 1}`);
+
+        dot.addEventListener("click", () => {
+            showSlide(index);
+            restartAutoPlay();
+        });
+
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(
+        dotsContainer.querySelectorAll(".slider-dot")
+    );
+
+    function showSlide(index) {
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+
+        if (index >= slides.length) {
+            index = 0;
+        }
+
+        slides.forEach((slide) => {
+            slide.classList.remove("active");
+        });
+
+        dots.forEach((dot) => {
+            dot.classList.remove("active");
+        });
+
+        slides[index].classList.add("active");
+
+        if (dots[index]) {
+            dots[index].classList.add("active");
+        }
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function previousSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+
+        autoPlayTimer = setInterval(() => {
+            nextSlide();
+        }, AUTO_PLAY_DELAY);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) {
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = null;
+        }
+    }
+
+    function restartAutoPlay() {
+        stopAutoPlay();
+        startAutoPlay();
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener("click", () => {
+            nextSlide();
+            restartAutoPlay();
+        });
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener("click", () => {
+            previousSlide();
+            restartAutoPlay();
+        });
+    }
+
+    // Mouse bannerin üzerindeyken otomatik geçişi durdur
+    slider.addEventListener("mouseenter", stopAutoPlay);
+    slider.addEventListener("mouseleave", startAutoPlay);
+
+    // Sekme arka plana geçince gereksiz çalışmasın
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            stopAutoPlay();
+        } else {
+            startAutoPlay();
+        }
+    });
+
+    // İlk manşeti göster ve sistemi başlat
+    showSlide(0);
+    startAutoPlay();
+});

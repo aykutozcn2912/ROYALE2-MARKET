@@ -1,283 +1,769 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ROYALE2 MARKET</title>
-  <meta name="description" content="Royale2 Ephesus, Teos, Pergamon ve Akademi Teos Ticaret Pazarı.">
+
+  <meta
+    name="description"
+    content="Royale2 Ephesus, Teos, Pergamon ve Akademi Teos Ticaret Pazarı."
+  >
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <!-- =====================================================
+       ÜST MENÜ
+  ====================================================== -->
+
   <header class="topbar">
+
     <a class="brand" href="index.html">
       <span class="brand-mark">R2</span>
-      <span><strong>ROYALE2</strong><small>MARKET</small></span>
+
+      <span>
+        <strong>ROYALE2</strong>
+        <small>MARKET</small>
+      </span>
     </a>
+
     <nav>
       <a class="active" href="#market">İlan Pazarı</a>
       <a href="#servers">Sunucular</a>
       <a href="#how">Nasıl Çalışır?</a>
     </nav>
+
     <div class="actions">
       <a class="login" href="#login">Giriş Yap</a>
       <a class="login" href="#register" id="register-open">Üye Ol</a>
       <a class="sell" href="create-listing.html">+ İlan Ver</a>
     </div>
+
   </header>
 
+
   <main>
-    <!-- ANA SAYFA MANŞET -->
-<section class="market-slider" aria-label="Royale2 Market Manşet">
-    <div class="slider-track">
 
-        <a href="#" class="slider-item active">
-            <img src="images/manset-1.webp" alt="Royale2 Market Manşet 1">
-        </a>
+    <!-- =====================================================
+         HERO / ROYALE2 MARKET
+    ====================================================== -->
 
-        <a href="#" class="slider-item">
-            <img src="images/manset-2.webp" alt="Royale2 Market Manşet 2">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-3.webp" alt="Royale2 Market Manşet 3">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-4.webp" alt="Royale2 Market Manşet 4">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-5.webp" alt="Royale2 Market Manşet 5">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-6.webp" alt="Royale2 Market Manşet 6">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-7.webp" alt="Royale2 Market Manşet 7">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-8.webp" alt="Royale2 Market Manşet 8">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-9.webp" alt="Royale2 Market Manşet 9">
-        </a>
-
-        <a href="#" class="slider-item">
-            <img src="images/manset-10.webp" alt="Royale2 Market Manşet 10">
-        </a>
-
-    </div>
-
-    <button class="slider-arrow slider-prev" type="button" aria-label="Önceki manşet">&#10094;</button>
-    <button class="slider-arrow slider-next" type="button" aria-label="Sonraki manşet">&#10095;</button>
-
-    <div class="slider-dots"></div>
-</section>
-<!-- ANA SAYFA MANŞET SONU -->
     <section class="hero">
+
       <div class="hero-bg"></div>
+
       <div class="hero-content">
-        <div class="eyebrow">EPHESUS • TEOS • PERGAMON • AKADEMİ TEOS</div>
-        <h1>ROYALE2 <span>MARKET</span></h1>
-        <p>ROYALE2 ticaretinin yeni adresi. İlanını oluştur, aradığını bul, hızlı ve güvenli şekilde iletişime geç.</p>
+
+        <div class="eyebrow">
+          EPHESUS • TEOS • PERGAMON • AKADEMİ TEOS
+        </div>
+
+        <h1>
+          ROYALE2 <span>MARKET</span>
+        </h1>
+
+        <p>
+          ROYALE2 ticaretinin yeni adresi.
+          İlanını oluştur, aradığını bul, hızlı ve güvenli şekilde
+          iletişime geç.
+        </p>
+
         <div class="hero-buttons">
-          <a class="primary" href="#market">İlanları Keşfet <b>→</b></a>
-          <a class="secondary" href="create-listing.html">İlan Ver</a>
+
+          <a class="primary" href="#market">
+            İlanları Keşfet <b>→</b>
+          </a>
+
+          <a class="secondary" href="create-listing.html">
+            İlan Ver
+          </a>
+
         </div>
+
         <div class="trust">
-          <span>✓</span> Ephesus &nbsp; <span>✓</span> Teos &nbsp; <span>✓</span> Pergamon
+          <span>✓</span> Ephesus
+          &nbsp;
+          <span>✓</span> Teos
+          &nbsp;
+          <span>✓</span> Pergamon
         </div>
+
       </div>
+
     </section>
+
+
+    <!-- =====================================================
+         İSTATİSTİKLER
+    ====================================================== -->
 
     <section class="stats">
-      <div><strong>3</strong><span>Aktif Sunucu</span></div>
-      <div><strong>4</strong><span>İlan Kategorisi</span></div>
-      <div><strong>24/7</strong><span>Aktif Pazar</span></div>
-      <div><strong>R2</strong><span>Topluluk Odaklı</span></div>
+
+      <div>
+        <strong>3</strong>
+        <span>Aktif Sunucu</span>
+      </div>
+
+      <div>
+        <strong>4</strong>
+        <span>İlan Kategorisi</span>
+      </div>
+
+      <div>
+        <strong>24/7</strong>
+        <span>Aktif Pazar</span>
+      </div>
+
+      <div>
+        <strong>R2</strong>
+        <span>Topluluk Odaklı</span>
+      </div>
+
     </section>
+
+
+    <!-- =====================================================
+         ANA SAYFA MANŞET
+    ====================================================== -->
+
+    <section
+      class="market-slider"
+      aria-label="Royale2 Market Manşet"
+    >
+
+      <div class="slider-track">
+
+        <!-- MANŞET 1 -->
+
+        <a
+          href="#market"
+          class="slider-item active"
+          aria-label="Royale2 Market Manşet 1"
+        >
+          <img
+            src="./images/manset-1.webp"
+            alt="Royale2 Market Manşet 1"
+            loading="eager"
+            decoding="async"
+          >
+        </a>
+
+      </div>
+
+
+      <!-- Slider yön tuşları -->
+
+      <button
+        class="slider-arrow slider-prev"
+        type="button"
+        aria-label="Önceki manşet"
+      >
+        &#10094;
+      </button>
+
+      <button
+        class="slider-arrow slider-next"
+        type="button"
+        aria-label="Sonraki manşet"
+      >
+        &#10095;
+      </button>
+
+
+      <!-- Slider noktaları -->
+
+      <div
+        class="slider-dots"
+        aria-label="Manşet seçimi"
+      ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SON İLANLAR
+    ====================================================== -->
 
     <section id="market" class="section">
+
       <div class="section-head">
-        <div><span class="eyebrow">PAZARI KEŞFET</span><h2>Son İlanlar</h2></div>
-        <a href="#">Tüm İlanları Gör →</a>
+
+        <div>
+          <span class="eyebrow">PAZARI KEŞFET</span>
+          <h2>Son İlanlar</h2>
+        </div>
+
+        <a href="#">
+          Tüm İlanları Gör →
+        </a>
+
       </div>
+
+
+      <!-- FİLTRELER -->
 
       <div class="filters">
-        <button class="filter active" data-server="Tümü">Tümü</button>
-        <button class="filter" data-server="Ephesus">Ephesus</button>
-        <button class="filter" data-server="Teos">Teos</button>
-        <button class="filter" data-server="Pergamon">Pergamon</button>
-        <button class="filter" data-server="Akademi Teos">Akademi Teos</button>
-        <span class="filter-sep"></span>
-        <select id="category">
-          <option value="Tümü">Tüm Kategoriler</option>
-          <option value="Yang">Yang</option>
-          <option value="Eşya">Eşya</option>
-          <option value="Karakter">Karakter</option>
-          <option value="Hesap">Hesap</option>
-        </select>
-      </div>
 
-      <div id="listings" class="listing-grid"></div>
-    </section>
-
-    <section id="servers" class="section servers">
-      <div class="section-head">
-        <div><span class="eyebrow">SUNUCUNU SEÇ</span><h2>ROYALE2 Dünyası</h2></div>
-      </div>
-      <div class="server-grid">
-        <button class="server-card" data-server-card="Ephesus"><span>EPHESUS</span><small>İlanları Gör →</small></button>
-        <button class="server-card" data-server-card="Teos"><span>TEOS</span><small>İlanları Gör →</small></button>
-        <button class="server-card" data-server-card="Pergamon"><span>PERGAMON</span><small>İlanları Gör →</small></button>
-        <button class="server-card" data-server-card="Akademi Teos"><span>AKADEMİ TEOS</span><small>İlanları Gör →</small></button>
-      </div>
-    </section>
-
-    <section id="how" class="section how">
-      <div class="section-head">
-        <div><span class="eyebrow">BASİT VE HIZLI</span><h2>Nasıl Çalışır?</h2></div>
-      </div>
-      <div class="steps">
-        <div><b>01</b><h3>İlanını Oluştur</h3><p>Sunucunu ve kategorini seçerek ilan bilgilerini gir.</p></div>
-        <div><b>02</b><h3>Alıcıyı Bul</h3><p>İlanını görüntüleyen oyuncular seninle iletişime geçsin.</p></div>
-        <div><b>03</b><h3>Ticareti Tamamla</h3><p>Güvenli iletişim ve doğrulama adımlarıyla işlemini tamamla.</p></div>
-      </div>
-    </section>
-
-    <section id="sell" class="cta">
-      <div><span class="eyebrow">PAZARA KATIL</span><h2>Sen de ilanını yayınla.</h2><p>ROYALE2 oyuncuları için kendi ilanını oluştur.</p></div>
-      <a class="primary" href="#login">Ücretsiz Başla →</a>
-    </section>
-  </main>
-
-  <footer>
-    <div class="brand footer-brand"><span class="brand-mark">R2</span><span><strong>ROYALE2</strong><small>MARKET</small></span></div>
-    <p>© 2026 ROYALE2 MARKET • Ephesus • Teos • Pergamon • Akademi Teos</p>
-    <div><a href="#">Kurallar</a><a href="#">Gizlilik</a><a href="#">İletişim</a></div>
-  </footer>
-<div id="register" class="modal">
-    <div class="modal-box">
-        <a class="close" href="#">×</a>
-
-        <span class="eyebrow">ROYALE2 MARKET</span>
-        <h2>Üye Ol</h2>
-        <p>Yeni hesabını oluştur ve Royale2 Market'e katıl.</p>
-
-        <label>Kullanıcı Adı</label>
-        <input
-            id="register-username"
-            type="text"
-            placeholder="Kullanıcı adınız"
-            maxlength="20"
-            autocomplete="username"
+        <button
+          class="filter active"
+          data-server="Tümü"
+          type="button"
         >
-
-        <small id="register-username-message"></small>
-
-<label>Adınız Soyadınız</label>
-<input
-  id="register-display-name"
-  type="text"
-  placeholder="Adınız Soyadınız"
-  maxlength="40"
-
-        >
-
-        <label>Telefon Numarası</label>
-        <input
-            id="register-phone"
-            type="tel"
-            placeholder="05XXXXXXXXX"
-            maxlength="11"
-            inputmode="numeric"
-            autocomplete="tel"
-        >
-
-        <label>E-posta Adresi</label>
-        <input
-            id="register-email"
-            type="email"
-            placeholder="ornek@mail.com"
-            autocomplete="email"
-        >
-
-        <label>Şifre</label>
-        <input
-            id="register-password"
-            type="password"
-            placeholder="En az 8 karakter"
-            autocomplete="new-password"
-        >
-
-        <label>Şifre Tekrar</label>
-        <input
-            id="register-password-confirm"
-            type="password"
-            placeholder="Şifrenizi tekrar girin"
-            autocomplete="new-password"
-        >
-
-        <label class="register-consent">
-            <input id="register-terms" type="checkbox">
-            Kullanım koşullarını ve gizlilik politikasını kabul ediyorum.
-        </label>
-
-        <button id="register-button" class="primary full" type="button">
-            Hesap Oluştur
+          Tümü
         </button>
 
-        <small id="register-message"></small>
+        <button
+          class="filter"
+          data-server="Ephesus"
+          type="button"
+        >
+          Ephesus
+        </button>
 
-        <p style="margin-top:14px;">
-            Zaten hesabın var mı?
-            <a href="#login">Giriş Yap</a>
+        <button
+          class="filter"
+          data-server="Teos"
+          type="button"
+        >
+          Teos
+        </button>
+
+        <button
+          class="filter"
+          data-server="Pergamon"
+          type="button"
+        >
+          Pergamon
+        </button>
+
+        <button
+          class="filter"
+          data-server="Akademi Teos"
+          type="button"
+        >
+          Akademi Teos
+        </button>
+
+        <span class="filter-sep"></span>
+
+
+        <select id="category" aria-label="İlan kategorisi">
+
+          <option value="Tümü">
+            Tüm Kategoriler
+          </option>
+
+          <option value="Yang">
+            Yang
+          </option>
+
+          <option value="Eşya">
+            Eşya
+          </option>
+
+          <option value="Karakter">
+            Karakter
+          </option>
+
+          <option value="Hesap">
+            Hesap
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- İLANLAR BURAYA JS İLE GELECEK -->
+
+      <div
+        id="listings"
+        class="listing-grid"
+      ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUNUCULAR
+    ====================================================== -->
+
+    <section
+      id="servers"
+      class="section servers"
+    >
+
+      <div class="section-head">
+
+        <div>
+          <span class="eyebrow">SUNUCUNU SEÇ</span>
+          <h2>ROYALE2 Dünyası</h2>
+        </div>
+
+      </div>
+
+
+      <div class="server-grid">
+
+        <button
+          class="server-card"
+          data-server-card="Ephesus"
+          type="button"
+        >
+          <span>EPHESUS</span>
+          <small>İlanları Gör →</small>
+        </button>
+
+
+        <button
+          class="server-card"
+          data-server-card="Teos"
+          type="button"
+        >
+          <span>TEOS</span>
+          <small>İlanları Gör →</small>
+        </button>
+
+
+        <button
+          class="server-card"
+          data-server-card="Pergamon"
+          type="button"
+        >
+          <span>PERGAMON</span>
+          <small>İlanları Gör →</small>
+        </button>
+
+
+        <button
+          class="server-card"
+          data-server-card="Akademi Teos"
+          type="button"
+        >
+          <span>AKADEMİ TEOS</span>
+          <small>İlanları Gör →</small>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NASIL ÇALIŞIR?
+    ====================================================== -->
+
+    <section
+      id="how"
+      class="section how"
+    >
+
+      <div class="section-head">
+
+        <div>
+          <span class="eyebrow">BASİT VE HIZLI</span>
+          <h2>Nasıl Çalışır?</h2>
+        </div>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div>
+          <b>01</b>
+          <h3>İlanını Oluştur</h3>
+          <p>
+            Sunucunu ve kategorini seçerek ilan bilgilerini gir.
+          </p>
+        </div>
+
+
+        <div>
+          <b>02</b>
+          <h3>Alıcıyı Bul</h3>
+          <p>
+            İlanını görüntüleyen oyuncular seninle iletişime geçsin.
+          </p>
+        </div>
+
+
+        <div>
+          <b>03</b>
+          <h3>Ticareti Tamamla</h3>
+          <p>
+            Güvenli iletişim ve doğrulama adımlarıyla işlemini tamamla.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         İLAN VER CTA
+    ====================================================== -->
+
+    <section
+      id="sell"
+      class="cta"
+    >
+
+      <div>
+
+        <span class="eyebrow">
+          PAZARA KATIL
+        </span>
+
+        <h2>
+          Sen de ilanını yayınla.
+        </h2>
+
+        <p>
+          ROYALE2 oyuncuları için kendi ilanını oluştur.
         </p>
+
+      </div>
+
+
+      <a
+        class="primary"
+        href="create-listing.html"
+      >
+        Ücretsiz Başla →
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="brand footer-brand">
+
+      <span class="brand-mark">
+        R2
+      </span>
+
+      <span>
+        <strong>ROYALE2</strong>
+        <small>MARKET</small>
+      </span>
+
     </div>
-</div>
-<div id="login" class="modal">
-  <div class="modal-box">
-    <a class="close" href="#">×</a>
 
-    <span class="eyebrow">ROYALE2 MARKET</span>
-    <h2>Giriş Yap</h2>
 
-    <p>Hesabınla giriş yaparak ilanlarını yönetebilirsin.</p>
+    <p>
+      © 2026 ROYALE2 MARKET •
+      Ephesus • Teos • Pergamon • Akademi Teos
+    </p>
 
-    <input id="login-email" type="email" placeholder="E-posta">
 
-    <input id="login-password" type="password" placeholder="Şifre">
+    <div>
+      <a href="#">Kurallar</a>
+      <a href="#">Gizlilik</a>
+      <a href="#">İletişim</a>
+    </div>
 
-    <button id="login-button" class="primary full" type="button">
-      Giriş Yap
-    </button>
+  </footer>
+
+
+  <!-- =====================================================
+       ÜYE OL MODAL
+  ====================================================== -->
+
+  <div
+    id="register"
+    class="modal"
+  >
+
+    <div class="modal-box">
+
+      <a
+        class="close"
+        href="#"
+        aria-label="Kapat"
+      >
+        ×
+      </a>
+
+
+      <span class="eyebrow">
+        ROYALE2 MARKET
+      </span>
+
+      <h2>
+        Üye Ol
+      </h2>
+
+      <p>
+        Yeni hesabını oluştur ve Royale2 Market'e katıl.
+      </p>
+
+
+      <label for="register-username">
+        Kullanıcı Adı
+      </label>
+
+      <input
+        id="register-username"
+        type="text"
+        placeholder="Kullanıcı adınız"
+        maxlength="20"
+        autocomplete="username"
+      >
+
+      <small id="register-username-message"></small>
+
+
+      <label for="register-display-name">
+        Adınız Soyadınız
+      </label>
+
+      <input
+        id="register-display-name"
+        type="text"
+        placeholder="Adınız Soyadınız"
+        maxlength="40"
+        autocomplete="name"
+      >
+
+
+      <label for="register-phone">
+        Telefon Numarası
+      </label>
+
+      <input
+        id="register-phone"
+        type="tel"
+        placeholder="05XXXXXXXXX"
+        maxlength="11"
+        inputmode="numeric"
+        autocomplete="tel"
+      >
+
+
+      <label for="register-email">
+        E-posta Adresi
+      </label>
+
+      <input
+        id="register-email"
+        type="email"
+        placeholder="ornek@mail.com"
+        autocomplete="email"
+      >
+
+
+      <label for="register-password">
+        Şifre
+      </label>
+
+      <input
+        id="register-password"
+        type="password"
+        placeholder="En az 8 karakter"
+        autocomplete="new-password"
+      >
+
+
+      <label for="register-password-confirm">
+        Şifre Tekrar
+      </label>
+
+      <input
+        id="register-password-confirm"
+        type="password"
+        placeholder="Şifrenizi tekrar girin"
+        autocomplete="new-password"
+      >
+
+
+      <label class="register-consent">
+
+        <input
+          id="register-terms"
+          type="checkbox"
+        >
+
+        Kullanım koşullarını ve gizlilik politikasını kabul ediyorum.
+
+      </label>
+
+
+      <button
+        id="register-button"
+        class="primary full"
+        type="button"
+      >
+        Hesap Oluştur
+      </button>
+
+
+      <small id="register-message"></small>
+
+
+      <p style="margin-top:14px;">
+
+        Zaten hesabın var mı?
+
+        <a href="#login">
+          Giriş Yap
+        </a>
+
+      </p>
+
+    </div>
+
   </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const loginButton = document.getElementById("login-button");
 
-  if (loginButton) {
-    loginButton.addEventListener("click", () => {
-      const email = document.getElementById("login-email").value.trim();
-      const password = document.getElementById("login-password").value;
+  <!-- =====================================================
+       GİRİŞ MODAL
+  ====================================================== -->
 
-      if (!email || !password) {
-        alert("E-posta ve şifre gir.");
+  <div
+    id="login"
+    class="modal"
+  >
+
+    <div class="modal-box">
+
+      <a
+        class="close"
+        href="#"
+        aria-label="Kapat"
+      >
+        ×
+      </a>
+
+
+      <span class="eyebrow">
+        ROYALE2 MARKET
+      </span>
+
+      <h2>
+        Giriş Yap
+      </h2>
+
+      <p>
+        Hesabınla giriş yaparak ilanlarını yönetebilirsin.
+      </p>
+
+
+      <label for="login-email">
+        E-posta
+      </label>
+
+      <input
+        id="login-email"
+        type="email"
+        placeholder="E-posta"
+        autocomplete="email"
+      >
+
+
+      <label for="login-password">
+        Şifre
+      </label>
+
+      <input
+        id="login-password"
+        type="password"
+        placeholder="Şifre"
+        autocomplete="current-password"
+      >
+
+
+      <button
+        id="login-button"
+        class="primary full"
+        type="button"
+      >
+        Giriş Yap
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="script.js"></script>
+
+
+  <!-- Login butonu -->
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const loginButton =
+        document.getElementById("login-button");
+
+
+      if (!loginButton) {
         return;
       }
 
-      loginUser(email, password);
+
+      loginButton.addEventListener("click", () => {
+
+        const email =
+          document
+            .getElementById("login-email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("login-password")
+            .value;
+
+
+        if (!email || !password) {
+
+          alert("E-posta ve şifre gir.");
+
+          return;
+
+        }
+
+
+        if (typeof loginUser === "function") {
+
+          loginUser(email, password);
+
+        } else {
+
+          console.error(
+            "loginUser fonksiyonu bulunamadı."
+          );
+
+        }
+
+      });
+
     });
-  }
-  
-});
-</script></body>
+
+  </script>
+
+</body>
 </html>

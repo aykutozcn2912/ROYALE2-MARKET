@@ -6972,3 +6972,62 @@ body > main > .market-slider .slider-arrow:hover {
         right: 8px !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - ANA SAYFA MANŞET DÜZENİ
+   Güncel Yang Kurları ile aynı genişlik
+   ========================================================= */
+
+/* Eski istatistik şeridini kaldır */
+body > main > .stats {
+    display: none !important;
+}
+
+/* Ana sayfa manşeti */
+body > main > .market-slider {
+    width: calc(100% - 40px) !important;
+    max-width: 1040px !important;
+    margin: 24px auto 48px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Slider iç alanı */
+body > main > .market-slider .slider-track {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+/* Manşet kartı */
+body > main > .market-slider .slider-item {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+/* Manşet görseli */
+body > main > .market-slider .slider-item img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+}
+
+/* Mobil */
+@media (max-width: 600px) {
+    body > main > .market-slider {
+        width: calc(100% - 24px) !important;
+        margin: 16px auto 32px !important;
+    }
+}

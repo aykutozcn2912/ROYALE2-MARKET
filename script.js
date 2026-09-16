@@ -5098,10 +5098,10 @@ function royaleYangGetPriceElement(card) {
     return (
         card.querySelector(".yang-current-price") ||
         card.querySelector("[data-yang-price]") ||
+        card.querySelector(".yang-price") ||
         card.querySelector(".price")
     );
 }
-
 
 function royaleYangGetChangeElement(card) {
     if (!card) return null;

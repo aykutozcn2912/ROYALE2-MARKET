@@ -5301,3 +5301,84 @@ body {
         box-shadow: 0 0 0 rgba(30, 170, 255, 0);
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET V2
+   PREMIUM METIN2 / MMORPG THEME
+   ========================================================= */
+
+:root {
+    --r2-bg: #07090a;
+    --r2-bg-deep: #030405;
+    --r2-panel: #0b0f11;
+    --r2-panel-soft: #101518;
+
+    --r2-gold: #c89542;
+    --r2-gold-light: #e4bd73;
+    --r2-gold-dark: #6f4a1d;
+
+    --r2-red: #8f1717;
+    --r2-red-bright: #c62a1c;
+    --r2-red-dark: #3b0808;
+
+    --r2-text: #f0ede6;
+    --r2-muted: #8e9499;
+
+    --r2-border: rgba(200, 149, 66, 0.32);
+    --r2-border-soft: rgba(200, 149, 66, 0.14);
+}
+
+/* ANA SAYFA ZEMİNİ */
+html,
+body {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(125, 54, 17, 0.12) 0%,
+            rgba(7, 9, 10, 0) 38%
+        ),
+        linear-gradient(
+            180deg,
+            #080b0d 0%,
+            #050708 55%,
+            #030405 100%
+        ) !important;
+
+    color: var(--r2-text);
+}
+
+/* SAYFADAKİ GENEL KOYU PANELLER */
+main,
+.site-main {
+    background-color: transparent;
+}
+
+/* GENEL ALTIN VURGU */
+::selection {
+    background: rgba(198, 42, 28, 0.75);
+    color: #ffffff;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050607;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        var(--r2-gold-dark),
+        var(--r2-gold)
+    );
+    border-radius: 10px;
+    border: 2px solid #050607;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--r2-gold-light);
+}

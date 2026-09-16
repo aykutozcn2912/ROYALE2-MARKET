@@ -3842,3 +3842,399 @@ body > .topbar {
         width: calc(100% - 20px);
     }
 }
+
+/* =========================================================
+   ROYALE2 MARKET — DESKTOP MARKETPLACE OPTIMIZATION V1
+   Mevcut çalışan tasarımı bozmadan genişlik / boşluk düzeni
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. GENEL SAYFA GENİŞLİĞİ
+   --------------------------------------------------------- */
+
+:root {
+    --market-max-width: 1200px;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+}
+
+
+/* ---------------------------------------------------------
+   2. HEADER GENİŞLİĞİ
+   --------------------------------------------------------- */
+
+.header-main,
+.header-nav,
+.hero-content,
+.stats,
+.section,
+.market-slider,
+.cta {
+    width: calc(100% - 40px);
+    max-width: var(--market-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   3. HERO ALANI
+   --------------------------------------------------------- */
+
+.hero {
+    min-height: 360px !important;
+    height: auto !important;
+    padding: 55px 0 45px !important;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.hero-content h1 {
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    max-width: 680px;
+    margin-bottom: 25px;
+}
+
+
+/* ---------------------------------------------------------
+   4. İSTATİSTİK ALANI
+   --------------------------------------------------------- */
+
+.stats {
+    margin-top: 0 !important;
+    margin-bottom: 28px !important;
+    min-height: 92px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: stretch;
+}
+
+.stats > div {
+    min-height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* ---------------------------------------------------------
+   5. MANŞET
+   --------------------------------------------------------- */
+
+.market-slider {
+    margin-top: 0 !important;
+    margin-bottom: 42px !important;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    aspect-ratio: 16 / 5;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.slider-track {
+    width: 100%;
+    height: 100%;
+}
+
+.slider-item {
+    width: 100%;
+    height: 100%;
+}
+
+.slider-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* ---------------------------------------------------------
+   6. MANŞET OKLARI
+   --------------------------------------------------------- */
+
+.slider-arrow {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50%;
+    backdrop-filter: blur(6px);
+}
+
+.slider-prev {
+    left: 16px !important;
+}
+
+.slider-next {
+    right: 16px !important;
+}
+
+
+/* ---------------------------------------------------------
+   7. SON İLANLAR BÖLÜMÜ
+   --------------------------------------------------------- */
+
+#market.section {
+    padding-top: 25px !important;
+    margin-top: 0 !important;
+}
+
+.section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.section-head {
+    margin-bottom: 20px;
+}
+
+
+/* ---------------------------------------------------------
+   8. İLAN FİLTRELERİ
+   --------------------------------------------------------- */
+
+.filters {
+    margin-bottom: 22px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filters select {
+    margin-left: auto;
+}
+
+
+/* ---------------------------------------------------------
+   9. İLAN GRID — GENİŞ EKRAN
+   --------------------------------------------------------- */
+
+.listing-grid {
+    width: 100%;
+
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr)) !important;
+
+    gap: 14px !important;
+}
+
+
+/* ---------------------------------------------------------
+   10. İLAN KARTLARI
+   --------------------------------------------------------- */
+
+.listing-card {
+    width: 100%;
+    min-width: 0;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* ---------------------------------------------------------
+   11. SUNUCULAR
+   --------------------------------------------------------- */
+
+.server-grid {
+    width: 100%;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr)) !important;
+
+    gap: 15px;
+}
+
+
+/* ---------------------------------------------------------
+   12. NASIL ÇALIŞIR
+   --------------------------------------------------------- */
+
+.steps {
+    width: 100%;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 15px;
+}
+
+
+/* ---------------------------------------------------------
+   13. DESKTOP GENİŞ EKRAN
+   --------------------------------------------------------- */
+
+@media (min-width: 1500px) {
+
+    :root {
+        --market-max-width: 1280px;
+    }
+
+    .listing-grid {
+        grid-template-columns:
+            repeat(5, minmax(0, 1fr)) !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   14. LAPTOP
+   --------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+    :root {
+        --market-max-width: 1040px;
+    }
+
+    .listing-grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr)) !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   15. TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .header-main,
+    .header-nav,
+    .hero-content,
+    .stats,
+    .section,
+    .market-slider,
+    .cta {
+        width: calc(100% - 28px);
+    }
+
+    .hero {
+        min-height: 320px !important;
+        padding: 45px 0 !important;
+    }
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr) !important;
+    }
+
+    .listing-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .server-grid {
+        grid-template-columns:
+            repeat(2, 1fr) !important;
+    }
+
+    .market-slider {
+        aspect-ratio: 16 / 6;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   16. MOBİL
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .header-main,
+    .header-nav,
+    .hero-content,
+    .stats,
+    .section,
+    .market-slider,
+    .cta {
+        width: calc(100% - 20px);
+    }
+
+    .hero {
+        min-height: auto !important;
+        padding: 38px 0 !important;
+    }
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr) !important;
+
+        margin-bottom: 20px !important;
+    }
+
+    .market-slider {
+        aspect-ratio: 16 / 9;
+        margin-bottom: 25px !important;
+    }
+
+    #market.section {
+        padding-top: 15px !important;
+    }
+
+    .listing-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 9px !important;
+    }
+
+    .server-grid,
+    .steps {
+        grid-template-columns:
+            1fr !important;
+    }
+
+    .filters select {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 6px;
+    }
+
+    .slider-arrow {
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   17. ÇOK KÜÇÜK TELEFON
+   --------------------------------------------------------- */
+
+@media (max-width: 390px) {
+
+    .listing-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+}

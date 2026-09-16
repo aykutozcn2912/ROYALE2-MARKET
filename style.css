@@ -6589,3 +6589,109 @@ body > main > section:not(.hero):not(.market-slider) {
             center top !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — FULL SCREEN BACKGROUND FIX
+   Tek parça / tekrar yok / ekranı tamamen kaplar
+   ========================================================= */
+
+html {
+    min-height: 100% !important;
+    background: #06090d !important;
+}
+
+body {
+    position: relative !important;
+    min-height: 100vh !important;
+
+    /* TEK ARKA PLAN */
+    background-image: url("./images/site-background.webp") !important;
+
+    /* Ekranın tamamını kapla */
+    background-size: cover !important;
+
+    /* Üst-orta noktadan hizala */
+    background-position: center top !important;
+
+    /* ASLA TEKRARLAMA */
+    background-repeat: no-repeat !important;
+
+    /* Scroll sırasında görsel sabitlenmesin */
+    background-attachment: scroll !important;
+
+    background-color: #06090d !important;
+}
+
+/* Ana sayfa zemini şeffaf */
+body > main {
+    background: transparent !important;
+}
+
+/* Hero ayrı arka plan oluşturmasın */
+body > main > .hero.hero-v2 {
+    background: transparent !important;
+}
+
+/* Eski hero background katmanını tamamen kapat */
+body > main > .hero.hero-v2 > .hero-v2-bg {
+    display: none !important;
+    background: none !important;
+}
+
+/* Önceki gradient katmanını kaldır */
+body > main > .hero.hero-v2::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Karakter görselimiz aynen korunuyor */
+body > main > .hero.hero-v2 > .hero-v2-characters {
+    position: absolute !important;
+    z-index: 2 !important;
+}
+
+/* Hero yazıları */
+body > main > .hero.hero-v2 > .hero-v2-content {
+    position: relative !important;
+    z-index: 3 !important;
+}
+
+/* Hero alt özellik barı */
+body > main > .hero.hero-v2 > .hero-v2-benefits {
+    position: absolute !important;
+    z-index: 4 !important;
+}
+
+/* =========================================================
+   ANA BÖLÜMLER
+   Arka planın görünmesini engelleyen düz renkleri kaldır
+   ========================================================= */
+
+body > main > .yang-rates-section,
+body > main > .market-slider,
+body > main > .market-section,
+body > main > .servers,
+body > main > .how-it-works {
+    background-image: none !important;
+}
+
+/* İçerik okunabilirliği için paneller kendi koyu zeminlerini korur */
+body > main > .yang-rates-section {
+    background-color: rgba(4, 10, 15, 0.90) !important;
+}
+
+/* Banner kendi görselini korur */
+body > main > .market-slider {
+    background-color: transparent !important;
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+    body {
+        background-size: cover !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+    }
+}

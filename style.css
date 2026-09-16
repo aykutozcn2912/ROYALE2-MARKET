@@ -6572,3 +6572,62 @@ body > main > .hero.hero-v2 .hero-benefit small {
         z-index: 12 !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - HERO -> YANG PROFESYONEL GEÇİŞ
+   ========================================================= */
+
+body > main > .hero-v2 {
+    position: relative;
+    margin-bottom: 0 !important;
+}
+
+/* Hero altındaki ince premium ışık */
+body > main > .hero-v2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(860px, 72%);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(42, 145, 220, 0.20) 18%,
+        rgba(202, 151, 62, 0.48) 50%,
+        rgba(42, 145, 220, 0.20) 82%,
+        transparent 100%
+    );
+    box-shadow:
+        0 0 12px rgba(202, 151, 62, 0.12),
+        0 0 24px rgba(35, 137, 207, 0.06);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Yang bölümünü Hero'ya daha doğal bağla */
+body > main > .yang-rates-section {
+    position: relative;
+    margin-top: 18px !important;
+}
+
+/* Yang bölümünün üstünde çok hafif ortam ışığı */
+body > main > .yang-rates-section::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -18px;
+    width: min(900px, 78vw);
+    height: 55px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        ellipse at center,
+        rgba(31, 132, 199, 0.055) 0%,
+        rgba(202, 151, 62, 0.025) 38%,
+        transparent 72%
+    );
+    pointer-events: none;
+    z-index: -1;
+}

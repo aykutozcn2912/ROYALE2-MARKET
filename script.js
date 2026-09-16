@@ -4956,3 +4956,93 @@ document.addEventListener(
         loadYangRates();
     }
 );
+
+// =====================================================
+// ROYALE2 MARKET - YANG KURLARI REALTIME
+// Supabase'de fiyat değişince sayfayı yenilemeden günceller
+// =====================================================
+
+let yangRatesRealtimeChannel = null;
+
+function startYangRatesRealtime() {
+    const rateBoard = document.querySelector(".yang-rates-section");
+
+    // Yang kuru bölümü olmayan sayfalarda çalışmasın.
+    if (!rateBoard) {
+        return;
+    }
+
+// Supabase Realtime kütüphanesi hazır mı kontrol et.
+if (
+    typeof supabase === "undefined" ||
+    typeof supabase.createClient !== "function"
+) {
+    console.warn("Yang Realtime: Supabase kütüphanesi hazır değil.");
+    return;
+}
+
+const yangRealtimeClient = supabase.createClient(
+    window.SUPABASE_API_URL.replace("/rest/v1/", ""),
+    window.SUPABASE_KEY,
+    {
+        auth: {
+            persistSession: false,
+            autoRefreshToken: false
+        }
+    }
+);
+
+    // Aynı kanal ikinci kez açılmasın.
+    if (yangRatesRealtimeChannel) {
+        return;
+    }
+
+    yangRatesRealtimeChannel = yangRealtimeClient
+        .channel("royale2-yang-rates-realtime")
+        .on(
+            "postgres_changes",
+            {
+                event: "*",
+                schema: "public",
+                table: "yang_rates"
+            },
+            async (payload) => {
+                console.log("Yang kuru Realtime değişikliği:", payload);
+
+                // Güncel verileri tekrar çek ve kartları yenile.
+                await loadYangRates();
+
+                // Değişen kartı kısa süre vurgula.
+                const changedServer =
+                    payload?.new?.server || payload?.old?.server;
+
+                if (changedServer) {
+                    const changedCard = document.querySelector(
+                        `[data-yang-server="${changedServer}"]`
+                    );
+
+                    if (changedCard) {
+                        changedCard.classList.remove("yang-rate-live-update");
+
+                        // Animasyonun tekrar tetiklenebilmesi için reflow.
+                        void changedCard.offsetWidth;
+
+                        changedCard.classList.add("yang-rate-live-update");
+
+                        setTimeout(() => {
+                            changedCard.classList.remove(
+                                "yang-rate-live-update"
+                            );
+                        }, 1200);
+                    }
+                }
+            }
+        )
+        .subscribe((status) => {
+            console.log("Yang kurları Realtime:", status);
+        });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    startYangRatesRealtime();
+});

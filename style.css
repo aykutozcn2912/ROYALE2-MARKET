@@ -3480,7 +3480,10 @@ body > main .listing .listing-image img {
 .market-header {
     position: relative;
     z-index: 100;
-    width: 100%;
+    width: calc(100% - 432px);
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
     background: #080d12;
     border-bottom: 1px solid #1d2b38;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
@@ -3689,7 +3692,7 @@ body > main .listing .listing-image img {
 .header-nav-wrap {
     width: 100%;
     border-top: 1px solid #131f29;
-    background: #0a1016;
+    background: transparent;
 }
 
 .market-nav {

@@ -4918,7 +4918,7 @@ async function loadYangRates() {
             );
 
             const updateElement =
-                document.querySelector(".yang-last-update");
+                document.getElementById("yang-last-update");
 
             if (updateElement) {
                 updateElement.textContent =

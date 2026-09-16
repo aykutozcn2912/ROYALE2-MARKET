@@ -4578,3 +4578,10 @@ body {
 .market-slider {
     margin-top: 12px !important;
 }
+
+/* MARKET SLIDER - FINAL ALIGN */
+.market-slider {
+    width: calc(100% - 48px) !important;
+    max-width: 1040px !important;
+    margin: 0 auto 30px !important;
+}

@@ -5382,3 +5382,211 @@ main,
 ::-webkit-scrollbar-thumb:hover {
     background: var(--r2-gold-light);
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET V2 - PREMIUM HEADER
+   ========================================================= */
+
+.market-header {
+    position: relative;
+    z-index: 100;
+    background:
+        linear-gradient(180deg, rgba(16, 17, 17, 0.98), rgba(5, 7, 8, 0.99)) !important;
+    border-top: 1px solid rgba(200, 149, 66, 0.25);
+    border-bottom: 1px solid rgba(200, 149, 66, 0.38);
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.55),
+        inset 0 -1px 0 rgba(200, 149, 66, 0.08);
+}
+
+/* HEADER ÜST SATIR */
+.header-main {
+    min-height: 78px;
+    border-bottom: 1px solid rgba(200, 149, 66, 0.14);
+}
+
+/* ROYALE2 LOGO */
+.market-brand-logo {
+    filter:
+        drop-shadow(0 0 7px rgba(198, 42, 28, 0.22))
+        drop-shadow(0 0 10px rgba(200, 149, 66, 0.12));
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.market-brand:hover .market-brand-logo {
+    transform: scale(1.025);
+    filter:
+        drop-shadow(0 0 9px rgba(198, 42, 28, 0.35))
+        drop-shadow(0 0 14px rgba(200, 149, 66, 0.20));
+}
+
+/* ARAMA KUTUSU */
+.market-search {
+    background: #090d0f;
+    border: 1px solid rgba(200, 149, 66, 0.25);
+    border-radius: 4px;
+    box-shadow:
+        inset 0 1px 5px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.015);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.market-search:focus-within {
+    border-color: rgba(228, 189, 115, 0.65);
+    box-shadow:
+        0 0 0 2px rgba(200, 149, 66, 0.08),
+        0 0 18px rgba(200, 149, 66, 0.08);
+}
+
+.market-search input {
+    background: transparent !important;
+    color: #eee9df !important;
+}
+
+.market-search input::placeholder {
+    color: #666d70 !important;
+}
+
+#market-search-button {
+    background:
+        linear-gradient(180deg, #a62217 0%, #6e0d0a 100%) !important;
+    color: #f4d28c !important;
+    border-left: 1px solid rgba(228, 189, 115, 0.45) !important;
+    transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+#market-search-button:hover {
+    filter: brightness(1.18);
+    box-shadow: 0 0 15px rgba(198, 42, 28, 0.30);
+}
+
+/* HEADER AKSİYONLARI */
+.header-actions a {
+    color: #d9d6cf;
+    border-color: rgba(200, 149, 66, 0.20);
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.header-actions a:hover {
+    color: #f0c979;
+    border-color: rgba(200, 149, 66, 0.55);
+    background: rgba(200, 149, 66, 0.06);
+}
+
+/* İLAN VER - ANA CTA */
+.header-actions .header-sell {
+    color: #fff4da !important;
+    background:
+        linear-gradient(180deg, #b32318 0%, #750e0b 100%) !important;
+    border: 1px solid #c89542 !important;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 210, 126, 0.10),
+        0 4px 14px rgba(0, 0, 0, 0.35),
+        0 0 12px rgba(151, 30, 20, 0.12);
+}
+
+.header-actions .header-sell:hover {
+    color: #ffffff !important;
+    background:
+        linear-gradient(180deg, #cf2e20 0%, #8e120d 100%) !important;
+    border-color: #e4bd73 !important;
+    transform: translateY(-1px);
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.40),
+        0 0 18px rgba(198, 42, 28, 0.22);
+}
+
+/* =========================================================
+   ALT NAVİGASYON
+   ========================================================= */
+
+.header-nav-wrap {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(9, 12, 13, 0.98),
+            rgba(5, 7, 8, 0.98)
+        ) !important;
+}
+
+.market-nav {
+    min-height: 48px;
+}
+
+.market-nav a {
+    position: relative;
+    color: #aaa9a4 !important;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.market-nav a:hover {
+    color: #e4bd73 !important;
+    background: rgba(200, 149, 66, 0.045);
+}
+
+/* AKTİF MENÜ */
+.market-nav a.active {
+    color: #f2d18d !important;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(143, 23, 23, 0.28),
+            rgba(143, 23, 23, 0.06)
+        ) !important;
+}
+
+.market-nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    bottom: 0;
+    height: 2px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #c89542,
+            #c62a1c,
+            #c89542,
+            transparent
+        );
+    box-shadow: 0 0 8px rgba(198, 42, 28, 0.30);
+}
+
+/* DISCORD */
+.market-nav .nav-discord {
+    color: #7da8ff !important;
+}
+
+.market-nav .nav-discord:hover {
+    color: #a9c5ff !important;
+}
+
+/* HEADER ALTIN İNCE ÇİZGİ */
+.market-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(111, 74, 29, 0.30) 15%,
+            rgba(200, 149, 66, 0.65) 50%,
+            rgba(111, 74, 29, 0.30) 85%,
+            transparent 100%
+        );
+}

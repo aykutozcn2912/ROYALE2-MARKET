@@ -4791,7 +4791,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // =====================================================
 
 async function loadYangRates() {
-    const rateBoard = document.querySelector(".yang-rates");
+    const rateBoard = document.querySelector(".yang-rates-section");
 
     // Bu bölüm sadece Yang Kurları alanının bulunduğu sayfada çalışsın.
     if (!rateBoard) {

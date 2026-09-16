@@ -1738,7 +1738,46 @@ async function uploadListingImages(
 
   return uploadedImages;
 }
+// =====================================================
+// HAZIR İLAN KAPAK GÖRSELİNİ KAYDET
+// =====================================================
 
+async function saveDefaultListingImage(
+  listingId,
+  imageUrl
+) {
+
+  const response =
+    await supabaseAuthFetch(
+      `${window.SUPABASE_API_URL}listing_images`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify({
+          listing_id: listingId,
+          image_url: imageUrl,
+          sort_order: 0
+        })
+      }
+    );
+
+  if (!response.ok) {
+
+    console.error(
+      "Hazır ilan görseli kayıt hatası:",
+      await response.text()
+    );
+
+    throw new Error(
+      "Hazır ilan görseli kaydedilemedi."
+    );
+  }
+
+  return await response.json();
+}
 
 // ==========================================================
 // İLAN FORMUNU KAYDET
@@ -1919,7 +1958,28 @@ async function uploadListingImages(
           status:
             "active"
         };
+// İLAN GÖRSELİ KONTROLÜ
+const listingImageInput =
+    document.getElementById("listingImages");
 
+const uploadedImageCount =
+    listingImageInput?.files?.length || 0;
+
+const selectedDefaultCover =
+    document.querySelector(
+        'input[name="defaultCover"]:checked'
+    );
+
+if (
+    uploadedImageCount === 0 &&
+    !selectedDefaultCover
+) {
+    alert(
+        "Lütfen ilan fotoğrafı yükleyin veya hazır ilan görsellerinden birini seçin."
+    );
+
+    return;
+}
 
         if (publishButton) {
 
@@ -1959,23 +2019,58 @@ async function uploadListingImages(
             : [];
 
 
-        if (
-          selectedImages.length
-        ) {
+if (selectedImages.length) {
 
-          if (message) {
+    // Kullanıcı kendi ilan fotoğrafını yüklediyse
+    // sadece kendi fotoğrafları kullanılır.
+    if (message) {
+        message.textContent =
+            "İlan görselleri yükleniyor...";
+    }
 
-            message.textContent =
-              "İlan görselleri yükleniyor...";
-          }
+    await uploadListingImages(
+        selectedImages,
+        createdListing.id,
+        storedUser.id
+    );
 
+} else {
 
-          await uploadListingImages(
-            selectedImages,
-            createdListing.id,
-            storedUser.id
-          );
-        }
+    // Kullanıcı fotoğraf yüklemediyse
+    // seçtiği hazır ilan kapağı kullanılır.
+    const selectedDefaultCover =
+        document.querySelector(
+            'input[name="defaultCover"]:checked'
+        );
+
+    const defaultCoverImages = {
+        hesap: "images/hesap-ilani.webp",
+        yang: "images/yang-ilani.webp",
+        item: "images/item-ilani.webp"
+    };
+
+    const selectedDefaultImage =
+        selectedDefaultCover
+            ? defaultCoverImages[selectedDefaultCover.value]
+            : null;
+
+    if (!selectedDefaultImage) {
+        throw new Error(
+            "Hazır ilan görseli seçilemedi."
+        );
+    }
+
+    const defaultImageUrl =
+        new URL(
+            selectedDefaultImage,
+            window.location.href
+        ).href;
+
+    await saveDefaultListingImage(
+        createdListing.id,
+        defaultImageUrl
+    );
+}
 
 
         if (message) {

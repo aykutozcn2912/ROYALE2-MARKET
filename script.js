@@ -4847,14 +4847,28 @@ async function loadYangRates() {
             const previousElement =
                 card.querySelector(".yang-previous-price");
 
-            if (priceElement && Number.isFinite(currentPrice)) {
-                priceElement.textContent =
-                    `${currentPrice.toLocaleString("tr-TR", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })} TL`;
-            }
+if (priceElement && Number.isFinite(currentPrice)) {
+    priceElement.textContent =
+        `${currentPrice.toLocaleString("tr-TR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })} TL`;
 
+    // Supabase gerçek fiyatını görsel piyasa hareketinin merkezi yap.
+    const motionState = yangMarketMotion.get(serverName);
+
+    if (motionState) {
+        motionState.basePrice = currentPrice;
+
+        // Gerçek fiyat fazla değiştiyse görsel fiyatı da yeni merkeze taşı.
+        if (
+            !Number.isFinite(motionState.displayPrice) ||
+            Math.abs(motionState.displayPrice - currentPrice) > 0.05
+        ) {
+            motionState.displayPrice = currentPrice;
+        }
+    }
+}
             if (
                 previousElement &&
                 Number.isFinite(previousPrice)
@@ -5045,4 +5059,161 @@ const yangRealtimeClient = supabase.createClient(
 
 document.addEventListener("DOMContentLoaded", () => {
     startYangRatesRealtime();
+});
+
+
+// =====================================================
+// ROYALE2 MARKET - YANG CANLI FİYAT HAREKETİ
+// Görsel piyasa hareketi - Supabase'e yazma yapmaz
+// 500+ kullanıcı için tamamen client-side çalışır
+// =====================================================
+
+const yangMarketMotion = new Map();
+
+function getYangPriceElement(card) {
+    return card.querySelector(".yang-current-price");
+}
+
+function startYangMarketMotion() {
+    const section = document.querySelector(".yang-rates-section");
+
+    if (!section) return;
+
+    const cards = section.querySelectorAll("[data-yang-server]");
+
+    cards.forEach((card) => {
+        const server = card.dataset.yangServer;
+        const priceElement = getYangPriceElement(card);
+
+        if (!server || !priceElement) return;
+
+        const rawPrice = priceElement.textContent
+            .replace("TL", "")
+            .replace(",", ".")
+            .trim();
+
+        const basePrice = Number(rawPrice);
+
+        if (!Number.isFinite(basePrice)) return;
+
+        const existing = yangMarketMotion.get(server);
+
+        if (existing) {
+            existing.basePrice = basePrice;
+            existing.displayPrice = basePrice;
+            return;
+        }
+
+        yangMarketMotion.set(server, {
+            basePrice: basePrice,
+            displayPrice: basePrice,
+            timer: null
+        });
+
+        scheduleYangMovement(server, card, priceElement);
+    });
+}
+
+function scheduleYangMovement(server, card, priceElement) {
+    const state = yangMarketMotion.get(server);
+
+    if (!state) return;
+
+    // Her kart aynı anda hareket etmesin.
+    // Yaklaşık 4 - 11 saniye arasında düzensiz güncelleme.
+    const delay = Math.floor(
+        4000 + Math.random() * 7000
+    );
+
+    state.timer = setTimeout(() => {
+        moveYangPrice(server, card, priceElement);
+
+        scheduleYangMovement(server, card, priceElement);
+    }, delay);
+}
+
+function moveYangPrice(server, card, priceElement) {
+    const state = yangMarketMotion.get(server);
+
+    if (!state) return;
+
+    const oldPrice = state.displayPrice;
+
+    // Referans fiyatın en fazla ±0.02 TL çevresinde hareket et.
+    const minPrice = Number(
+        (state.basePrice - 0.02).toFixed(2)
+    );
+
+    const maxPrice = Number(
+        (state.basePrice + 0.02).toFixed(2)
+    );
+
+    // Küçük hareketler daha sık.
+    // 0 = fiyat değişmez
+    // ±1 kuruş = ana hareket
+    const movements = [
+        -0.01,
+        -0.01,
+        -0.01,
+         0,
+         0,
+         0.01,
+         0.01,
+         0.01
+    ];
+
+    const movement =
+        movements[Math.floor(Math.random() * movements.length)];
+
+    let newPrice = Number(
+        (oldPrice + movement).toFixed(2)
+    );
+
+    // Bant dışına çıkarsa merkeze doğru geri döndür.
+    if (newPrice < minPrice) {
+        newPrice = Number(
+            (oldPrice + 0.01).toFixed(2)
+        );
+    }
+
+    if (newPrice > maxPrice) {
+        newPrice = Number(
+            (oldPrice - 0.01).toFixed(2)
+        );
+    }
+
+    state.displayPrice = newPrice;
+
+    priceElement.textContent =
+        `${newPrice.toLocaleString("tr-TR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })} TL`;
+
+    // Son hareket yönünü karta aktar.
+    card.classList.remove(
+        "yang-tick-up",
+        "yang-tick-down"
+    );
+
+    if (newPrice > oldPrice) {
+        card.classList.add("yang-tick-up");
+    } else if (newPrice < oldPrice) {
+        card.classList.add("yang-tick-down");
+    }
+
+    // Flash sınıfını kısa süre sonra kaldır.
+    setTimeout(() => {
+        card.classList.remove(
+            "yang-tick-up",
+            "yang-tick-down"
+        );
+    }, 650);
+}
+
+// İlk fiyatlar Supabase'den yüklendikten sonra başlat.
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        startYangMarketMotion();
+    }, 1500);
 });

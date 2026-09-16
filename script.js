@@ -5183,7 +5183,49 @@ function moveYangPrice(server, card, priceElement) {
     }
 
     state.displayPrice = newPrice;
+// Hareketli fiyatla yüzde değişimini de canlı güncelle.
+const changeElement = card.querySelector(".yang-change");
+const previousElement = card.querySelector(".yang-previous-price");
 
+if (changeElement && previousElement) {
+    const previousRaw = previousElement.textContent
+        .replace("Önceki:", "")
+        .replace("TL", "")
+        .replace(",", ".")
+        .trim();
+
+    const previousPrice = Number(previousRaw);
+
+    if (Number.isFinite(previousPrice) && previousPrice !== 0) {
+        const difference = newPrice - previousPrice;
+        const percentage = (difference / previousPrice) * 100;
+
+        changeElement.classList.remove(
+            "yang-up",
+            "yang-down",
+            "yang-neutral"
+        );
+
+        if (difference > 0) {
+            changeElement.classList.add("yang-up");
+            changeElement.textContent =
+                `▲ +${percentage.toLocaleString("tr-TR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}%`;
+        } else if (difference < 0) {
+            changeElement.classList.add("yang-down");
+            changeElement.textContent =
+                `▼ ${percentage.toLocaleString("tr-TR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}%`;
+        } else {
+            changeElement.classList.add("yang-neutral");
+            changeElement.textContent = "• %0,00";
+        }
+    }
+}
     priceElement.textContent =
         `${newPrice.toLocaleString("tr-TR", {
             minimumFractionDigits: 2,

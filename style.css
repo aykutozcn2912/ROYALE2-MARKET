@@ -6308,3 +6308,111 @@ body > main > .how-it-works {
             center 500px !important;
     }
 }
+
+
+/* =========================================================
+   HERO BENEFITS — FINAL POSITION FIX
+   ========================================================= */
+
+body > main > .hero.hero-v2 > .hero-v2-benefits {
+    position: absolute !important;
+
+    left: 50% !important;
+    right: auto !important;
+    bottom: 0 !important;
+
+    transform: translateX(-50%) !important;
+
+    width: min(1180px, calc(100% - 40px)) !important;
+    height: 70px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+    z-index: 10 !important;
+
+    background: rgba(4, 12, 17, 0.96) !important;
+
+    border-top: 1px solid rgba(198, 145, 49, 0.35) !important;
+    border-bottom: 1px solid rgba(198, 145, 49, 0.18) !important;
+
+    box-sizing: border-box !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-benefits > .hero-benefit {
+    position: relative !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+    height: 70px !important;
+
+    margin: 0 !important;
+    padding: 0 20px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    transform: none !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-benefits > .hero-benefit:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Hero geçişi benefits barının üzerine çıkmasın */
+body > main > .hero.hero-v2::after {
+    z-index: 2 !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-characters {
+    z-index: 1 !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-content {
+    z-index: 5 !important;
+}
+
+body > main > .hero.hero-v2 > .hero-v2-benefits {
+    z-index: 10 !important;
+}
+
+
+/* TABLET */
+@media (max-width: 900px) {
+
+    body > main > .hero.hero-v2 > .hero-v2-benefits {
+        width: calc(100% - 28px) !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        height: auto !important;
+    }
+
+    body > main > .hero.hero-v2 > .hero-v2-benefits > .hero-benefit {
+        height: 58px !important;
+    }
+}
+
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    body > main > .hero.hero-v2 > .hero-v2-benefits {
+        position: relative !important;
+
+        left: auto !important;
+        bottom: auto !important;
+
+        transform: none !important;
+
+        width: calc(100% - 20px) !important;
+        margin: auto !important;
+
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}

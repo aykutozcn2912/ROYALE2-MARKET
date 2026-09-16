@@ -6531,3 +6531,44 @@ body > main > .hero.hero-v2 .hero-benefit small {
         width: 760px !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — HERO V2 DESKTOP POSITION FIX
+   Karakter konumu + header mesafesi
+   ========================================================= */
+
+@media (min-width: 1101px) {
+
+    body > main > .hero.hero-v2 {
+        height: 600px !important;
+        min-height: 600px !important;
+        padding-top: 0 !important;
+    }
+
+    body > main > .hero.hero-v2 > .hero-v2-characters {
+        width: 1380px !important;
+
+        left: 50% !important;
+        top: 54% !important;
+
+        transform: translate(-50%, -50%) !important;
+
+        object-fit: contain !important;
+        object-position: center center !important;
+    }
+
+    body > main > .hero.hero-v2 > .hero-content.hero-v2-content {
+        width: 430px !important;
+
+        position: relative !important;
+        z-index: 10 !important;
+
+        transform: translateY(-10px) !important;
+    }
+
+    body > main > .hero.hero-v2 > .hero-v2-benefits {
+        bottom: 0 !important;
+        z-index: 12 !important;
+    }
+}

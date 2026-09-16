@@ -6075,35 +6075,236 @@ body > main > .hero.hero-v2 > .hero-v2-characters {
 
 
 /* =========================================================
-   ROYALE2 MARKET — GLOBAL ATMOSPHERE
-   Hero arka planının site boyunca devamı
+   ROYALE2 MARKET
+   GLOBAL CINEMATIC BACKGROUND V2
+   Profesyonel + Performans Odaklı
    ========================================================= */
 
 html {
-    background: #05090c !important;
+    background-color: #05090d !important;
 }
 
 body {
     position: relative !important;
+    margin: 0 !important;
+
+    background-color: #05090d !important;
+
+    /*
+       Aynı görsel tüm sayfayı kaplıyor fakat
+       Hero dışındaki kullanım kontrollü biçimde karartılıyor.
+       background-attachment: fixed YOK.
+    */
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(3, 8, 12, 0.88) 0%,
+            rgba(3, 8, 12, 0.94) 38%,
+            rgba(3, 8, 12, 0.97) 72%,
+            rgba(3, 8, 12, 0.985) 100%
+        ),
+        url("images/hero-background-v2.webp") !important;
+
+    background-size:
+        100% 100%,
+        1920px auto !important;
+
+    background-position:
+        center top,
+        center 620px !important;
+
+    background-repeat:
+        no-repeat,
+        repeat-y !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN
+   Eski düz siyah blokları kaldır
+   --------------------------------------------------------- */
+
+body > main {
+    position: relative !important;
+    background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   HERO
+   Hero kendi temiz ve güçlü görselini kullanır
+   --------------------------------------------------------- */
+
+body > main > .hero.hero-v2 {
+    position: relative !important;
+    background: #05090d !important;
+    overflow: hidden !important;
+}
+
+
+/* Hero arka plan resmi */
+
+body > main > .hero.hero-v2 > .hero-v2-bg {
+    position: absolute !important;
+    inset: 0 !important;
+
+    z-index: 0 !important;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(3, 7, 10, 0.16) 0%,
+            rgba(3, 7, 10, 0.02) 28%,
+            rgba(3, 7, 10, 0.04) 50%,
+            rgba(3, 7, 10, 0.02) 72%,
+            rgba(3, 7, 10, 0.16) 100%
+        ),
+        url("images/hero-background-v2.webp") !important;
+
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+
+    pointer-events: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   HERO → ALT BÖLÜM GEÇİŞİ
+   Keskin çizgiyi ortadan kaldırır
+   --------------------------------------------------------- */
+
+body > main > .hero.hero-v2::after {
+    content: "" !important;
+
+    position: absolute !important;
+
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    height: 90px !important;
+
+    z-index: 2 !important;
+    pointer-events: none !important;
 
     background:
         linear-gradient(
-            rgba(3, 8, 12, 0.90),
-            rgba(3, 8, 12, 0.95)
-        ),
-        url("images/hero-background-v2.webp")
-        center top / cover
-        fixed no-repeat !important;
-
-    background-color: #05090c !important;
+            to bottom,
+            rgba(5, 9, 13, 0) 0%,
+            rgba(5, 9, 13, 0.32) 42%,
+            rgba(5, 9, 13, 0.82) 100%
+        ) !important;
 }
 
-/* Ana içerik artık düz siyah duvar oluşturmasın */
-body > main {
-    background: transparent !important;
+
+/* Hero içerikleri geçiş katmanının üzerinde */
+
+body > main > .hero.hero-v2 > .hero-v2-content,
+body > main > .hero.hero-v2 > .hero-v2-benefits {
+    position: relative !important;
+    z-index: 5 !important;
 }
 
-/* Hero kendi güçlü arka planını kullanmaya devam etsin */
-body > main > .hero.hero-v2 {
-    background: transparent !important;
+
+/* ---------------------------------------------------------
+   YANG KURLARI
+   Arka plandan ayrılan kurumsal panel
+   --------------------------------------------------------- */
+
+body > main > .yang-rates-section {
+    position: relative !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7, 17, 24, 0.97),
+            rgba(5, 13, 19, 0.97)
+        ) !important;
+
+    border:
+        1px solid rgba(196, 145, 52, 0.30) !important;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.32) !important;
+
+    backdrop-filter: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   MANŞET
+   Yang paneliyle aynı tasarım ailesi
+   --------------------------------------------------------- */
+
+body > main > .market-slider {
+    position: relative !important;
+
+    border:
+        1px solid rgba(196, 145, 52, 0.22) !important;
+
+    background: #071018 !important;
+
+    box-shadow:
+        0 16px 38px rgba(0, 0, 0, 0.28) !important;
+
+    overflow: hidden !important;
+}
+
+
+/* ---------------------------------------------------------
+   ALT İÇERİK BÖLÜMLERİ
+   Düz siyah arka planları temizle
+   --------------------------------------------------------- */
+
+body > main > .section,
+body > main > #market,
+body > main > .servers,
+body > main > .how-it-works {
+    background-color: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBİL
+   Büyük arka plan tekrarlarını azalt
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    body {
+        background-size:
+            100% 100%,
+            auto 900px !important;
+
+        background-position:
+            center top,
+            center 520px !important;
+    }
+
+    body > main > .hero.hero-v2::after {
+        height: 70px !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(3, 8, 12, 0.94),
+                rgba(3, 8, 12, 0.985)
+            ),
+            url("images/hero-background-v2.webp") !important;
+
+        background-size:
+            100% 100%,
+            auto 760px !important;
+
+        background-position:
+            center top,
+            center 500px !important;
+    }
 }

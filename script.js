@@ -4853,22 +4853,16 @@ if (priceElement && Number.isFinite(currentPrice)) {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         })} TL`;
+}
 
-
-            if (
-                previousElement &&
-                Number.isFinite(previousPrice)
-            ) {
-                previousElement.textContent =
-                    `Önceki: ${previousPrice.toLocaleString("tr-TR", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })} TL`;
-            }
-
-
-        });
-
+if (previousElement && Number.isFinite(previousPrice)) {
+    previousElement.textContent =
+        `Önceki: ${previousPrice.toLocaleString("tr-TR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })} TL`;
+}
+});
         // En son güncellenen kaydı bul.
         const validDates = rates
             .map((rate) => new Date(rate.updated_at))

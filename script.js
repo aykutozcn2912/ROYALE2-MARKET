@@ -5063,24 +5063,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ============================================================
-// ROYALE2 MARKET - CANLI YANG GÖRSEL PİYASA HAREKETİ V2
-// ------------------------------------------------------------
-// EPHESUS + TEOS + PERGAMON + AKADEMİ TEOS
+
+// =========================================================
+// ROYALE2 MARKET - CANLI YANG GÖRSEL PİYASA HAREKETİ V3
+// =========================================================
 //
-// - Supabase'e veri YAZMAZ.
-// - Supabase'den gelen gerçek fiyatı merkez fiyat kabul eder.
-// - Her sunucu birbirinden bağımsız hareket eder.
-// - Fiyat yükselirse yeşil flash.
-// - Fiyat düşerse kırmızı flash.
-// - Yüzde etiketi hareketle birlikte canlı güncellenir.
-// - "Önceki" fiyat alanına dokunmaz.
-// - Mevcut Realtime sistemini bozmaz.
-// ============================================================
+// GERÇEK FİYAT:
+// Supabase current_price merkez fiyat.
+//
+// ÖNCEKİ FİYAT:
+// Supabase previous_price.
+// Animasyon bu alana ASLA dokunmaz.
+//
+// GÖRSEL PİYASA:
+// Her sunucu birbirinden bağımsız hareket eder.
+// Supabase'e veri YAZMAZ.
+// Mevcut Realtime sistemine dokunmaz.
+//
+// =========================================================
 
-const royaleYangMarket = new Map();
+const royaleYangVisualMarket = new Map();
 
-function royaleYangParsePrice(value) {
-    if (!value) return NaN;
+function royaleYangV3ParsePrice(value) {
+    if (value === null || value === undefined) return NaN;
+
+    if (typeof value === "number") {
+        return value;
+    }
 
     return Number(
         String(value)
@@ -5092,7 +5101,15 @@ function royaleYangParsePrice(value) {
 }
 
 
-function royaleYangGetPriceElement(card) {
+function royaleYangV3FormatPrice(value) {
+    return `${Number(value).toLocaleString("tr-TR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })} TL`;
+}
+
+
+function royaleYangV3GetPriceElement(card) {
     if (!card) return null;
 
     return (
@@ -5103,123 +5120,26 @@ function royaleYangGetPriceElement(card) {
     );
 }
 
-function royaleYangGetChangeElement(card) {
+
+function royaleYangV3GetChangeElement(card) {
     if (!card) return null;
 
     return card.querySelector(".yang-change");
 }
 
 
-function royaleYangGetPreviousElement(card) {
+function royaleYangV3GetPreviousElement(card) {
     if (!card) return null;
 
     return card.querySelector(".yang-previous-price");
 }
 
 
-function royaleYangCreateState(card) {
-    const server = card.dataset.yangServer;
-    const priceElement = royaleYangGetPriceElement(card);
+// ---------------------------------------------------------
+// YEŞİL / KIRMIZI FLASH
+// ---------------------------------------------------------
 
-    if (!server || !priceElement) return null;
-
-    const realPrice = royaleYangParsePrice(priceElement.textContent);
-
-    if (!Number.isFinite(realPrice) || realPrice <= 0) {
-        return null;
-    }
-
-    const existing = royaleYangMarket.get(server);
-
-    if (existing) {
-        existing.card = card;
-        existing.priceElement = priceElement;
-
-        // Supabase gerçek fiyat değiştiyse yeni merkez fiyat yap.
-        if (
-            Number.isFinite(realPrice) &&
-            Math.abs(realPrice - existing.basePrice) > 0.05
-        ) {
-            existing.basePrice = realPrice;
-            existing.displayPrice = realPrice;
-        }
-
-        return existing;
-    }
-
-    const state = {
-        server,
-        card,
-        priceElement,
-        basePrice: realPrice,
-        displayPrice: realPrice,
-        timer: null
-    };
-
-    royaleYangMarket.set(server, state);
-
-    return state;
-}
-
-
-function royaleYangUpdateChange(card, currentPrice, suppliedPreviousPrice = null) {
-    const changeElement = royaleYangGetChangeElement(card);
-    const previousElement = royaleYangGetPreviousElement(card);
-
-    if (!changeElement || !previousElement) return;
-
-const previousPrice =
-    Number.isFinite(Number(suppliedPreviousPrice))
-        ? Number(suppliedPreviousPrice)
-        : royaleYangParsePrice(
-            previousElement.textContent
-                .replace("Önceki:", "")
-                .trim()
-        );
-
-    if (
-        !Number.isFinite(previousPrice) ||
-        previousPrice <= 0 ||
-        !Number.isFinite(currentPrice)
-    ) {
-        return;
-    }
-
-    const difference = currentPrice - previousPrice;
-    const percentage = (difference / previousPrice) * 100;
-
-    changeElement.classList.remove(
-        "yang-up",
-        "yang-down",
-        "yang-neutral"
-    );
-
-    if (difference > 0) {
-        changeElement.classList.add("yang-up");
-
-        changeElement.textContent =
-            `▲ +${percentage.toLocaleString("tr-TR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })}%`;
-
-    } else if (difference < 0) {
-        changeElement.classList.add("yang-down");
-
-        changeElement.textContent =
-            `▼ ${percentage.toLocaleString("tr-TR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })}%`;
-
-    } else {
-        changeElement.classList.add("yang-neutral");
-        changeElement.textContent = "• %0,00";
-    }
-}
-
-
-function royaleYangFlash(card, direction) {
+function royaleYangV3Flash(card, direction) {
     if (!card) return;
 
     card.classList.remove(
@@ -5227,7 +5147,7 @@ function royaleYangFlash(card, direction) {
         "yang-tick-down"
     );
 
-    // Aynı animasyon art arda tekrar çalışabilsin.
+    // Aynı animasyon tekrar çalışabilsin.
     void card.offsetWidth;
 
     if (direction === "up") {
@@ -5247,8 +5167,240 @@ function royaleYangFlash(card, direction) {
 }
 
 
-function royaleYangMove(state) {
-    if (!state || !state.card || !state.priceElement) return;
+// ---------------------------------------------------------
+// YÜZDE DEĞİŞİMİ
+// ---------------------------------------------------------
+
+function royaleYangV3UpdatePercentage(
+    changeElement,
+    oldPrice,
+    newPrice
+) {
+    if (!changeElement) return;
+
+    if (
+        !Number.isFinite(oldPrice) ||
+        !Number.isFinite(newPrice) ||
+        oldPrice <= 0
+    ) {
+        return;
+    }
+
+    const difference = newPrice - oldPrice;
+    const percentage = (difference / oldPrice) * 100;
+
+    changeElement.classList.remove(
+        "yang-up",
+        "yang-down",
+        "yang-neutral"
+    );
+
+    if (difference > 0) {
+        changeElement.classList.add("yang-up");
+
+        changeElement.textContent =
+            `▲ +${Math.abs(percentage).toLocaleString("tr-TR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}%`;
+
+        return;
+    }
+
+    if (difference < 0) {
+        changeElement.classList.add("yang-down");
+
+        changeElement.textContent =
+            `▼ -${Math.abs(percentage).toLocaleString("tr-TR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}%`;
+
+        return;
+    }
+
+    changeElement.classList.add("yang-neutral");
+    changeElement.textContent = "• %0,00";
+}
+
+
+// ---------------------------------------------------------
+// SUPABASE GERÇEK FİYATLARINI AL
+// ---------------------------------------------------------
+
+async function royaleYangV3GetRealRates() {
+    try {
+        const response = await fetch(
+            `${window.SUPABASE_API_URL}/yang_rates?select=server,current_price,previous_price&order=server.asc`,
+            {
+                method: "GET",
+                headers: {
+                    apikey: window.SUPABASE_KEY,
+                    Authorization: `Bearer ${window.SUPABASE_KEY}`,
+                    Accept: "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Yang V3 fiyatları alınamadı. HTTP ${response.status}`
+            );
+        }
+
+        const rates = await response.json();
+
+        if (!Array.isArray(rates)) {
+            return [];
+        }
+
+        return rates;
+
+    } catch (error) {
+        console.error(
+            "Royale Yang V3 fiyat okuma hatası:",
+            error
+        );
+
+        return [];
+    }
+}
+
+
+// ---------------------------------------------------------
+// SUPABASE -> GÖRSEL PİYASA SENKRONİZASYONU
+// ---------------------------------------------------------
+
+async function royaleYangV3Sync() {
+    const section =
+        document.querySelector(".yang-rates-section");
+
+    if (!section) return;
+
+    const rates = await royaleYangV3GetRealRates();
+
+    if (!rates.length) return;
+
+    rates.forEach((rate) => {
+        const server = String(rate.server || "").trim();
+
+        if (!server) return;
+
+        const card = section.querySelector(
+            `[data-yang-server="${server}"]`
+        );
+
+        if (!card) return;
+
+        const priceElement =
+            royaleYangV3GetPriceElement(card);
+
+        const changeElement =
+            royaleYangV3GetChangeElement(card);
+
+        const previousElement =
+            royaleYangV3GetPreviousElement(card);
+
+        if (!priceElement) return;
+
+        const realPrice =
+            royaleYangV3ParsePrice(rate.current_price);
+
+        const previousPrice =
+            royaleYangV3ParsePrice(rate.previous_price);
+
+        if (
+            !Number.isFinite(realPrice) ||
+            realPrice <= 0
+        ) {
+            return;
+        }
+
+
+        // -------------------------------------------------
+        // ÖNCEKİ FİYAT = SADECE SUPABASE previous_price
+        // -------------------------------------------------
+
+        if (
+            previousElement &&
+            Number.isFinite(previousPrice)
+        ) {
+            previousElement.textContent =
+                `Önceki: ${royaleYangV3FormatPrice(previousPrice)}`;
+        }
+
+
+        // -------------------------------------------------
+        // İLK KURULUM
+        // -------------------------------------------------
+
+        let state =
+            royaleYangVisualMarket.get(server);
+
+        if (!state) {
+            state = {
+                server: server,
+                card: card,
+                priceElement: priceElement,
+                changeElement: changeElement,
+
+                basePrice: realPrice,
+                displayPrice: realPrice,
+
+                timer: null
+            };
+
+            royaleYangVisualMarket.set(
+                server,
+                state
+            );
+
+            priceElement.textContent =
+                royaleYangV3FormatPrice(realPrice);
+
+            return;
+        }
+
+
+        // -------------------------------------------------
+        // SUPABASE current_price DEĞİŞTİYSE
+        // YENİ MERKEZ FİYATI KABUL ET
+        // -------------------------------------------------
+
+        state.card = card;
+        state.priceElement = priceElement;
+        state.changeElement = changeElement;
+
+        if (
+            Math.abs(
+                state.basePrice - realPrice
+            ) > 0.001
+        ) {
+            state.basePrice = realPrice;
+
+            // Yeni gerçek fiyat geldiğinde görsel piyasa
+            // doğrudan yeni merkeze taşınır.
+            state.displayPrice = realPrice;
+
+            priceElement.textContent =
+                royaleYangV3FormatPrice(realPrice);
+        }
+    });
+}
+
+
+// ---------------------------------------------------------
+// TEK BİR SUNUCUNUN CANLI HAREKETİ
+// ---------------------------------------------------------
+
+function royaleYangV3Move(state) {
+    if (
+        !state ||
+        !state.card ||
+        !state.priceElement
+    ) {
+        return;
+    }
 
     const oldPrice = state.displayPrice;
     const basePrice = state.basePrice;
@@ -5261,17 +5413,13 @@ function royaleYangMove(state) {
         return;
     }
 
-    // --------------------------------------------------------
-    // PİYASA HAREKET MANTIĞI
-    //
-    // Fiyat Supabase gerçek fiyatının yaklaşık ±%1.20
-    // çevresinde dolaşır.
-    // --------------------------------------------------------
 
+    // Merkez fiyatın yaklaşık ±%1.20 çevresinde dolaşır.
     const minPrice = basePrice * 0.988;
     const maxPrice = basePrice * 1.012;
 
-    // Küçük ve doğal fiyat adımları.
+
+    // Küçük doğal fiyat adımları.
     const movements = [
         -0.03,
         -0.02,
@@ -5283,211 +5431,174 @@ function royaleYangMove(state) {
 
     let movement =
         movements[
-            Math.floor(Math.random() * movements.length)
+            Math.floor(
+                Math.random() * movements.length
+            )
         ];
 
-    // Alt banda yaklaştığında yukarı gitme eğilimi.
+
+    // Alt sınıra yaklaşıyorsa yukarı hareket ihtimalini artır.
     if (oldPrice <= minPrice + 0.02) {
         movement = Math.abs(movement);
     }
 
-    // Üst banda yaklaştığında aşağı gitme eğilimi.
+
+    // Üst sınıra yaklaşıyorsa aşağı hareket ihtimalini artır.
     if (oldPrice >= maxPrice - 0.02) {
         movement = -Math.abs(movement);
     }
+
 
     let newPrice = Number(
         (oldPrice + movement).toFixed(2)
     );
 
-    // Bandın dışına çıkmasını engelle.
+
+    // Bant dışına çıkmasını engelle.
     if (newPrice < minPrice) {
         newPrice = Number(
-            (oldPrice + 0.01).toFixed(2)
+            Math.min(
+                basePrice,
+                oldPrice + 0.01
+            ).toFixed(2)
         );
     }
 
     if (newPrice > maxPrice) {
         newPrice = Number(
-            (oldPrice - 0.01).toFixed(2)
+            Math.max(
+                basePrice,
+                oldPrice - 0.01
+            ).toFixed(2)
         );
     }
+
 
     if (newPrice <= 0) return;
 
 
-    // --------------------------------------------------------
-    // EKRANDAKİ FİYATI GÜNCELLE
-    // --------------------------------------------------------
+    // -----------------------------------------------------
+    // EKRANDAKİ CANLI FİYATI DEĞİŞTİR
+    // -----------------------------------------------------
 
     state.displayPrice = newPrice;
 
     state.priceElement.textContent =
-        `${newPrice.toLocaleString("tr-TR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        })} TL`;
+        royaleYangV3FormatPrice(newPrice);
 
 
-    // --------------------------------------------------------
-    // YÜZDE DEĞİŞİMİNİ GÜNCELLE
-    // --------------------------------------------------------
+    // -----------------------------------------------------
+    // YÜZDE = BİR ÖNCEKİ GÖRSEL FİYATA GÖRE
+    // -----------------------------------------------------
+
+    royaleYangV3UpdatePercentage(
+        state.changeElement,
+        oldPrice,
+        newPrice
+    );
 
 
-
-    // --------------------------------------------------------
-    // YEŞİL / KIRMIZI FLASH
-    // --------------------------------------------------------
+    // -----------------------------------------------------
+    // FLASH
+    // -----------------------------------------------------
 
     if (newPrice > oldPrice) {
-        royaleYangFlash(
+        royaleYangV3Flash(
             state.card,
             "up"
         );
-    } else if (newPrice < oldPrice) {
-        royaleYangFlash(
+    }
+
+    if (newPrice < oldPrice) {
+        royaleYangV3Flash(
             state.card,
             "down"
         );
     }
 
 
-    // --------------------------------------------------------
-    // SONRAKİ HAREKET
-    //
-    // Her kart farklı zamanda hareket eder.
-    // Böylece dört sunucu aynı anda mekanik biçimde oynamaz.
-    // --------------------------------------------------------
+    // -----------------------------------------------------
+    // HER SUNUCU İÇİN BAĞIMSIZ SONRAKİ HAREKET
+    // -----------------------------------------------------
 
     const nextDelay =
-        1800 + Math.floor(Math.random() * 2700);
+        2200 + Math.floor(
+            Math.random() * 3800
+        );
 
     clearTimeout(state.timer);
 
     state.timer = setTimeout(() => {
-        royaleYangMove(state);
+        royaleYangV3Move(state);
     }, nextDelay);
 }
 
 
-function startRoyaleYangVisualMarket() {
-    const section =
-        document.querySelector(".yang-rates-section");
+// ---------------------------------------------------------
+// GÖRSEL PİYASAYI BAŞLAT
+// ---------------------------------------------------------
 
-    if (!section) return;
+async function royaleYangV3Start() {
+    await royaleYangV3Sync();
 
-    const cards =
-        section.querySelectorAll("[data-yang-server]");
+    royaleYangVisualMarket.forEach((state) => {
 
-    if (!cards.length) return;
+        if (state.timer) {
+            clearTimeout(state.timer);
+        }
 
-    cards.forEach((card, index) => {
-        const state =
-            royaleYangCreateState(card);
-
-        if (!state) return;
-
-        clearTimeout(state.timer);
-
-        // Kartların ilk hareketini farklı zamanlarda başlat.
+        // Kartların aynı anda hareket etmesini engelle.
         const firstDelay =
-            1200 +
-            (index * 550) +
-            Math.floor(Math.random() * 900);
+            1000 + Math.floor(
+                Math.random() * 3500
+            );
 
         state.timer = setTimeout(() => {
-            royaleYangMove(state);
+            royaleYangV3Move(state);
         }, firstDelay);
     });
 
     console.log(
-        "Royale2 görsel Yang piyasası aktif:",
-        royaleYangMarket.size,
-        "sunucu"
+        "Royale Market Yang Görsel Piyasa V3: AKTİF"
     );
 }
 
 
-// ============================================================
-// SUPABASE REALTIME İLE SENKRONİZASYON
+// ---------------------------------------------------------
+// REALTIME SONRASI MERKEZ FİYATLARI KONTROL ET
 //
-// loadYangRates() gerçek fiyatı DOM'a yazdığında,
-// görsel piyasanın merkez fiyatlarını tekrar senkronize eder.
-// ============================================================
+// Bu yalnızca Supabase'den OKUR.
+// Supabase'e hiçbir veri YAZMAZ.
+// ---------------------------------------------------------
 
-function royaleYangSyncWithSupabase() {
-    const section =
-        document.querySelector(".yang-rates-section");
+let royaleYangV3SyncTimer = null;
 
-    if (!section) return;
+function royaleYangV3ScheduleSync() {
+    clearTimeout(royaleYangV3SyncTimer);
 
-    const cards =
-        section.querySelectorAll("[data-yang-server]");
-
-    cards.forEach((card) => {
-        const server = card.dataset.yangServer;
-        const priceElement =
-            royaleYangGetPriceElement(card);
-
-        if (!server || !priceElement) return;
-
-        const currentRealPrice =
-            royaleYangParsePrice(
-                priceElement.textContent
-            );
-
-        if (
-            !Number.isFinite(currentRealPrice) ||
-            currentRealPrice <= 0
-        ) {
-            return;
-        }
-
-        const state =
-            royaleYangMarket.get(server);
-
-        if (!state) {
-            royaleYangCreateState(card);
-            return;
-        }
-
-        // DOM'daki değer görsel değerden farklıysa,
-        // Supabase tarafından yeni gerçek fiyat gelmiş olabilir.
-        if (
-            Math.abs(
-                currentRealPrice -
-                state.displayPrice
-            ) > 0.05
-        ) {
-            state.basePrice =
-                currentRealPrice;
-
-            state.displayPrice =
-                currentRealPrice;
-
-            state.priceElement =
-                priceElement;
-
-            state.card =
-                card;
-        }
-    });
+    royaleYangV3SyncTimer = setTimeout(() => {
+        royaleYangV3Sync();
+    }, 800);
 }
 
 
-// ============================================================
+// ---------------------------------------------------------
 // BAŞLAT
-// ============================================================
+// ---------------------------------------------------------
 
 window.addEventListener("load", () => {
-    setTimeout(() => {
-        startRoyaleYangVisualMarket();
-        royaleYangSyncWithSupabase();
-    }, 1800);
 
+    setTimeout(() => {
+        royaleYangV3Start();
+    }, 2200);
+
+
+    // Gerçek fiyat değişikliklerini takip et.
+    // Ağ yükünü düşük tutmak için 30 saniyede bir kontrol.
     setInterval(() => {
-        royaleYangSyncWithSupabase();
-    }, 5000);
+        royaleYangV3ScheduleSync();
+    }, 30000);
+
 });
 
 

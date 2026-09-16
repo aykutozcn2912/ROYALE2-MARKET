@@ -6031,3 +6031,22 @@ body > .market-header .market-nav > .nav-discord {
         font-size: 11px !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — HERO BACKGROUND V2
+   Hafif / Performans Odaklı
+   ========================================================= */
+
+body > main > .hero.hero-v2 > .hero-v2-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+
+    background-image: url("images/hero-background-v2.webp") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+
+    pointer-events: none !important;
+}

@@ -4513,8 +4513,8 @@ body {
    ========================================================= */
 
 .stats {
-    width: calc(100% - 28px) !important;
-    max-width: 1280px !important;
+    width: calc(100% - 28px) !important;t;
+    max-width: 1040px !important;
     margin: 0 auto !important;
 
     min-height: 58px !important;

@@ -6631,3 +6631,178 @@ body > main > .yang-rates-section::before {
     pointer-events: none;
     z-index: -1;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - PREMIUM İSTATİSTİK ŞERİDİ
+   Yang panelinin altındaki 3 / 4 / 24/7 / R2 alanı
+   ========================================================= */
+
+body > main > .stats {
+    width: min(1020px, calc(100% - 32px)) !important;
+    margin: 14px auto 34px !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(11, 22, 31, 0.94),
+            rgba(6, 13, 20, 0.98)
+        ) !important;
+
+    border: 1px solid rgba(82, 118, 145, 0.24) !important;
+    border-top-color: rgba(202, 151, 62, 0.30) !important;
+
+    border-radius: 8px !important;
+    overflow: hidden !important;
+
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.018) !important;
+}
+
+
+/* Her istatistik kutusu */
+body > main > .stats > div {
+    position: relative !important;
+
+    min-width: 0 !important;
+    min-height: 82px !important;
+
+    padding: 17px 20px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    gap: 5px !important;
+
+    background: transparent !important;
+    border: 0 !important;
+
+    transition:
+        background-color 180ms ease,
+        transform 180ms ease !important;
+}
+
+
+/* Kutular arasındaki ince ayırıcı */
+body > main > .stats > div:not(:last-child)::after {
+    content: "";
+    position: absolute;
+
+    top: 18px;
+    right: 0;
+    bottom: 18px;
+
+    width: 1px;
+
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(79, 120, 150, 0.30),
+        rgba(202, 151, 62, 0.16),
+        transparent
+    );
+}
+
+
+/* Büyük değer */
+body > main > .stats > div > strong {
+    display: block !important;
+
+    margin: 0 !important;
+
+    color: #f4f7fa !important;
+
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.4px !important;
+
+    text-shadow:
+        0 1px 8px rgba(0, 0, 0, 0.40) !important;
+}
+
+
+/* Açıklama */
+body > main > .stats > div > span {
+    display: block !important;
+
+    margin: 0 !important;
+
+    color: #70889b !important;
+
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.65px !important;
+
+    text-transform: uppercase !important;
+}
+
+
+/* Hover - çok hafif premium vurgu */
+body > main > .stats > div:hover {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(26, 91, 132, 0.08),
+            rgba(202, 151, 62, 0.025)
+        ) !important;
+}
+
+
+/* Hover sırasında rakam */
+body > main > .stats > div:hover > strong {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    body > main > .stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    body > main > .stats > div:nth-child(2)::after {
+        display: none !important;
+    }
+
+    body > main > .stats > div:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(82, 118, 145, 0.16) !important;
+    }
+}
+
+
+/* =========================================================
+   MOBİL
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    body > main > .stats {
+        width: calc(100% - 24px) !important;
+        margin-top: 12px !important;
+        margin-bottom: 26px !important;
+    }
+
+    body > main > .stats > div {
+        min-height: 70px !important;
+        padding: 14px 16px !important;
+    }
+
+    body > main > .stats > div > strong {
+        font-size: 20px !important;
+    }
+
+    body > main > .stats > div > span {
+        font-size: 9px !important;
+    }
+}

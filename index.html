@@ -21,30 +21,70 @@
        ÜST MENÜ
   ====================================================== -->
 
-  <header class="topbar">
+<header class="market-header">
+  <div class="header-main">
 
-    <a class="brand" href="index.html">
-      <span class="brand-mark">R2</span>
-
-      <span>
+    <a class="market-brand" href="index.html">
+      <span class="market-brand-icon">R2</span>
+      <span class="market-brand-text">
         <strong>ROYALE2</strong>
         <small>MARKET</small>
       </span>
     </a>
 
-    <nav>
-      <a class="active" href="#market">İlan Pazarı</a>
-      <a href="#servers">Sunucular</a>
-      <a href="#how">Nasıl Çalışır?</a>
-    </nav>
-
-    <div class="actions">
-      <a class="login" href="#login">Giriş Yap</a>
-      <a class="login" href="#register" id="register-open">Üye Ol</a>
-      <a class="sell" href="create-listing.html">+ İlan Ver</a>
+    <div class="market-search">
+      <input
+        type="search"
+        id="market-search-input"
+        placeholder="İlan, item, karakter veya hesap ara..."
+        aria-label="İlanlarda ara"
+      >
+      <button type="button" id="market-search-button" aria-label="Ara">
+        🔍
+      </button>
     </div>
 
-  </header>
+    <div class="header-actions">
+      <a class="header-message" href="messages.html">
+        💬 Mesajlar
+      </a>
+
+      <a class="header-login" href="#login">
+        Giriş Yap
+      </a>
+
+      <a class="header-register" href="#register" id="register-open">
+        Üye Ol
+      </a>
+
+      <a class="header-sell" href="create-listing.html">
+        + İlan Ver
+      </a>
+    </div>
+
+  </div>
+
+  <div class="header-nav-wrap">
+    <nav class="market-nav">
+      <a class="active" href="#market">İlan Pazarı</a>
+      <a href="#servers">Sunucular</a>
+      <a href="#market" data-header-server="Ephesus">Ephesus</a>
+      <a href="#market" data-header-server="Teos">Teos</a>
+      <a href="#market" data-header-server="Pergamon">Pergamon</a>
+      <a href="#market" data-header-server="Akademi Teos">Akademi Teos</a>
+      <a href="#how">Nasıl Çalışır?</a>
+
+      <a
+        class="nav-discord"
+        href="https://discord.gg/royale2wiki"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Discord
+      </a>
+    </nav>
+  </div>
+</header>
 
 
   <main>

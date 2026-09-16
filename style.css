@@ -4238,3 +4238,119 @@ body {
     }
 
 }
+
+/* =========================================================
+   ROYALE2 MARKET - UST BANNER REKLAM ALANI
+   ========================================================= */
+
+.top-ad-area {
+    width: 100%;
+    padding: 14px 20px;
+    background: #070b10;
+    border-bottom: 1px solid #1b2b3a;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.top-ad-link {
+    display: block;
+    width: 100%;
+    max-width: 970px;
+    text-decoration: none;
+}
+
+.top-ad-placeholder {
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(24, 143, 224, 0.10),
+            rgba(7, 14, 22, 0.95)
+        );
+
+    border: 1px dashed #29445c;
+    border-radius: 8px;
+
+    color: #8294a5;
+    transition: 0.2s ease;
+}
+
+.top-ad-placeholder:hover {
+    border-color: #2698e8;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(24, 143, 224, 0.16),
+            rgba(7, 14, 22, 0.98)
+        );
+}
+
+.top-ad-placeholder span {
+    padding: 5px 8px;
+    border: 1px solid #29445c;
+    border-radius: 4px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    color: #55b7fa;
+}
+
+.top-ad-placeholder strong {
+    font-size: 15px;
+    color: #dbe8f2;
+}
+
+.top-ad-placeholder small {
+    font-size: 12px;
+    color: #708395;
+}
+
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+
+    .top-ad-area {
+        padding: 10px 16px;
+    }
+
+    .top-ad-placeholder {
+        height: 80px;
+    }
+
+}
+
+
+/* MOBIL */
+
+@media (max-width: 600px) {
+
+    .top-ad-area {
+        padding: 8px 12px;
+    }
+
+    .top-ad-placeholder {
+        height: 65px;
+        gap: 7px;
+    }
+
+    .top-ad-placeholder strong {
+        display: none;
+    }
+
+    .top-ad-placeholder small {
+        font-size: 10px;
+    }
+
+}

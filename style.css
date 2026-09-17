@@ -6759,3 +6759,43 @@ body > main .listing-card {
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
 }
+
+
+/* =====================================================
+   ROYALE2 MARKET - NASIL ÇALIŞIR KURUMSAL KARTLAR V1
+   Ana sabit arka plan korunur
+===================================================== */
+
+.how-grid > * {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 14, 20, 0.94),
+            rgba(9, 15, 21, 0.86)
+        ) !important;
+
+    border: 1px solid rgba(201, 145, 52, 0.22) !important;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 190, 75, 0.035) !important;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    border-radius: 4px !important;
+}
+
+/* 01 / 02 / 03 */
+.how-grid > * > :first-child {
+    color: #d59a37 !important;
+}
+
+/* Kart başlıkları */
+.how-grid h3 {
+    color: #f4f6f8 !important;
+}
+
+/* Açıklamalar */
+.how-grid p {
+    color: #8f9cac !important;
+}

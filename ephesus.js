@@ -13,12 +13,12 @@
   const EPHESUS_SERVER_ID = 1;
   const ITEMS_PER_PAGE = 20;
 
-  const CATEGORY_NAMES = {
-    1: "Eşya",
-    2: "Yang",
-    3: "Karakter",
-    4: "Hesap"
-  };
+const CATEGORY_NAMES = {
+  1: "Item",
+  2: "Yang",
+  3: "Karakter",
+  4: "Hesap"
+};
 
 
   // ========================================================
@@ -361,16 +361,11 @@
       result =
         result.filter(item => {
 
-          if (
-            state.category === "Eşya"
-          ) {
-
-            return (
-              item.category === "Eşya" ||
-              item.category === "Item"
-            );
-          }
-
+if (
+  state.category === "Item"
+) {
+  return item.category === "Item";
+}
 
           return (
             item.category ===

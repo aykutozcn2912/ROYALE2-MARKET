@@ -3666,10 +3666,12 @@ body {
 @media (min-width: 1550px) {
 
     .side-ad {
+        position: fixed !important;
         width: 200px !important;
-        height: 760px !important;
-        top: 238px !important;
-        z-index: 50 !important;
+        height: 820px !important;
+        top: 120px !important;
+        z-index: 999 !important;
+        isolation: isolate;
     }
 
     .side-ad-left {

@@ -515,25 +515,34 @@ async function updateUserMenu() {
 
   const user =
     getStoredUser();
-
+const registerLink =
+  document.querySelector(
+    ".header-register"
+  );
 
   if (!loginLink) {
     return;
   }
 
 
-  if (!user) {
+if (!user) {
 
-    loginLink.textContent =
-      "Giriş Yap";
+  loginLink.textContent =
+    "Giriş Yap";
 
-    loginLink.href =
-      "#login";
+  loginLink.href =
+    "#login";
 
-    return;
+  if (registerLink) {
+    registerLink.style.display = "";
   }
 
-
+  return;
+}
+  
+if (registerLink) {
+  registerLink.style.display = "none";
+}
   let username =
     user?.user_metadata?.username ||
     user?.email?.split("@")[0] ||

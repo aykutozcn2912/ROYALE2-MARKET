@@ -6725,3 +6725,21 @@ body {
 body > main {
     background: transparent !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — CONTENT BACKGROUND INTEGRATION V1
+   ========================================================= */
+
+/* Son İlanlar ana bölümünün düz zeminini kaldır */
+body > main > #market,
+body > main > .market,
+body > main > .market-section {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* İlan kartları koyu ve okunaklı kalacak */
+body > main .listing-card {
+    background: rgba(7, 14, 21, 0.94) !important;
+}

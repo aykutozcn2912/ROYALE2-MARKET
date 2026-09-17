@@ -7779,3 +7779,177 @@ body > main .yang-rate-card {
         padding: 22px;
     }
 }
+
+/* =========================================================
+   ROYALE2 MARKET - FOOTER
+   ========================================================= */
+
+.market-footer {
+    position: relative;
+    width: 100%;
+    margin-top: 0;
+    padding: 55px 0 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(12, 10, 8, 0.98) 0%,
+            #070706 100%
+        );
+
+    border-top: 1px solid rgba(196, 145, 52, 0.22);
+}
+
+.market-footer-main {
+    width: min(100% - 40px, 1300px);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1.7fr repeat(3, 1fr);
+    gap: 55px;
+
+    align-items: start;
+}
+
+/* LOGO + AÇIKLAMA */
+
+.market-footer-brand {
+    max-width: 310px;
+}
+
+.market-footer-logo {
+    display: inline-block;
+    margin-bottom: 18px;
+}
+
+.market-footer-logo img {
+    display: block;
+    width: 190px !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+.market-footer-brand p {
+    margin: 0;
+
+    max-width: 290px;
+
+    color: rgba(220, 211, 197, 0.60);
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* FOOTER KOLONLARI */
+
+.market-footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.market-footer-column h4 {
+    margin: 0 0 8px;
+
+    color: #f2eee7;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.market-footer-column a {
+    display: inline-block;
+
+    color: rgba(220, 211, 197, 0.62);
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    text-decoration: none;
+
+    transition:
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.market-footer-column a:hover {
+    color: #d59d37;
+    transform: translateX(3px);
+}
+
+/* ALT TELİF BÖLÜMÜ */
+
+.market-footer-bottom {
+    width: min(100% - 40px, 1300px);
+    margin: 42px auto 0;
+    padding-top: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    border-top: 1px solid rgba(196, 145, 52, 0.15);
+}
+
+.market-footer-bottom p {
+    margin: 0;
+
+    color: rgba(220, 211, 197, 0.48);
+
+    font-size: 12px;
+}
+
+.market-footer-disclaimer {
+    text-align: right;
+}
+
+
+/* TABLET */
+
+@media (max-width: 950px) {
+
+    .market-footer-main {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .market-footer-brand {
+        max-width: none;
+    }
+}
+
+
+/* MOBİL */
+
+@media (max-width: 600px) {
+
+    .market-footer {
+        padding-top: 40px;
+    }
+
+    .market-footer-main {
+        width: min(100% - 28px, 1300px);
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .market-footer-logo img {
+        width: 165px !important;
+    }
+
+    .market-footer-bottom {
+        width: min(100% - 28px, 1300px);
+
+        margin-top: 35px;
+
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .market-footer-disclaimer {
+        text-align: left;
+    }
+}

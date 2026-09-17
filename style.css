@@ -6799,3 +6799,124 @@ body > main .listing-card {
 .how-grid p {
     color: #8f9cac !important;
 }
+
+
+/* =====================================================
+   ROYALE2 MARKET - ALT CTA KURUMSAL TASARIM V1
+   Sabit site arka planı korunur
+===================================================== */
+
+body > main > .cta {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 13, 18, 0.94),
+            rgba(12, 17, 22, 0.88)
+        ) !important;
+
+    border: 1px solid rgba(201, 145, 52, 0.32) !important;
+    border-radius: 5px !important;
+
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 190, 75, 0.05) !important;
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* PAZARA KATIL */
+body > main > .cta .eyebrow {
+    color: #d99b37 !important;
+}
+
+/* Başlık */
+body > main > .cta h2 {
+    color: #f4f5f6 !important;
+}
+
+/* Açıklama */
+body > main > .cta p {
+    color: #8f9cac !important;
+}
+
+/* Ücretsiz Başla butonu */
+body > main > .cta > .primary {
+    background:
+        linear-gradient(
+            180deg,
+            #d49a39 0%,
+            #a86c1c 100%
+        ) !important;
+
+    color: #ffffff !important;
+
+    border: 1px solid rgba(255, 196, 92, 0.65) !important;
+    border-radius: 4px !important;
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.30),
+        inset 0 1px 0 rgba(255, 225, 160, 0.20) !important;
+
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease,
+        box-shadow 0.18s ease !important;
+}
+
+body > main > .cta > .primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.38),
+        0 0 16px rgba(201, 145, 52, 0.12) !important;
+}
+
+/* =========================================================
+   ROYALE2 MARKET — CORPORATE GOLD THEME V1
+   GLOBAL RENK SİSTEMİ
+========================================================= */
+
+:root {
+    /* Ana zeminler */
+    --r2-bg: #080a0c;
+    --r2-bg-soft: #0c1014;
+    --r2-panel: rgba(9, 14, 19, 0.94);
+    --r2-panel-soft: rgba(12, 17, 22, 0.90);
+
+    /* Royale altın / bakır */
+    --r2-gold: #d69a38;
+    --r2-gold-light: #efbd63;
+    --r2-gold-dark: #95601d;
+    --r2-copper: #b66d2d;
+
+    /* Yazılar */
+    --r2-text: #f3f4f5;
+    --r2-text-soft: #a4abb3;
+    --r2-text-muted: #727c87;
+
+    /* Çizgiler */
+    --r2-border: rgba(207, 148, 54, 0.28);
+    --r2-border-soft: rgba(207, 148, 54, 0.14);
+
+    /* Durum renkleri — bunları koruyoruz */
+    --r2-success: #20d997;
+    --r2-danger: #ef5361;
+}
+
+/* Genel seçim rengi */
+::selection {
+    background: var(--r2-gold);
+    color: #080a0c;
+}
+
+/* Genel link geçişi */
+a {
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        background-color 0.18s ease;
+}

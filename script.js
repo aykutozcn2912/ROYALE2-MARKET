@@ -6912,14 +6912,25 @@ document.addEventListener(
     const isMyListings = window.location.hash === "#my-listings";
 
     if (isMyListings) {
-      overviewView.classList.remove("active");
-      listingsView.classList.add("active");
+      overviewView.style.display = "none";
+      listingsView.style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+      });
     } else {
-      listingsView.classList.remove("active");
-      overviewView.classList.add("active");
+      listingsView.style.display = "none";
+      overviewView.style.display = "block";
     }
   }
 
   document.addEventListener("DOMContentLoaded", updateAccountView);
-  window.addEventListener("hashchange", updateAccountView);
+
+  window.addEventListener("hashchange", function () {
+    updateAccountView();
+  });
+
+  window.addEventListener("load", updateAccountView);
 })();

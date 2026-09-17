@@ -6130,30 +6130,43 @@ document.addEventListener(
 
 
 // ==========================================================
-// ROYALE2 MARKET - İLANLARIM PANELİ
-// Mevcut ilan / mesaj / Supabase sistemlerine dokunmadan çalışır.
+// ROYALE2 MARKET - İLANLARIM YÖNETİM SİSTEMİ
+// account.html içindeki mevcut profesyonel paneli kullanır.
 // ==========================================================
 
 (function initMyListingsFeature() {
-    "use strict";
 
-    const MY_LISTINGS_HASH = "#my-listings";
-    const PANEL_ID = "royale2-my-listings-panel";
-    const STYLE_ID = "royale2-my-listings-style";
+     "use strict";
 
-    const serverNames = {
+    // ==========================================================
+    // SABİT TANIMLAR
+    // ==========================================================
+
+    const SERVER_NAMES = {
         1: "Ephesus",
         2: "Teos",
         3: "Pergamon",
         4: "Akademi Teos"
     };
 
-    const categoryNames = {
+    const CATEGORY_NAMES = {
         1: "Eşya",
         2: "Yang",
         3: "Karakter",
         4: "Hesap"
     };
+
+    let myListings = [];
+    let myListingImages = new Map();
+
+    let selectedMyListingsStatus = "all";
+    let myListingsSearchTerm = "";
+    let myListingsInitialized = false;
+
+
+    // ==========================================================
+    // GÜVENLİ HTML
+    // ==========================================================
 
     function escapeMyListingsHtml(value) {
         return String(value ?? "")
@@ -6163,6 +6176,11 @@ document.addEventListener(
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
+
+
+    // ==========================================================
+    // FİYAT
+    // ==========================================================
 
     function formatMyListingsPrice(value) {
         const price = Number(value);
@@ -6178,6 +6196,11 @@ document.addEventListener(
             }) + " TL"
         );
     }
+
+
+    // ==========================================================
+    // TARİH
+    // ==========================================================
 
     function formatMyListingsDate(value) {
         if (!value) {
@@ -6199,437 +6222,150 @@ document.addEventListener(
         });
     }
 
-    function getMyListingStatus(status) {
-        const normalized = String(status || "")
-            .trim()
-            .toLocaleLowerCase("tr-TR");
 
-        if (normalized === "active") {
+    // ==========================================================
+    // DURUM
+    // ==========================================================
+
+    function normalizeMyListingsStatus(value) {
+        return String(value || "")
+            .trim()
+            .toLowerCase();
+    }
+
+
+    function getMyListingsStatusInfo(value) {
+        const status =
+            normalizeMyListingsStatus(value);
+
+        if (status === "active") {
             return {
-                text: "Yayında",
-                className: "is-active"
+                text: "Aktif",
+                className: "active"
             };
         }
 
-        if (normalized === "sold") {
+        if (status === "sold") {
             return {
                 text: "Satıldı",
-                className: "is-sold"
+                className: "sold"
             };
         }
 
         if (
-            normalized === "inactive" ||
-            normalized === "passive"
+            status === "inactive" ||
+            status === "passive"
         ) {
             return {
                 text: "Yayında Değil",
-                className: "is-passive"
+                className: "inactive"
             };
         }
 
         return {
-            text: status || "Bilinmiyor",
-            className: "is-unknown"
+            text: value || "Bilinmiyor",
+            className: "inactive"
         };
     }
 
-    function ensureMyListingsStyles() {
-        if (document.getElementById(STYLE_ID)) {
-            return;
+
+    // ==========================================================
+    // FİLTRE
+    // ==========================================================
+
+    function myListingMatchesStatus(listing) {
+        if (selectedMyListingsStatus === "all") {
+            return true;
         }
 
-        const style = document.createElement("style");
-
-        style.id = STYLE_ID;
-
-        style.textContent = `
-            #${PANEL_ID} {
-                width: min(1180px, calc(100% - 32px));
-                margin: 34px auto 60px;
-                color: #f5f7fb;
-            }
-
-            #${PANEL_ID}[hidden] {
-                display: none !important;
-            }
-
-            #${PANEL_ID} .r2ml-shell {
-                overflow: hidden;
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 22px;
-                background:
-                    radial-gradient(
-                        circle at top right,
-                        rgba(214, 167, 65, 0.10),
-                        transparent 34%
-                    ),
-                    linear-gradient(
-                        180deg,
-                        rgba(20, 24, 31, 0.98),
-                        rgba(12, 15, 20, 0.98)
-                    );
-                box-shadow:
-                    0 24px 70px rgba(0, 0, 0, 0.34);
-            }
-
-            #${PANEL_ID} .r2ml-head {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 18px;
-                padding: 26px 28px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-            }
-
-            #${PANEL_ID} .r2ml-title-wrap h1 {
-                margin: 0;
-                font-size: clamp(24px, 3vw, 34px);
-                line-height: 1.1;
-                color: #ffffff;
-            }
-
-            #${PANEL_ID} .r2ml-title-wrap p {
-                margin: 8px 0 0;
-                color: #9ca6b5;
-                font-size: 14px;
-            }
-
-            #${PANEL_ID} .r2ml-create {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 44px;
-                padding: 0 18px;
-                border: 1px solid rgba(214, 167, 65, 0.45);
-                border-radius: 12px;
-                background: linear-gradient(
-                    180deg,
-                    #d9ad4b,
-                    #b98727
-                );
-                color: #15120b;
-                text-decoration: none;
-                font-weight: 800;
-                white-space: nowrap;
-                transition:
-                    transform 160ms ease,
-                    filter 160ms ease;
-            }
-
-            #${PANEL_ID} .r2ml-create:hover {
-                transform: translateY(-1px);
-                filter: brightness(1.06);
-            }
-
-            #${PANEL_ID} .r2ml-body {
-                padding: 26px 28px 30px;
-            }
-
-            #${PANEL_ID} .r2ml-state {
-                padding: 42px 20px;
-                text-align: center;
-                border: 1px dashed rgba(255, 255, 255, 0.10);
-                border-radius: 16px;
-                background: rgba(255, 255, 255, 0.018);
-                color: #9ca6b5;
-            }
-
-            #${PANEL_ID} .r2ml-state strong {
-                display: block;
-                margin-bottom: 7px;
-                color: #ffffff;
-                font-size: 18px;
-            }
-
-            #${PANEL_ID} .r2ml-grid {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 16px;
-            }
-
-            #${PANEL_ID} .r2ml-card {
-                display: grid;
-                grid-template-columns: 126px minmax(0, 1fr);
-                min-height: 154px;
-                overflow: hidden;
-                border: 1px solid rgba(255, 255, 255, 0.075);
-                border-radius: 16px;
-                background: rgba(255, 255, 255, 0.025);
-                transition:
-                    transform 160ms ease,
-                    border-color 160ms ease,
-                    background 160ms ease;
-            }
-
-            #${PANEL_ID} .r2ml-card:hover {
-                transform: translateY(-2px);
-                border-color: rgba(214, 167, 65, 0.24);
-                background: rgba(255, 255, 255, 0.035);
-            }
-
-            #${PANEL_ID} .r2ml-image {
-                position: relative;
-                min-height: 154px;
-                background:
-                    linear-gradient(
-                        135deg,
-                        #181d25,
-                        #0c0f14
-                    );
-            }
-
-            #${PANEL_ID} .r2ml-image img {
-                width: 100%;
-                height: 100%;
-                min-height: 154px;
-                object-fit: cover;
-                display: block;
-            }
-
-            #${PANEL_ID} .r2ml-no-image {
-                position: absolute;
-                inset: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #687383;
-                font-size: 12px;
-                font-weight: 700;
-                text-align: center;
-                padding: 12px;
-            }
-
-            #${PANEL_ID} .r2ml-content {
-                min-width: 0;
-                padding: 16px;
-            }
-
-            #${PANEL_ID} .r2ml-topline {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                margin-bottom: 10px;
-            }
-
-            #${PANEL_ID} .r2ml-server {
-                overflow: hidden;
-                color: #d9ad4b;
-                font-size: 11px;
-                font-weight: 900;
-                letter-spacing: 0.08em;
-                text-overflow: ellipsis;
-                text-transform: uppercase;
-                white-space: nowrap;
-            }
-
-            #${PANEL_ID} .r2ml-status {
-                flex: 0 0 auto;
-                padding: 5px 8px;
-                border-radius: 999px;
-                font-size: 10px;
-                font-weight: 900;
-                letter-spacing: 0.02em;
-            }
-
-            #${PANEL_ID} .r2ml-status.is-active {
-                color: #86efac;
-                background: rgba(34, 197, 94, 0.12);
-                border: 1px solid rgba(34, 197, 94, 0.22);
-            }
-
-            #${PANEL_ID} .r2ml-status.is-sold {
-                color: #fcd34d;
-                background: rgba(245, 158, 11, 0.11);
-                border: 1px solid rgba(245, 158, 11, 0.22);
-            }
-
-            #${PANEL_ID} .r2ml-status.is-passive,
-            #${PANEL_ID} .r2ml-status.is-unknown {
-                color: #cbd5e1;
-                background: rgba(148, 163, 184, 0.10);
-                border: 1px solid rgba(148, 163, 184, 0.18);
-            }
-
-            #${PANEL_ID} .r2ml-card h2 {
-                margin: 0;
-                overflow: hidden;
-                color: #f8fafc;
-                font-size: 16px;
-                line-height: 1.35;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            #${PANEL_ID} .r2ml-meta {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 7px 12px;
-                margin-top: 8px;
-                color: #8490a0;
-                font-size: 11px;
-            }
-
-            #${PANEL_ID} .r2ml-bottom {
-                display: flex;
-                align-items: flex-end;
-                justify-content: space-between;
-                gap: 12px;
-                margin-top: 15px;
-            }
-
-            #${PANEL_ID} .r2ml-price {
-                color: #ffffff;
-                font-size: 18px;
-                font-weight: 900;
-            }
-
-            #${PANEL_ID} .r2ml-view {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 34px;
-                padding: 0 11px;
-                border: 1px solid rgba(255, 255, 255, 0.10);
-                border-radius: 9px;
-                color: #dbe3ed;
-                text-decoration: none;
-                font-size: 11px;
-                font-weight: 800;
-                transition:
-                    background 150ms ease,
-                    border-color 150ms ease;
-            }
-
-            #${PANEL_ID} .r2ml-view:hover {
-                background: rgba(255, 255, 255, 0.05);
-                border-color: rgba(214, 167, 65, 0.28);
-            }
-
-            @media (max-width: 860px) {
-                #${PANEL_ID} .r2ml-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            @media (max-width: 620px) {
-                #${PANEL_ID} {
-                    width: min(100% - 20px, 1180px);
-                    margin-top: 20px;
-                }
-
-                #${PANEL_ID} .r2ml-head {
-                    align-items: stretch;
-                    flex-direction: column;
-                    padding: 20px;
-                }
-
-                #${PANEL_ID} .r2ml-create {
-                    width: 100%;
-                }
-
-                #${PANEL_ID} .r2ml-body {
-                    padding: 18px;
-                }
-
-                #${PANEL_ID} .r2ml-card {
-                    grid-template-columns: 100px minmax(0, 1fr);
-                }
-
-                #${PANEL_ID} .r2ml-image,
-                #${PANEL_ID} .r2ml-image img {
-                    min-height: 142px;
-                }
-
-                #${PANEL_ID} .r2ml-bottom {
-                    align-items: flex-start;
-                    flex-direction: column;
-                }
-            }
-        `;
-
-        document.head.appendChild(style);
-    }
-
-    function ensureMyListingsPanel() {
-        let panel =
-            document.getElementById(PANEL_ID);
-
-        if (panel) {
-            return panel;
-        }
-
-        panel =
-            document.createElement("section");
-
-        panel.id = PANEL_ID;
-        panel.hidden = true;
-
-        panel.innerHTML = `
-            <div class="r2ml-shell">
-                <div class="r2ml-head">
-                    <div class="r2ml-title-wrap">
-                        <h1>İlanlarım</h1>
-                        <p>
-                            Yayındaki ve geçmiş ilanlarını
-                            tek ekrandan görüntüle.
-                        </p>
-                    </div>
-
-                    <a
-                        class="r2ml-create"
-                        href="create-listing.html"
-                    >
-                        + Yeni İlan Ver
-                    </a>
-                </div>
-
-                <div class="r2ml-body">
-                    <div
-                        class="r2ml-state"
-                        data-my-listings-state
-                    >
-                        İlanların hazırlanıyor...
-                    </div>
-
-                    <div
-                        class="r2ml-grid"
-                        data-my-listings-grid
-                        hidden
-                    ></div>
-                </div>
-            </div>
-        `;
-
-        const preferredContainer =
-            document.getElementById(
-                "my-listings-container"
+        const listingStatus =
+            normalizeMyListingsStatus(
+                listing.status
             );
 
-        const host =
-            preferredContainer ||
-            document.querySelector("main") ||
-            document.querySelector(".account-content") ||
-            document.querySelector(".account-main") ||
-            document.body;
-
-        if (preferredContainer) {
-            preferredContainer.innerHTML = "";
+        if (
+            selectedMyListingsStatus ===
+            "inactive"
+        ) {
+            return (
+                listingStatus === "inactive" ||
+                listingStatus === "passive"
+            );
         }
 
-        host.appendChild(panel);
-
-        return panel;
+        return (
+            listingStatus ===
+            selectedMyListingsStatus
+        );
     }
 
-    async function fetchMyListings(userId) {
+
+    function myListingMatchesSearch(listing) {
+        if (!myListingsSearchTerm) {
+            return true;
+        }
+
+        const serverName =
+            SERVER_NAMES[
+                Number(listing.server_id)
+            ] || "";
+
+        const categoryName =
+            CATEGORY_NAMES[
+                Number(listing.category_id)
+            ] || "";
+
+        const searchableText = [
+            listing.title,
+            listing.description,
+            serverName,
+            categoryName,
+            listing.price
+        ]
+            .filter(
+                value =>
+                    value !== null &&
+                    value !== undefined
+            )
+            .join(" ")
+            .toLocaleLowerCase("tr-TR");
+
+        return searchableText.includes(
+            myListingsSearchTerm
+        );
+    }
+
+
+    function getFilteredMyListings() {
+        return myListings.filter(
+            listing =>
+                myListingMatchesStatus(
+                    listing
+                ) &&
+                myListingMatchesSearch(
+                    listing
+                )
+        );
+    }
+
+
+    // ==========================================================
+    // SUPABASE - KULLANICININ İLANLARI
+    // ==========================================================
+
+    async function fetchAccountMyListings(
+        userId
+    ) {
+        const url =
+            `${window.SUPABASE_API_URL}` +
+            `listings?user_id=eq.${encodeURIComponent(
+                userId
+            )}` +
+            `&select=*` +
+            `&order=created_at.desc`;
+
         const response =
-            await supabaseAuthFetch(
-                `${window.SUPABASE_API_URL}listings?user_id=eq.${encodeURIComponent(
-                    userId
-                )}&select=*&order=created_at.desc`
-            );
+            await supabaseAuthFetch(url);
 
         if (!response.ok) {
             const errorText =
@@ -6654,27 +6390,44 @@ document.addEventListener(
             : [];
     }
 
-    async function fetchMyListingImages(listingIds) {
-        const firstImageByListing =
-            new Map();
+
+    // ==========================================================
+    // SUPABASE - İLAN GÖRSELLERİ
+    // ==========================================================
+
+    async function fetchAccountMyListingImages(
+        listings
+    ) {
+        const imageMap = new Map();
+
+        const listingIds = listings
+            .map(listing => listing.id)
+            .filter(
+                id =>
+                    id !== null &&
+                    id !== undefined
+            );
 
         if (!listingIds.length) {
-            return firstImageByListing;
+            return imageMap;
         }
 
-        const ids =
-            listingIds
-                .map((id) =>
-                    encodeURIComponent(
-                        String(id)
-                    )
+        const encodedIds = listingIds
+            .map(id =>
+                encodeURIComponent(
+                    String(id)
                 )
-                .join(",");
+            )
+            .join(",");
+
+        const url =
+            `${window.SUPABASE_API_URL}` +
+            `listing_images?listing_id=in.(${encodedIds})` +
+            `&select=listing_id,image_url,sort_order` +
+            `&order=sort_order.asc`;
 
         const response =
-            await supabaseAuthFetch(
-                `${window.SUPABASE_API_URL}listing_images?listing_id=in.(${ids})&select=listing_id,image_url,sort_order&order=sort_order.asc`
-            );
+            await supabaseAuthFetch(url);
 
         if (!response.ok) {
             console.warn(
@@ -6682,17 +6435,17 @@ document.addEventListener(
                 response.status
             );
 
-            return firstImageByListing;
+            return imageMap;
         }
 
         const rows =
             await response.json();
 
         if (!Array.isArray(rows)) {
-            return firstImageByListing;
+            return imageMap;
         }
 
-        rows.forEach((image) => {
+        rows.forEach(image => {
             const listingId =
                 String(
                     image.listing_id ?? ""
@@ -6701,131 +6454,150 @@ document.addEventListener(
             if (
                 listingId &&
                 image.image_url &&
-                !firstImageByListing.has(
-                    listingId
-                )
+                !imageMap.has(listingId)
             ) {
-                firstImageByListing.set(
+                imageMap.set(
                     listingId,
                     image.image_url
                 );
             }
         });
 
-        return firstImageByListing;
+        return imageMap;
     }
 
-    function renderMyListings(
-        panel,
-        listings,
-        imageMap
+
+    // ==========================================================
+    // BOŞ DURUM
+    // ==========================================================
+
+    function renderMyListingsEmpty(
+        container,
+        title,
+        description
     ) {
-        const state =
-            panel.querySelector(
-                "[data-my-listings-state]"
-            );
-
-        const grid =
-            panel.querySelector(
-                "[data-my-listings-grid]"
-            );
-
-        if (!state || !grid) {
-            return;
-        }
-
-        if (!listings.length) {
-            grid.hidden = true;
-            grid.innerHTML = "";
-
-            state.hidden = false;
-
-            state.innerHTML = `
+        container.innerHTML = `
+            <div class="my-listings-empty">
                 <strong>
-                    Henüz ilanınız bulunmuyor.
+                    ${escapeMyListingsHtml(title)}
                 </strong>
 
-                İlk ilanınızı oluşturarak
-                Royale2 Market'te satışa
-                başlayabilirsiniz.
-            `;
+                <span>
+                    ${escapeMyListingsHtml(description)}
+                </span>
+            </div>
+        `;
+    }
+
+
+    // ==========================================================
+    // İLANLARI EKRANA BAS
+    // ==========================================================
+
+    function renderAccountMyListings() {
+        const container =
+            document.getElementById(
+                "my-listings-container"
+            );
+
+        if (!container) {
+            return;
+        }
+
+        const filteredListings =
+            getFilteredMyListings();
+
+        if (!filteredListings.length) {
+            if (
+                myListings.length === 0 &&
+                selectedMyListingsStatus ===
+                    "all" &&
+                !myListingsSearchTerm
+            ) {
+                renderMyListingsEmpty(
+                    container,
+                    "Henüz ilanınız yok.",
+                    "Yeni bir ilan oluşturarak satışa başlayabilirsiniz."
+                );
+
+                return;
+            }
+
+            renderMyListingsEmpty(
+                container,
+                "İlan bulunamadı.",
+                "Seçtiğiniz filtre veya arama kriterine uygun ilan bulunmuyor."
+            );
 
             return;
         }
 
-        state.hidden = true;
-        grid.hidden = false;
-
-        grid.innerHTML =
-            listings
-                .map((listing) => {
-                    const status =
-                        getMyListingStatus(
-                            listing.status
-                        );
-
-                    const server =
-                        serverNames[
+        container.innerHTML =
+            filteredListings
+                .map(listing => {
+                    const serverName =
+                        SERVER_NAMES[
                             Number(
                                 listing.server_id
                             )
-                        ] ||
-                        "Sunucu";
+                        ] || "Sunucu";
 
-                    const category =
-                        categoryNames[
+                    const categoryName =
+                        CATEGORY_NAMES[
                             Number(
                                 listing.category_id
                             )
-                        ] ||
-                        "Kategori";
+                        ] || "Kategori";
+
+                    const statusInfo =
+                        getMyListingsStatusInfo(
+                            listing.status
+                        );
 
                     const title =
                         escapeMyListingsHtml(
                             listing.title ||
-                            "İlan"
+                                "İlan"
                         );
 
                     const imageUrl =
-                        imageMap.get(
-                            String(
-                                listing.id
-                            )
+                        myListingImages.get(
+                            String(listing.id)
                         ) || "";
 
-                    const safeImage =
+                    const safeImageUrl =
                         escapeMyListingsHtml(
                             imageUrl
                         );
 
-                    const safeServer =
+                    const safeServerName =
                         escapeMyListingsHtml(
-                            server
+                            serverName
                         );
 
-                    const safeCategory =
+                    const safeCategoryName =
                         escapeMyListingsHtml(
-                            category
+                            categoryName
                         );
 
                     const safeStatusText =
                         escapeMyListingsHtml(
-                            status.text
+                            statusInfo.text
                         );
 
                     const safeStatusClass =
                         escapeMyListingsHtml(
-                            status.className
+                            statusInfo.className
                         );
 
-                    const price =
+                    const safePrice =
                         escapeMyListingsHtml(
                             formatMyListingsPrice(
                                 listing.price
                             )
                         );
 
-                    const date =
+                    const safeDate =
                         escapeMyListingsHtml(
                             formatMyListingsDate(
                                 listing.created_at
@@ -6838,198 +6610,285 @@ document.addEventListener(
                         )}`;
 
                     return `
-                        <article class="r2ml-card">
-                            <div class="r2ml-image">
+                        <article class="my-listing-item">
+
+                            <div class="my-listing-image">
+
                                 ${
-                                    safeImage
+                                    safeImageUrl
                                         ? `
                                             <img
-                                                src="${safeImage}"
+                                                src="${safeImageUrl}"
                                                 alt="${title}"
                                                 loading="lazy"
                                             >
                                         `
                                         : `
-                                            <div class="r2ml-no-image">
-                                                Görsel bulunamadı
+                                            <div class="my-listing-no-image">
+                                                Görsel Yok
                                             </div>
                                         `
                                 }
+
                             </div>
 
-                            <div class="r2ml-content">
-                                <div class="r2ml-topline">
-                                    <span class="r2ml-server">
-                                        ${safeServer}
-                                    </span>
+                            <div class="my-listing-info">
+
+                                <div class="my-listing-top">
+
+                                    <div class="my-listing-tags">
+
+                                        <span class="my-listing-server">
+                                            ${safeServerName}
+                                        </span>
+
+                                        <span class="my-listing-category">
+                                            ${safeCategoryName}
+                                        </span>
+
+                                    </div>
 
                                     <span
-                                        class="r2ml-status ${safeStatusClass}"
+                                        class="my-listing-status ${safeStatusClass}"
                                     >
                                         ${safeStatusText}
                                     </span>
+
                                 </div>
 
-                                <h2 title="${title}">
+                                <h3 class="my-listing-title">
                                     ${title}
-                                </h2>
+                                </h3>
 
-                                <div class="r2ml-meta">
+                                <div class="my-listing-meta">
                                     <span>
-                                        ${safeCategory}
-                                    </span>
-
-                                    <span>
-                                        ${date}
+                                        ${safeDate}
                                     </span>
                                 </div>
 
-                                <div class="r2ml-bottom">
-                                    <div class="r2ml-price">
-                                        ${price}
-                                    </div>
+                                <div class="my-listing-bottom">
+
+                                    <strong class="my-listing-price">
+                                        ${safePrice}
+                                    </strong>
 
                                     <a
-                                        class="r2ml-view"
+                                        class="my-listing-view"
                                         href="${detailUrl}"
                                     >
                                         İlanı Gör
                                     </a>
+
                                 </div>
+
                             </div>
+
                         </article>
                     `;
                 })
                 .join("");
     }
 
-    async function openMyListingsPanel() {
-        if (
-            window.location.hash !==
-            MY_LISTINGS_HASH
-        ) {
+
+    // ==========================================================
+    // FİLTRE BUTONLARI
+    // ==========================================================
+
+    function setActiveMyListingsFilter(
+        activeButton
+    ) {
+        document
+            .querySelectorAll(
+                ".my-listings-filter"
+            )
+            .forEach(button => {
+                button.classList.remove(
+                    "active"
+                );
+            });
+
+        activeButton.classList.add(
+            "active"
+        );
+    }
+
+
+    function initializeMyListingsFilters() {
+        const filterButtons =
+            document.querySelectorAll(
+                ".my-listings-filter"
+            );
+
+        filterButtons.forEach(button => {
+            button.addEventListener(
+                "click",
+                () => {
+                    selectedMyListingsStatus =
+                        button.dataset.status ||
+                        "all";
+
+                    setActiveMyListingsFilter(
+                        button
+                    );
+
+                    renderAccountMyListings();
+                }
+            );
+        });
+
+
+        const searchInput =
+            document.getElementById(
+                "my-listings-search"
+            );
+
+        if (searchInput) {
+            searchInput.addEventListener(
+                "input",
+                () => {
+                    myListingsSearchTerm =
+                        searchInput.value
+                            .trim()
+                            .toLocaleLowerCase(
+                                "tr-TR"
+                            );
+
+                    renderAccountMyListings();
+                }
+            );
+        }
+    }
+
+
+    // ==========================================================
+    // İLANLARI YÜKLE
+    // ==========================================================
+
+    async function loadAccountMyListings() {
+        const container =
+            document.getElementById(
+                "my-listings-container"
+            );
+
+        if (!container) {
             return;
         }
 
-        const currentUser =
+        const storedUser =
             getStoredUser();
 
-        if (!currentUser?.id) {
-            window.location.href = "/";
+        if (!storedUser?.id) {
+            renderMyListingsEmpty(
+                container,
+                "Oturum bulunamadı.",
+                "İlanlarınızı görüntülemek için giriş yapmalısınız."
+            );
+
             return;
         }
 
-        ensureMyListingsStyles();
-
-        const panel =
-            ensureMyListingsPanel();
-
-        panel.hidden = false;
-
-        const state =
-            panel.querySelector(
-                "[data-my-listings-state]"
-            );
-
-        const grid =
-            panel.querySelector(
-                "[data-my-listings-grid]"
-            );
-
-        if (state) {
-            state.hidden = false;
-            state.textContent =
-                "İlanların hazırlanıyor...";
-        }
-
-        if (grid) {
-            grid.hidden = true;
-            grid.innerHTML = "";
-        }
+        container.innerHTML = `
+            <div class="my-listings-loading">
+                İlanların yükleniyor...
+            </div>
+        `;
 
         try {
-            const listings =
-                await fetchMyListings(
-                    currentUser.id
+            myListings =
+                await fetchAccountMyListings(
+                    storedUser.id
                 );
 
-            const listingIds =
-                listings
-                    .map((listing) =>
-                        listing.id
-                    )
-                    .filter(Boolean);
-
-            const imageMap =
-                await fetchMyListingImages(
-                    listingIds
+            myListingImages =
+                await fetchAccountMyListingImages(
+                    myListings
                 );
 
-            renderMyListings(
-                panel,
-                listings,
-                imageMap
-            );
-
-            panel.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+            renderAccountMyListings();
 
         } catch (error) {
             console.error(
-                "İlanlarım paneli hatası:",
+                "İlanlarım yükleme hatası:",
                 error
             );
 
-            if (grid) {
-                grid.hidden = true;
-                grid.innerHTML = "";
-            }
-
-            if (state) {
-                state.hidden = false;
-
-                state.innerHTML = `
-                    <strong>
-                        İlanlar yüklenemedi.
-                    </strong>
-
-                    ${
-                        escapeMyListingsHtml(
-                            error.message ||
-                            "Lütfen tekrar deneyin."
-                        )
-                    }
-                `;
-            }
+            renderMyListingsEmpty(
+                container,
+                "İlanlar yüklenemedi.",
+                error?.message ||
+                    "Lütfen tekrar deneyin."
+            );
         }
     }
 
-    function closeMyListingsPanelWhenNeeded() {
-        const panel =
-            document.getElementById(
-                PANEL_ID
-            );
 
-        if (!panel) {
+    // ==========================================================
+    // #my-listings HASH GEÇİŞİ
+    // ==========================================================
+
+    function focusAccountMyListings() {
+        if (
+            window.location.hash !==
+            "#my-listings"
+        ) {
             return;
         }
 
-        if (
-            window.location.hash !==
-            MY_LISTINGS_HASH
-        ) {
-            panel.hidden = true;
+        const section =
+            document.getElementById(
+                "my-listings"
+            );
+
+        if (!section) {
+            return;
         }
+
+        window.setTimeout(
+            () => {
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            },
+            100
+        );
     }
 
-    window.addEventListener("hashchange", () => {
-        closeMyListingsPanelWhenNeeded();
-        openMyListingsPanel();
-    });
 
-    document.addEventListener("DOMContentLoaded", () => {
-        openMyListingsPanel();
-    });
+    // ==========================================================
+    // BAŞLAT
+    // ==========================================================
+
+    function initializeAccountMyListings() {
+        const container =
+            document.getElementById(
+                "my-listings-container"
+            );
+
+        if (!container) {
+            return;
+        }
+
+        if (!myListingsInitialized) {
+            myListingsInitialized = true;
+
+            initializeMyListingsFilters();
+            loadAccountMyListings();
+        }
+
+        focusAccountMyListings();
+    }
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeAccountMyListings
+    );
+
+
+    window.addEventListener(
+        "hashchange",
+        focusAccountMyListings
+    );
+
 })();

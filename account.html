@@ -480,6 +480,563 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* =========================================================
+   İLANLARIM — PROFESYONEL SATIRLI YÖNETİM PANELİ
+   ========================================================= */
+
+.account-view {
+  display: none;
+}
+
+.account-view.active {
+  display: block;
+}
+
+#account-listings-view {
+  min-width: 0;
+}
+
+.my-listings-card {
+  margin-top: 0 !important;
+  overflow: hidden;
+}
+
+.my-listings-toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+
+  padding: 16px 18px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, .06);
+}
+
+.my-listings-search {
+  width: 100%;
+  min-height: 42px;
+
+  box-sizing: border-box;
+  padding: 0 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, .09);
+  border-radius: 10px;
+
+  outline: 0;
+
+  color: #eee9e2;
+  background: #0e0c0a;
+}
+
+.my-listings-search:focus {
+  border-color:
+    rgba(205, 143, 45, .55);
+}
+
+.my-listings-filters {
+  display: flex;
+  gap: 7px;
+}
+
+.my-listings-filter {
+  min-height: 42px;
+  padding: 0 13px;
+
+  border:
+    1px solid rgba(255, 255, 255, .08);
+  border-radius: 9px;
+
+  color: #a69e92;
+  background: #12100d;
+
+  cursor: pointer;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.my-listings-filter.active,
+.my-listings-filter:hover {
+  color: #120e08;
+
+  border-color: #d6a32f;
+
+  background:
+    linear-gradient(
+      #e3b64d,
+      #b98220
+    );
+}
+
+.my-listings-head,
+.my-listing-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, 2.1fr)
+    minmax(130px, .9fr)
+    minmax(110px, .7fr)
+    minmax(100px, .65fr)
+    minmax(145px, .85fr);
+
+  align-items: center;
+  gap: 14px;
+}
+
+.my-listings-head {
+  padding: 12px 18px;
+
+  color: #746d63;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, .06);
+
+  background: #100e0b;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.my-listing-row {
+  padding: 14px 18px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, .055);
+}
+
+.my-listing-row:hover {
+  background:
+    rgba(210, 145, 44, .035);
+}
+
+.my-listing-main {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+
+  align-items: center;
+  gap: 13px;
+
+  min-width: 0;
+}
+
+.my-listing-thumb {
+  width: 72px;
+  height: 72px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(205, 143, 45, .22);
+
+  border-radius: 11px;
+
+  background: #0b0907;
+}
+
+.my-listing-thumb img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.my-listing-title {
+  overflow: hidden;
+
+  margin-bottom: 6px;
+
+  color: #f4efe8;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-listing-sub,
+.my-listing-meta span {
+  color: #777067;
+
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.my-listing-meta strong {
+  display: block;
+
+  color: #eee7dc;
+  font-size: 12px;
+}
+
+.my-listing-price strong {
+  color: #e3b354;
+  font-size: 14px;
+}
+
+.my-listing-status {
+  display: inline-flex;
+
+  min-height: 26px;
+  padding: 0 9px;
+
+  align-items: center;
+
+  border-radius: 999px;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.my-listing-status.active {
+  color: #7ce59c;
+  background: rgba(39, 155, 78, .12);
+}
+
+.my-listing-status.sold {
+  color: #7ebcff;
+  background: rgba(55, 115, 185, .13);
+}
+
+.my-listing-status.inactive {
+  color: #e98a8a;
+  background: rgba(170, 55, 55, .12);
+}
+
+.my-listing-actions {
+  display: flex;
+
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.my-listing-action {
+  min-height: 34px;
+  padding: 0 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(205, 143, 45, .24);
+
+  border-radius: 8px;
+
+  color: #d9a44d;
+  background:
+    rgba(190, 119, 24, .07);
+
+  cursor: pointer;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+.my-listing-action:hover {
+  border-color:
+    rgba(205, 143, 45, .55);
+
+  background:
+    rgba(190, 119, 24, .14);
+}
+
+.my-listings-loading,
+.my-listings-empty,
+.my-listings-error {
+  padding: 38px 20px;
+
+  color: #8b8378;
+
+  text-align: center;
+  font-size: 12px;
+}
+
+.my-listings-error {
+  color: #dc8585;
+}
+
+/* İLAN DÜZENLEME MODALI */
+
+.listing-edit-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 10050;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0, 0, 0, .78);
+
+  backdrop-filter: blur(8px);
+}
+
+.listing-edit-modal.active {
+  display: flex;
+}
+
+.listing-edit-box {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 40px);
+
+  overflow: auto;
+
+  border:
+    1px solid rgba(207, 143, 44, .30);
+
+  border-radius: 18px;
+
+  background: #15120e;
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, .55);
+}
+
+.listing-edit-head {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px 22px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, .06);
+}
+
+.listing-edit-head h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.listing-edit-head p {
+  margin: 6px 0 0;
+
+  color: #827a70;
+  font-size: 11px;
+}
+
+.listing-edit-close {
+  width: 34px;
+  height: 34px;
+
+  border:
+    1px solid rgba(255, 255, 255, .08);
+
+  border-radius: 8px;
+
+  color: #aaa;
+  background: #0e0c0a;
+
+  cursor: pointer;
+
+  font-size: 20px;
+}
+
+.listing-edit-body {
+  display: grid;
+  gap: 14px;
+
+  padding: 20px 22px;
+}
+
+.listing-edit-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 180px;
+
+  gap: 14px;
+}
+
+.listing-edit-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #9d9589;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.listing-edit-field input,
+.listing-edit-field textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid rgba(255, 255, 255, .09);
+
+  border-radius: 10px;
+
+  outline: 0;
+
+  color: #eee9e2;
+  background: #0e0c0a;
+}
+
+.listing-edit-field input {
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.listing-edit-field textarea {
+  min-height: 120px;
+  padding: 12px;
+
+  resize: vertical;
+}
+
+.listing-edit-photo-row {
+  display: grid;
+
+  grid-template-columns:
+    100px 1fr;
+
+  gap: 14px;
+
+  align-items: center;
+}
+
+.listing-edit-preview {
+  width: 100px;
+  height: 100px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(205, 143, 45, .22);
+
+  border-radius: 12px;
+
+  background: #0b0907;
+}
+
+.listing-edit-preview img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.listing-edit-footer {
+  display: flex;
+
+  justify-content: flex-end;
+  gap: 9px;
+
+  padding: 16px 22px 20px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, .06);
+}
+
+.listing-edit-footer button {
+  min-height: 40px;
+  padding: 0 16px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.listing-edit-cancel {
+  border:
+    1px solid rgba(255, 255, 255, .09);
+
+  color: #aaa;
+  background: #0e0c0a;
+}
+
+.listing-edit-save {
+  border:
+    1px solid rgba(205, 143, 45, .42);
+
+  color: #161008;
+
+  background:
+    linear-gradient(
+      #e3b64d,
+      #b98220
+    );
+}
+
+@media (max-width: 1050px) {
+
+  .my-listings-head {
+    display: none;
+  }
+
+  .my-listing-row {
+    grid-template-columns:
+      1fr auto;
+  }
+
+  .my-listing-meta,
+  .my-listing-status-wrap {
+    grid-column: 1;
+    padding-left: 85px;
+  }
+
+  .my-listing-actions {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .my-listings-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .my-listings-filters {
+    overflow: auto;
+  }
+
+  .my-listing-row {
+    grid-template-columns: 1fr;
+  }
+
+  .my-listing-meta,
+  .my-listing-status-wrap {
+    padding-left: 0;
+  }
+
+  .my-listing-actions {
+    grid-column: 1;
+    grid-row: auto;
+
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .listing-edit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 
 </head>
@@ -659,379 +1216,643 @@ body {
     <section class="account-content">
 
       <!-- ==========================================
-     HESAP ANA GÖRÜNÜMÜ
-     ========================================== -->
-<div id="account-overview-view" class="account-view active">
-
-      <div class="account-header">
-
-        <span class="eyebrow">
-          ROYALE2 MARKET • KONTROL MERKEZİ
-        </span>
-
-        <h1>
-          Hesap Özeti
-        </h1>
-
-        <p>
-          Profilini, ilanlarını, favorilerini ve hesap güvenliğini
-          tek merkezden yönetebilirsin.
-        </p>
-
-      </div>
-
-
-
-      <!-- ==============================
-           ÖZET KARTLARI
-           ============================== -->
-
-      <div class="account-summary">
-
-
-        <div class="summary-card">
-
-          <span>
-            Aktif İlan
-          </span>
-
-          <strong id="active-listings-count">
-            0
-          </strong>
-
-          <small>
-            Yayındaki ilanların
-          </small>
-
-        </div>
-
-
-        <div class="summary-card">
-
-          <span>
-            Favorilerim
-          </span>
-
-          <strong id="favorite-count">
-            0
-          </strong>
-
-          <small>
-            Kaydettiğin ilanlar
-          </small>
-
-        </div>
-
-
-        <div class="summary-card">
-
-          <span>
-            Hesap Durumu
-          </span>
-
-          <strong id="verified-status">
-            Hayır
-          </strong>
-
-          <small>
-            Doğrulanmış hesap
-          </small>
-
-        </div>
-
-
-      </div>
-
-
-
-      <!-- ==============================
-           PROFİL BİLGİLERİ
-           ============================== -->
-
-      <div class="account-card profile-card">
-
-
-        <div class="account-card-head">
-
-          <div>
-
-            <h2>
-              Profil Bilgileri
-            </h2>
-
-            <p>
-              Hesabına ait temel bilgiler.
-            </p>
-
-          </div>
-
-
-          <button
-            type="button"
-            class="account-edit-btn"
-            id="profile-edit-button"
-          >
-
-            Profili Düzenle
-
-          </button>
-
-        </div>
-
-
-
-        <div class="profile-details">
-
-
-          <div class="profile-field">
-
-            <span>
-              Kullanıcı Adı
-            </span>
-
-            <strong id="profile-username">
-              Yükleniyor...
-            </strong>
-
-          </div>
-
-
-          <div class="profile-field">
-
-            <span>
-              Görünen Ad
-            </span>
-
-            <strong id="profile-display-name">
-              Yükleniyor...
-            </strong>
-
-          </div>
-
-
-          <div class="profile-field">
-
-            <span>
-              E-posta Adresi
-            </span>
-
-            <strong id="profile-email">
-              Yükleniyor...
-            </strong>
-
-          </div>
-
-
-          <div class="profile-field">
-
-            <span>
-              Üyelik Tarihi
-            </span>
-
-            <strong id="profile-created-at">
-              Yükleniyor...
-            </strong>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-
-      <!-- ==============================
-           GÜVENLİK
-           ============================== -->
+           HESAP ANA GÖRÜNÜMÜ
+           ========================================== -->
 
       <div
-        class="account-card security-card"
-        id="security"
+        id="account-overview-view"
+        class="account-view active"
       >
 
+        <div class="account-header">
 
-        <div class="account-card-head">
-
-          <div>
-
-            <h2>
-              Hesap Güvenliği
-            </h2>
-
-            <p>
-              Hesabının güvenlik durumunu kontrol et.
-            </p>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="security-row">
-
-          <div>
-
-            <strong>
-              E-posta Doğrulaması
-            </strong>
-
-            <span>
-              Hesabının e-posta doğrulama durumu.
-            </span>
-
-          </div>
-
-
-          <span
-            class="security-badge"
-            id="security-verified"
-          >
-
-            Kontrol ediliyor
-
+          <span class="eyebrow">
+            ROYALE2 MARKET • KONTROL MERKEZİ
           </span>
 
+          <h1>
+            Hesap Özeti
+          </h1>
+
+          <p>
+            Profilini, ilanlarını, favorilerini ve hesap güvenliğini
+            tek merkezden yönetebilirsin.
+          </p>
+
         </div>
 
 
 
-        <div class="security-row">
+        <!-- ==============================
+             ÖZET KARTLARI
+             ============================== -->
 
-          <div>
+        <div class="account-summary">
 
-            <strong>
-              Şifre
-            </strong>
+
+          <div class="summary-card">
 
             <span>
-              Hesap şifreni düzenli olarak güncelle.
+              Aktif İlan
+            </span>
+
+            <strong id="active-listings-count">
+              0
+            </strong>
+
+            <small>
+              Yayındaki ilanların
+            </small>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <span>
+              Favorilerim
+            </span>
+
+            <strong id="favorite-count">
+              0
+            </strong>
+
+            <small>
+              Kaydettiğin ilanlar
+            </small>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <span>
+              Hesap Durumu
+            </span>
+
+            <strong id="verified-status">
+              Hayır
+            </strong>
+
+            <small>
+              Doğrulanmış hesap
+            </small>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ==============================
+             PROFİL BİLGİLERİ
+             ============================== -->
+
+        <div class="account-card profile-card">
+
+
+          <div class="account-card-head">
+
+            <div>
+
+              <h2>
+                Profil Bilgileri
+              </h2>
+
+              <p>
+                Hesabına ait temel bilgiler.
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="account-edit-btn"
+              id="profile-edit-button"
+            >
+
+              Profili Düzenle
+
+            </button>
+
+          </div>
+
+
+
+          <div class="profile-details">
+
+
+            <div class="profile-field">
+
+              <span>
+                Kullanıcı Adı
+              </span>
+
+              <strong id="profile-username">
+                Yükleniyor...
+              </strong>
+
+            </div>
+
+
+            <div class="profile-field">
+
+              <span>
+                Görünen Ad
+              </span>
+
+              <strong id="profile-display-name">
+                Yükleniyor...
+              </strong>
+
+            </div>
+
+
+            <div class="profile-field">
+
+              <span>
+                E-posta Adresi
+              </span>
+
+              <strong id="profile-email">
+                Yükleniyor...
+              </strong>
+
+            </div>
+
+
+            <div class="profile-field">
+
+              <span>
+                Üyelik Tarihi
+              </span>
+
+              <strong id="profile-created-at">
+                Yükleniyor...
+              </strong>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             GÜVENLİK
+             ============================== -->
+
+        <div
+          class="account-card security-card"
+          id="security"
+        >
+
+
+          <div class="account-card-head">
+
+            <div>
+
+              <h2>
+                Hesap Güvenliği
+              </h2>
+
+              <p>
+                Hesabının güvenlik durumunu kontrol et.
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="security-row">
+
+            <div>
+
+              <strong>
+                E-posta Doğrulaması
+              </strong>
+
+              <span>
+                Hesabının e-posta doğrulama durumu.
+              </span>
+
+            </div>
+
+
+            <span
+              class="security-badge"
+              id="security-verified"
+            >
+
+              Kontrol ediliyor
+
             </span>
 
           </div>
 
 
-          <button
-            type="button"
-            class="security-button"
-          >
 
-            Şifre Değiştir
+          <div class="security-row">
 
-          </button>
+            <div>
+
+              <strong>
+                Şifre
+              </strong>
+
+              <span>
+                Hesap şifreni düzenli olarak güncelle.
+              </span>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="security-button"
+            >
+
+              Şifre Değiştir
+
+            </button>
+
+          </div>
+
 
         </div>
-
 
       </div>
-  
-    </div>
 
-    <!-- HESAP ANA GÖRÜNÜMÜ SON -->
-  </div>
+      <!-- HESAP ANA GÖRÜNÜMÜ SON -->
 
 
-  <!-- =========================
-       İLANLARIM
-       ========================= -->
-<!-- =========================
-     İLANLARIM ÖZEL GÖRÜNÜM
-     ========================= -->
-<div id="account-listings-view" class="account-view">
-  
-      <!-- ==============================
-           İLANLARIM
-           ============================== -->
+      <!-- ==========================================
+           İLANLARIM ÖZEL GÖRÜNÜM
+           ========================================== -->
 
-      <div class="account-card my-listings-card" id="my-listings">
+      <div
+        id="account-listings-view"
+        class="account-view"
+      >
 
-        <div class="account-card-head">
+        <div
+          class="account-card my-listings-card"
+          id="my-listings"
+        >
 
-          <div>
-            <h2>İlanlarım</h2>
-            <p>Yayınladığın ilanları görüntüle ve yönet.</p>
+          <div class="account-card-head">
+
+            <div>
+
+              <h2>
+                İlanlarım
+              </h2>
+
+              <p>
+                Yayınladığın ilanları görüntüle ve yönet.
+              </p>
+
+              <small>
+                Toplam
+                <strong id="my-listings-total">
+                  0
+                </strong>
+                ilan
+              </small>
+
+            </div>
+
+
+            <a
+              href="create-listing.html"
+              class="account-edit-btn"
+            >
+              + Yeni İlan
+            </a>
+
           </div>
 
-          <a href="create-listing.html" class="account-edit-btn">
-            + Yeni İlan
-          </a>
+
+          <div class="my-listings-toolbar">
+
+            <input
+              type="search"
+              id="my-listings-search"
+              class="my-listings-search"
+              placeholder="İlan başlığı veya açıklamada ara..."
+              autocomplete="off"
+            >
+
+
+            <div class="my-listings-filters">
+
+              <button
+                type="button"
+                class="my-listings-filter active"
+                data-status="all"
+              >
+                Tümü
+              </button>
+
+              <button
+                type="button"
+                class="my-listings-filter"
+                data-status="active"
+              >
+                Aktif
+              </button>
+
+              <button
+                type="button"
+                class="my-listings-filter"
+                data-status="sold"
+              >
+                Satıldı
+              </button>
+
+              <button
+                type="button"
+                class="my-listings-filter"
+                data-status="inactive"
+              >
+                Yayında Değil
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="my-listings-head">
+
+            <span>
+              İlan Bilgisi
+            </span>
+
+            <span>
+              Sunucu / Kategori
+            </span>
+
+            <span>
+              Fiyat
+            </span>
+
+            <span>
+              Durum
+            </span>
+
+            <span style="text-align:right">
+              İşlemler
+            </span>
+
+          </div>
+
+
+          <div
+            id="my-listings-container"
+            class="my-listings-container"
+          >
+
+            <div class="my-listings-loading">
+              İlanların yükleniyor...
+            </div>
+
+          </div>
 
         </div>
 
-        <div class="my-listings-toolbar">
+      </div>
 
-          <div class="my-listings-filters">
-            <button type="button" class="my-listings-filter active" data-status="all">
-              Tümü
-            </button>
+      <!-- İLANLARIM ÖZEL GÖRÜNÜM SON -->
 
-            <button type="button" class="my-listings-filter" data-status="active">
-              Aktif
-            </button>
+    </section>
 
-            <button type="button" class="my-listings-filter" data-status="sold">
-              Satıldı
-            </button>
+  </div>
 
-            <button type="button" class="my-listings-filter" data-status="inactive">
-              Yayında Değil
-            </button>
-          </div>
+    <!-- ======================================================
+       İLAN DÜZENLEME MODALI
+       ====================================================== -->
+
+  <div
+    id="listing-edit-modal"
+    class="listing-edit-modal"
+  >
+
+    <div class="listing-edit-box">
+
+
+      <div class="listing-edit-head">
+
+        <div>
+
+          <h2>
+            İlanı Düzenle
+          </h2>
+
+          <p>
+            İlan başlığı, açıklaması, fiyatı ve kapak fotoğrafını güncelle.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="listing-edit-close"
+          class="listing-edit-close"
+          aria-label="Kapat"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="listing-edit-body">
+
+
+        <input
+          type="hidden"
+          id="listing-edit-id"
+        >
+
+
+        <div class="listing-edit-field">
+
+          <label for="listing-edit-title">
+            İlan Başlığı
+          </label>
 
           <input
-            type="search"
-            id="my-listings-search"
-            class="my-listings-search"
-            placeholder="İlanlarında ara..."
+            type="text"
+            id="listing-edit-title"
+            maxlength="150"
             autocomplete="off"
           >
 
         </div>
 
-        <div id="my-listings-container" class="my-listings-container">
 
-          <div class="my-listings-loading">
-            İlanların yükleniyor...
+        <div class="listing-edit-grid">
+
+
+          <div class="listing-edit-field">
+
+            <label for="listing-edit-price">
+              Fiyat (TL)
+            </label>
+
+            <input
+              type="number"
+              id="listing-edit-price"
+              min="0"
+              step="1"
+              inputmode="numeric"
+            >
+
+          </div>
+
+
+          <div class="listing-edit-field">
+
+            <label for="listing-edit-status">
+              Durum
+            </label>
+
+            <input
+              type="text"
+              id="listing-edit-status"
+              disabled
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <div class="listing-edit-field">
+
+          <label for="listing-edit-description">
+            Açıklama
+          </label>
+
+          <textarea
+            id="listing-edit-description"
+            maxlength="5000"
+            placeholder="İlan açıklaması..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="listing-edit-field">
+
+          <label for="listing-edit-photo">
+            Kapak Fotoğrafı
+          </label>
+
+
+          <div class="listing-edit-photo-row">
+
+
+            <div class="listing-edit-preview">
+
+              <img
+                id="listing-edit-preview-image"
+                alt="İlan fotoğrafı"
+              >
+
+            </div>
+
+
+            <div>
+
+              <input
+                type="file"
+                id="listing-edit-photo"
+                accept="image/jpeg,image/png,image/webp"
+              >
+
+              <p
+                style="
+                  margin:8px 0 0;
+                  color:#746d63;
+                  font-size:10px;
+                  line-height:1.5;
+                "
+              >
+                Yeni fotoğraf seçmezsen mevcut kapak fotoğrafı korunur.
+                JPG, PNG veya WEBP kullanabilirsin.
+              </p>
+
+            </div>
+
+
           </div>
 
         </div>
 
+
       </div>
 
-</div>
-<!-- İLANLARIM ÖZEL GÖRÜNÜM SON -->
-    </section>
+
+      <div class="listing-edit-footer">
+
+        <button
+          type="button"
+          id="listing-edit-cancel"
+          class="listing-edit-cancel"
+        >
+          Vazgeç
+        </button>
+
+
+        <button
+          type="button"
+          id="listing-edit-save"
+          class="listing-edit-save"
+        >
+          Değişiklikleri Kaydet
+        </button>
+
+      </div>
+
+
+    </div>
 
   </div>
 
 
 
-
-  <!-- ==============================
+  <!-- ======================================================
        PROFİL DÜZENLEME MODALI
-       ============================== -->
+       ====================================================== -->
 
   <div
-    id="profile-edit-modal"
+    id="profile-modal"
     class="profile-modal"
   >
-
 
     <div class="profile-modal-box">
 
 
-      <div class="profile-modal-header">
-
+      <div class="profile-modal-head">
 
         <div>
 
           <h2>
-            Profil Bilgilerini Düzenle
+            Profili Düzenle
           </h2>
 
           <p>
-            Hesabında görünen bilgileri buradan güncelleyebilirsin.
+            Hesap bilgilerini güncelle.
           </p>
 
         </div>
@@ -1040,122 +1861,70 @@ body {
         <button
           type="button"
           id="profile-modal-close"
+          class="profile-modal-close"
+          aria-label="Kapat"
         >
           ×
         </button>
 
-
       </div>
-
 
 
       <div class="profile-modal-body">
 
 
-        <label>
-          Kullanıcı Adı
-        </label>
+        <div class="profile-modal-field">
 
-        <input
-          type="text"
-          id="edit-username"
-          placeholder="Kullanıcı adınız"
-        >
+          <label for="profile-edit-username">
+            Kullanıcı Adı
+          </label>
 
+          <input
+            type="text"
+            id="profile-edit-username"
+            autocomplete="username"
+          >
 
-        <label>
-          Görünen Ad
-        </label>
-
-        <input
-          type="text"
-          id="edit-display-name"
-          placeholder="Görünen adınız"
-        >
+        </div>
 
 
-        <label>
-          E-posta Adresi
-        </label>
+        <div class="profile-modal-field">
 
-        <input
-          type="email"
-          id="edit-email"
-          disabled
-        >
+          <label for="profile-edit-display-name">
+            Görünen Ad
+          </label>
 
-        <small>
-          E-posta adresi güvenlik nedeniyle buradan değiştirilemez.
-        </small>
+          <input
+            type="text"
+            id="profile-edit-display-name"
+            autocomplete="name"
+          >
 
-
-
-        <label>
-          Telefon Numarası *
-        </label>
-
-        <input
-          type="tel"
-          id="edit-phone"
-          placeholder="05XXXXXXXXX"
-          maxlength="11"
-          inputmode="numeric"
-          required
-        >
+        </div>
 
 
+        <div class="profile-modal-field">
 
-        <label>
-          T.C. Kimlik No *
-        </label>
+          <label for="profile-edit-bio">
+            Hakkında
+          </label>
 
-        <input
-          type="text"
-          id="edit-tc"
-          placeholder="11 haneli T.C. Kimlik No"
-          maxlength="11"
-          inputmode="numeric"
-          autocomplete="off"
-          required
-        >
+          <textarea
+            id="profile-edit-bio"
+            maxlength="500"
+            placeholder="Kendin hakkında kısa bir bilgi..."
+          ></textarea>
 
-
-        <small
-          id="tc-lock-message"
-          style="display:none;"
-        >
-
-          T.C. Kimlik Numarası kaydedildikten sonra değiştirilemez.
-
-        </small>
+        </div>
 
 
-
-        <label>
-          Adres
-        </label>
-
-        <textarea
-          id="edit-address"
-          placeholder="Açık adresinizi yazınız"
-          rows="3"
-        ></textarea>
-
-
-        <small
-          id="private-lock-message"
-          style="display:none;"
-        >
-
-          Telefon, T.C. Kimlik No ve adres bilgileri kaydedildikten
-          sonra değiştirilemez. Değişiklik için site yönetimiyle
-          iletişime geçiniz.
-
-        </small>
+        <div
+          id="profile-edit-message"
+          class="profile-edit-message"
+        ></div>
 
 
       </div>
-
 
 
       <div class="profile-modal-footer">
@@ -1163,21 +1932,19 @@ body {
 
         <button
           type="button"
-          id="profile-edit-cancel"
+          id="profile-modal-cancel"
+          class="profile-modal-cancel"
         >
-
           Vazgeç
-
         </button>
 
 
         <button
           type="button"
-          id="profile-edit-save"
+          id="profile-modal-save"
+          class="profile-modal-save"
         >
-
           Değişiklikleri Kaydet
-
         </button>
 
 
@@ -1189,1463 +1956,3018 @@ body {
   </div>
 
 
-</main>
-
-
-
 <script src="script.js"></script>
 
 
 <script>
-
 /* =========================================================
-   ROYALE2 MARKET
-   ACCOUNT CONTROL CENTER
+   ACCOUNT.HTML
+   HESAP SAYFASI KONTROLÜ
    ========================================================= */
 
+(function () {
 
-async function loadAccountPage() {
-
-    const savedUser =
-        localStorage.getItem("royale2_user");
-
-    const accessToken =
-        localStorage.getItem("royale2_access_token");
+  "use strict";
 
 
-    if (!savedUser || !accessToken) {
-
-        window.location.href =
-            "index.html#login";
-
-        return;
-    }
+  /* =======================================================
+     YARDIMCI FONKSİYONLAR
+     ======================================================= */
 
 
-    const user =
-        JSON.parse(savedUser);
-
-
-
-    /* =============================================
-       AUTH BİLGİLERİNİ HEMEN GÖSTER
-       ============================================= */
-
-
-    document.getElementById(
-        "profile-email"
-    ).textContent =
-        user.email || "-";
-
-
-    document.getElementById(
-        "profile-created-at"
-    ).textContent =
-        user.created_at
-            ? new Date(
-                user.created_at
-              ).toLocaleDateString("tr-TR")
-            : "-";
-
-
-    document.getElementById(
-        "account-username"
-    ).textContent =
-        user.email
-            ? user.email.split("@")[0]
-            : "Hesabım";
-
-
-
-    /* =============================================
-       PROFİL BİLGİLERİ
-       ============================================= */
+  function getStoredAccountUser() {
 
     try {
 
+      const raw =
+        localStorage.getItem("royale2_user");
 
-        const profileResponse =
-            await fetch(
+      if (!raw) {
+        return null;
+      }
 
-                `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}&select=*`,
+      return JSON.parse(raw);
 
-                {
+    } catch (error) {
 
-                    headers: {
+      console.error(
+        "Kullanıcı bilgisi okunamadı:",
+        error
+      );
 
-                        apikey:
-                            window.SUPABASE_KEY,
+      return null;
 
-                        Authorization:
-                            `Bearer ${accessToken}`
+    }
 
-                    }
-
-                }
-
-            );
-
-
-        const profileData =
-            await profileResponse.json();
-
-
-        const profile =
-            profileData?.[0];
+  }
 
 
 
-        /* =============================================
-           ÖZEL PROFİL BİLGİLERİ
-           ============================================= */
+  function getStoredAccessToken() {
 
+    return (
+      localStorage.getItem(
+        "royale2_access_token"
+      ) || ""
+    );
 
-        const privateResponse =
-            await fetch(
-
-                `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
-
-                {
-
-                    headers: {
-
-                        apikey:
-                            window.SUPABASE_KEY,
-
-                        Authorization:
-                            `Bearer ${accessToken}`
-
-                    }
-
-                }
-
-            );
-
-
-        const privateData =
-            await privateResponse.json();
-
-
-        const privateProfile =
-            privateData?.[0];
+  }
 
 
 
-        if (privateProfile) {
+  function getAccountSession() {
+
+    const user =
+      getStoredAccountUser();
+
+    const accessToken =
+      getStoredAccessToken();
+
+    if (!user || !accessToken) {
+      return null;
+    }
+
+    return {
+      user,
+      accessToken
+    };
+
+  }
 
 
-            document.getElementById(
-                "edit-phone"
-            ).value =
-                privateProfile.phone || "";
+
+  function accountApiHeaders(
+    extraHeaders = {}
+  ) {
+
+    const session =
+      getAccountSession();
+
+    return {
+
+      apikey:
+        window.SUPABASE_KEY,
+
+      Authorization:
+        session
+          ? `Bearer ${session.accessToken}`
+          : "",
+
+      ...extraHeaders
+
+    };
+
+  }
 
 
-            document.getElementById(
-                "edit-address"
-            ).value =
-                privateProfile.address || "";
+
+  function escapeAccountHtml(value) {
+
+    return String(value ?? "")
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
 
 
-            const tcInput =
-                document.getElementById(
-                    "edit-tc"
+
+  function formatAccountDate(value) {
+
+    if (!value) {
+      return "-";
+    }
+
+    const date =
+      new Date(value);
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+      return "-";
+    }
+
+    return date.toLocaleDateString(
+      "tr-TR",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
+
+  function formatAccountPrice(value) {
+
+    const price =
+      Number(value || 0);
+
+    return new Intl.NumberFormat(
+      "tr-TR",
+      {
+        style: "currency",
+        currency: "TRY",
+        maximumFractionDigits: 0
+      }
+    ).format(price);
+
+  }
+
+
+
+  /* =======================================================
+     HESAP BİLGİLERİNİ EKRANA YAZ
+     ======================================================= */
+
+
+  function renderStoredAccountUser() {
+
+    const user =
+      getStoredAccountUser();
+
+    if (!user) {
+      return;
+    }
+
+
+    const username =
+      user.username ||
+      user.display_name ||
+      user.email ||
+      "Kullanıcı";
+
+
+    const displayName =
+      user.display_name ||
+      user.username ||
+      "Kullanıcı";
+
+
+    const usernameElements = [
+
+      document.getElementById(
+        "sidebar-username"
+      ),
+
+      document.getElementById(
+        "profile-username"
+      ),
+
+      document.getElementById(
+        "account-username"
+      )
+
+    ];
+
+
+    usernameElements.forEach(
+      element => {
+
+        if (element) {
+          element.textContent =
+            username;
+        }
+
+      }
+    );
+
+
+    const displayNameElement =
+      document.getElementById(
+        "profile-display-name"
+      );
+
+    if (displayNameElement) {
+
+      displayNameElement.textContent =
+        displayName;
+
+    }
+
+
+    const emailElement =
+      document.getElementById(
+        "profile-email"
+      );
+
+    if (emailElement) {
+
+      emailElement.textContent =
+        user.email || "-";
+
+    }
+
+
+    const createdElement =
+      document.getElementById(
+        "profile-created-at"
+      );
+
+    if (createdElement) {
+
+      createdElement.textContent =
+        formatAccountDate(
+          user.created_at
+        );
+
+    }
+
+
+    const avatar =
+      document.getElementById(
+        "profile-avatar-letter"
+      );
+
+    if (avatar) {
+
+      avatar.textContent =
+        String(username)
+          .trim()
+          .charAt(0)
+          .toLocaleUpperCase("tr-TR") ||
+        "P";
+
+    }
+
+
+    const verified =
+      Boolean(
+        user.email_confirmed_at ||
+        user.email_verified ||
+        user.confirmed_at
+      );
+
+
+    const verifiedStatus =
+      document.getElementById(
+        "verified-status"
+      );
+
+    if (verifiedStatus) {
+
+      verifiedStatus.textContent =
+        verified
+          ? "Evet"
+          : "Hayır";
+
+    }
+
+
+    const securityVerified =
+      document.getElementById(
+        "security-verified"
+      );
+
+    if (securityVerified) {
+
+      securityVerified.textContent =
+        verified
+          ? "Doğrulandı"
+          : "Doğrulanmadı";
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     HESAP GÖRÜNÜM YÖNETİMİ
+     ======================================================= */
+
+
+  function updateAccountView() {
+
+    const overviewView =
+      document.getElementById(
+        "account-overview-view"
+      );
+
+
+    const listingsView =
+      document.getElementById(
+        "account-listings-view"
+      );
+
+
+    if (
+      !overviewView ||
+      !listingsView
+    ) {
+      return;
+    }
+
+
+    const isMyListings =
+      window.location.hash ===
+      "#my-listings";
+
+
+    overviewView.classList.toggle(
+      "active",
+      !isMyListings
+    );
+
+
+    listingsView.classList.toggle(
+      "active",
+      isMyListings
+    );
+
+
+    const accountMenuLinks =
+      document.querySelectorAll(
+        ".account-menu a"
+      );
+
+
+    accountMenuLinks.forEach(
+      link => {
+
+        const href =
+          link.getAttribute("href");
+
+
+        if (
+          href === "account.html" ||
+          href === "#my-listings"
+        ) {
+
+          link.classList.remove(
+            "active"
+          );
+
+        }
+
+      }
+    );
+
+
+    const activeLink =
+      document.querySelector(
+        isMyListings
+          ? '.account-menu a[href="#my-listings"]'
+          : '.account-menu a[href="account.html"]'
+      );
+
+
+    if (activeLink) {
+
+      activeLink.classList.add(
+        "active"
+      );
+
+    }
+
+
+    if (isMyListings) {
+
+      loadProfessionalMyListings();
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     İLANLARIM VERİLERİ
+     ======================================================= */
+
+
+  const ACCOUNT_SERVER_NAMES = {
+
+    1: "Ephesus",
+
+    2: "Teos",
+
+    3: "Pergamon",
+
+    4: "Akademi Teos"
+
+  };
+
+
+  const ACCOUNT_CATEGORY_NAMES = {
+
+    1: "Eşya",
+
+    2: "Yang",
+
+    3: "Karakter",
+
+    4: "Hesap"
+
+  };
+
+
+  let professionalMyListings = [];
+
+  let professionalMyListingImages = {};
+
+  let professionalListingFilter =
+    "all";
+
+  let professionalEditingListing =
+    null;
+
+
+
+  function accountStatusLabel(status) {
+
+    const normalized =
+      String(status || "")
+        .toLowerCase();
+
+
+    if (
+      normalized === "active"
+    ) {
+
+      return "Aktif";
+
+    }
+
+
+    if (
+      normalized === "sold"
+    ) {
+
+      return "Satıldı";
+
+    }
+
+
+    if (
+      normalized === "inactive" ||
+      normalized === "passive"
+    ) {
+
+      return "Yayında Değil";
+
+    }
+
+
+    return status || "Bilinmiyor";
+
+  }
+
+
+
+  function accountStatusClass(status) {
+
+    const normalized =
+      String(status || "")
+        .toLowerCase();
+
+
+    if (
+      normalized === "active"
+    ) {
+
+      return "active";
+
+    }
+
+
+    if (
+      normalized === "sold"
+    ) {
+
+      return "sold";
+
+    }
+
+
+    return "inactive";
+
+  }
+
+
+
+  function getProfessionalListingImage(
+    listingId
+  ) {
+
+    const images =
+      professionalMyListingImages[
+        String(listingId)
+      ] || [];
+
+
+    return (
+      images[0]?.image_url ||
+      ""
+    );
+
+  }
+
+
+
+  async function loadProfessionalMyListings() {
+
+    const container =
+      document.getElementById(
+        "my-listings-container"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+
+      window.location.href =
+        "index.html#login";
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      '<div class="my-listings-loading">İlanların yükleniyor...</div>';
+
+
+    try {
+
+      const listingsResponse =
+        await fetch(
+
+          `${window.SUPABASE_API_URL}listings?user_id=eq.${encodeURIComponent(
+            session.user.id
+          )}&select=*&order=created_at.desc`,
+
+          {
+            headers:
+              accountApiHeaders()
+          }
+
+        );
+
+
+      if (
+        !listingsResponse.ok
+      ) {
+
+        throw new Error(
+          await listingsResponse.text()
+        );
+
+      }
+
+
+      const listingData =
+        await listingsResponse.json();
+
+
+      professionalMyListings =
+        Array.isArray(listingData)
+          ? listingData
+          : [];
+
+
+      const totalElement =
+        document.getElementById(
+          "my-listings-total"
+        );
+
+
+      if (totalElement) {
+
+        totalElement.textContent =
+          String(
+            professionalMyListings.length
+          );
+
+      }
+
+
+      const activeCount =
+        professionalMyListings.filter(
+          listing =>
+            String(
+              listing.status || ""
+            ).toLowerCase() ===
+            "active"
+        ).length;
+
+
+      const activeCountElement =
+        document.getElementById(
+          "active-listings-count"
+        );
+
+
+      if (activeCountElement) {
+
+        activeCountElement.textContent =
+          String(activeCount);
+
+      }
+
+
+      professionalMyListingImages = {};
+
+
+      const listingIds =
+        professionalMyListings
+
+          .map(
+            listing =>
+              listing.id
+          )
+
+          .filter(Boolean);
+
+
+      if (listingIds.length) {
+
+        const encodedIds =
+          listingIds
+
+            .map(
+              id =>
+                encodeURIComponent(id)
+            )
+
+            .join(",");
+
+
+        const imagesResponse =
+          await fetch(
+
+            `${window.SUPABASE_API_URL}listing_images?listing_id=in.(${encodedIds})&select=id,listing_id,image_url,sort_order&order=sort_order.asc`,
+
+            {
+              headers:
+                accountApiHeaders()
+            }
+
+          );
+
+
+        if (
+          imagesResponse.ok
+        ) {
+
+          const imageData =
+            await imagesResponse.json();
+
+
+          (
+            Array.isArray(imageData)
+              ? imageData
+              : []
+          ).forEach(
+            image => {
+
+              const key =
+                String(
+                  image.listing_id
                 );
 
 
-            const tcMessage =
-                document.getElementById(
-                    "tc-lock-message"
-                );
+              if (
+                !professionalMyListingImages[
+                  key
+                ]
+              ) {
+
+                professionalMyListingImages[
+                  key
+                ] = [];
+
+              }
 
 
-            if (
-                privateProfile.tc_identity_no
-            ) {
-
-
-                tcInput.value =
-                    privateProfile.tc_identity_no;
-
-
-                tcInput.disabled =
-                    true;
-
-
-                if (tcMessage) {
-
-                    tcMessage.style.display =
-                        "block";
-
-                }
+              professionalMyListingImages[
+                key
+              ].push(image);
 
             }
+          );
+
+        }
+
+      }
+
+
+      renderProfessionalMyListings();
+
+
+    } catch (error) {
+
+      console.error(
+        "İlanlarım yüklenemedi:",
+        error
+      );
+
+
+      container.innerHTML =
+        '<div class="my-listings-error">İlanlar yüklenirken bir hata oluştu.</div>';
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     İLAN FİLTRELEME
+     ======================================================= */
+
+
+  function getFilteredProfessionalListings() {
+
+    const searchInput =
+      document.getElementById(
+        "my-listings-search"
+      );
+
+
+    const searchValue =
+      String(
+        searchInput?.value || ""
+      )
+        .trim()
+        .toLocaleLowerCase(
+          "tr-TR"
+        );
+
+
+    return professionalMyListings.filter(
+      listing => {
+
+
+        const listingStatus =
+          String(
+            listing.status || ""
+          ).toLowerCase();
+
+
+        let statusMatches =
+          professionalListingFilter ===
+          "all";
+
+
+        if (
+          professionalListingFilter ===
+          "active"
+        ) {
+
+          statusMatches =
+            listingStatus ===
+            "active";
 
         }
 
 
+        if (
+          professionalListingFilter ===
+          "sold"
+        ) {
 
-        /* =============================================
-           KULLANICI ADI
-           ============================================= */
+          statusMatches =
+            listingStatus ===
+            "sold";
+
+        }
+
+
+        if (
+          professionalListingFilter ===
+          "inactive"
+        ) {
+
+          statusMatches =
+            listingStatus ===
+              "inactive" ||
+            listingStatus ===
+              "passive";
+
+        }
+
+
+        if (!statusMatches) {
+
+          return false;
+
+        }
+
+
+        if (!searchValue) {
+
+          return true;
+
+        }
+
+
+        const searchableText = [
+
+          listing.title,
+
+          listing.description,
+
+          listing.id,
+
+          ACCOUNT_SERVER_NAMES[
+            listing.server_id
+          ],
+
+          ACCOUNT_CATEGORY_NAMES[
+            listing.category_id
+          ]
+
+        ]
+
+          .filter(Boolean)
+
+          .join(" ")
+
+          .toLocaleLowerCase(
+            "tr-TR"
+          );
+
+
+        return searchableText.includes(
+          searchValue
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =======================================================
+     İLANLARI SATIRLI OLARAK ÇİZ
+     ======================================================= */
+
+
+  function renderProfessionalMyListings() {
+
+    const container =
+      document.getElementById(
+        "my-listings-container"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    const listings =
+      getFilteredProfessionalListings();
+
+
+    if (!listings.length) {
+
+      container.innerHTML =
+        '<div class="my-listings-empty">Bu filtreye uygun ilan bulunamadı.</div>';
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      listings
+
+        .map(
+          listing => {
+
+
+            const imageUrl =
+              getProfessionalListingImage(
+                listing.id
+              );
+
+
+            const serverName =
+              ACCOUNT_SERVER_NAMES[
+                listing.server_id
+              ] ||
+              "-";
+
+
+            const categoryName =
+              ACCOUNT_CATEGORY_NAMES[
+                listing.category_id
+              ] ||
+              "-";
+
+
+            const statusText =
+              accountStatusLabel(
+                listing.status
+              );
+
+
+            const statusClass =
+              accountStatusClass(
+                listing.status
+              );
+
+
+            const imageHtml =
+              imageUrl
+
+                ? `
+                  <img
+                    src="${escapeAccountHtml(
+                      imageUrl
+                    )}"
+                    alt="${escapeAccountHtml(
+                      listing.title ||
+                      "İlan"
+                    )}"
+                  >
+                `
+
+                : "";
+
+
+            return `
+              <div
+                class="my-listing-row"
+                data-listing-id="${escapeAccountHtml(
+                  listing.id
+                )}"
+              >
+
+                <div class="my-listing-main">
+
+                  <div class="my-listing-thumb">
+                    ${imageHtml}
+                  </div>
+
+                  <div style="min-width:0">
+
+                    <div class="my-listing-title">
+                      ${escapeAccountHtml(
+                        listing.title ||
+                        "İsimsiz İlan"
+                      )}
+                    </div>
+
+                    <div class="my-listing-sub">
+
+                      İlan No:
+                      ${escapeAccountHtml(
+                        listing.id
+                      )}
+
+                      <br>
+
+                      ${formatAccountDate(
+                        listing.created_at
+                      )}
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="my-listing-meta">
+
+                  <strong>
+                    ${escapeAccountHtml(
+                      serverName
+                    )}
+                  </strong>
+
+                  <span>
+                    ${escapeAccountHtml(
+                      categoryName
+                    )}
+                  </span>
+
+                </div>
+
+
+                <div
+                  class="
+                    my-listing-meta
+                    my-listing-price
+                  "
+                >
+
+                  <strong>
+                    ${escapeAccountHtml(
+                      formatAccountPrice(
+                        listing.price
+                      )
+                    )}
+                  </strong>
+
+                  <span>
+                    İlan fiyatı
+                  </span>
+
+                </div>
+
+
+                <div class="my-listing-status-wrap">
+
+                  <span
+                    class="
+                      my-listing-status
+                      ${statusClass}
+                    "
+                  >
+                    ${escapeAccountHtml(
+                      statusText
+                    )}
+                  </span>
+
+                </div>
+
+
+                <div class="my-listing-actions">
+
+                  <a
+                    class="my-listing-action"
+                    href="listing.html?id=${encodeURIComponent(
+                      listing.id
+                    )}"
+                  >
+                    Gör
+                  </a>
+
+
+                  <button
+                    type="button"
+                    class="
+                      my-listing-action
+                      edit-listing-button
+                    "
+                    data-listing-id="${escapeAccountHtml(
+                      listing.id
+                    )}"
+                  >
+                    Düzenle
+                  </button>
+
+                </div>
+
+              </div>
+            `;
+
+          }
+        )
+
+        .join("");
+
+  }  /* =======================================================
+     İLAN DÜZENLEME MODALI
+     ======================================================= */
+
+
+  function openProfessionalListingEditor(
+    listingId
+  ) {
+
+    const listing =
+      professionalMyListings.find(
+        item =>
+          String(item.id) ===
+          String(listingId)
+      );
+
+
+    if (!listing) {
+      return;
+    }
+
+
+    professionalEditingListing =
+      listing;
+
+
+    const idInput =
+      document.getElementById(
+        "listing-edit-id"
+      );
+
+
+    const titleInput =
+      document.getElementById(
+        "listing-edit-title"
+      );
+
+
+    const priceInput =
+      document.getElementById(
+        "listing-edit-price"
+      );
+
+
+    const descriptionInput =
+      document.getElementById(
+        "listing-edit-description"
+      );
+
+
+    const statusInput =
+      document.getElementById(
+        "listing-edit-status"
+      );
+
+
+    const photoInput =
+      document.getElementById(
+        "listing-edit-photo"
+      );
+
+
+    const previewImage =
+      document.getElementById(
+        "listing-edit-preview-image"
+      );
+
+
+    const modal =
+      document.getElementById(
+        "listing-edit-modal"
+      );
+
+
+    if (idInput) {
+
+      idInput.value =
+        listing.id;
+
+    }
+
+
+    if (titleInput) {
+
+      titleInput.value =
+        listing.title || "";
+
+    }
+
+
+    if (priceInput) {
+
+      priceInput.value =
+        listing.price ?? "";
+
+    }
+
+
+    if (descriptionInput) {
+
+      descriptionInput.value =
+        listing.description || "";
+
+    }
+
+
+    if (statusInput) {
+
+      statusInput.value =
+        accountStatusLabel(
+          listing.status
+        );
+
+    }
+
+
+    if (photoInput) {
+
+      photoInput.value = "";
+
+    }
+
+
+    if (previewImage) {
+
+      const imageUrl =
+        getProfessionalListingImage(
+          listing.id
+        );
+
+
+      if (imageUrl) {
+
+        previewImage.src =
+          imageUrl;
+
+        previewImage.style.display =
+          "block";
+
+      } else {
+
+        previewImage.removeAttribute(
+          "src"
+        );
+
+        previewImage.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    if (modal) {
+
+      modal.classList.add(
+        "active"
+      );
+
+    }
+
+  }
+
+
+
+  function closeProfessionalListingEditor() {
+
+    const modal =
+      document.getElementById(
+        "listing-edit-modal"
+      );
+
+
+    if (modal) {
+
+      modal.classList.remove(
+        "active"
+      );
+
+    }
+
+
+    professionalEditingListing =
+      null;
+
+  }
+
+
+
+  /* =======================================================
+     YENİ FOTOĞRAF ÖNİZLEME
+     ======================================================= */
+
+
+  function previewProfessionalListingPhoto(
+    file
+  ) {
+
+    if (!file) {
+      return;
+    }
+
+
+    const previewImage =
+      document.getElementById(
+        "listing-edit-preview-image"
+      );
+
+
+    if (!previewImage) {
+      return;
+    }
+
+
+    const objectUrl =
+      URL.createObjectURL(file);
+
+
+    previewImage.src =
+      objectUrl;
+
+
+    previewImage.style.display =
+      "block";
+
+
+    previewImage.onload =
+      function () {
+
+        URL.revokeObjectURL(
+          objectUrl
+        );
+
+      };
+
+  }
+
+
+
+  /* =======================================================
+     SUPABASE STORAGE — YENİ KAPAK FOTOĞRAFI
+     ======================================================= */
+
+
+  async function uploadProfessionalListingPhoto(
+    file,
+    listingId
+  ) {
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+
+      throw new Error(
+        "Oturum bulunamadı."
+      );
+
+    }
+
+
+    const allowedTypes = [
+
+      "image/jpeg",
+
+      "image/png",
+
+      "image/webp"
+
+    ];
+
+
+    if (
+      !allowedTypes.includes(
+        file.type
+      )
+    ) {
+
+      throw new Error(
+        "Fotoğraf JPG, PNG veya WEBP olmalıdır."
+      );
+
+    }
+
+
+    if (
+      file.size >
+      8 * 1024 * 1024
+    ) {
+
+      throw new Error(
+        "Fotoğraf en fazla 8 MB olabilir."
+      );
+
+    }
+
+
+    const originalExtension =
+      String(
+        file.name
+          .split(".")
+          .pop() ||
+        "jpg"
+      )
+        .toLowerCase()
+        .replace(
+          /[^a-z0-9]/g,
+          ""
+        );
+
+
+    const safeExtension =
+      [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp"
+      ].includes(
+        originalExtension
+      )
+
+        ? originalExtension
+
+        : "jpg";
+
+
+    const storagePath =
+      `${session.user.id}/${listingId}/${Date.now()}-cover.${safeExtension}`;
+
+
+    const projectBaseUrl =
+      String(
+        window.SUPABASE_API_URL ||
+        ""
+      ).replace(
+        /\/rest\/v1\/?$/,
+        ""
+      );
+
+
+    if (!projectBaseUrl) {
+
+      throw new Error(
+        "Supabase proje adresi bulunamadı."
+      );
+
+    }
+
+
+    /*
+     * create-listing sistemindeki mevcut bucket adı
+     * listing-images olarak kullanılıyor.
+     */
+
+    const uploadResponse =
+      await fetch(
+
+        `${projectBaseUrl}/storage/v1/object/listing-images/${storagePath}`,
+
+        {
+
+          method:
+            "POST",
+
+
+          headers:
+            accountApiHeaders({
+
+              "Content-Type":
+                file.type ||
+                "application/octet-stream",
+
+              "x-upsert":
+                "false"
+
+            }),
+
+
+          body:
+            file
+
+        }
+
+      );
+
+
+    if (
+      !uploadResponse.ok
+    ) {
+
+      throw new Error(
+        await uploadResponse.text()
+      );
+
+    }
+
+
+    const publicImageUrl =
+      `${projectBaseUrl}/storage/v1/object/public/listing-images/${storagePath}`;
+
+
+    const existingImages =
+      professionalMyListingImages[
+        String(listingId)
+      ] || [];
+
+
+    /*
+     * Mevcut fotoğraf varsa ilk/kapak fotoğrafının
+     * image_url değerini değiştiriyoruz.
+     */
+
+    if (
+      existingImages.length
+    ) {
+
+      const firstImage =
+        existingImages[0];
+
+
+      const imageUpdateResponse =
+        await fetch(
+
+          `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
+            firstImage.id
+          )}`,
+
+          {
+
+            method:
+              "PATCH",
+
+
+            headers:
+              accountApiHeaders({
+
+                "Content-Type":
+                  "application/json",
+
+                "Prefer":
+                  "return=representation"
+
+              }),
+
+
+            body:
+              JSON.stringify({
+
+                image_url:
+                  publicImageUrl
+
+              })
+
+          }
+
+        );
+
+
+      if (
+        !imageUpdateResponse.ok
+      ) {
+
+        throw new Error(
+          await imageUpdateResponse.text()
+        );
+
+      }
+
+    }
+
+    /*
+     * İlanın hiç fotoğrafı yoksa
+     * listing_images tablosuna ilk fotoğrafı ekliyoruz.
+     */
+
+    else {
+
+      const imageInsertResponse =
+        await fetch(
+
+          `${window.SUPABASE_API_URL}listing_images`,
+
+          {
+
+            method:
+              "POST",
+
+
+            headers:
+              accountApiHeaders({
+
+                "Content-Type":
+                  "application/json",
+
+                "Prefer":
+                  "return=representation"
+
+              }),
+
+
+            body:
+              JSON.stringify({
+
+                listing_id:
+                  listingId,
+
+                image_url:
+                  publicImageUrl,
+
+                sort_order:
+                  0
+
+              })
+
+          }
+
+        );
+
+
+      if (
+        !imageInsertResponse.ok
+      ) {
+
+        throw new Error(
+          await imageInsertResponse.text()
+        );
+
+      }
+
+    }
+
+
+    return publicImageUrl;
+
+  }
+
+
+
+  /* =======================================================
+     İLAN DEĞİŞİKLİKLERİNİ KAYDET
+     ======================================================= */
+
+
+  async function saveProfessionalListingChanges() {
+
+    if (
+      !professionalEditingListing
+    ) {
+      return;
+    }
+
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+
+      alert(
+        "Oturum bulunamadı. Lütfen tekrar giriş yap."
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * Front-end tarafında da sahiplik kontrolü.
+     * Asıl güvenlik Supabase RLS tarafından sağlanmalıdır.
+     */
+
+    if (
+      String(
+        professionalEditingListing.user_id
+      ) !==
+      String(
+        session.user.id
+      )
+    ) {
+
+      alert(
+        "Bu ilanı düzenleme yetkin yok."
+      );
+
+      return;
+
+    }
+
+
+    const titleInput =
+      document.getElementById(
+        "listing-edit-title"
+      );
+
+
+    const priceInput =
+      document.getElementById(
+        "listing-edit-price"
+      );
+
+
+    const descriptionInput =
+      document.getElementById(
+        "listing-edit-description"
+      );
+
+
+    const photoInput =
+      document.getElementById(
+        "listing-edit-photo"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "listing-edit-save"
+      );
+
+
+    const title =
+      String(
+        titleInput?.value ||
+        ""
+      ).trim();
+
+
+    const description =
+      String(
+        descriptionInput?.value ||
+        ""
+      ).trim();
+
+
+    const price =
+      Number(
+        priceInput?.value
+      );
+
+
+    const photo =
+      photoInput?.files?.[0] ||
+      null;
+
+
+    if (
+      title.length < 2
+    ) {
+
+      alert(
+        "İlan başlığı en az 2 karakter olmalıdır."
+      );
+
+      titleInput?.focus();
+
+      return;
+
+    }
+
+
+    if (
+      !Number.isFinite(price) ||
+      price < 0
+    ) {
+
+      alert(
+        "Geçerli bir fiyat gir."
+      );
+
+      priceInput?.focus();
+
+      return;
+
+    }
+
+
+    if (photo) {
+
+      const allowedTypes = [
+
+        "image/jpeg",
+
+        "image/png",
+
+        "image/webp"
+
+      ];
+
+
+      if (
+        !allowedTypes.includes(
+          photo.type
+        )
+      ) {
+
+        alert(
+          "Fotoğraf JPG, PNG veya WEBP formatında olmalıdır."
+        );
+
+        return;
+
+      }
+
+
+      if (
+        photo.size >
+        8 * 1024 * 1024
+      ) {
+
+        alert(
+          "Fotoğraf en fazla 8 MB olabilir."
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    try {
+
+
+      if (saveButton) {
+
+        saveButton.disabled =
+          true;
+
+
+        saveButton.textContent =
+          "Kaydediliyor...";
+
+      }
+
+
+      /*
+       * Sadece düzenlenmesine izin verdiğimiz alanları
+       * PATCH ediyoruz.
+       *
+       * server_id, category_id, user_id ve status
+       * değiştirilmez.
+       */
+
+      const listingUpdateResponse =
+        await fetch(
+
+          `${window.SUPABASE_API_URL}listings?id=eq.${encodeURIComponent(
+            professionalEditingListing.id
+          )}&user_id=eq.${encodeURIComponent(
+            session.user.id
+          )}`,
+
+          {
+
+            method:
+              "PATCH",
+
+
+            headers:
+              accountApiHeaders({
+
+                "Content-Type":
+                  "application/json",
+
+                "Prefer":
+                  "return=representation"
+
+              }),
+
+
+            body:
+              JSON.stringify({
+
+                title:
+                  title,
+
+                description:
+                  description ||
+                  null,
+
+                price:
+                  price
+
+              })
+
+          }
+
+        );
+
+
+      if (
+        !listingUpdateResponse.ok
+      ) {
+
+        throw new Error(
+          await listingUpdateResponse.text()
+        );
+
+      }
+
+
+      const updatedRows =
+        await listingUpdateResponse.json();
+
+
+      /*
+       * Supabase PATCH başarılı görünmesine rağmen
+       * RLS nedeniyle satır dönmediyse bunu da
+       * başarısız kabul ediyoruz.
+       */
+
+      if (
+        !Array.isArray(
+          updatedRows
+        ) ||
+        updatedRows.length === 0
+      ) {
+
+        throw new Error(
+          "İlan güncellenemedi veya düzenleme yetkisi bulunamadı."
+        );
+
+      }
+
+
+      /*
+       * Kullanıcı yeni fotoğraf seçmişse
+       * kapak fotoğrafını da güncelle.
+       */
+
+      if (photo) {
+
+        await uploadProfessionalListingPhoto(
+          photo,
+          professionalEditingListing.id
+        );
+
+      }
+
+
+      /*
+       * Veriyi Supabase'den yeniden çekiyoruz.
+       * Böylece ekranda eski veri kalmaz.
+       */
+
+      await loadProfessionalMyListings();
+
+
+      closeProfessionalListingEditor();
+
+
+      alert(
+        "İlan başarıyla güncellendi."
+      );
+
+
+    } catch (error) {
+
+
+      console.error(
+        "İlan güncellenemedi:",
+        error
+      );
+
+
+      const message =
+        String(
+          error?.message ||
+          error ||
+          ""
+        );
+
+
+      if (
+        message.includes(
+          "row-level security"
+        ) ||
+        message.includes(
+          "permission"
+        ) ||
+        message.includes(
+          "policy"
+        )
+      ) {
+
+        alert(
+          "Supabase güvenlik politikası bu işlemi engelledi. İlan düzenleme yetkisini kontrol etmemiz gerekiyor."
+        );
+
+      } else {
+
+        alert(
+          "İlan güncellenirken bir hata oluştu. Lütfen tekrar dene."
+        );
+
+      }
+
+
+    } finally {
+
+
+      if (saveButton) {
+
+        saveButton.disabled =
+          false;
+
+
+        saveButton.textContent =
+          "Değişiklikleri Kaydet";
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     PROFİL BİLGİLERİNİ SUPABASE'DEN YÜKLE
+     ======================================================= */
+
+
+  async function loadProfessionalAccountProfile() {
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+      return;
+    }
+
+
+    try {
+
+
+      const profileResponse =
+        await fetch(
+
+          `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
+            session.user.id
+          )}&select=*`,
+
+          {
+            headers:
+              accountApiHeaders()
+          }
+
+        );
+
+
+      if (
+        !profileResponse.ok
+      ) {
+
+        throw new Error(
+          await profileResponse.text()
+        );
+
+      }
+
+
+      const profileData =
+        await profileResponse.json();
+
+
+      const profile =
+        Array.isArray(profileData)
+          ? profileData[0]
+          : null;
+
+
+      if (!profile) {
+        return;
+      }
+
+
+      const username =
+        profile.username ||
+        session.user.email
+          ?.split("@")[0] ||
+        "Kullanıcı";
+
+
+      const displayName =
+        profile.display_name ||
+        username;
+
+
+      const profileUsername =
+        document.getElementById(
+          "profile-username"
+        );
+
+
+      const profileDisplayName =
+        document.getElementById(
+          "profile-display-name"
+        );
+
+
+      const sidebarUsername =
+        document.getElementById(
+          "sidebar-username"
+        );
+
+
+      const accountUsername =
+        document.getElementById(
+          "account-username"
+        );
+
+
+      const avatarLetter =
+        document.getElementById(
+          "profile-avatar-letter"
+        );
+
+
+      if (profileUsername) {
+
+        profileUsername.textContent =
+          username;
+
+      }
+
+
+      if (profileDisplayName) {
+
+        profileDisplayName.textContent =
+          displayName;
+
+      }
+
+
+      if (sidebarUsername) {
+
+        sidebarUsername.textContent =
+          username;
+
+      }
+
+
+      if (accountUsername) {
+
+        accountUsername.textContent =
+          username;
+
+      }
+
+
+      if (avatarLetter) {
+
+        avatarLetter.textContent =
+          String(
+            displayName ||
+            username ||
+            "R"
+          )
+            .trim()
+            .charAt(0)
+            .toLocaleUpperCase(
+              "tr-TR"
+            );
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Profil bilgileri yüklenemedi:",
+        error
+      );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     FAVORİ SAYISINI YÜKLE
+     ======================================================= */
+
+
+  async function loadProfessionalFavoriteCount() {
+
+    const session =
+      getAccountSession();
+
+
+    const favoriteCount =
+      document.getElementById(
+        "favorite-count"
+      );
+
+
+    if (
+      !session?.user?.id ||
+      !favoriteCount
+    ) {
+      return;
+    }
+
+
+    try {
+
+
+      const response =
+        await fetch(
+
+          `${window.SUPABASE_API_URL}favorites?user_id=eq.${encodeURIComponent(
+            session.user.id
+          )}&select=id`,
+
+          {
+            headers:
+              accountApiHeaders()
+          }
+
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          await response.text()
+        );
+
+      }
+
+
+      const favorites =
+        await response.json();
+
+
+      favoriteCount.textContent =
+        String(
+          Array.isArray(favorites)
+            ? favorites.length
+            : 0
+        );
+
+
+    } catch (error) {
+
+
+      console.error(
+        "Favori sayısı yüklenemedi:",
+        error
+      );
+
+
+      favoriteCount.textContent =
+        "0";
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     İLANLARIM EVENTLERİ
+     ======================================================= */
+
+
+  function initializeProfessionalListingEvents() {
+
+    const container =
+      document.getElementById(
+        "my-listings-container"
+      );
+
+
+    const searchInput =
+      document.getElementById(
+        "my-listings-search"
+      );
+
+
+    const editModal =
+      document.getElementById(
+        "listing-edit-modal"
+      );
+
+
+    /*
+     * Dinamik oluşturulan Düzenle butonları
+     */
+
+    if (container) {
+
+      container.addEventListener(
+        "click",
+        event => {
+
+
+          const editButton =
+            event.target.closest(
+              ".edit-listing-button"
+            );
+
+
+          if (!editButton) {
+            return;
+          }
+
+
+          const listingId =
+            editButton.getAttribute(
+              "data-listing-id"
+            );
+
+
+          openProfessionalListingEditor(
+            listingId
+          );
+
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Arama
+     */
+
+    if (searchInput) {
+
+      searchInput.addEventListener(
+        "input",
+        renderProfessionalMyListings
+      );
+
+    }
+
+
+    /*
+     * Durum filtreleri
+     */
+
+    document
+      .querySelectorAll(
+        ".my-listings-filter"
+      )
+      .forEach(
+        button => {
+
+
+          button.addEventListener(
+            "click",
+            () => {
+
+
+              document
+                .querySelectorAll(
+                  ".my-listings-filter"
+                )
+                .forEach(
+                  filterButton => {
+
+                    filterButton.classList.remove(
+                      "active"
+                    );
+
+                  }
+                );
+
+
+              button.classList.add(
+                "active"
+              );
+
+
+              professionalListingFilter =
+                button.getAttribute(
+                  "data-status"
+                ) ||
+                "all";
+
+
+              renderProfessionalMyListings();
+
+
+            }
+          );
+
+
+        }
+      );
+
+
+    /*
+     * Düzenleme modalını kapat
+     */
+
+    document
+      .getElementById(
+        "listing-edit-close"
+      )
+      ?.addEventListener(
+        "click",
+        closeProfessionalListingEditor
+      );
+
+
+    document
+      .getElementById(
+        "listing-edit-cancel"
+      )
+      ?.addEventListener(
+        "click",
+        closeProfessionalListingEditor
+      );
+
+
+    /*
+     * Kaydet
+     */
+
+    document
+      .getElementById(
+        "listing-edit-save"
+      )
+      ?.addEventListener(
+        "click",
+        saveProfessionalListingChanges
+      );
+
+
+    /*
+     * Fotoğraf seçildiğinde önizleme
+     */
+
+    document
+      .getElementById(
+        "listing-edit-photo"
+      )
+      ?.addEventListener(
+        "change",
+        event => {
+
+
+          const file =
+            event.target
+              .files?.[0];
+
+
+          if (file) {
+
+            previewProfessionalListingPhoto(
+              file
+            );
+
+          }
+
+
+        }
+      );
+
+
+    /*
+     * Modalın dışına tıklayınca kapat
+     */
+
+    if (editModal) {
+
+      editModal.addEventListener(
+        "click",
+        event => {
+
+
+          if (
+            event.target ===
+            editModal
+          ) {
+
+            closeProfessionalListingEditor();
+
+          }
+
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ESC ile kapat
+     */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+
+          closeProfessionalListingEditor();
+
+        }
+
+
+      }
+    );
+
+  }
+
+
+
+  /* =======================================================
+     PROFİL DÜZENLEME MODALI
+     ======================================================= */
+
+
+  function initializeProfessionalProfileModal() {
+
+    const editButton =
+      document.getElementById(
+        "profile-edit-button"
+      );
+
+
+    const modal =
+      document.getElementById(
+        "profile-modal"
+      );
+
+
+    const closeButton =
+      document.getElementById(
+        "profile-modal-close"
+      );
+
+
+    const cancelButton =
+      document.getElementById(
+        "profile-modal-cancel"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "profile-modal-save"
+      );
+
+
+    if (
+      !editButton ||
+      !modal
+    ) {
+      return;
+    }
+
+
+    function closeProfileModal() {
+
+      modal.classList.remove(
+        "active"
+      );
+
+    }
+
+
+    editButton.addEventListener(
+      "click",
+      async () => {
+
+
+        const session =
+          getAccountSession();
+
+
+        if (
+          !session?.user?.id
+        ) {
+          return;
+        }
+
+
+        try {
+
+
+          const response =
+            await fetch(
+
+              `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
+                session.user.id
+              )}&select=*`,
+
+              {
+                headers:
+                  accountApiHeaders()
+              }
+
+            );
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              await response.text()
+            );
+
+          }
+
+
+          const data =
+            await response.json();
+
+
+          const profile =
+            Array.isArray(data)
+              ? data[0]
+              : null;
+
+
+          const usernameInput =
+            document.getElementById(
+              "profile-edit-username"
+            );
+
+
+          const displayNameInput =
+            document.getElementById(
+              "profile-edit-display-name"
+            );
+
+
+          const bioInput =
+            document.getElementById(
+              "profile-edit-bio"
+            );
+
+
+          if (usernameInput) {
+
+            usernameInput.value =
+              profile?.username ||
+              "";
+
+          }
+
+
+          if (displayNameInput) {
+
+            displayNameInput.value =
+              profile?.display_name ||
+              "";
+
+          }
+
+
+          if (bioInput) {
+
+            bioInput.value =
+              profile?.bio ||
+              "";
+
+          }
+
+
+          modal.classList.add(
+            "active"
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Profil düzenleme bilgileri alınamadı:",
+            error
+          );
+
+
+          alert(
+            "Profil bilgileri yüklenemedi."
+          );
+
+        }
+
+
+      }
+    );
+
+
+    closeButton?.addEventListener(
+      "click",
+      closeProfileModal
+    );
+
+
+    cancelButton?.addEventListener(
+      "click",
+      closeProfileModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target ===
+          modal
+        ) {
+
+          closeProfileModal();
+
+        }
+
+      }
+    );
+
+
+    saveButton?.addEventListener(
+      "click",
+      async () => {
+
+
+        const session =
+          getAccountSession();
+
+
+        if (
+          !session?.user?.id
+        ) {
+          return;
+        }
 
 
         const username =
-
-            profile?.username ||
-
-            user.email?.split("@")[0] ||
-
-            "-";
+          String(
+            document.getElementById(
+              "profile-edit-username"
+            )?.value ||
+            ""
+          ).trim();
 
 
         const displayName =
-
-            profile?.display_name ||
-
-            username;
-
-
-
-        document.getElementById(
-            "profile-username"
-        ).textContent =
-            username;
-
-
-        document.getElementById(
-            "profile-display-name"
-        ).textContent =
-            displayName;
-
-
-        document.getElementById(
-            "account-username"
-        ).textContent =
-            username;
-
-
-
-        /* SIDEBAR KULLANICI ADI */
-
-
-        const sidebarUsername =
+          String(
             document.getElementById(
-                "sidebar-username"
-            );
+              "profile-edit-display-name"
+            )?.value ||
+            ""
+          ).trim();
 
 
-        if (sidebarUsername) {
+        const bio =
+          String(
+            document.getElementById(
+              "profile-edit-bio"
+            )?.value ||
+            ""
+          ).trim();
 
-            sidebarUsername.textContent =
-                username;
+
+        if (!username) {
+
+          alert(
+            "Kullanıcı adı boş bırakılamaz."
+          );
+
+          return;
 
         }
 
 
+        if (!displayName) {
 
-        /* AVATAR HARFİ */
+          alert(
+            "Görünen ad boş bırakılamaz."
+          );
 
-
-        const avatarLetter =
-            document.getElementById(
-                "profile-avatar-letter"
-            );
-
-
-        if (avatarLetter) {
-
-            avatarLetter.textContent =
-
-                (
-                    displayName ||
-                    username ||
-                    "R"
-                )
-                .trim()
-                .charAt(0)
-                .toUpperCase();
+          return;
 
         }
 
 
-
-        /* =============================================
-           DOĞRULAMA DURUMU
-           ============================================= */
+        try {
 
 
-        const verified =
-
-            user.email_confirmed_at ||
-
-            user.confirmed_at;
+          saveButton.disabled =
+            true;
 
 
-        document.getElementById(
-            "verified-status"
-        ).textContent =
-
-            verified
-                ? "Evet"
-                : "Hayır";
+          saveButton.textContent =
+            "Kaydediliyor...";
 
 
-        const securityBadge =
-            document.getElementById(
-                "security-verified"
-            );
-
-
-        if (securityBadge) {
-
-            securityBadge.textContent =
-
-                verified
-                    ? "Doğrulandı"
-                    : "Doğrulanmadı";
-
-        }
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            "Profil bilgileri yüklenemedi:",
-            error
-        );
-
-
-        const fallbackUsername =
-
-            user.email?.split("@")[0] ||
-
-            "-";
-
-
-        document.getElementById(
-            "profile-username"
-        ).textContent =
-            fallbackUsername;
-
-
-        document.getElementById(
-            "profile-display-name"
-        ).textContent =
-            fallbackUsername;
-
-
-        const sidebarUsername =
-            document.getElementById(
-                "sidebar-username"
-            );
-
-
-        if (sidebarUsername) {
-
-            sidebarUsername.textContent =
-                fallbackUsername;
-
-        }
-
-    }
-
-
-
-    /* =============================================
-       FAVORİ SAYISI
-       ============================================= */
-
-    try {
-
-
-        const favoritesResponse =
+          const response =
             await fetch(
 
-                `${window.SUPABASE_API_URL}favorites?user_id=eq.${user.id}&select=*`,
+              `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
+                session.user.id
+              )}`,
 
-                {
+              {
 
-                    headers: {
+                method:
+                  "PATCH",
 
-                        apikey:
-                            window.SUPABASE_KEY,
 
-                        Authorization:
-                            `Bearer ${accessToken}`
+                headers:
+                  accountApiHeaders({
 
-                    }
+                    "Content-Type":
+                      "application/json",
 
-                }
+                    "Prefer":
+                      "return=representation"
+
+                  }),
+
+
+                body:
+                  JSON.stringify({
+
+                    username:
+                      username,
+
+                    display_name:
+                      displayName,
+
+                    bio:
+                      bio ||
+                      null
+
+                  })
+
+              }
 
             );
 
 
-        if (!favoritesResponse.ok) {
+          if (!response.ok) {
 
             throw new Error(
-                await favoritesResponse.text()
+              await response.text()
             );
+
+          }
+
+
+          await loadProfessionalAccountProfile();
+
+
+          closeProfileModal();
+
+
+          alert(
+            "Profil bilgilerin başarıyla güncellendi."
+          );
+
+
+        } catch (error) {
+
+
+          console.error(
+            "Profil güncellenemedi:",
+            error
+          );
+
+
+          alert(
+            "Profil güncellenirken bir hata oluştu."
+          );
+
+
+        } finally {
+
+
+          saveButton.disabled =
+            false;
+
+
+          saveButton.textContent =
+            "Değişiklikleri Kaydet";
 
         }
 
 
-        const favorites =
-            await favoritesResponse.json();
+      }
+    );
 
-
-        document.getElementById(
-            "favorite-count"
-        ).textContent =
-
-            Array.isArray(favorites)
-                ? favorites.length
-                : 0;
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            "Favoriler yüklenemedi:",
-            error
-        );
-
-
-        document.getElementById(
-            "favorite-count"
-        ).textContent =
-            "0";
-
-    }
+  }
 
 
 
-    /* =============================================
-       AKTİF İLAN SAYISI
-       ============================================= */
-
-    try {
+  /* =======================================================
+     SAYFAYI BAŞLAT
+     ======================================================= */
 
 
-        const listingsResponse =
-            await fetch(
-
-                `${window.SUPABASE_API_URL}listings?user_id=eq.${user.id}&status=eq.active&select=id`,
-
-                {
-
-                    headers: {
-
-                        apikey:
-                            window.SUPABASE_KEY,
-
-                        Authorization:
-                            `Bearer ${accessToken}`
-
-                    }
-
-                }
-
-            );
-
-
-        const listings =
-            await listingsResponse.json();
-
-
-        document.getElementById(
-            "active-listings-count"
-        ).textContent =
-
-            Array.isArray(listings)
-                ? listings.length
-                : 0;
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            "İlanlar yüklenemedi:",
-            error
-        );
-
-
-        document.getElementById(
-            "active-listings-count"
-        ).textContent =
-            "0";
-
-    }
-
-}
-
-
-
-/* =========================================================
-   PROFİL DÜZENLEME
-   ========================================================= */
-
-
-document.addEventListener(
+  document.addEventListener(
     "DOMContentLoaded",
     () => {
 
 
-        const editButton =
-            document.getElementById(
-                "profile-edit-button"
-            );
+      const session =
+        getAccountSession();
 
 
-        const modal =
-            document.getElementById(
-                "profile-edit-modal"
-            );
+      if (!session) {
 
+        window.location.href =
+          "index.html#login";
 
-        const closeButton =
-            document.getElementById(
-                "profile-modal-close"
-            );
+        return;
 
+      }
 
-        const cancelButton =
-            document.getElementById(
-                "profile-edit-cancel"
-            );
 
+      renderStoredAccountUser();
 
-        const saveButton =
-            document.getElementById(
-                "profile-edit-save"
-            );
 
+      initializeProfessionalListingEvents();
 
 
-        /* =============================================
-           MODALI AÇ
-           ============================================= */
+      initializeProfessionalProfileModal();
 
 
-        if (editButton && modal) {
+      loadProfessionalAccountProfile();
 
 
-            editButton.addEventListener(
-                "click",
-                async () => {
+      loadProfessionalFavoriteCount();
 
 
-                    const username =
-
-                        document.getElementById(
-                            "profile-username"
-                        )?.textContent || "";
-
-
-                    const displayName =
-
-                        document.getElementById(
-                            "profile-display-name"
-                        )?.textContent || "";
-
-
-                    const email =
-
-                        document.getElementById(
-                            "profile-email"
-                        )?.textContent || "";
-
-
-
-                    document.getElementById(
-                        "edit-username"
-                    ).value =
-                        username;
-
-
-                    document.getElementById(
-                        "edit-display-name"
-                    ).value =
-                        displayName;
-
-
-                    document.getElementById(
-                        "edit-email"
-                    ).value =
-                        email;
-
-
-
-                    const savedUser =
-                        localStorage.getItem(
-                            "royale2_user"
-                        );
-
-
-                    const accessToken =
-                        localStorage.getItem(
-                            "royale2_access_token"
-                        );
-
-
-
-                    if (
-                        savedUser &&
-                        accessToken
-                    ) {
-
-
-                        const user =
-                            JSON.parse(
-                                savedUser
-                            );
-
-
-                        try {
-
-
-                            const response =
-                                await fetch(
-
-                                    `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
-
-                                    {
-
-                                        headers: {
-
-                                            apikey:
-                                                window.SUPABASE_KEY,
-
-                                            Authorization:
-                                                `Bearer ${accessToken}`
-
-                                        }
-
-                                    }
-
-                                );
-
-
-                            const data =
-                                await response.json();
-
-
-                            const privateProfile =
-                                data?.[0];
-
-
-
-                            const phoneInput =
-                                document.getElementById(
-                                    "edit-phone"
-                                );
-
-
-                            const tcInput =
-                                document.getElementById(
-                                    "edit-tc"
-                                );
-
-
-                            const addressInput =
-                                document.getElementById(
-                                    "edit-address"
-                                );
-
-
-                            const tcMessage =
-                                document.getElementById(
-                                    "tc-lock-message"
-                                );
-
-
-                            const privateLockMessage =
-                                document.getElementById(
-                                    "private-lock-message"
-                                );
-
-
-
-                            phoneInput.value =
-                                privateProfile?.phone ||
-                                "";
-
-
-                            addressInput.value =
-                                privateProfile?.address ||
-                                "";
-
-
-
-                            if (
-                                privateLockMessage &&
-                                (
-                                    privateProfile?.phone ||
-                                    privateProfile?.tc_identity_no ||
-                                    privateProfile?.address
-                                )
-                            ) {
-
-
-                                privateLockMessage.style.display =
-                                    "block";
-
-
-                            }
-
-                            else if (
-                                privateLockMessage
-                            ) {
-
-
-                                privateLockMessage.style.display =
-                                    "none";
-
-                            }
-
-
-
-                            if (
-                                privateProfile?.phone
-                            ) {
-
-                                phoneInput.disabled =
-                                    true;
-
-                            }
-
-                            else {
-
-                                phoneInput.disabled =
-                                    false;
-
-                            }
-
-
-
-                            if (
-                                privateProfile?.address
-                            ) {
-
-                                addressInput.disabled =
-                                    true;
-
-                            }
-
-                            else {
-
-                                addressInput.disabled =
-                                    false;
-
-                            }
-
-
-
-                            if (
-                                privateProfile?.tc_identity_no
-                            ) {
-
-
-                                tcInput.value =
-                                    privateProfile.tc_identity_no;
-
-
-                                tcInput.disabled =
-                                    true;
-
-
-                                if (tcMessage) {
-
-                                    tcMessage.style.display =
-                                        "block";
-
-                                }
-
-
-                            }
-
-                            else {
-
-
-                                tcInput.value =
-                                    "";
-
-
-                                tcInput.disabled =
-                                    false;
-
-
-                                if (tcMessage) {
-
-                                    tcMessage.style.display =
-                                        "none";
-
-                                }
-
-                            }
-
-
-                        }
-
-                        catch (error) {
-
-
-                            console.error(
-                                "Özel profil bilgileri yüklenemedi:",
-                                error
-                            );
-
-                        }
-
-                    }
-
-
-
-                    modal.classList.add(
-                        "active"
-                    );
-
-
-                }
-            );
-
-        }
-
-
-
-        /* =============================================
-           MODALI KAPAT
-           ============================================= */
-
-
-        if (
-            closeButton &&
-            modal
-        ) {
-
-
-            closeButton.addEventListener(
-                "click",
-                () => {
-
-                    modal.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        if (
-            cancelButton &&
-            modal
-        ) {
-
-
-            cancelButton.addEventListener(
-                "click",
-                () => {
-
-                    modal.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        if (modal) {
-
-
-            modal.addEventListener(
-                "click",
-                (e) => {
-
-
-                    if (
-                        e.target === modal
-                    ) {
-
-                        modal.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-
-                }
-            );
-
-        }
-
-
-
-        /* =============================================
-           PROFİLİ KAYDET
-           ============================================= */
-
-
-        if (
-            saveButton &&
-            modal
-        ) {
-
-
-            saveButton.addEventListener(
-                "click",
-                async () => {
-
-
-                    const displayName =
-                        document
-                            .getElementById(
-                                "edit-display-name"
-                            )
-                            .value
-                            .trim();
-
-
-                    const username =
-                        document
-                            .getElementById(
-                                "edit-username"
-                            )
-                            .value
-                            .trim();
-
-
-                    const phone =
-                        document
-                            .getElementById(
-                                "edit-phone"
-                            )
-                            .value
-                            .trim();
-
-
-                    const tcInput =
-                        document.getElementById(
-                            "edit-tc"
-                        );
-
-
-                    const tcIdentityNo =
-                        tcInput.value.trim();
-
-
-                    const address =
-                        document
-                            .getElementById(
-                                "edit-address"
-                            )
-                            .value
-                            .trim();
-
-
-
-                    /* TELEFON KONTROLÜ */
-
-
-                    if (
-                        !/^05\d{9}$/.test(
-                            phone
-                        )
-                    ) {
-
-
-                        alert(
-                            "Telefon numarası 05XXXXXXXXX şeklinde 11 haneli olmalıdır."
-                        );
-
-
-                        return;
-
-                    }
-
-
-
-                    /* TC KONTROLÜ */
-
-
-                    if (
-                        !/^[1-9][0-9]{10}$/.test(
-                            tcIdentityNo
-                        )
-                    ) {
-
-
-                        alert(
-                            "T.C. Kimlik No 11 haneli olmalıdır."
-                        );
-
-
-                        return;
-
-                    }
-
-
-
-                    if (!displayName) {
-
-
-                        alert(
-                            "Görünen ad boş bırakılamaz."
-                        );
-
-
-                        return;
-
-                    }
-
-
-
-                    if (!username) {
-
-
-                        alert(
-                            "Kullanıcı adı boş bırakılamaz."
-                        );
-
-
-                        return;
-
-                    }
-
-
-
-                    const savedUser =
-                        localStorage.getItem(
-                            "royale2_user"
-                        );
-
-
-                    const accessToken =
-                        localStorage.getItem(
-                            "royale2_access_token"
-                        );
-
-
-
-                    if (
-                        !savedUser ||
-                        !accessToken
-                    ) {
-
-
-                        alert(
-                            "Oturum bulunamadı. Lütfen tekrar giriş yapın."
-                        );
-
-
-                        return;
-
-                    }
-
-
-
-                    const user =
-                        JSON.parse(
-                            savedUser
-                        );
-
-
-
-                    try {
-
-
-                        saveButton.disabled =
-                            true;
-
-
-                        saveButton.textContent =
-                            "Kaydediliyor...";
-
-
-
-                        /* =============================================
-                           PUBLIC PROFILE UPDATE
-                           ============================================= */
-
-
-                        const response =
-                            await fetch(
-
-                                `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}`,
-
-                                {
-
-                                    method:
-                                        "PATCH",
-
-
-                                    headers: {
-
-                                        "apikey":
-                                            window.SUPABASE_KEY,
-
-                                        "Authorization":
-                                            `Bearer ${accessToken}`,
-
-                                        "Content-Type":
-                                            "application/json",
-
-                                        "Prefer":
-                                            "return=representation"
-
-                                    },
-
-
-                                    body:
-                                        JSON.stringify({
-
-                                            username:
-                                                username,
-
-                                            display_name:
-                                                displayName
-
-                                        })
-
-                                }
-
-                            );
-
-
-
-                        if (!response.ok) {
-
-
-                            throw new Error(
-                                await response.text()
-                            );
-
-                        }
-
-
-
-                        /* =============================================
-                           PRIVATE PROFILE UPDATE
-                           ============================================= */
-
-
-                        const privatePayload = {
-
-                            user_id:
-                                user.id
-
-                        };
-
-
-
-                        /*
-                         * Sadece daha önce kaydedilmemiş
-                         * ve kilitlenmemiş alanlar gönderilir.
-                         */
-
-
-                        if (
-                            !document.getElementById(
-                                "edit-phone"
-                            ).disabled
-                        ) {
-
-                            privatePayload.phone =
-                                phone;
-
-                        }
-
-
-
-                        if (
-                            !document.getElementById(
-                                "edit-tc"
-                            ).disabled
-                        ) {
-
-                            privatePayload.tc_identity_no =
-                                tcIdentityNo;
-
-                        }
-
-
-
-                        if (
-                            !document.getElementById(
-                                "edit-address"
-                            ).disabled
-                        ) {
-
-                            privatePayload.address =
-                                address;
-
-                        }
-
-
-
-                        /*
-                         * user_id dışında veri varsa
-                         * Supabase'e gönder.
-                         */
-
-
-                        if (
-                            Object.keys(
-                                privatePayload
-                            ).length > 1
-                        ) {
-
-
-                            const privateResponse =
-                                await fetch(
-
-                                    `${window.SUPABASE_API_URL}profile_private?on_conflict=user_id`,
-
-                                    {
-
-                                        method:
-                                            "POST",
-
-
-                                        headers: {
-
-                                            apikey:
-                                                window.SUPABASE_KEY,
-
-                                            Authorization:
-                                                `Bearer ${accessToken}`,
-
-                                            "Content-Type":
-                                                "application/json",
-
-                                            Prefer:
-                                                "resolution=merge-duplicates,return=representation"
-
-                                        },
-
-
-                                        body:
-                                            JSON.stringify(
-                                                privatePayload
-                                            )
-
-                                    }
-
-                                );
-
-
-
-                            if (
-                                !privateResponse.ok
-                            ) {
-
-
-                                throw new Error(
-                                    await privateResponse.text()
-                                );
-
-                            }
-
-                        }
-
-
-
-                        /* =============================================
-                           EKRANI ANINDA GÜNCELLE
-                           ============================================= */
-
-
-                        const profileUsername =
-                            document.getElementById(
-                                "profile-username"
-                            );
-
-
-                        if (profileUsername) {
-
-                            profileUsername.textContent =
-                                username;
-
-                        }
-
-
-
-                        document.getElementById(
-                            "profile-display-name"
-                        ).textContent =
-                            displayName;
-
-
-
-                        const accountUsername =
-                            document.getElementById(
-                                "account-username"
-                            );
-
-
-                        if (accountUsername) {
-
-                            accountUsername.textContent =
-                                username;
-
-                        }
-
-
-
-                        const sidebarUsername =
-                            document.getElementById(
-                                "sidebar-username"
-                            );
-
-
-                        if (sidebarUsername) {
-
-                            sidebarUsername.textContent =
-                                username;
-
-                        }
-
-
-
-                        const avatarLetter =
-                            document.getElementById(
-                                "profile-avatar-letter"
-                            );
-
-
-                        if (avatarLetter) {
-
-
-                            avatarLetter.textContent =
-
-                                (
-                                    displayName ||
-                                    username ||
-                                    "R"
-                                )
-                                .trim()
-                                .charAt(0)
-                                .toUpperCase();
-
-                        }
-
-
-
-                        modal.classList.remove(
-                            "active"
-                        );
-
-
-                        alert(
-                            "Profil bilgilerin başarıyla güncellendi."
-                        );
-
-
-                    }
-
-                    catch (error) {
-
-
-                        console.error(
-                            "Profil güncellenemedi:",
-                            error
-                        );
-
-
-                        const errorMessage =
-                            String(
-                                error?.message ||
-                                error ||
-                                ""
-                            );
-
-
-
-                        if (
-
-                            errorMessage.includes(
-                                "profiles_username_unique_ci"
-                            ) ||
-
-                            errorMessage.includes(
-                                "duplicate key value"
-                            ) ||
-
-                            errorMessage.includes(
-                                "23505"
-                            )
-
-                        ) {
-
-
-                            alert(
-                                "Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin."
-                            );
-
-
-                        }
-
-                        else {
-
-
-                            alert(
-                                "Profil güncellenirken bir hata oluştu. Lütfen tekrar deneyin."
-                            );
-
-                        }
-
-
-                    }
-
-                    finally {
-
-
-                        saveButton.disabled =
-                            false;
-
-
-                        saveButton.textContent =
-                            "Değişiklikleri Kaydet";
-
-                    }
-
-
-                }
-            );
-
-        }
+      updateAccountView();
 
 
     }
-);
+  );
 
 
 
-/* =========================================================
-   SAYFAYI YÜKLE
-   ========================================================= */
+  /* =======================================================
+     HASH DEĞİŞİKLİĞİ
+     ======================================================= */
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    loadAccountPage
-);
+  window.addEventListener(
+    "hashchange",
+    updateAccountView
+  );
 
+
+})();
 </script>
 
 
+</main>
+
 </body>
 </html>
+

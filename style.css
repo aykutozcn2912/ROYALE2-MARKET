@@ -4234,15 +4234,26 @@ background:
 
 #market-search-button {
     background:
-        linear-gradient(180deg, #a62217 0%, #6e0d0a 100%) !important;
-    color: #f4d28c !important;
-    border-left: 1px solid rgba(228, 189, 115, 0.45) !important;
-    transition: filter 0.2s ease, box-shadow 0.2s ease;
+        linear-gradient(
+            180deg,
+            #d69a38 0%,
+            #9f681f 100%
+        ) !important;
+
+    color: #100e0b !important;
+
+    border-left: 1px solid rgba(230, 184, 92, 0.65) !important;
+
+    transition:
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 #market-search-button:hover {
-    filter: brightness(1.18);
-    box-shadow: 0 0 15px rgba(198, 42, 28, 0.30);
+    filter: brightness(1.12);
+    box-shadow:
+        0 0 15px rgba(214, 154, 56, 0.28);
+}-shadow: 0 0 15px rgba(198, 42, 28, 0.30);
 }
 
 /* HEADER AKSİYONLARI */
@@ -4669,12 +4680,12 @@ body > main > .hero.hero-v2 .hero-v2-search button {
 
     border-radius: 0 !important;
 
-    background:
-        linear-gradient(
-            180deg,
-            #9e251b 0%,
-            #70140f 100%
-        ) !important;
+background:
+    linear-gradient(
+        180deg,
+        #d69a38 0%,
+        #9f681f 100%
+    ) !important;
 
     color: #fff !important;
 
@@ -4730,20 +4741,20 @@ body > main > .hero.hero-v2 .hero-v2-buttons a:hover {
 }
 
 body > main > .hero.hero-v2 .hero-v2-buttons .primary {
-    border: 1px solid #dc8d25 !important;
+    border: 1px solid #d69a38 !important;
 
     background:
         linear-gradient(
             180deg,
-            #a81717 0%,
-            #700b0b 100%
+            #d69a38 0%,
+            #9f681f 100%
         ) !important;
 
-    color: #fff !important;
+    color: #100e0b !important;
 
     box-shadow:
-        0 5px 18px rgba(143, 18, 18, 0.30),
-        inset 0 0 12px rgba(255, 164, 47, 0.08) !important;
+        0 5px 18px rgba(159, 104, 31, 0.28),
+        inset 0 1px 0 rgba(255, 230, 170, 0.18) !important;
 }
 
 body > main > .hero.hero-v2 .hero-v2-buttons .secondary {

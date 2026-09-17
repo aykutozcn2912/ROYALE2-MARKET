@@ -7007,3 +7007,101 @@ nav.main-nav {
         0 5px 16px rgba(0, 0, 0, 0.30),
         0 0 12px rgba(214, 154, 56, 0.10) !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — BLUE TO GOLD GLOBAL V1
+   Ana sayfadaki eski mavi vurgu renklerini kaldırır
+========================================================= */
+
+/* Bölüm üst başlıkları:
+   PAZARI KEŞFET / SUNUCUNU SEÇ / BASİT VE HIZLI / PAZARA KATIL */
+body > main .eyebrow {
+    color: var(--r2-gold) !important;
+}
+
+/* Son İlanlar sunucu filtreleri */
+body > main .filters button,
+body > main .server-filter,
+body > main .filter-btn {
+    color: var(--r2-text-soft) !important;
+    background: rgba(9, 14, 19, 0.88) !important;
+    border-color: var(--r2-border-soft) !important;
+}
+
+/* Aktif filtre */
+body > main .filters button.active,
+body > main .server-filter.active,
+body > main .filter-btn.active {
+    color: var(--r2-gold-light) !important;
+    background: rgba(214, 154, 56, 0.10) !important;
+    border-color: var(--r2-gold) !important;
+}
+
+/* Filtre hover */
+body > main .filters button:hover,
+body > main .server-filter:hover,
+body > main .filter-btn:hover {
+    color: var(--r2-gold-light) !important;
+    border-color: var(--r2-gold) !important;
+}
+
+/* Ana içerikteki standart mavi linkler */
+body > main a:not(.primary):not(.secondary) {
+    color: var(--r2-gold-light) !important;
+}
+
+body > main a:not(.primary):not(.secondary):hover {
+    color: #ffd47d !important;
+}
+
+/* Nasıl Çalışır 01 / 02 / 03 */
+.how-grid > * > :first-child {
+    color: var(--r2-gold) !important;
+}
+
+/* Select / kategori filtresi */
+body > main select {
+    color: var(--r2-text-soft) !important;
+    background-color: rgba(9, 14, 19, 0.92) !important;
+    border-color: var(--r2-border-soft) !important;
+}
+
+/* İlan kartları */
+body > main .listing-card {
+    background: rgba(8, 13, 18, 0.92) !important;
+    border-color: var(--r2-border-soft) !important;
+}
+
+/* İlan kartı görsel çerçevesi */
+body > main .listing-card img {
+    border-color: rgba(214, 154, 56, 0.16) !important;
+}
+
+/* Sunucu kartları */
+body > main .server-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8, 13, 18, 0.94),
+            rgba(13, 16, 18, 0.90)
+        ) !important;
+
+    border-color: var(--r2-border-soft) !important;
+}
+
+/* Reklam alanlarındaki eski parlak mavi çerçeve */
+.ad-slot,
+.side-ad,
+.ad-placeholder {
+    border-color: rgba(214, 154, 56, 0.34) !important;
+}
+
+/* Reklam etiketi */
+.ad-slot .ad-label,
+.side-ad .ad-label,
+.ad-placeholder .ad-label {
+    color: var(--r2-gold-light) !important;
+    border-color: rgba(214, 154, 56, 0.35) !important;
+    background: rgba(214, 154, 56, 0.07) !important;
+}

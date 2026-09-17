@@ -6920,3 +6920,90 @@ a {
         border-color 0.18s ease,
         background-color 0.18s ease;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — HEADER & NAV GOLD THEME V1
+========================================================= */
+
+/* Ana header */
+.site-header,
+header.site-header {
+    background: rgba(6, 10, 13, 0.97) !important;
+    border-bottom: 1px solid var(--r2-border-soft) !important;
+}
+
+/* Navigasyon alanı */
+.main-nav,
+nav.main-nav {
+    background: rgba(7, 11, 15, 0.96) !important;
+    border-top: 1px solid rgba(214, 154, 56, 0.08) !important;
+    border-bottom: 1px solid var(--r2-border) !important;
+}
+
+/* Menü yazıları */
+.main-nav a {
+    color: var(--r2-text-soft) !important;
+}
+
+/* Menü hover */
+.main-nav a:hover {
+    color: var(--r2-gold-light) !important;
+}
+
+/* Aktif menü */
+.main-nav a.active,
+.main-nav .active {
+    color: var(--r2-gold-light) !important;
+    background: rgba(214, 154, 56, 0.10) !important;
+    border-color: var(--r2-gold) !important;
+}
+
+/* Header arama kutusu */
+.site-header input[type="search"],
+.site-header input[type="text"] {
+    background: rgba(7, 12, 16, 0.92) !important;
+    border-color: var(--r2-border) !important;
+    color: var(--r2-text) !important;
+}
+
+.site-header input::placeholder {
+    color: var(--r2-text-muted) !important;
+}
+
+/* Header arama butonu */
+.site-header button[type="submit"],
+.site-header .search-button {
+    background: linear-gradient(
+        180deg,
+        var(--r2-gold),
+        var(--r2-gold-dark)
+    ) !important;
+
+    border-color: var(--r2-gold-light) !important;
+    color: #0a0b0c !important;
+}
+
+/* Header standart butonlar */
+.site-header .secondary,
+.site-header .outline {
+    background: rgba(10, 14, 18, 0.90) !important;
+    border-color: var(--r2-border) !important;
+    color: var(--r2-text) !important;
+}
+
+/* İlan Ver gibi primary buton */
+.site-header .primary {
+    background: linear-gradient(
+        180deg,
+        var(--r2-gold-light),
+        var(--r2-gold-dark)
+    ) !important;
+
+    border-color: var(--r2-gold-light) !important;
+    color: #090a0b !important;
+
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.30),
+        0 0 12px rgba(214, 154, 56, 0.10) !important;
+}

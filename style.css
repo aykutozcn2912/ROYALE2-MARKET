@@ -7805,7 +7805,7 @@ body > main .yang-rate-card {
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: 1.7fr repeat(3, 1fr);
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 55px;
 
     align-items: start;

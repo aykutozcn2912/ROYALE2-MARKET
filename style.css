@@ -7801,7 +7801,7 @@ body > main .yang-rate-card {
 }
 
 .market-footer-main {
-    width: min(100% - 40px, 1300px);
+    width: min(100% - 40px, 1100px);
     margin: 0 auto;
 
     display: grid;

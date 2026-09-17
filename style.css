@@ -7290,3 +7290,15 @@ body > main .step-card {
 .top-ad-area .top-ad-placeholder small {
     color: #8f887d !important;
 }
+
+
+/* ROYALE2 MARKET - ILAN KARTLARI GOLD/BLACK V2 */
+body > main .listing-card {
+    background: rgba(10, 9, 7, 0.96) !important;
+    border-color: rgba(205, 145, 55, 0.22) !important;
+    box-shadow: none !important;
+}
+
+body > main .listing-card:hover {
+    border-color: rgba(218, 157, 58, 0.55) !important;
+}

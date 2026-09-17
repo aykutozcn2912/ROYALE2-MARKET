@@ -479,14 +479,10 @@ async function loginUser(
   saveSession(data);
 
 
-  if (redirectAfterLogin) {
+if (redirectAfterLogin) {
 
-    alert(
-      "Giriş başarılı!"
-    );
-
-    window.location.href = "/";
-  }
+    window.location.href = "account.html";
+}
 
 
   return data;

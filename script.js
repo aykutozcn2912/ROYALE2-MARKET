@@ -506,7 +506,35 @@ function logoutUser() {
 // ==========================================================
 
 async function updateUserMenu() {
+  const headerLogin = document.querySelector(".header-login");
+  const headerRegister = document.querySelector(".header-register");
+  const headerAccount = document.getElementById("header-account");
+  const headerAccountUsername = document.getElementById("header-account-username");
 
+  const headerUser = getStoredUser();
+
+  if (headerUser) {
+    if (headerLogin) headerLogin.style.display = "none";
+    if (headerRegister) headerRegister.style.display = "none";
+
+    if (headerAccount) {
+      headerAccount.style.display = "inline-flex";
+    }
+
+    if (headerAccountUsername) {
+      headerAccountUsername.textContent =
+        headerUser?.user_metadata?.username ||
+        headerUser?.email?.split("@")[0] ||
+        "Hesabım";
+    }
+  } else {
+    if (headerLogin) headerLogin.style.display = "";
+    if (headerRegister) headerRegister.style.display = "";
+
+    if (headerAccount) {
+      headerAccount.style.display = "none";
+    }
+  }
   const loginLink =
     document.querySelector(
       ".login"

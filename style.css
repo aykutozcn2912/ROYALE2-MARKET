@@ -7321,3 +7321,342 @@ body > main .yang-rate-card {
     border-color: rgba(205, 145, 55, 0.22) !important;
     box-shadow: none !important;
 }
+
+
+/* ==========================================================
+   EPHESUS MARKET PAGE
+   ========================================================== */
+
+.ephesus-market-page {
+  position: relative;
+  width: min(1116px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 78px 0 90px;
+  min-height: 620px;
+}
+
+
+/* ==========================================================
+   HEADER / TITLE
+   ========================================================== */
+
+.ephesus-market-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.ephesus-market-title {
+  min-width: 0;
+}
+
+.ephesus-market-title .eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: #d99a2b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.ephesus-market-title h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+#ephesusListingCount {
+  margin: 12px 0 0;
+  color: #a99c88;
+  font-size: 13px;
+}
+
+
+/* ==========================================================
+   SEARCH + SORT
+   ========================================================== */
+
+.ephesus-market-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.ephesus-search {
+  position: relative;
+}
+
+.ephesus-search input {
+  width: 310px;
+  height: 46px;
+  padding: 0 16px 0 42px;
+  border: 1px solid rgba(208, 145, 37, 0.35);
+  border-radius: 6px;
+  outline: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 26, 18, 0.96),
+      rgba(18, 16, 12, 0.96)
+    );
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ephesus-search::before {
+  content: "⌕";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-52%);
+  color: #b88a3d;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.ephesus-search input::placeholder {
+  color: #756d61;
+}
+
+.ephesus-search input:focus {
+  border-color: #d99a2b;
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 43, 0.09);
+}
+
+.ephesus-sort select {
+  height: 46px;
+  min-width: 175px;
+  padding: 0 38px 0 14px;
+  border: 1px solid rgba(208, 145, 37, 0.35);
+  border-radius: 6px;
+  outline: none;
+  background-color: #18140e;
+  color: #e9e0d3;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+/* ==========================================================
+   CATEGORY FILTERS
+   ========================================================== */
+
+.ephesus-category-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 18px 0;
+  margin-bottom: 25px;
+  border-top: 1px solid rgba(208, 145, 37, 0.12);
+  border-bottom: 1px solid rgba(208, 145, 37, 0.12);
+}
+
+.ephesus-filter {
+  min-height: 38px;
+  padding: 0 17px;
+  border: 1px solid rgba(208, 145, 37, 0.3);
+  border-radius: 4px;
+  background: rgba(14, 12, 9, 0.82);
+  color: #b9ae9d;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.ephesus-filter:hover {
+  color: #fff;
+  border-color: #d99a2b;
+  transform: translateY(-1px);
+}
+
+.ephesus-filter.active {
+  color: #171108;
+  border-color: #d99a2b;
+  background:
+    linear-gradient(
+      180deg,
+      #e2a63b,
+      #b97918
+    );
+}
+
+
+/* ==========================================================
+   STATUS / EMPTY STATE
+   ========================================================== */
+
+.ephesus-market-status {
+  padding: 35px 20px;
+  border: 1px solid rgba(208, 145, 37, 0.18);
+  background: rgba(20, 17, 12, 0.7);
+  color: #a99c88;
+  text-align: center;
+  font-size: 13px;
+}
+
+.ephesus-empty-state {
+  padding: 60px 25px;
+  border: 1px solid rgba(208, 145, 37, 0.18);
+  background: rgba(20, 17, 12, 0.76);
+  text-align: center;
+}
+
+.ephesus-empty-state h3 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 21px;
+}
+
+.ephesus-empty-state p {
+  margin: 0;
+  color: #928675;
+  font-size: 13px;
+}
+
+
+/* ==========================================================
+   LISTING GRID
+   ========================================================== */
+
+.ephesus-listing-grid {
+  margin-top: 0;
+}
+
+
+/* ==========================================================
+   PAGINATION
+   ========================================================== */
+
+.ephesus-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 38px;
+}
+
+.ephesus-page-button {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 13px;
+  border: 1px solid rgba(208, 145, 37, 0.28);
+  border-radius: 4px;
+  background: rgba(20, 17, 12, 0.92);
+  color: #b8ad9c;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ephesus-page-button:hover:not(:disabled) {
+  border-color: #d99a2b;
+  color: #fff;
+}
+
+.ephesus-page-button.active {
+  border-color: #d99a2b;
+  background: #c88925;
+  color: #171108;
+}
+
+.ephesus-page-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .ephesus-market-page {
+    width: min(100% - 28px, 1116px);
+    padding-top: 50px;
+  }
+
+  .ephesus-market-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .ephesus-market-controls {
+    width: 100%;
+  }
+
+  .ephesus-search {
+    flex: 1;
+  }
+
+  .ephesus-search input {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .ephesus-market-page {
+    width: min(100% - 20px, 1116px);
+    padding-top: 35px;
+  }
+
+  .ephesus-market-controls {
+    flex-direction: column;
+  }
+
+  .ephesus-search,
+  .ephesus-sort,
+  .ephesus-sort select {
+    width: 100%;
+  }
+
+  .ephesus-category-filters {
+    gap: 7px;
+  }
+
+  .ephesus-filter {
+    flex: 1 1 auto;
+  }
+}

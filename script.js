@@ -515,6 +515,7 @@ async function updateUserMenu() {
 
   const user =
     getStoredUser();
+
 const registerLink =
   document.querySelector(
     ".header-register"
@@ -543,6 +544,7 @@ if (!user) {
 if (registerLink) {
   registerLink.style.setProperty("display", "none", "important");
 }
+
   let username =
     user?.user_metadata?.username ||
     user?.email?.split("@")[0] ||
@@ -1588,7 +1590,8 @@ document
           document
             .querySelectorAll(
               ".filter"
-            )
+
+                          )
             .forEach(
               button => {
 
@@ -3178,7 +3181,8 @@ async function fetchProfile(
 
 
   const profiles =
-    await response.json();
+
+      await response.json();
 
 
   return (
@@ -4768,7 +4772,8 @@ async function initUnreadMessagesBadge() {
         if (unreadCount > 0) {
             badge.textContent =
                 unreadCount > 99
-                    ? "99+"
+
+                          ? "99+"
                     : String(unreadCount);
 
             badge.style.display =
@@ -4840,9 +4845,10 @@ async function startUnreadMessagesRealtime() {
                     );
 
                     await initUnreadMessagesBadge();
-                  if (document.getElementById("conversationList")) {
-    await initMessagesPage();
-}
+
+                    if (document.getElementById("conversationList")) {
+                        await initMessagesPage();
+                    }
                 }
             )
             .subscribe((status) => {
@@ -4859,6 +4865,8 @@ async function startUnreadMessagesRealtime() {
         );
     }
 }
+
+
 // ==========================================================
 // SAYFAYI BAŞLAT
 // ==========================================================
@@ -4887,6 +4895,7 @@ document.addEventListener(
     }
   }
 );
+
 
 // =========================================================
 // ROYALE2 MARKET - ANA SAYFA MANSET SLIDER
@@ -5078,22 +5087,23 @@ async function loadYangRates() {
             const previousElement =
                 card.querySelector(".yang-previous-price");
 
-if (priceElement && Number.isFinite(currentPrice)) {
-    priceElement.textContent =
-        `${currentPrice.toLocaleString("tr-TR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        })} TL`;
-}
+            if (priceElement && Number.isFinite(currentPrice)) {
+                priceElement.textContent =
+                    `${currentPrice.toLocaleString("tr-TR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })} TL`;
+            }
 
-if (previousElement && Number.isFinite(previousPrice)) {
-    previousElement.textContent =
-        `Önceki: ${previousPrice.toLocaleString("tr-TR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        })} TL`;
-}
-});
+            if (previousElement && Number.isFinite(previousPrice)) {
+                previousElement.textContent =
+                    `Önceki: ${previousPrice.toLocaleString("tr-TR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })} TL`;
+            }
+        });
+
         // En son güncellenen kaydı bul.
         const validDates = rates
             .map((rate) => new Date(rate.updated_at))
@@ -5159,33 +5169,34 @@ function startYangRatesRealtime() {
         return;
     }
 
-// Supabase Realtime kütüphanesi hazır mı kontrol et.
-if (
-    typeof supabase === "undefined" ||
-    typeof supabase.createClient !== "function"
-) {
-    console.warn("Yang Realtime: Supabase kütüphanesi hazır değil.");
-    return;
-}
-
-const yangRealtimeClient = supabase.createClient(
-    window.SUPABASE_API_URL.replace("/rest/v1/", ""),
-    window.SUPABASE_KEY,
-    {
-        auth: {
-            persistSession: false,
-            autoRefreshToken: false
-        }
+    if (
+        typeof supabase === "undefined" ||
+        typeof supabase.createClient !== "function"
+    ) {
+        console.error(
+            "Yang Realtime başlatılamadı: Supabase kütüphanesi bulunamadı."
+        );
+        return;
     }
-);
 
-    // Aynı kanal ikinci kez açılmasın.
+    // Aynı kanalın birden fazla kez açılmasını engelle.
     if (yangRatesRealtimeChannel) {
         return;
     }
 
-    yangRatesRealtimeChannel = yangRealtimeClient
-        .channel("royale2-yang-rates-realtime")
+    const realtimeClient = supabase.createClient(
+        window.SUPABASE_API_URL.replace("/rest/v1/", ""),
+        window.SUPABASE_KEY,
+        {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false
+            }
+        }
+    );
+
+    yangRatesRealtimeChannel = realtimeClient
+        .channel("yang-rates-live")
         .on(
             "postgres_changes",
             {
@@ -5194,217 +5205,114 @@ const yangRealtimeClient = supabase.createClient(
                 table: "yang_rates"
             },
             async (payload) => {
-                console.log("Yang kuru Realtime değişikliği:", payload);
+                console.log(
+                    "Yang kuru Realtime güncellemesi:",
+                    payload
+                );
 
-                // Güncel verileri tekrar çek ve kartları yenile.
+                // Tablo değiştiğinde güncel değerleri tekrar çek.
                 await loadYangRates();
-
-                // Değişen kartı kısa süre vurgula.
-                const changedServer =
-                    payload?.new?.server || payload?.old?.server;
-
-                if (changedServer) {
-                    const changedCard = document.querySelector(
-                        `[data-yang-server="${changedServer}"]`
-                    );
-
-                    if (changedCard) {
-                        changedCard.classList.remove("yang-rate-live-update");
-
-                        // Animasyonun tekrar tetiklenebilmesi için reflow.
-                        void changedCard.offsetWidth;
-
-                        changedCard.classList.add("yang-rate-live-update");
-
-                        setTimeout(() => {
-                            changedCard.classList.remove(
-                                "yang-rate-live-update"
-                            );
-                        }, 1200);
-                    }
-                }
             }
         )
         .subscribe((status) => {
-            console.log("Yang kurları Realtime:", status);
+            console.log(
+                "Yang kurları Realtime durumu:",
+                status
+            );
         });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    startYangRatesRealtime();
-});
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        startYangRatesRealtime();
+    }
+);
+// =====================================================
+// ROYALE2 MARKET - YANG FİYAT HAREKETİ
+// Son fiyat değişimini yeşil/kırmızı ve flash ile gösterir
+// =====================================================
 
+const yangRateVisualState = new Map();
 
-// ============================================================
+function getYangRateDirection(currentPrice, previousPrice) {
+    const current = Number(currentPrice);
+    const previous = Number(previousPrice);
 
-// =========================================================
-// ROYALE2 MARKET - CANLI YANG GÖRSEL PİYASA HAREKETİ V3
-// =========================================================
-//
-// GERÇEK FİYAT:
-// Supabase current_price merkez fiyat.
-//
-// ÖNCEKİ FİYAT:
-// Supabase previous_price.
-// Animasyon bu alana ASLA dokunmaz.
-//
-// GÖRSEL PİYASA:
-// Her sunucu birbirinden bağımsız hareket eder.
-// Supabase'e veri YAZMAZ.
-// Mevcut Realtime sistemine dokunmaz.
-//
-// =========================================================
-
-const royaleYangVisualMarket = new Map();
-
-function royaleYangV3ParsePrice(value) {
-    if (value === null || value === undefined) return NaN;
-
-    if (typeof value === "number") {
-        return value;
+    if (
+        !Number.isFinite(current) ||
+        !Number.isFinite(previous)
+    ) {
+        return "neutral";
     }
 
-    return Number(
-        String(value)
-            .replace("TL", "")
-            .replace(/\s/g, "")
-            .replace(",", ".")
-            .trim()
-    );
+    if (current > previous) {
+        return "up";
+    }
+
+    if (current < previous) {
+        return "down";
+    }
+
+    return "neutral";
 }
 
-
-function royaleYangV3FormatPrice(value) {
-    return `${Number(value).toLocaleString("tr-TR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    })} TL`;
-}
-
-
-function royaleYangV3GetPriceElement(card) {
-    if (!card) return null;
-
-    return (
-        card.querySelector(".yang-current-price") ||
-        card.querySelector("[data-yang-price]") ||
-        card.querySelector(".yang-price") ||
-        card.querySelector(".price")
-    );
-}
-
-
-function royaleYangV3GetChangeElement(card) {
-    if (!card) return null;
-
-    return card.querySelector(".yang-change");
-}
-
-
-function royaleYangV3GetPreviousElement(card) {
-    if (!card) return null;
-
-    return card.querySelector(".yang-previous-price");
-}
-
-
-// ---------------------------------------------------------
-// YEŞİL / KIRMIZI FLASH
-// ---------------------------------------------------------
-
-function royaleYangV3Flash(card, direction) {
-    if (!card) return;
+function clearYangRateMovementClasses(card) {
+    if (!card) {
+        return;
+    }
 
     card.classList.remove(
-        "yang-tick-up",
-        "yang-tick-down"
+        "yang-rate-up",
+        "yang-rate-down",
+        "yang-rate-flash-up",
+        "yang-rate-flash-down"
     );
+}
 
-    // Aynı animasyon tekrar çalışabilsin.
-    void card.offsetWidth;
+function applyYangRateMovement(card, direction, shouldFlash = false) {
+    if (!card) {
+        return;
+    }
+
+    clearYangRateMovementClasses(card);
 
     if (direction === "up") {
-        card.classList.add("yang-tick-up");
+        card.classList.add("yang-rate-up");
+
+        if (shouldFlash) {
+            card.classList.add("yang-rate-flash-up");
+        }
     }
 
     if (direction === "down") {
-        card.classList.add("yang-tick-down");
+        card.classList.add("yang-rate-down");
+
+        if (shouldFlash) {
+            card.classList.add("yang-rate-flash-down");
+        }
     }
 
-    setTimeout(() => {
-        card.classList.remove(
-            "yang-tick-up",
-            "yang-tick-down"
-        );
-    }, 650);
+    if (shouldFlash) {
+        window.setTimeout(() => {
+            card.classList.remove(
+                "yang-rate-flash-up",
+                "yang-rate-flash-down"
+            );
+        }, 1300);
+    }
 }
 
+async function loadYangRatesWithMovement() {
+    const rateBoard = document.querySelector(".yang-rates-section");
 
-// ---------------------------------------------------------
-// YÜZDE DEĞİŞİMİ
-// ---------------------------------------------------------
-
-function royaleYangV3UpdatePercentage(
-    changeElement,
-    oldPrice,
-    newPrice
-) {
-    if (!changeElement) return;
-
-    if (
-        !Number.isFinite(oldPrice) ||
-        !Number.isFinite(newPrice) ||
-        oldPrice <= 0
-    ) {
+    if (!rateBoard) {
         return;
     }
 
-    const difference = newPrice - oldPrice;
-    const percentage = (difference / oldPrice) * 100;
-
-    changeElement.classList.remove(
-        "yang-up",
-        "yang-down",
-        "yang-neutral"
-    );
-
-    if (difference > 0) {
-        changeElement.classList.add("yang-up");
-
-        changeElement.textContent =
-            `▲ +${Math.abs(percentage).toLocaleString("tr-TR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })}%`;
-
-        return;
-    }
-
-    if (difference < 0) {
-        changeElement.classList.add("yang-down");
-
-        changeElement.textContent =
-            `▼ -${Math.abs(percentage).toLocaleString("tr-TR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })}%`;
-
-        return;
-    }
-
-    changeElement.classList.add("yang-neutral");
-    changeElement.textContent = "• %0,00";
-}
-
-
-// ---------------------------------------------------------
-// SUPABASE GERÇEK FİYATLARINI AL
-// ---------------------------------------------------------
-
-async function royaleYangV3GetRealRates() {
     try {
         const response = await fetch(
-            `${window.SUPABASE_API_URL}/yang_rates?select=server,current_price,previous_price&order=server.asc`,
+            `${window.SUPABASE_API_URL}yang_rates?select=server,unit,current_price,previous_price,updated_at&order=server.asc`,
             {
                 method: "GET",
                 headers: {
@@ -5417,361 +5325,1711 @@ async function royaleYangV3GetRealRates() {
 
         if (!response.ok) {
             throw new Error(
-                `Yang V3 fiyatları alınamadı. HTTP ${response.status}`
+                `Yang kurları alınamadı. HTTP ${response.status}`
+            );
+        }
+
+        const rates = await response.json();
+
+        if (!Array.isArray(rates) || rates.length === 0) {
+            return;
+        }
+
+        rates.forEach((rate) => {
+            const serverName = String(rate.server || "").trim();
+
+            const card = document.querySelector(
+                `[data-yang-server="${serverName}"]`
+            );
+
+            if (!card) {
+                return;
+            }
+
+            const currentPrice = Number(rate.current_price);
+            const previousPrice = Number(rate.previous_price);
+
+            const priceElement =
+                card.querySelector(".yang-current-price");
+
+            const previousElement =
+                card.querySelector(".yang-previous-price");
+
+            if (priceElement && Number.isFinite(currentPrice)) {
+                priceElement.textContent =
+                    `${currentPrice.toLocaleString("tr-TR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })} TL`;
+            }
+
+            if (previousElement && Number.isFinite(previousPrice)) {
+                previousElement.textContent =
+                    `Önceki: ${previousPrice.toLocaleString("tr-TR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })} TL`;
+            }
+
+            const direction =
+                getYangRateDirection(
+                    currentPrice,
+                    previousPrice
+                );
+
+            const oldState =
+                yangRateVisualState.get(serverName);
+
+            const shouldFlash =
+                oldState &&
+                oldState.currentPrice !== currentPrice;
+
+            applyYangRateMovement(
+                card,
+                direction,
+                shouldFlash
+            );
+
+            yangRateVisualState.set(
+                serverName,
+                {
+                    currentPrice,
+                    previousPrice,
+                    direction
+                }
+            );
+        });
+
+    } catch (error) {
+        console.error(
+            "Yang fiyat hareketi yüklenirken hata:",
+            error
+        );
+    }
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        loadYangRatesWithMovement();
+    }
+);
+// =====================================================
+// ROYALE2 MARKET - YANG FİYAT HAREKETİ V2
+// Tüm sunucularda yükseliş/düşüş görünümünü zorunlu uygular
+// =====================================================
+
+function normalizeYangServerName(value) {
+    return String(value || "")
+        .trim()
+        .toLocaleLowerCase("tr-TR")
+        .replace(/\s+/g, " ");
+}
+
+function getYangServerCard(serverName) {
+    const normalizedTarget =
+        normalizeYangServerName(serverName);
+
+    const cards =
+        Array.from(
+            document.querySelectorAll("[data-yang-server]")
+        );
+
+    return (
+        cards.find((card) => {
+            const cardServer =
+                normalizeYangServerName(
+                    card.dataset.yangServer
+                );
+
+            return cardServer === normalizedTarget;
+        }) || null
+    );
+}
+
+function applyYangVisualState(card, direction, shouldFlash = false) {
+    if (!card) {
+        return;
+    }
+
+    const priceElement =
+        card.querySelector(".yang-current-price");
+
+    const changeElement =
+        card.querySelector(".yang-change");
+
+    card.classList.remove(
+        "yang-up",
+        "yang-down",
+        "yang-neutral",
+        "yang-flash-up",
+        "yang-flash-down"
+    );
+
+    if (priceElement) {
+        priceElement.classList.remove(
+            "yang-price-up",
+            "yang-price-down",
+            "yang-price-neutral"
+        );
+    }
+
+    if (changeElement) {
+        changeElement.classList.remove(
+            "yang-change-up",
+            "yang-change-down",
+            "yang-change-neutral"
+        );
+    }
+
+    if (direction === "up") {
+        card.classList.add("yang-up");
+
+        if (priceElement) {
+            priceElement.classList.add("yang-price-up");
+        }
+
+        if (changeElement) {
+            changeElement.classList.add("yang-change-up");
+            changeElement.textContent = "YÜKSELİYOR";
+        }
+
+        if (shouldFlash) {
+            card.classList.add("yang-flash-up");
+        }
+    } else if (direction === "down") {
+        card.classList.add("yang-down");
+
+        if (priceElement) {
+            priceElement.classList.add("yang-price-down");
+        }
+
+        if (changeElement) {
+            changeElement.classList.add("yang-change-down");
+            changeElement.textContent = "DÜŞÜYOR";
+        }
+
+        if (shouldFlash) {
+            card.classList.add("yang-flash-down");
+        }
+    } else {
+        card.classList.add("yang-neutral");
+
+        if (priceElement) {
+            priceElement.classList.add("yang-price-neutral");
+        }
+
+        if (changeElement) {
+            changeElement.classList.add("yang-change-neutral");
+            changeElement.textContent = "SABİT";
+        }
+    }
+
+    if (shouldFlash) {
+        window.setTimeout(() => {
+            card.classList.remove(
+                "yang-flash-up",
+                "yang-flash-down"
+            );
+        }, 1400);
+    }
+}
+
+const yangVisualPreviousPrices = new Map();
+
+async function syncYangVisualMarket() {
+    const rateBoard =
+        document.querySelector(".yang-rates-section");
+
+    if (!rateBoard) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${window.SUPABASE_API_URL}yang_rates?select=server,current_price,previous_price,updated_at&order=server.asc`,
+            {
+                method: "GET",
+                headers: {
+                    apikey: window.SUPABASE_KEY,
+                    Authorization: `Bearer ${window.SUPABASE_KEY}`,
+                    Accept: "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Yang görsel sistemi HTTP ${response.status}`
             );
         }
 
         const rates = await response.json();
 
         if (!Array.isArray(rates)) {
-            return [];
+            return;
         }
 
-        return rates;
+        rates.forEach((rate) => {
+            const serverName =
+                String(rate.server || "").trim();
+
+            const card =
+                getYangServerCard(serverName);
+
+            if (!card) {
+                console.warn(
+                    "Yang kartı bulunamadı:",
+                    serverName
+                );
+                return;
+            }
+
+            const currentPrice =
+                Number(rate.current_price);
+
+            const previousPrice =
+                Number(rate.previous_price);
+
+            if (!Number.isFinite(currentPrice)) {
+                return;
+            }
+
+            const oldRenderedPrice =
+                yangVisualPreviousPrices.get(
+                    normalizeYangServerName(serverName)
+                );
+
+            let direction = "neutral";
+
+            if (Number.isFinite(previousPrice)) {
+                if (currentPrice > previousPrice) {
+                    direction = "up";
+                } else if (currentPrice < previousPrice) {
+                    direction = "down";
+                }
+            }
+
+            const shouldFlash =
+                Number.isFinite(oldRenderedPrice) &&
+                oldRenderedPrice !== currentPrice;
+
+            applyYangVisualState(
+                card,
+                direction,
+                shouldFlash
+            );
+
+            yangVisualPreviousPrices.set(
+                normalizeYangServerName(serverName),
+                currentPrice
+            );
+        });
 
     } catch (error) {
         console.error(
-            "Royale Yang V3 fiyat okuma hatası:",
+            "Yang görsel senkronizasyon hatası:",
             error
         );
-
-        return [];
     }
 }
 
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        syncYangVisualMarket();
+    }
+);
+// =====================================================
+// ROYALE2 MARKET - YANG GÖRSEL SİSTEMİ V3
+// Mevcut CSS yapısından bağımsız çalışır.
+// Tüm sunuculara yükseliş/düşüş oku ve flash efekti verir.
+// =====================================================
 
-// ---------------------------------------------------------
-// SUPABASE -> GÖRSEL PİYASA SENKRONİZASYONU
-// ---------------------------------------------------------
+(function initRoyaleYangVisualV3() {
+    const STYLE_ID = "royale-yang-visual-v3-style";
 
-async function royaleYangV3Sync() {
-    const section =
-        document.querySelector(".yang-rates-section");
+    const lastRenderedPrices = new Map();
 
-    if (!section) return;
+    function normalizeServer(value) {
+        return String(value || "")
+            .trim()
+            .toLocaleLowerCase("tr-TR")
+            .replace(/\s+/g, " ");
+    }
 
-    const rates = await royaleYangV3GetRealRates();
-
-    if (!rates.length) return;
-
-    rates.forEach((rate) => {
-        const server = String(rate.server || "").trim();
-
-        if (!server) return;
-
-        const card = section.querySelector(
-            `[data-yang-server="${server}"]`
-        );
-
-        if (!card) return;
-
-        const priceElement =
-            royaleYangV3GetPriceElement(card);
-
-        const changeElement =
-            royaleYangV3GetChangeElement(card);
-
-        const previousElement =
-            royaleYangV3GetPreviousElement(card);
-
-        if (!priceElement) return;
-
-        const realPrice =
-            royaleYangV3ParsePrice(rate.current_price);
-
-        const previousPrice =
-            royaleYangV3ParsePrice(rate.previous_price);
-
-        if (
-            !Number.isFinite(realPrice) ||
-            realPrice <= 0
-        ) {
+    function injectStyles() {
+        if (document.getElementById(STYLE_ID)) {
             return;
         }
 
+        const style = document.createElement("style");
 
-        // -------------------------------------------------
-        // ÖNCEKİ FİYAT = SADECE SUPABASE previous_price
-        // -------------------------------------------------
+        style.id = STYLE_ID;
 
-        if (
-            previousElement &&
-            Number.isFinite(previousPrice)
-        ) {
-            previousElement.textContent =
-                `Önceki: ${royaleYangV3FormatPrice(previousPrice)}`;
+        style.textContent = `
+            [data-yang-server] .yang-v3-price-up {
+                color: #22c55e !important;
+                text-shadow: 0 0 12px rgba(34, 197, 94, 0.28);
+            }
+
+            [data-yang-server] .yang-v3-price-down {
+                color: #ef4444 !important;
+                text-shadow: 0 0 12px rgba(239, 68, 68, 0.28);
+            }
+
+            [data-yang-server] .yang-v3-price-neutral {
+                color: inherit !important;
+                text-shadow: none;
+            }
+
+            [data-yang-server] .yang-v3-indicator {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 22px;
+                height: 22px;
+                margin-left: 7px;
+                border-radius: 999px;
+                font-size: 14px;
+                font-weight: 900;
+                line-height: 1;
+                vertical-align: middle;
+                transition:
+                    transform 180ms ease,
+                    opacity 180ms ease,
+                    background-color 180ms ease,
+                    color 180ms ease;
+            }
+
+            [data-yang-server] .yang-v3-indicator-up {
+                color: #22c55e;
+                background: rgba(34, 197, 94, 0.12);
+                border: 1px solid rgba(34, 197, 94, 0.30);
+            }
+
+            [data-yang-server] .yang-v3-indicator-down {
+                color: #ef4444;
+                background: rgba(239, 68, 68, 0.12);
+                border: 1px solid rgba(239, 68, 68, 0.30);
+            }
+
+            [data-yang-server] .yang-v3-indicator-neutral {
+                color: #9ca3af;
+                background: rgba(156, 163, 175, 0.10);
+                border: 1px solid rgba(156, 163, 175, 0.20);
+            }
+
+            [data-yang-server].yang-v3-card-up {
+                border-color: rgba(34, 197, 94, 0.28) !important;
+            }
+
+            [data-yang-server].yang-v3-card-down {
+                border-color: rgba(239, 68, 68, 0.28) !important;
+            }
+
+            [data-yang-server].yang-v3-flash-up {
+                animation: royaleYangFlashUp 1.15s ease;
+            }
+
+            [data-yang-server].yang-v3-flash-down {
+                animation: royaleYangFlashDown 1.15s ease;
+            }
+
+            @keyframes royaleYangFlashUp {
+                0% {
+                    box-shadow: 0 0 0 rgba(34, 197, 94, 0);
+                    transform: translateY(0);
+                }
+
+                35% {
+                    box-shadow: 0 0 26px rgba(34, 197, 94, 0.34);
+                    transform: translateY(-2px);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 rgba(34, 197, 94, 0);
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes royaleYangFlashDown {
+                0% {
+                    box-shadow: 0 0 0 rgba(239, 68, 68, 0);
+                    transform: translateY(0);
+                }
+
+                35% {
+                    box-shadow: 0 0 26px rgba(239, 68, 68, 0.34);
+                    transform: translateY(2px);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 rgba(239, 68, 68, 0);
+                    transform: translateY(0);
+                }
+            }
+        `;
+
+        document.head.appendChild(style);
+    }
+
+    function getCard(serverName) {
+        const target =
+            normalizeServer(serverName);
+
+        const cards =
+            Array.from(
+                document.querySelectorAll(
+                    "[data-yang-server]"
+                )
+            );
+
+        return (
+            cards.find((card) => {
+                return (
+                    normalizeServer(
+                        card.dataset.yangServer
+                    ) === target
+                );
+            }) || null
+        );
+    }
+
+    function getPriceElement(card) {
+        if (!card) {
+            return null;
         }
 
+        return (
+            card.querySelector(".yang-current-price") ||
+            card.querySelector(".yang-price") ||
+            card.querySelector("[data-yang-price]") ||
+            null
+        );
+    }
 
-        // -------------------------------------------------
-        // İLK KURULUM
-        // -------------------------------------------------
+    function ensureIndicator(card, priceElement) {
+        if (!card || !priceElement) {
+            return null;
+        }
 
-        let state =
-            royaleYangVisualMarket.get(server);
+        let indicator =
+            card.querySelector(
+                ".yang-v3-indicator"
+            );
 
-        if (!state) {
-            state = {
-                server: server,
-                card: card,
-                priceElement: priceElement,
-                changeElement: changeElement,
+        if (indicator) {
+            return indicator;
+        }
 
-                basePrice: realPrice,
-                displayPrice: realPrice,
+        indicator =
+            document.createElement("span");
 
-                timer: null
+        indicator.className =
+            "yang-v3-indicator yang-v3-indicator-neutral";
+
+        indicator.textContent = "•";
+
+        indicator.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        priceElement.insertAdjacentElement(
+            "afterend",
+            indicator
+        );
+
+        return indicator;
+    }
+
+    function setVisualState(
+        card,
+        priceElement,
+        indicator,
+        direction,
+        shouldFlash
+    ) {
+        if (!card || !priceElement || !indicator) {
+            return;
+        }
+
+        priceElement.classList.remove(
+            "yang-v3-price-up",
+            "yang-v3-price-down",
+            "yang-v3-price-neutral"
+        );
+
+        indicator.classList.remove(
+            "yang-v3-indicator-up",
+            "yang-v3-indicator-down",
+            "yang-v3-indicator-neutral"
+        );
+
+        card.classList.remove(
+            "yang-v3-card-up",
+            "yang-v3-card-down",
+            "yang-v3-flash-up",
+            "yang-v3-flash-down"
+        );
+
+        if (direction === "up") {
+            priceElement.classList.add(
+                "yang-v3-price-up"
+            );
+
+            indicator.classList.add(
+                "yang-v3-indicator-up"
+            );
+
+            indicator.textContent = "▲";
+
+            indicator.title =
+                "Fiyat yükseldi";
+
+            card.classList.add(
+                "yang-v3-card-up"
+            );
+
+            if (shouldFlash) {
+                card.classList.add(
+                    "yang-v3-flash-up"
+                );
+            }
+        } else if (direction === "down") {
+            priceElement.classList.add(
+                "yang-v3-price-down"
+            );
+
+            indicator.classList.add(
+                "yang-v3-indicator-down"
+            );
+
+            indicator.textContent = "▼";
+
+            indicator.title =
+                "Fiyat düştü";
+
+            card.classList.add(
+                "yang-v3-card-down"
+            );
+
+            if (shouldFlash) {
+                card.classList.add(
+                    "yang-v3-flash-down"
+                );
+            }
+        } else {
+            priceElement.classList.add(
+                "yang-v3-price-neutral"
+            );
+
+            indicator.classList.add(
+                "yang-v3-indicator-neutral"
+            );
+
+            indicator.textContent = "•";
+
+            indicator.title =
+                "Fiyat sabit";
+        }
+
+        if (shouldFlash) {
+            window.setTimeout(() => {
+                card.classList.remove(
+                    "yang-v3-flash-up",
+                    "yang-v3-flash-down"
+                );
+            }, 1250);
+        }
+    }
+
+    async function syncVisuals() {
+        const board =
+            document.querySelector(
+                ".yang-rates-section"
+            );
+
+        if (!board) {
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `${window.SUPABASE_API_URL}yang_rates?select=server,current_price,previous_price,updated_at&order=server.asc`,
+                {
+                    method: "GET",
+                    headers: {
+                        apikey:
+                            window.SUPABASE_KEY,
+                        Authorization:
+                            `Bearer ${window.SUPABASE_KEY}`,
+                        Accept:
+                            "application/json"
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    `HTTP ${response.status}`
+                );
+            }
+
+            const rates =
+                await response.json();
+
+            if (!Array.isArray(rates)) {
+                return;
+            }
+
+            rates.forEach((rate) => {
+                const serverName =
+                    String(
+                        rate.server || ""
+                    ).trim();
+
+                const currentPrice =
+                    Number(
+                        rate.current_price
+                    );
+
+                const previousPrice =
+                    Number(
+                        rate.previous_price
+                    );
+
+                if (
+                    !serverName ||
+                    !Number.isFinite(
+                        currentPrice
+                    )
+                ) {
+                    return;
+                }
+
+                const card =
+                    getCard(serverName);
+
+                if (!card) {
+                    console.warn(
+                        "Yang V3 kart bulunamadı:",
+                        serverName
+                    );
+                    return;
+                }
+
+                const priceElement =
+                    getPriceElement(card);
+
+                if (!priceElement) {
+                    console.warn(
+                        "Yang V3 fiyat alanı bulunamadı:",
+                        serverName
+                    );
+                    return;
+                }
+
+                const indicator =
+                    ensureIndicator(
+                        card,
+                        priceElement
+                    );
+
+                priceElement.textContent =
+                    `${currentPrice.toLocaleString(
+                        "tr-TR",
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                    )} TL`;
+
+                let direction =
+                    "neutral";
+
+                if (
+                    Number.isFinite(
+                        previousPrice
+                    )
+                ) {
+                    if (
+                        currentPrice >
+                        previousPrice
+                    ) {
+                        direction = "up";
+                    } else if (
+                        currentPrice <
+                        previousPrice
+                    ) {
+                        direction = "down";
+                    }
+                }
+
+                const stateKey =
+                    normalizeServer(
+                        serverName
+                    );
+
+                const oldPrice =
+                    lastRenderedPrices.get(
+                        stateKey
+                    );
+
+                const shouldFlash =
+                    Number.isFinite(
+                        oldPrice
+                    ) &&
+                    oldPrice !==
+                        currentPrice;
+
+                setVisualState(
+                    card,
+                    priceElement,
+                    indicator,
+                    direction,
+                    shouldFlash
+                );
+
+                lastRenderedPrices.set(
+                    stateKey,
+                    currentPrice
+                );
+            });
+
+        } catch (error) {
+            console.error(
+                "Yang V3 görsel senkronizasyon hatası:",
+                error
+            );
+        }
+    }
+
+    function start() {
+        injectStyles();
+
+        syncVisuals();
+
+        window.setInterval(
+            syncVisuals,
+            30000
+        );
+    }
+
+    window.addEventListener(
+        "load",
+        () => {
+            window.setTimeout(
+                start,
+                2200
+            );
+        }
+    );
+})();
+
+
+// ==========================================================
+// ROYALE2 MARKET - İLANLARIM PANELİ
+// Mevcut ilan / mesaj / Supabase sistemlerine dokunmadan çalışır.
+// ==========================================================
+
+(function initMyListingsFeature() {
+    "use strict";
+
+    const MY_LISTINGS_HASH = "#my-listings";
+    const PANEL_ID = "royale2-my-listings-panel";
+    const STYLE_ID = "royale2-my-listings-style";
+
+    const serverNames = {
+        1: "Ephesus",
+        2: "Teos",
+        3: "Pergamon",
+        4: "Akademi Teos"
+    };
+
+    const categoryNames = {
+        1: "Eşya",
+        2: "Yang",
+        3: "Karakter",
+        4: "Hesap"
+    };
+
+    function escapeMyListingsHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function formatMyListingsPrice(value) {
+        const price = Number(value);
+
+        if (!Number.isFinite(price)) {
+            return "0 TL";
+        }
+
+        return (
+            price.toLocaleString("tr-TR", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }) + " TL"
+        );
+    }
+
+    function formatMyListingsDate(value) {
+        if (!value) {
+            return "-";
+        }
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return "-";
+        }
+
+        return date.toLocaleString("tr-TR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+    }
+
+    function getMyListingStatus(status) {
+        const normalized = String(status || "")
+            .trim()
+            .toLocaleLowerCase("tr-TR");
+
+        if (normalized === "active") {
+            return {
+                text: "Yayında",
+                className: "is-active"
             };
+        }
 
-            royaleYangVisualMarket.set(
-                server,
-                state
+        if (normalized === "sold") {
+            return {
+                text: "Satıldı",
+                className: "is-sold"
+            };
+        }
+
+        if (
+            normalized === "inactive" ||
+            normalized === "passive"
+        ) {
+            return {
+                text: "Yayında Değil",
+                className: "is-passive"
+            };
+        }
+
+        return {
+            text: status || "Bilinmiyor",
+            className: "is-unknown"
+        };
+    }
+
+    function ensureMyListingsStyles() {
+        if (document.getElementById(STYLE_ID)) {
+            return;
+        }
+
+        const style = document.createElement("style");
+
+        style.id = STYLE_ID;
+
+        style.textContent = `
+            #${PANEL_ID} {
+                width: min(1180px, calc(100% - 32px));
+                margin: 34px auto 60px;
+                color: #f5f7fb;
+            }
+
+            #${PANEL_ID}[hidden] {
+                display: none !important;
+            }
+
+            #${PANEL_ID} .r2ml-shell {
+                overflow: hidden;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 22px;
+                background:
+                    radial-gradient(
+                        circle at top right,
+                        rgba(214, 167, 65, 0.10),
+                        transparent 34%
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgba(20, 24, 31, 0.98),
+                        rgba(12, 15, 20, 0.98)
+                    );
+                box-shadow:
+                    0 24px 70px rgba(0, 0, 0, 0.34);
+            }
+
+            #${PANEL_ID} .r2ml-head {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 18px;
+                padding: 26px 28px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            }
+
+            #${PANEL_ID} .r2ml-title-wrap h1 {
+                margin: 0;
+                font-size: clamp(24px, 3vw, 34px);
+                line-height: 1.1;
+                color: #ffffff;
+            }
+
+            #${PANEL_ID} .r2ml-title-wrap p {
+                margin: 8px 0 0;
+                color: #9ca6b5;
+                font-size: 14px;
+            }
+
+            #${PANEL_ID} .r2ml-create {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 44px;
+                padding: 0 18px;
+                border: 1px solid rgba(214, 167, 65, 0.45);
+                border-radius: 12px;
+                background: linear-gradient(
+                    180deg,
+                    #d9ad4b,
+                    #b98727
+                );
+                color: #15120b;
+                text-decoration: none;
+                font-weight: 800;
+                white-space: nowrap;
+                transition:
+                    transform 160ms ease,
+                    filter 160ms ease;
+            }
+
+            #${PANEL_ID} .r2ml-create:hover {
+                transform: translateY(-1px);
+                filter: brightness(1.06);
+            }
+
+            #${PANEL_ID} .r2ml-body {
+                padding: 26px 28px 30px;
+            }
+
+            #${PANEL_ID} .r2ml-state {
+                padding: 42px 20px;
+                text-align: center;
+                border: 1px dashed rgba(255, 255, 255, 0.10);
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.018);
+                color: #9ca6b5;
+            }
+
+            #${PANEL_ID} .r2ml-state strong {
+                display: block;
+                margin-bottom: 7px;
+                color: #ffffff;
+                font-size: 18px;
+            }
+
+            #${PANEL_ID} .r2ml-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+
+            #${PANEL_ID} .r2ml-card {
+                display: grid;
+                grid-template-columns: 126px minmax(0, 1fr);
+                min-height: 154px;
+                overflow: hidden;
+                border: 1px solid rgba(255, 255, 255, 0.075);
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.025);
+                transition:
+                    transform 160ms ease,
+                    border-color 160ms ease,
+                    background 160ms ease;
+            }
+
+            #${PANEL_ID} .r2ml-card:hover {
+                transform: translateY(-2px);
+                border-color: rgba(214, 167, 65, 0.24);
+                background: rgba(255, 255, 255, 0.035);
+            }
+
+            #${PANEL_ID} .r2ml-image {
+                position: relative;
+                min-height: 154px;
+                background:
+                    linear-gradient(
+                        135deg,
+                        #181d25,
+                        #0c0f14
+                    );
+            }
+
+            #${PANEL_ID} .r2ml-image img {
+                width: 100%;
+                height: 100%;
+                min-height: 154px;
+                object-fit: cover;
+                display: block;
+            }
+
+            #${PANEL_ID} .r2ml-no-image {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #687383;
+                font-size: 12px;
+                font-weight: 700;
+                text-align: center;
+                padding: 12px;
+            }
+
+            #${PANEL_ID} .r2ml-content {
+                min-width: 0;
+                padding: 16px;
+            }
+
+            #${PANEL_ID} .r2ml-topline {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            #${PANEL_ID} .r2ml-server {
+                overflow: hidden;
+                color: #d9ad4b;
+                font-size: 11px;
+                font-weight: 900;
+                letter-spacing: 0.08em;
+                text-overflow: ellipsis;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+
+            #${PANEL_ID} .r2ml-status {
+                flex: 0 0 auto;
+                padding: 5px 8px;
+                border-radius: 999px;
+                font-size: 10px;
+                font-weight: 900;
+                letter-spacing: 0.02em;
+            }
+
+            #${PANEL_ID} .r2ml-status.is-active {
+                color: #86efac;
+                background: rgba(34, 197, 94, 0.12);
+                border: 1px solid rgba(34, 197, 94, 0.22);
+            }
+
+            #${PANEL_ID} .r2ml-status.is-sold {
+                color: #fcd34d;
+                background: rgba(245, 158, 11, 0.11);
+                border: 1px solid rgba(245, 158, 11, 0.22);
+            }
+
+            #${PANEL_ID} .r2ml-status.is-passive,
+            #${PANEL_ID} .r2ml-status.is-unknown {
+                color: #cbd5e1;
+                background: rgba(148, 163, 184, 0.10);
+                border: 1px solid rgba(148, 163, 184, 0.18);
+            }
+
+            #${PANEL_ID} .r2ml-card h2 {
+                margin: 0;
+                overflow: hidden;
+                color: #f8fafc;
+                font-size: 16px;
+                line-height: 1.35;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #${PANEL_ID} .r2ml-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 7px 12px;
+                margin-top: 8px;
+                color: #8490a0;
+                font-size: 11px;
+            }
+
+            #${PANEL_ID} .r2ml-bottom {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                gap: 12px;
+                margin-top: 15px;
+            }
+
+            #${PANEL_ID} .r2ml-price {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: 900;
+            }
+
+            #${PANEL_ID} .r2ml-view {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 34px;
+                padding: 0 11px;
+                border: 1px solid rgba(255, 255, 255, 0.10);
+                border-radius: 9px;
+                color: #dbe3ed;
+                text-decoration: none;
+                font-size: 11px;
+                font-weight: 800;
+                transition:
+                    background 150ms ease,
+                    border-color 150ms ease;
+            }
+
+            #${PANEL_ID} .r2ml-view:hover {
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(214, 167, 65, 0.28);
+            }
+
+            @media (max-width: 860px) {
+                #${PANEL_ID} .r2ml-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            @media (max-width: 620px) {
+                #${PANEL_ID} {
+                    width: min(100% - 20px, 1180px);
+                    margin-top: 20px;
+                }
+
+                #${PANEL_ID} .r2ml-head {
+                    align-items: stretch;
+                    flex-direction: column;
+                    padding: 20px;
+                }
+
+                #${PANEL_ID} .r2ml-create {
+                    width: 100%;
+                }
+
+                #${PANEL_ID} .r2ml-body {
+                    padding: 18px;
+                }
+
+                #${PANEL_ID} .r2ml-card {
+                    grid-template-columns: 100px minmax(0, 1fr);
+                }
+
+                #${PANEL_ID} .r2ml-image,
+                #${PANEL_ID} .r2ml-image img {
+                    min-height: 142px;
+                }
+
+                #${PANEL_ID} .r2ml-bottom {
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+            }
+        `;
+
+        document.head.appendChild(style);
+    }
+
+    function ensureMyListingsPanel() {
+        let panel =
+            document.getElementById(PANEL_ID);
+
+        if (panel) {
+            return panel;
+        }
+
+        panel =
+            document.createElement("section");
+
+        panel.id = PANEL_ID;
+        panel.hidden = true;
+
+        panel.innerHTML = `
+            <div class="r2ml-shell">
+                <div class="r2ml-head">
+                    <div class="r2ml-title-wrap">
+                        <h1>İlanlarım</h1>
+                        <p>
+                            Yayındaki ve geçmiş ilanlarını
+                            tek ekrandan görüntüle.
+                        </p>
+                    </div>
+
+                    <a
+                        class="r2ml-create"
+                        href="create-listing.html"
+                    >
+                        + Yeni İlan Ver
+                    </a>
+                </div>
+
+                <div class="r2ml-body">
+                    <div
+                        class="r2ml-state"
+                        data-my-listings-state
+                    >
+                        İlanların hazırlanıyor...
+                    </div>
+
+                    <div
+                        class="r2ml-grid"
+                        data-my-listings-grid
+                        hidden
+                    ></div>
+                </div>
+            </div>
+        `;
+
+        const preferredContainer =
+            document.getElementById(
+                "my-listings-container"
             );
 
-            priceElement.textContent =
-                royaleYangV3FormatPrice(realPrice);
+        const host =
+            preferredContainer ||
+            document.querySelector("main") ||
+            document.querySelector(".account-content") ||
+            document.querySelector(".account-main") ||
+            document.body;
+
+        if (preferredContainer) {
+            preferredContainer.innerHTML = "";
+        }
+
+        host.appendChild(panel);
+
+        return panel;
+    }
+
+    async function fetchMyListings(userId) {
+        const response =
+            await supabaseAuthFetch(
+                `${window.SUPABASE_API_URL}listings?user_id=eq.${encodeURIComponent(
+                    userId
+                )}&select=*&order=created_at.desc`
+            );
+
+        if (!response.ok) {
+            const errorText =
+                await response.text();
+
+            console.error(
+                "İlanlarım sorgu hatası:",
+                response.status,
+                errorText
+            );
+
+            throw new Error(
+                "İlanlarınız alınamadı."
+            );
+        }
+
+        const rows =
+            await response.json();
+
+        return Array.isArray(rows)
+            ? rows
+            : [];
+    }
+
+    async function fetchMyListingImages(listingIds) {
+        const firstImageByListing =
+            new Map();
+
+        if (!listingIds.length) {
+            return firstImageByListing;
+        }
+
+        const ids =
+            listingIds
+                .map((id) =>
+                    encodeURIComponent(
+                        String(id)
+                    )
+                )
+                .join(",");
+
+        const response =
+            await supabaseAuthFetch(
+                `${window.SUPABASE_API_URL}listing_images?listing_id=in.(${ids})&select=listing_id,image_url,sort_order&order=sort_order.asc`
+            );
+
+        if (!response.ok) {
+            console.warn(
+                "İlanlarım görselleri alınamadı:",
+                response.status
+            );
+
+            return firstImageByListing;
+        }
+
+        const rows =
+            await response.json();
+
+        if (!Array.isArray(rows)) {
+            return firstImageByListing;
+        }
+
+        rows.forEach((image) => {
+            const listingId =
+                String(
+                    image.listing_id ?? ""
+                );
+
+            if (
+                listingId &&
+                image.image_url &&
+                !firstImageByListing.has(
+                    listingId
+                )
+            ) {
+                firstImageByListing.set(
+                    listingId,
+                    image.image_url
+                );
+            }
+        });
+
+        return firstImageByListing;
+    }
+
+    function renderMyListings(
+        panel,
+        listings,
+        imageMap
+    ) {
+        const state =
+            panel.querySelector(
+                "[data-my-listings-state]"
+            );
+
+        const grid =
+            panel.querySelector(
+                "[data-my-listings-grid]"
+            );
+
+        if (!state || !grid) {
+            return;
+        }
+
+        if (!listings.length) {
+            grid.hidden = true;
+            grid.innerHTML = "";
+
+            state.hidden = false;
+
+            state.innerHTML = `
+                <strong>
+                    Henüz ilanınız bulunmuyor.
+                </strong>
+
+                İlk ilanınızı oluşturarak
+                Royale2 Market'te satışa
+                başlayabilirsiniz.
+            `;
 
             return;
         }
 
+        state.hidden = true;
+        grid.hidden = false;
 
-        // -------------------------------------------------
-        // SUPABASE current_price DEĞİŞTİYSE
-        // YENİ MERKEZ FİYATI KABUL ET
-        // -------------------------------------------------
+        grid.innerHTML =
+            listings
+                .map((listing) => {
+                    const status =
+                        getMyListingStatus(
+                            listing.status
+                        );
 
-        state.card = card;
-        state.priceElement = priceElement;
-        state.changeElement = changeElement;
+                    const server =
+                        serverNames[
+                            Number(
+                                listing.server_id
+                            )
+                        ] ||
+                        "Sunucu";
 
+                    const category =
+                        categoryNames[
+                            Number(
+                                listing.category_id
+                            )
+                        ] ||
+                        "Kategori";
+
+                    const title =
+                        escapeMyListingsHtml(
+                            listing.title ||
+                            "İlan"
+                        );
+
+                    const imageUrl =
+                        imageMap.get(
+                            String(
+                                listing.id
+                            )
+                        ) || "";
+
+                    const safeImage =
+                        escapeMyListingsHtml(
+                            imageUrl
+                        );
+
+                    const safeServer =
+                        escapeMyListingsHtml(
+                            server
+                        );
+
+                    const safeCategory =
+                        escapeMyListingsHtml(
+                            category
+                        );
+
+                    const safeStatusText =
+                        escapeMyListingsHtml(
+                            status.text
+                        );
+
+                    const safeStatusClass =
+                        escapeMyListingsHtml(
+                            status.className
+                        );
+
+                    const price =
+                        escapeMyListingsHtml(
+                            formatMyListingsPrice(
+                                listing.price
+                            )
+                        );
+
+                    const date =
+                        escapeMyListingsHtml(
+                            formatMyListingsDate(
+                                listing.created_at
+                            )
+                        );
+
+                    const detailUrl =
+                        `listing.html?id=${encodeURIComponent(
+                            listing.id
+                        )}`;
+
+                    return `
+                        <article class="r2ml-card">
+                            <div class="r2ml-image">
+                                ${
+                                    safeImage
+                                        ? `
+                                            <img
+                                                src="${safeImage}"
+                                                alt="${title}"
+                                                loading="lazy"
+                                            >
+                                        `
+                                        : `
+                                            <div class="r2ml-no-image">
+                                                Görsel bulunamadı
+                                            </div>
+                                        `
+                                }
+                            </div>
+
+                            <div class="r2ml-content">
+                                <div class="r2ml-topline">
+                                    <span class="r2ml-server">
+                                        ${safeServer}
+                                    </span>
+
+                                    <span
+                                        class="r2ml-status ${safeStatusClass}"
+                                    >
+                                        ${safeStatusText}
+                                    </span>
+                                </div>
+
+                                <h2 title="${title}">
+                                    ${title}
+                                </h2>
+
+                                <div class="r2ml-meta">
+                                    <span>
+                                        ${safeCategory}
+                                    </span>
+
+                                    <span>
+                                        ${date}
+                                    </span>
+                                </div>
+
+                                <div class="r2ml-bottom">
+                                    <div class="r2ml-price">
+                                        ${price}
+                                    </div>
+
+                                    <a
+                                        class="r2ml-view"
+                                        href="${detailUrl}"
+                                    >
+                                        İlanı Gör
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                })
+                .join("");
+    }
+
+    async function openMyListingsPanel() {
         if (
-            Math.abs(
-                state.basePrice - realPrice
-            ) > 0.001
+            window.location.hash !==
+            MY_LISTINGS_HASH
         ) {
-            state.basePrice = realPrice;
-
-            // Yeni gerçek fiyat geldiğinde görsel piyasa
-            // doğrudan yeni merkeze taşınır.
-            state.displayPrice = realPrice;
-
-            priceElement.textContent =
-                royaleYangV3FormatPrice(realPrice);
-        }
-    });
-}
-
-
-// ---------------------------------------------------------
-// TEK BİR SUNUCUNUN CANLI HAREKETİ
-// ---------------------------------------------------------
-
-function royaleYangV3Move(state) {
-    if (
-        !state ||
-        !state.card ||
-        !state.priceElement
-    ) {
-        return;
-    }
-
-    const oldPrice = state.displayPrice;
-    const basePrice = state.basePrice;
-
-    if (
-        !Number.isFinite(oldPrice) ||
-        !Number.isFinite(basePrice) ||
-        basePrice <= 0
-    ) {
-        return;
-    }
-
-
-    // Merkez fiyatın yaklaşık ±%1.20 çevresinde dolaşır.
-    const minPrice = basePrice * 0.988;
-    const maxPrice = basePrice * 1.012;
-
-
-    // Küçük doğal fiyat adımları.
-    const movements = [
-        -0.03,
-        -0.02,
-        -0.01,
-         0.01,
-         0.02,
-         0.03
-    ];
-
-    let movement =
-        movements[
-            Math.floor(
-                Math.random() * movements.length
-            )
-        ];
-
-
-    // Alt sınıra yaklaşıyorsa yukarı hareket ihtimalini artır.
-    if (oldPrice <= minPrice + 0.02) {
-        movement = Math.abs(movement);
-    }
-
-
-    // Üst sınıra yaklaşıyorsa aşağı hareket ihtimalini artır.
-    if (oldPrice >= maxPrice - 0.02) {
-        movement = -Math.abs(movement);
-    }
-
-
-    let newPrice = Number(
-        (oldPrice + movement).toFixed(2)
-    );
-
-
-    // Bant dışına çıkmasını engelle.
-    if (newPrice < minPrice) {
-        newPrice = Number(
-            Math.min(
-                basePrice,
-                oldPrice + 0.01
-            ).toFixed(2)
-        );
-    }
-
-    if (newPrice > maxPrice) {
-        newPrice = Number(
-            Math.max(
-                basePrice,
-                oldPrice - 0.01
-            ).toFixed(2)
-        );
-    }
-
-
-    if (newPrice <= 0) return;
-
-
-    // -----------------------------------------------------
-    // EKRANDAKİ CANLI FİYATI DEĞİŞTİR
-    // -----------------------------------------------------
-
-    state.displayPrice = newPrice;
-
-    state.priceElement.textContent =
-        royaleYangV3FormatPrice(newPrice);
-
-
-    // -----------------------------------------------------
-    // YÜZDE = BİR ÖNCEKİ GÖRSEL FİYATA GÖRE
-    // -----------------------------------------------------
-
-    royaleYangV3UpdatePercentage(
-        state.changeElement,
-        oldPrice,
-        newPrice
-    );
-
-
-    // -----------------------------------------------------
-    // FLASH
-    // -----------------------------------------------------
-
-    if (newPrice > oldPrice) {
-        royaleYangV3Flash(
-            state.card,
-            "up"
-        );
-    }
-
-    if (newPrice < oldPrice) {
-        royaleYangV3Flash(
-            state.card,
-            "down"
-        );
-    }
-
-
-    // -----------------------------------------------------
-    // HER SUNUCU İÇİN BAĞIMSIZ SONRAKİ HAREKET
-    // -----------------------------------------------------
-
-    const nextDelay =
-        2200 + Math.floor(
-            Math.random() * 3800
-        );
-
-    clearTimeout(state.timer);
-
-    state.timer = setTimeout(() => {
-        royaleYangV3Move(state);
-    }, nextDelay);
-}
-
-
-// ---------------------------------------------------------
-// GÖRSEL PİYASAYI BAŞLAT
-// ---------------------------------------------------------
-
-async function royaleYangV3Start() {
-    await royaleYangV3Sync();
-
-    royaleYangVisualMarket.forEach((state) => {
-
-        if (state.timer) {
-            clearTimeout(state.timer);
+            return;
         }
 
-        // Kartların aynı anda hareket etmesini engelle.
-        const firstDelay =
-            1000 + Math.floor(
-                Math.random() * 3500
+        const currentUser =
+            getStoredUser();
+
+        if (!currentUser?.id) {
+            window.location.href = "/";
+            return;
+        }
+
+        ensureMyListingsStyles();
+
+        const panel =
+            ensureMyListingsPanel();
+
+        panel.hidden = false;
+
+        const state =
+            panel.querySelector(
+                "[data-my-listings-state]"
             );
 
-        state.timer = setTimeout(() => {
-            royaleYangV3Move(state);
-        }, firstDelay);
+        const grid =
+            panel.querySelector(
+                "[data-my-listings-grid]"
+            );
+
+        if (state) {
+            state.hidden = false;
+            state.textContent =
+                "İlanların hazırlanıyor...";
+        }
+
+        if (grid) {
+            grid.hidden = true;
+            grid.innerHTML = "";
+        }
+
+        try {
+            const listings =
+                await fetchMyListings(
+                    currentUser.id
+                );
+
+            const listingIds =
+                listings
+                    .map((listing) =>
+                        listing.id
+                    )
+                    .filter(Boolean);
+
+            const imageMap =
+                await fetchMyListingImages(
+                    listingIds
+                );
+
+            renderMyListings(
+                panel,
+                listings,
+                imageMap
+            );
+
+            panel.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        } catch (error) {
+            console.error(
+                "İlanlarım paneli hatası:",
+                error
+            );
+
+            if (grid) {
+                grid.hidden = true;
+                grid.innerHTML = "";
+            }
+
+            if (state) {
+                state.hidden = false;
+
+                state.innerHTML = `
+                    <strong>
+                        İlanlar yüklenemedi.
+                    </strong>
+
+                    ${
+                        escapeMyListingsHtml(
+                            error.message ||
+                            "Lütfen tekrar deneyin."
+                        )
+                    }
+                `;
+            }
+        }
+    }
+
+    function closeMyListingsPanelWhenNeeded() {
+        const panel =
+            document.getElementById(
+                PANEL_ID
+            );
+
+        if (!panel) {
+            return;
+        }
+
+        if (
+            window.location.hash !==
+            MY_LISTINGS_HASH
+        ) {
+            panel.hidden = true;
+        }
+    }
+
+    window.addEventListener("hashchange", () => {
+        closeMyListingsPanelWhenNeeded();
+        openMyListingsPanel();
     });
 
-    console.log(
-        "Royale Market Yang Görsel Piyasa V3: AKTİF"
-    );
-}
-
-
-// ---------------------------------------------------------
-// REALTIME SONRASI MERKEZ FİYATLARI KONTROL ET
-//
-// Bu yalnızca Supabase'den OKUR.
-// Supabase'e hiçbir veri YAZMAZ.
-// ---------------------------------------------------------
-
-let royaleYangV3SyncTimer = null;
-
-function royaleYangV3ScheduleSync() {
-    clearTimeout(royaleYangV3SyncTimer);
-
-    royaleYangV3SyncTimer = setTimeout(() => {
-        royaleYangV3Sync();
-    }, 800);
-}
-
-
-// ---------------------------------------------------------
-// BAŞLAT
-// ---------------------------------------------------------
-
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
-        royaleYangV3Start();
-    }, 2200);
-
-
-    // Gerçek fiyat değişikliklerini takip et.
-    // Ağ yükünü düşük tutmak için 30 saniyede bir kontrol.
-    setInterval(() => {
-        royaleYangV3ScheduleSync();
-    }, 30000);
-
-});
-
-
+    document.addEventListener("DOMContentLoaded", () => {
+        openMyListingsPanel();
+    });
+})();

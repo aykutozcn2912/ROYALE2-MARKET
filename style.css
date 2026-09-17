@@ -7173,3 +7173,15 @@ body > main .section-head > a {
 body > main .section-head > a:hover {
     color: #ffd47d !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — İLAN KARTI MAVİ DETAYLARI ALTIN
+========================================================= */
+
+body > main .listing-card input[type="checkbox"],
+body > main .listing-card .checkbox,
+body > main .listing-card .checkmark {
+    border-color: #8f6425 !important;
+    accent-color: #c88a2b !important;
+}

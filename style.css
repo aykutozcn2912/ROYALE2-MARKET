@@ -7156,3 +7156,20 @@ body > main section a:not(.primary):not(.secondary) {
 body > main section a:not(.primary):not(.secondary):hover {
     color: #ffd47d !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — SECTION HEAD ALTIN TEMA
+========================================================= */
+
+body > main .section-head .eyebrow {
+    color: #d69a38 !important;
+}
+
+body > main .section-head > a {
+    color: #d69a38 !important;
+}
+
+body > main .section-head > a:hover {
+    color: #ffd47d !important;
+}

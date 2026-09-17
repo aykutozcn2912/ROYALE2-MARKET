@@ -6707,10 +6707,10 @@ html {
 
 body {
     background-image:
-        linear-gradient(
-            rgba(7, 9, 11, 0.12),
-            rgba(7, 9, 11, 0.22)
-        ),
+linear-gradient(
+    rgba(7, 9, 11, 0.04),
+    rgba(7, 9, 11, 0.10)
+),
         url("./images/hero-backgroundv3-v2.webp") !important;
 
     background-position: center top !important;

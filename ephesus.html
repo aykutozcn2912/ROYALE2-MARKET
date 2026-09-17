@@ -9,16 +9,19 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    Ephesus İlan Pazarı | Royale2 Market
-  </title>
+  <title>Ephesus İlan Pazarı | Royale2 Market</title>
 
   <meta
     name="description"
-    content="Royale2 Ephesus sunucusu Yang, eşya, karakter ve hesap ilanları."
+    content="Royale2 Ephesus sunucusu Yang, item, karakter ve hesap ilanlarını keşfet."
   >
 
-  <!-- MEVCUT SİTE TASARIMI -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="images/royale-market-icon.png"
+  >
+
   <link
     rel="stylesheet"
     href="style.css"
@@ -29,62 +32,114 @@
 <body>
 
   <!-- =====================================================
+       ÜST REKLAM
+  ====================================================== -->
+
+  <div class="top-ad-area">
+
+    <a
+      href="#"
+      class="top-ad-link"
+      aria-label="Üst reklam alanı"
+    >
+
+      <div class="top-ad-placeholder">
+
+        <span>REKLAM</span>
+
+        <strong>728 × 90</strong>
+
+        <small>
+          Üst Banner Reklam Alanı
+        </small>
+
+      </div>
+
+    </a>
+
+  </div>
+
+
+  <!-- =====================================================
        HEADER
   ====================================================== -->
 
-  <header class="topbar">
+  <header class="market-header">
 
-    <div class="container topbar-inner">
+    <div class="header-main">
+
+      <!-- LOGO -->
 
       <a
+        class="market-brand"
         href="index.html"
-        class="brand"
+        aria-label="Royale Market Ana Sayfa"
       >
-        <strong>ROYALE2</strong>
-        <span>MARKET</span>
+
+        <img
+          src="images/royale-market-logo.png"
+          alt="Royale Market"
+          class="market-brand-logo"
+        >
+
       </a>
 
 
-      <nav class="main-nav">
+      <!-- GENEL ARAMA -->
 
-        <a href="index.html">
-          Ana Sayfa
-        </a>
+      <div class="market-search">
 
-        <a
-          href="ephesus.html"
-          class="active"
+        <input
+          type="search"
+          id="market-search-input"
+          placeholder="İlan, item, karakter veya hesap ara..."
+          aria-label="İlanlarda ara"
         >
-          Ephesus
-        </a>
 
-        <a href="#">
-          Teos
-        </a>
+        <button
+          type="button"
+          id="market-search-button"
+          aria-label="Ara"
+        >
+          🔍
+        </button>
 
-        <a href="#">
-          Pergamon
-        </a>
-
-        <a href="#">
-          Akademi Teos
-        </a>
-
-      </nav>
+      </div>
 
 
-      <div class="actions">
+      <!-- KULLANICI İŞLEMLERİ -->
+
+      <div class="header-actions">
 
         <a
+          class="header-messages"
           href="messages.html"
-          class="btn ghost"
+          id="messages-link"
         >
-          Mesajlar
+          💬 Mesajlar
         </a>
 
+
         <a
+          class="header-login"
+          href="#login"
+        >
+          Giriş Yap
+        </a>
+
+
+        <a
+          class="header-register"
+          href="#register"
+          id="register-open"
+        >
+          Üye Ol
+        </a>
+
+
+        <a
+          class="header-sell"
           href="create-listing.html"
-          class="btn primary"
         >
           + İlan Ver
         </a>
@@ -93,50 +148,116 @@
 
     </div>
 
+
+    <!-- ===================================================
+         ANA MENÜ
+    ==================================================== -->
+
+    <div class="header-nav-wrap">
+
+      <nav
+        class="market-nav"
+        aria-label="Ana menü"
+      >
+
+        <a href="index.html">
+          İlan Pazarı
+        </a>
+
+
+        <a
+          class="active"
+          href="ephesus.html"
+          data-header-server="Ephesus"
+        >
+          Ephesus
+        </a>
+
+
+        <a
+          href="#"
+          data-header-server="Teos"
+        >
+          Teos
+        </a>
+
+
+        <a
+          href="#"
+          data-header-server="Pergamon"
+        >
+          Pergamon
+        </a>
+
+
+        <a
+          href="#"
+          data-header-server="Akademi Teos"
+        >
+          Akademi Teos
+        </a>
+
+
+        <a href="#how">
+          Nasıl Çalışır?
+        </a>
+
+
+        <a
+          class="nav-discord"
+          href="https://discord.gg/royale2wiki"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Discord
+        </a>
+
+      </nav>
+
+    </div>
+
   </header>
 
 
   <!-- =====================================================
-       EPHESUS PAZAR
+       EPHESUS PAZAR SAYFASI
   ====================================================== -->
 
   <main>
 
     <section
-      class="section ephesus-market-page"
       id="ephesus-market"
+      class="section ephesus-market-page"
     >
 
-      <div class="container">
+      <!-- =================================================
+           SAYFA BAŞLIĞI
+      ================================================== -->
 
-        <!-- SAYFA BAŞLIĞI -->
+      <div class="ephesus-market-header">
 
-        <div class="section-head">
+        <div class="ephesus-market-title">
 
-          <div>
+          <span class="eyebrow">
+            EPHESUS PAZARI
+          </span>
 
-            <span class="eyebrow">
-              ROYALE2 MARKET
-            </span>
+          <h1>
+            Ephesus İlan Pazarı
+          </h1>
 
-            <h1>
-              Ephesus İlan Pazarı
-            </h1>
-
-            <p id="ephesusListingCount">
-              İlanlar yükleniyor...
-            </p>
-
-          </div>
+          <p id="ephesusListingCount">
+            İlanlar yükleniyor...
+          </p>
 
         </div>
 
 
-        <!-- =================================================
+        <!-- ===============================================
              ARAMA + SIRALAMA
-        ================================================== -->
+        ================================================ -->
 
-        <div class="ephesus-market-toolbar">
+        <div class="ephesus-market-controls">
 
           <div class="ephesus-search">
 
@@ -144,14 +265,15 @@
               for="ephesusSearch"
               class="sr-only"
             >
-              İlanlarda ara
+              Ephesus ilanlarında ara
             </label>
 
             <input
               id="ephesusSearch"
               type="search"
-              placeholder="İlanlarda ara..."
+              placeholder="Ephesus ilanlarında ara..."
               autocomplete="off"
+              spellcheck="false"
             >
 
           </div>
@@ -166,7 +288,10 @@
               İlanları sırala
             </label>
 
-            <select id="ephesusSort">
+            <select
+              id="ephesusSort"
+              aria-label="İlanları sırala"
+            >
 
               <option value="newest">
                 Önce En Yeni
@@ -190,109 +315,127 @@
 
         </div>
 
+      </div>
 
-        <!-- =================================================
-             KATEGORİ FİLTRELERİ
-        ================================================== -->
 
-        <div
-          class="ephesus-category-filters"
-          role="group"
-          aria-label="Ephesus ilan kategorileri"
+      <!-- =================================================
+           KATEGORİ FİLTRELERİ
+      ================================================== -->
+
+      <div
+        class="ephesus-category-filters"
+        role="group"
+        aria-label="Ephesus ilan kategorileri"
+      >
+
+        <button
+          type="button"
+          class="ephesus-filter active"
+          data-category="Tümü"
+          aria-pressed="true"
         >
-
-          <button
-            type="button"
-            class="ephesus-filter active"
-            data-category="Tümü"
-          >
-            Tüm İlanlar
-          </button>
+          Tüm İlanlar
+        </button>
 
 
-          <button
-            type="button"
-            class="ephesus-filter"
-            data-category="Yang"
-          >
-            Yang
-          </button>
-
-
-          <button
-            type="button"
-            class="ephesus-filter"
-            data-category="Eşya"
-          >
-            İtem
-          </button>
-
-
-          <button
-            type="button"
-            class="ephesus-filter"
-            data-category="Karakter"
-          >
-            Karakter
-          </button>
-
-
-          <button
-            type="button"
-            class="ephesus-filter"
-            data-category="Hesap"
-          >
-            Hesap
-          </button>
-
-        </div>
-
-
-        <!-- =================================================
-             İLAN DURUMU
-        ================================================== -->
-
-        <div
-          id="ephesusMarketStatus"
-          class="ephesus-market-status"
-          aria-live="polite"
+        <button
+          type="button"
+          class="ephesus-filter"
+          data-category="Yang"
+          aria-pressed="false"
         >
-          Ephesus ilanları yükleniyor...
-        </div>
+          Yang
+        </button>
 
 
-        <!-- =================================================
-             İLAN KARTLARI
-        ================================================== -->
-
-        <div
-          id="ephesusListings"
-          class="listing-grid"
-        ></div>
-
-
-        <!-- =================================================
-             BOŞ SONUÇ
-        ================================================== -->
-
-        <div
-          id="ephesusEmptyState"
-          class="ephesus-empty-state"
-          hidden
+        <button
+          type="button"
+          class="ephesus-filter"
+          data-category="Eşya"
+          aria-pressed="false"
         >
+          İtem
+        </button>
 
-          <h3>
-            İlan bulunamadı
-          </h3>
 
-          <p>
-            Arama veya kategori filtrelerini
-            değiştirerek tekrar deneyebilirsin.
-          </p>
+        <button
+          type="button"
+          class="ephesus-filter"
+          data-category="Karakter"
+          aria-pressed="false"
+        >
+          Karakter
+        </button>
 
-        </div>
+
+        <button
+          type="button"
+          class="ephesus-filter"
+          data-category="Hesap"
+          aria-pressed="false"
+        >
+          Hesap
+        </button>
 
       </div>
+
+
+      <!-- =================================================
+           YÜKLEME / HATA DURUMU
+      ================================================== -->
+
+      <div
+        id="ephesusMarketStatus"
+        class="ephesus-market-status"
+        role="status"
+        aria-live="polite"
+      >
+        Ephesus ilanları yükleniyor...
+      </div>
+
+
+      <!-- =================================================
+           İLANLAR
+      ================================================== -->
+
+      <div
+        id="ephesusListings"
+        class="listing-grid ephesus-listing-grid"
+      ></div>
+
+
+      <!-- =================================================
+           SONUÇ BULUNAMADI
+      ================================================== -->
+
+      <div
+        id="ephesusEmptyState"
+        class="ephesus-empty-state"
+        hidden
+      >
+
+        <h3>
+          İlan bulunamadı
+        </h3>
+
+        <p>
+          Arama kelimesini veya kategori filtresini
+          değiştirerek tekrar deneyebilirsin.
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           SAYFALAMA
+      ================================================== -->
+
+      <nav
+        id="ephesusPagination"
+        class="ephesus-pagination"
+        aria-label="İlan sayfaları"
+        hidden
+      ></nav>
 
     </section>
 
@@ -300,24 +443,41 @@
 
 
   <!-- =====================================================
-       FOOTER
+       SOL / SAĞ REKLAM ALANLARI
   ====================================================== -->
 
-  <footer class="footer">
+  <div class="side-ad side-ad-left">
 
-    <div class="container">
+    <span>REKLAM</span>
 
-      <p>
-        © 2026 Royale2 Market
-      </p>
+    <strong>
+      200 × 760
+    </strong>
 
-    </div>
+    <small>
+      Sol Reklam Alanı
+    </small>
 
-  </footer>
+  </div>
+
+
+  <div class="side-ad side-ad-right">
+
+    <span>REKLAM</span>
+
+    <strong>
+      200 × 760
+    </strong>
+
+    <small>
+      Sağ Reklam Alanı
+    </small>
+
+  </div>
 
 
   <!-- =====================================================
-       SUPABASE REALTIME KÜTÜPHANESİ
+       SUPABASE
   ====================================================== -->
 
   <script
@@ -326,10 +486,17 @@
 
 
   <!-- =====================================================
-       MEVCUT ANA JAVASCRIPT
+       MEVCUT ORTAK SİSTEM
   ====================================================== -->
 
   <script src="script.js"></script>
+
+
+  <!-- =====================================================
+       EPHESUS MARKET MODÜLÜ
+  ====================================================== -->
+
+  <script src="ephesus.js"></script>
 
 </body>
 

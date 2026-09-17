@@ -6695,3 +6695,33 @@ body > main > .market-slider {
         background-attachment: scroll !important;
     }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — GLOBAL BACKGROUND V1
+   ========================================================= */
+
+html {
+    background: #080a0c !important;
+}
+
+body {
+    background-image:
+        linear-gradient(
+            rgba(7, 9, 11, 0.12),
+            rgba(7, 9, 11, 0.22)
+        ),
+        url("./images/hero-backgroundv3-v2.webp") !important;
+
+    background-position: center top !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-color: #080a0c !important;
+    min-height: 100vh !important;
+}
+
+/* Ana içerikteki düz arka planı kaldır */
+body > main {
+    background: transparent !important;
+}

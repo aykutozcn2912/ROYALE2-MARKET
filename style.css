@@ -6743,3 +6743,19 @@ body > main > .market-section {
 body > main .listing-card {
     background: rgba(7, 14, 21, 0.94) !important;
 }
+
+
+/* =====================================================
+   ROYALE2 MARKET — NASIL ÇALIŞIR PREMIUM PANEL V1
+   ===================================================== */
+
+.how-it-works {
+    position: relative !important;
+    background: rgba(5, 11, 16, 0.72) !important;
+    border: 1px solid rgba(205, 145, 55, 0.16) !important;
+    border-radius: 8px !important;
+    padding: 34px 28px 38px !important;
+    box-sizing: border-box !important;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}

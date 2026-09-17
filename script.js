@@ -541,7 +541,7 @@ if (!user) {
 }
   
 if (registerLink) {
-  registerLink.style.display = "none";
+  registerLink.style.setProperty("display", "none", "important");
 }
   let username =
     user?.user_metadata?.username ||

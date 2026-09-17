@@ -924,7 +924,64 @@ body {
 
 
     </section>
+      <!-- ==============================
+           İLANLARIM
+           ============================== -->
 
+      <div class="account-card my-listings-card" id="my-listings">
+
+        <div class="account-card-head">
+
+          <div>
+            <h2>İlanlarım</h2>
+            <p>Yayınladığın ilanları görüntüle ve yönet.</p>
+          </div>
+
+          <a href="create-listing.html" class="account-edit-btn">
+            + Yeni İlan
+          </a>
+
+        </div>
+
+        <div class="my-listings-toolbar">
+
+          <div class="my-listings-filters">
+            <button type="button" class="my-listings-filter active" data-status="all">
+              Tümü
+            </button>
+
+            <button type="button" class="my-listings-filter" data-status="active">
+              Aktif
+            </button>
+
+            <button type="button" class="my-listings-filter" data-status="sold">
+              Satıldı
+            </button>
+
+            <button type="button" class="my-listings-filter" data-status="inactive">
+              Yayında Değil
+            </button>
+          </div>
+
+          <input
+            type="search"
+            id="my-listings-search"
+            class="my-listings-search"
+            placeholder="İlanlarında ara..."
+            autocomplete="off"
+          >
+
+        </div>
+
+        <div id="my-listings-container" class="my-listings-container">
+
+          <div class="my-listings-loading">
+            İlanların yükleniyor...
+          </div>
+
+        </div>
+
+      </div>
   </div>
 
 

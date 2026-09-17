@@ -7105,3 +7105,54 @@ body > main .server-card {
     border-color: rgba(214, 154, 56, 0.35) !important;
     background: rgba(214, 154, 56, 0.07) !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — KALAN MAVİ VURGULARI TEMİZLE V2
+========================================================= */
+
+/* Küçük bölüm başlıkları */
+body > main .eyebrow,
+body > main section .eyebrow {
+    color: #d69a38 !important;
+}
+
+/* Sunucu kartlarındaki İlanları Gör */
+body > main .server-card a,
+body > main .servers a {
+    color: #d69a38 !important;
+}
+
+body > main .server-card a:hover,
+body > main .servers a:hover {
+    color: #ffd47d !important;
+}
+
+/* Nasıl Çalışır 01 - 02 - 03 */
+body > main .how-step > span,
+body > main .how-step .step-number,
+body > main .how-grid > div > span:first-child {
+    color: #d69a38 !important;
+}
+
+/* Reklam alanları */
+body .side-ad,
+body .ad-slot,
+body .ad-placeholder {
+    border-color: rgba(214, 154, 56, 0.42) !important;
+}
+
+body .side-ad *,
+body .ad-slot *,
+body .ad-placeholder * {
+    border-color: rgba(214, 154, 56, 0.42) !important;
+}
+
+/* Ana içerikte kalan standart mavi linkler */
+body > main section a:not(.primary):not(.secondary) {
+    color: #d69a38 !important;
+}
+
+body > main section a:not(.primary):not(.secondary):hover {
+    color: #ffd47d !important;
+}

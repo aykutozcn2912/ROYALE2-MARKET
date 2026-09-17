@@ -3719,13 +3719,13 @@ body {
     position: relative;
     overflow: hidden;
 
-    background:
-        radial-gradient(circle at 50% 0%,
-            rgba(212, 155, 54, 0.10),
-            transparent 38%),
-        linear-gradient(135deg,
-            rgba(5, 12, 18, 0.98),
-            rgba(7, 20, 30, 0.98));
+background:
+    radial-gradient(circle at 50% 0%,
+        rgba(212, 155, 54, 0.10) 0%,
+        transparent 38%),
+    linear-gradient(135deg,
+        rgba(10, 9, 7, 0.98),
+        rgba(5, 5, 5, 0.98));
 
     border: 1px solid rgba(211, 158, 67, 0.35);
     border-radius: 12px;
@@ -7301,4 +7301,12 @@ body > main .listing-card {
 
 body > main .listing-card:hover {
     border-color: rgba(218, 157, 58, 0.55) !important;
+}
+
+
+/* ROYALE2 MARKET - YANG KARTLARI BLACK/GOLD */
+body > main .yang-rate-card {
+    background: rgba(10, 9, 7, 0.96) !important;
+    border-color: rgba(205, 145, 55, 0.22) !important;
+    box-shadow: none !important;
 }

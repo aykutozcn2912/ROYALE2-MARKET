@@ -7269,3 +7269,24 @@ body > main .step-card {
     background-color: rgba(9, 9, 9, 0.92) !important;
     border-color: rgba(190, 132, 42, 0.30) !important;
 }
+
+
+/* ÜST 728x90 REKLAM — SİYAH / ALTIN */
+.top-ad-area .top-ad-placeholder {
+    background: rgba(8, 8, 8, 0.82) !important;
+    border: 1px dashed rgba(200, 138, 43, 0.65) !important;
+    color: #d6c4a5 !important;
+}
+
+.top-ad-area .top-ad-placeholder span {
+    color: #d89a32 !important;
+    border-color: rgba(200, 138, 43, 0.65) !important;
+}
+
+.top-ad-area .top-ad-placeholder strong {
+    color: #ffffff !important;
+}
+
+.top-ad-area .top-ad-placeholder small {
+    color: #8f887d !important;
+}

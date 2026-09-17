@@ -1023,21 +1023,111 @@ document.addEventListener(
 
 let listings = [];
 
-let selectedServer =
-  "Tümü";
-
+let selectedServer = "Tümü";
 
 const grid =
   document.getElementById(
     "listings"
   );
 
-
 const category =
   document.getElementById(
     "category"
   );
 
+
+// ==========================================================
+// ANA SAYFA İLAN VERİSİNİ NORMALLEŞTİR
+// ==========================================================
+
+function normalizeHomeListing(item) {
+
+  const serverNames = {
+    1: "Ephesus",
+    2: "Teos",
+    3: "Pergamon",
+    4: "Akademi Teos"
+  };
+
+
+  const categoryNames = {
+    1: "Eşya",
+    2: "Yang",
+    3: "Karakter",
+    4: "Hesap"
+  };
+
+
+  return {
+    ...item,
+
+    server:
+      item.server ||
+      serverNames[
+        Number(item.server_id)
+      ] ||
+      "",
+
+    cat:
+      item.cat ||
+      categoryNames[
+        Number(item.category_id)
+      ] ||
+      "",
+
+    desc:
+      item.desc ??
+      item.description ??
+      ""
+  };
+}
+
+
+// ==========================================================
+// HTML GÜVENLİ METİN
+// ==========================================================
+
+function escapeHomeListingHtml(value) {
+
+  return String(
+    value ?? ""
+  )
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+// ==========================================================
+// FİYAT FORMATLA
+// ==========================================================
+
+function formatHomeListingPrice(value) {
+
+  const price =
+    Number(value);
+
+
+  if (!Number.isFinite(price)) {
+    return "";
+  }
+
+
+  return price.toLocaleString(
+    "tr-TR",
+    {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
+    }
+  );
+}
+
+
+// ==========================================================
+// İLANLARI SUPABASE'DEN YÜKLE
+// ==========================================================
 
 async function loadListings() {
 
@@ -1059,11 +1149,16 @@ async function loadListings() {
 
     const response =
       await fetch(
-        `${window.SUPABASE_API_URL}listings?select=*`,
+        `${window.SUPABASE_API_URL}listings?status=eq.active&select=*&order=created_at.desc`,
         {
+          method: "GET",
+
           headers: {
             "apikey":
-              window.SUPABASE_KEY
+              window.SUPABASE_KEY,
+
+            "Accept":
+              "application/json"
           }
         }
       );
@@ -1077,63 +1172,119 @@ async function loadListings() {
     }
 
 
-    listings =
+    const data =
       await response.json();
 
-// ==========================================================
-// ANA SAYFA İLAN KAPAK GÖRSELLERİ
-// ==========================================================
 
-const listingImagesResponse =
-  await fetch(
-    `${window.SUPABASE_API_URL}listing_images?select=listing_id,image_url,sort_order&order=sort_order.asc`,
-    {
-      headers: {
-        "apikey":
-          window.SUPABASE_KEY
+    listings =
+      Array.isArray(data)
+        ? data.map(
+            normalizeHomeListing
+          )
+        : [];
+
+
+    // ======================================================
+    // İLAN KAPAK GÖRSELLERİ
+    // ======================================================
+
+    if (listings.length > 0) {
+
+      const listingIds =
+        listings
+          .map(item => item.id)
+          .filter(Boolean);
+
+
+      if (listingIds.length > 0) {
+
+        const encodedIds =
+          listingIds
+            .map(id =>
+              encodeURIComponent(
+                String(id)
+              )
+            )
+            .join(",");
+
+
+        const listingImagesResponse =
+          await fetch(
+            `${window.SUPABASE_API_URL}listing_images?listing_id=in.(${encodedIds})&select=listing_id,image_url,sort_order&order=sort_order.asc`,
+            {
+              method: "GET",
+
+              headers: {
+                "apikey":
+                  window.SUPABASE_KEY,
+
+                "Accept":
+                  "application/json"
+              }
+            }
+          );
+
+
+        if (listingImagesResponse.ok) {
+
+          const listingImages =
+            await listingImagesResponse.json();
+
+
+          const firstImageByListing =
+            new Map();
+
+
+          listingImages.forEach(
+            image => {
+
+              const listingId =
+                String(
+                  image.listing_id ?? ""
+                );
+
+
+              if (
+                listingId &&
+                image.image_url &&
+                !firstImageByListing.has(
+                  listingId
+                )
+              ) {
+
+                firstImageByListing.set(
+                  listingId,
+                  image.image_url
+                );
+              }
+            }
+          );
+
+
+          listings =
+            listings.map(
+              item => ({
+                ...item,
+
+                cover_image:
+                  firstImageByListing.get(
+                    String(item.id)
+                  ) || ""
+              })
+            );
+        }
+
+        else {
+
+          console.warn(
+            "İlan kapak görselleri alınamadı:",
+            listingImagesResponse.status
+          );
+        }
       }
     }
-  );
 
-if (listingImagesResponse.ok) {
 
-  const listingImages =
-    await listingImagesResponse.json();
-
-  const firstImageByListing =
-    new Map();
-
-  listingImages.forEach(
-    image => {
-
-      if (
-        image.listing_id &&
-        image.image_url &&
-        !firstImageByListing.has(
-          String(image.listing_id)
-        )
-      ) {
-
-        firstImageByListing.set(
-          String(image.listing_id),
-          image.image_url
-        );
-      }
-    }
-  );
-
-  listings =
-    listings.map(
-      item => ({
-        ...item,
-
-        cover_image:
-          firstImageByListing.get(
-            String(item.id)
-          ) || ""
-      })
-    );
-}
     renderListings();
 
 
@@ -1147,6 +1298,7 @@ if (listingImagesResponse.ok) {
 
     grid.innerHTML = `
       <div class="listing">
+
         <h3>
           İlanlar yüklenemedi
         </h3>
@@ -1155,11 +1307,16 @@ if (listingImagesResponse.ok) {
           Veritabanı bağlantısı
           kontrol ediliyor.
         </p>
+
       </div>
     `;
   }
 }
 
+
+// ==========================================================
+// İLANLARI EKRANA BAS
+// ==========================================================
 
 function renderListings() {
 
@@ -1168,117 +1325,40 @@ function renderListings() {
   }
 
 
-  const cat =
+  const selectedCategory =
     category?.value ||
     "Tümü";
 
 
-  const data =
+  const filteredListings =
     listings.filter(
-      item =>
+      item => {
 
-        (
-          selectedServer ===
-            "Tümü" ||
+        const serverMatches =
+          selectedServer === "Tümü" ||
+          item.server === selectedServer;
 
-          item.server ===
-            selectedServer
-        )
 
-        &&
+        const categoryMatches =
+          selectedCategory === "Tümü" ||
+          item.cat === selectedCategory ||
+          (
+            selectedCategory === "Eşya" &&
+            item.cat === "Item"
+          );
 
-        (
-          cat === "Tümü" ||
 
-          item.cat === cat
-        )
+        return (
+          serverMatches &&
+          categoryMatches
+        );
+      }
     );
 
 
-  grid.innerHTML =
+  if (!filteredListings.length) {
 
-    data.map(
-      item => `
-        <article class="listing">
-${
-  item.cover_image
-    ? `
-      <div class="listing-image">
-        <img
-          src="${item.cover_image}"
-          alt="${item.title || "İlan görseli"}"
-          loading="lazy"
-        >
-      </div>
-    `
-    : ""
-}
-          <div class="listing-top">
-
-            <span class="server-tag">
-              ${
-                item.server
-                  ?.toUpperCase() ||
-                ""
-              }
-            </span>
-
-            <span class="cat">
-              ${
-                item.cat || ""
-              }
-            </span>
-
-          </div>
-
-
-          <h3>
-            ${
-              item.title || ""
-            }
-          </h3>
-
-
-          <p>
-            ${
-              item.desc || ""
-            }
-          </p>
-
-
-          <div class="listing-bottom">
-
-            <div class="price">
-
-              ${
-                item.price || ""
-              }
-
-              <small>
-                TL
-              </small>
-
-            </div>
-
-
-            <a
-              class="view"
-              href="listing.html?id=${encodeURIComponent(
-                item.id
-              )}"
-            >
-              İLANI GÖR →
-            </a>
-
-          </div>
-
-        </article>
-      `
-    ).join("")
-
-    ||
-
-    `
+    grid.innerHTML = `
       <div class="listing">
 
         <h3>
@@ -1292,8 +1372,137 @@ ${
 
       </div>
     `;
+
+    return;
+  }
+
+
+  grid.innerHTML =
+    filteredListings
+      .map(
+        item => {
+
+          const safeTitle =
+            escapeHomeListingHtml(
+              item.title || "İlan"
+            );
+
+
+          const safeDescription =
+            escapeHomeListingHtml(
+              item.desc || ""
+            );
+
+
+          const safeServer =
+            escapeHomeListingHtml(
+              String(
+                item.server || ""
+              ).toUpperCase()
+            );
+
+
+          const safeCategory =
+            escapeHomeListingHtml(
+              item.cat || ""
+            );
+
+
+          const safePrice =
+            escapeHomeListingHtml(
+              formatHomeListingPrice(
+                item.price
+              )
+            );
+
+
+          const safeImage =
+            escapeHomeListingHtml(
+              item.cover_image || ""
+            );
+
+
+          const listingUrl =
+            `listing.html?id=${encodeURIComponent(
+              item.id
+            )}`;
+
+
+          return `
+            <article class="listing">
+
+              ${
+                safeImage
+                  ? `
+                    <div class="listing-image">
+
+                      <img
+                        src="${safeImage}"
+                        alt="${safeTitle}"
+                        loading="lazy"
+                      >
+
+                    </div>
+                  `
+                  : ""
+              }
+
+              <div class="listing-top">
+
+                <span class="server-tag">
+                  ${safeServer}
+                </span>
+
+                <span class="cat">
+                  ${safeCategory}
+                </span>
+
+              </div>
+
+
+              <h3>
+                ${safeTitle}
+              </h3>
+
+
+              <p>
+                ${safeDescription}
+              </p>
+
+
+              <div class="listing-bottom">
+
+                <div class="price">
+
+                  ${safePrice}
+
+                  <small>
+                    TL
+                  </small>
+
+                </div>
+
+
+                <a
+                  class="view"
+                  href="${listingUrl}"
+                >
+                  İLANI GÖR →
+                </a>
+
+              </div>
+
+            </article>
+          `;
+        }
+      )
+      .join("");
 }
 
+
+// ==========================================================
+// SUNUCU FİLTRELERİ
+// ==========================================================
 
 document
   .querySelectorAll(
@@ -1324,7 +1533,8 @@ document
 
 
           selectedServer =
-            button.dataset.server;
+            button.dataset.server ||
+            "Tümü";
 
 
           renderListings();
@@ -1334,6 +1544,10 @@ document
   );
 
 
+// ==========================================================
+// KATEGORİ FİLTRESİ
+// ==========================================================
+
 if (category) {
 
   category.addEventListener(
@@ -1342,6 +1556,10 @@ if (category) {
   );
 }
 
+
+// ==========================================================
+// SUNUCU KARTLARI
+// ==========================================================
 
 document
   .querySelectorAll(
@@ -1355,7 +1573,8 @@ document
         () => {
 
           selectedServer =
-            card.dataset.serverCard;
+            card.dataset.serverCard ||
+            "Tümü";
 
 
           document
@@ -1395,6 +1614,10 @@ document
     }
   );
 
+
+// ==========================================================
+// ANA SAYFA İLAN SİSTEMİNİ BAŞLAT
+// ==========================================================
 
 loadListings();
 

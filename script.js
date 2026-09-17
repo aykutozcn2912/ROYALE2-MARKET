@@ -6892,3 +6892,34 @@ document.addEventListener(
     );
 
 })();
+
+
+// ==========================================================
+// HESAP SAYFASI - ÖZEL GÖRÜNÜM YÖNETİMİ
+// ==========================================================
+
+(function initAccountViewManager() {
+  "use strict";
+
+  function updateAccountView() {
+    const overviewView = document.getElementById("account-overview-view");
+    const listingsView = document.getElementById("account-listings-view");
+
+    if (!overviewView || !listingsView) {
+      return;
+    }
+
+    const isMyListings = window.location.hash === "#my-listings";
+
+    if (isMyListings) {
+      overviewView.classList.remove("active");
+      listingsView.classList.add("active");
+    } else {
+      listingsView.classList.remove("active");
+      overviewView.classList.add("active");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", updateAccountView);
+  window.addEventListener("hashchange", updateAccountView);
+})();

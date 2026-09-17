@@ -8056,3 +8056,14 @@ body > main .yang-rate-card {
   box-shadow: 0 0 0 2px rgba(185, 133, 37, 0.12);
 }
 
+/* ==========================================================
+   HESAP SAYFASI - ÖZEL GÖRÜNÜM SİSTEMİ
+   ========================================================== */
+
+.account-view {
+  display: none;
+}
+
+.account-view.active {
+  display: block;
+}

@@ -7,29 +7,541 @@
   <title>Hesabım | Royale2 Market</title>
 
   <link rel="stylesheet" href="style.css?v=3">
+
+<style>
+/* =========================================================
+   ROYALE2 MARKET — ACCOUNT CONTROL CENTER
+   Sadece account.html sayfasını hedefler.
+   ========================================================= */
+
+body {
+  background: #090806;
+}
+
+.account-page {
+  width: min(1420px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 34px 0 70px;
+}
+
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* SOL PANEL */
+
+.account-sidebar {
+  position: sticky;
+  top: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(197, 137, 47, .22);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(35, 28, 18, .98),
+      rgba(15, 13, 10, .98)
+    );
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
+}
+
+.account-user {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+.account-avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(222, 157, 53, .55);
+  border-radius: 14px;
+
+  color: #f0b650;
+  font-size: 19px;
+  font-weight: 900;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(180, 112, 21, .22),
+      rgba(255, 255, 255, .03)
+    );
+}
+
+.account-user-info {
+  min-width: 0;
+}
+
+.account-user-info strong,
+.account-user-info span {
+  display: block;
+}
+
+.account-user-info strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-user-info span {
+  margin-top: 4px;
+  color: #8f887d;
+  font-size: 11px;
+}
+
+/* SOL MENÜ */
+
+.account-menu {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+}
+
+.account-menu a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-height: 44px;
+  padding: 0 12px;
+
+  border: 1px solid transparent;
+  border-radius: 11px;
+
+  color: #b7afa4;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: .18s ease;
+}
+
+.account-menu a:hover {
+  color: #fff;
+  border-color: rgba(202, 140, 45, .18);
+  background: rgba(255, 255, 255, .035);
+  transform: translateX(2px);
+}
+
+.account-menu a.active {
+  color: #fff;
+
+  border-color: rgba(218, 151, 48, .34);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(190, 119, 24, .25),
+      rgba(190, 119, 24, .06)
+    );
+
+  box-shadow: inset 3px 0 0 #c8892f;
+}
+
+.account-logout {
+  width: calc(100% - 28px);
+  min-height: 42px;
+
+  margin: 0 14px 14px;
+
+  border: 1px solid rgba(205, 70, 70, .20);
+  border-radius: 11px;
+
+  color: #e98c8c;
+  background: rgba(143, 39, 39, .09);
+
+  cursor: pointer;
+  font-weight: 800;
+}
+
+/* SAĞ PANEL */
+
+.account-content {
+  min-width: 0;
+}
+
+/* HERO / HESAP ÖZETİ */
+
+.account-header {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 145px;
+  padding: 28px !important;
+
+  border: 1px solid rgba(205, 143, 45, .28) !important;
+  border-radius: 20px !important;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(40, 30, 18, .98),
+      rgba(17, 14, 10, .96) 62%,
+      rgba(66, 39, 13, .88)
+    ) !important;
+
+  box-shadow: 0 22px 55px rgba(0, 0, 0, .25);
+}
+
+.account-header::after {
+  content: "";
+
+  position: absolute;
+  right: -80px;
+  top: -120px;
+
+  width: 330px;
+  height: 330px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(222, 147, 36, .18),
+      transparent 67%
+    );
+
+  pointer-events: none;
+}
+
+.account-header .eyebrow {
+  color: #d89b3e !important;
+
+  font-size: 10px !important;
+  font-weight: 900;
+  letter-spacing: 2.2px;
+}
+
+.account-header h1 {
+  margin: 10px 0 0 !important;
+
+  color: #fff !important;
+  font-size: 36px !important;
+}
+
+.account-header p {
+  max-width: 620px;
+
+  margin: 12px 0 0 !important;
+
+  color: #a8a096 !important;
+
+  font-size: 12px !important;
+  line-height: 1.7;
+}
+
+/* ÖZET KARTLARI */
+
+.account-summary {
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr)) !important;
+
+  gap: 14px !important;
+
+  margin-top: 16px !important;
+}
+
+.summary-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 118px;
+
+  padding: 20px !important;
+
+  border: 1px solid rgba(255, 255, 255, .07) !important;
+  border-radius: 16px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 25, 18, .98),
+      rgba(16, 14, 11, .98)
+    ) !important;
+}
+
+.summary-card::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 3px;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      #d69a3c,
+      transparent
+    );
+}
+
+.summary-card span,
+.summary-card small {
+  display: block;
+}
+
+.summary-card span {
+  color: #928a7e !important;
+
+  font-size: 10px !important;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.summary-card strong {
+  display: block;
+
+  margin: 10px 0 7px;
+
+  color: #fff !important;
+  font-size: 28px !important;
+}
+
+.summary-card small {
+  color: #746e66 !important;
+  font-size: 10px !important;
+}
+
+/* KARTLAR */
+
+.account-card {
+  margin-top: 16px;
+
+  border: 1px solid rgba(255, 255, 255, .07) !important;
+  border-radius: 18px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(27, 23, 18, .98),
+      rgba(14, 12, 10, .98)
+    ) !important;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, .16);
+}
+
+.account-card-head {
+  padding: 21px 22px !important;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, .055) !important;
+}
+
+.account-card-head h2 {
+  color: #fff !important;
+}
+
+.account-card-head p {
+  color: #817a70 !important;
+}
+
+.account-edit-btn,
+.security-button {
+  border:
+    1px solid rgba(205, 143, 45, .35) !important;
+
+  border-radius: 9px !important;
+
+  color: #e6ad52 !important;
+
+  background:
+    rgba(190, 119, 24, .09) !important;
+}
+
+/* PROFİL */
+
+.profile-details {
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr)) !important;
+
+  gap: 1px !important;
+
+  background:
+    rgba(255, 255, 255, .05) !important;
+}
+
+.profile-field {
+  padding: 19px 22px !important;
+
+  background: #15120e !important;
+}
+
+.profile-field span {
+  color: #766f65 !important;
+
+  font-size: 9px !important;
+  font-weight: 900;
+
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+.profile-field strong {
+  color: #dcd6cd !important;
+}
+
+/* GÜVENLİK */
+
+.security-row {
+  padding: 18px 22px !important;
+
+  border-top:
+    1px solid rgba(255, 255, 255, .05) !important;
+}
+
+.security-badge {
+  border-color:
+    rgba(205, 143, 45, .25) !important;
+
+  color: #dba24b !important;
+
+  background:
+    rgba(188, 119, 22, .08) !important;
+}
+
+/* PROFİL MODAL */
+
+.profile-modal {
+  backdrop-filter: blur(8px);
+}
+
+.profile-modal-box {
+  border:
+    1px solid rgba(207, 143, 44, .30) !important;
+
+  border-radius: 18px !important;
+
+  background: #15120e !important;
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, .55) !important;
+}
+
+.profile-modal-body input,
+.profile-modal-body textarea {
+  border:
+    1px solid rgba(255, 255, 255, .09) !important;
+
+  border-radius: 10px !important;
+
+  color: #eee9e2 !important;
+
+  background: #0e0c0a !important;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .account-sidebar {
+    position: static;
+  }
+
+  .account-summary {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .account-page {
+    width: calc(100% - 22px);
+    padding-top: 18px;
+  }
+
+  .profile-details {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
 <header class="topbar">
+
   <a class="brand" href="index.html">
+
     <span class="brand-mark">R2</span>
+
     <span>
       <strong>ROYALE2</strong>
       <small>MARKET</small>
     </span>
+
   </a>
 
   <nav>
-    <a href="index.html#market">İlan Pazarı</a>
-    <a href="index.html#servers">Sunucular</a>
-    <a href="index.html#how">Nasıl Çalışır?</a>
+
+    <a href="index.html#market">
+      İlan Pazarı
+    </a>
+
+    <a href="ephesus.html">
+      Ephesus
+    </a>
+
+    <a href="teos.html">
+      Teos
+    </a>
+
+    <a href="pergamon.html">
+      Pergamon
+    </a>
+
+    <a href="akademi-teos.html">
+      Akademi Teos
+    </a>
+
   </nav>
 
   <div class="actions">
-    <a class="login" id="account-username" href="#">Hesabım</a>
-    <a class="sell" href="index.html#sell">+ İlan Ver</a>
+
+    <a
+      class="login"
+      id="account-username"
+      href="#"
+    >
+      Hesabım
+    </a>
+
+    <a
+      class="sell"
+      href="create-listing.html"
+    >
+      + İlan Ver
+    </a>
+
   </div>
+
 </header>
 
 
@@ -37,690 +549,2024 @@
 
   <div class="account-layout">
 
-    <!-- SOL KULLANICI PANELİ -->
+
+    <!-- ==============================
+         SOL KULLANICI PANELİ
+         ============================== -->
+
     <aside class="account-sidebar">
 
+
       <div class="account-user">
+
         <div class="account-avatar">
-          <span id="profile-avatar-letter">P</span>
+
+          <span id="profile-avatar-letter">
+            P
+          </span>
+
         </div>
 
+
         <div class="account-user-info">
-          <strong id="sidebar-username">Kullanıcı</strong>
-          <span>Royale2 Market Üyesi</span>
+
+          <strong id="sidebar-username">
+            Kullanıcı
+          </strong>
+
+          <span>
+            Royale2 Market Üyesi
+          </span>
+
         </div>
+
       </div>
+
 
       <nav class="account-menu">
 
-        <a href="account.html" class="active">
+
+        <a
+          href="account.html"
+          class="active"
+        >
+
           <span>👤</span>
+
           Hesabım
+
         </a>
+
 
         <a href="#my-listings">
+
           <span>📦</span>
+
           İlanlarım
+
         </a>
+
 
         <a href="#favorites">
+
           <span>♥</span>
+
           Favorilerim
+
         </a>
+
 
         <a href="messages.html">
+
           <span>💬</span>
+
           Mesajlarım
+
         </a>
+
 
         <a href="#security">
+
           <span>🛡</span>
+
           Güvenlik
+
         </a>
 
+
       </nav>
+
 
       <button
         type="button"
         class="account-logout"
         onclick="logoutUser()"
       >
+
         Çıkış Yap
+
       </button>
+
 
     </aside>
 
 
-    <!-- SAĞ İÇERİK -->
+
+    <!-- ==============================
+         SAĞ İÇERİK
+         ============================== -->
+
     <section class="account-content">
 
+
       <div class="account-header">
-        <span class="eyebrow">HESAP YÖNETİMİ</span>
-        <h1>Hesabım</h1>
+
+        <span class="eyebrow">
+          ROYALE2 MARKET • KONTROL MERKEZİ
+        </span>
+
+        <h1>
+          Hesap Özeti
+        </h1>
+
         <p>
-          Profil bilgilerini, ilanlarını ve hesap durumunu buradan yönetebilirsin.
+          Profilini, ilanlarını, favorilerini ve hesap güvenliğini
+          tek merkezden yönetebilirsin.
         </p>
+
       </div>
 
 
-      <!-- ÖZET KARTLARI -->
+
+      <!-- ==============================
+           ÖZET KARTLARI
+           ============================== -->
+
       <div class="account-summary">
 
-        <div class="summary-card">
-          <span>Aktif İlan</span>
-          <strong id="active-listings-count">0</strong>
-          <small>Yayındaki ilanların</small>
-        </div>
 
         <div class="summary-card">
-          <span>Favorilerim</span>
-          <strong id="favorite-count">0</strong>
-          <small>Kaydettiğin ilanlar</small>
+
+          <span>
+            Aktif İlan
+          </span>
+
+          <strong id="active-listings-count">
+            0
+          </strong>
+
+          <small>
+            Yayındaki ilanların
+          </small>
+
         </div>
 
+
         <div class="summary-card">
-          <span>Hesap Durumu</span>
-          <strong id="verified-status">Hayır</strong>
-          <small>Doğrulanmış hesap</small>
+
+          <span>
+            Favorilerim
+          </span>
+
+          <strong id="favorite-count">
+            0
+          </strong>
+
+          <small>
+            Kaydettiğin ilanlar
+          </small>
+
         </div>
+
+
+        <div class="summary-card">
+
+          <span>
+            Hesap Durumu
+          </span>
+
+          <strong id="verified-status">
+            Hayır
+          </strong>
+
+          <small>
+            Doğrulanmış hesap
+          </small>
+
+        </div>
+
 
       </div>
 
 
-      <!-- PROFİL BİLGİLERİ -->
+
+      <!-- ==============================
+           PROFİL BİLGİLERİ
+           ============================== -->
+
       <div class="account-card profile-card">
 
+
         <div class="account-card-head">
+
           <div>
-            <h2>Profil Bilgileri</h2>
-            <p>Hesabına ait temel bilgiler.</p>
+
+            <h2>
+              Profil Bilgileri
+            </h2>
+
+            <p>
+              Hesabına ait temel bilgiler.
+            </p>
+
           </div>
 
-<button type="button" class="account-edit-btn" id="profile-edit-button">
-    Profili Düzenle
-</button>
+
+          <button
+            type="button"
+            class="account-edit-btn"
+            id="profile-edit-button"
+          >
+
+            Profili Düzenle
+
+          </button>
+
         </div>
+
 
 
         <div class="profile-details">
 
-          <div class="profile-field">
-            <span>Kullanıcı Adı</span>
-            <strong id="profile-username">Yükleniyor...</strong>
-          </div>
 
           <div class="profile-field">
-            <span>Görünen Ad</span>
-            <strong id="profile-display-name">Yükleniyor...</strong>
+
+            <span>
+              Kullanıcı Adı
+            </span>
+
+            <strong id="profile-username">
+              Yükleniyor...
+            </strong>
+
           </div>
 
-          <div class="profile-field">
-            <span>E-posta Adresi</span>
-            <strong id="profile-email">Yükleniyor...</strong>
-          </div>
 
           <div class="profile-field">
-            <span>Üyelik Tarihi</span>
-            <strong id="profile-created-at">Yükleniyor...</strong>
+
+            <span>
+              Görünen Ad
+            </span>
+
+            <strong id="profile-display-name">
+              Yükleniyor...
+            </strong>
+
           </div>
+
+
+          <div class="profile-field">
+
+            <span>
+              E-posta Adresi
+            </span>
+
+            <strong id="profile-email">
+              Yükleniyor...
+            </strong>
+
+          </div>
+
+
+          <div class="profile-field">
+
+            <span>
+              Üyelik Tarihi
+            </span>
+
+            <strong id="profile-created-at">
+              Yükleniyor...
+            </strong>
+
+          </div>
+
 
         </div>
 
       </div>
 
 
-      <!-- GÜVENLİK -->
-      <div class="account-card security-card">
+
+      <!-- ==============================
+           GÜVENLİK
+           ============================== -->
+
+      <div
+        class="account-card security-card"
+        id="security"
+      >
+
 
         <div class="account-card-head">
+
           <div>
-            <h2>Hesap Güvenliği</h2>
-            <p>Hesabının güvenlik durumunu kontrol et.</p>
+
+            <h2>
+              Hesap Güvenliği
+            </h2>
+
+            <p>
+              Hesabının güvenlik durumunu kontrol et.
+            </p>
+
           </div>
+
         </div>
 
+
+
         <div class="security-row">
+
           <div>
-            <strong>E-posta Doğrulaması</strong>
-            <span>Hesabının e-posta doğrulama durumu.</span>
+
+            <strong>
+              E-posta Doğrulaması
+            </strong>
+
+            <span>
+              Hesabının e-posta doğrulama durumu.
+            </span>
+
           </div>
 
-          <span class="security-badge" id="security-verified">
+
+          <span
+            class="security-badge"
+            id="security-verified"
+          >
+
             Kontrol ediliyor
+
           </span>
+
         </div>
+
+
 
         <div class="security-row">
+
           <div>
-            <strong>Şifre</strong>
-            <span>Hesap şifreni düzenli olarak güncelle.</span>
+
+            <strong>
+              Şifre
+            </strong>
+
+            <span>
+              Hesap şifreni düzenli olarak güncelle.
+            </span>
+
           </div>
 
-          <button type="button" class="security-button">
+
+          <button
+            type="button"
+            class="security-button"
+          >
+
             Şifre Değiştir
+
           </button>
+
         </div>
+
 
       </div>
+
 
     </section>
 
   </div>
-<!-- PROFİL DÜZENLEME PENCERESİ -->
-<div id="profile-edit-modal" class="profile-modal">
+
+
+
+  <!-- ==============================
+       PROFİL DÜZENLEME MODALI
+       ============================== -->
+
+  <div
+    id="profile-edit-modal"
+    class="profile-modal"
+  >
+
+
     <div class="profile-modal-box">
 
-        <div class="profile-modal-header">
-            <div>
-                <h2>Profil Bilgilerini Düzenle</h2>
-                <p>Hesabında görünen bilgileri buradan güncelleyebilirsin.</p>
-            </div>
 
-            <button type="button" id="profile-modal-close">×</button>
+      <div class="profile-modal-header">
+
+
+        <div>
+
+          <h2>
+            Profil Bilgilerini Düzenle
+          </h2>
+
+          <p>
+            Hesabında görünen bilgileri buradan güncelleyebilirsin.
+          </p>
+
         </div>
 
-        <div class="profile-modal-body">
 
-            <label>Kullanıcı Adı</label>
-            <input type="text" id="edit-username" placeholder="Kullanıcı adınız">
+        <button
+          type="button"
+          id="profile-modal-close"
+        >
+          ×
+        </button>
 
-            <label>Görünen Ad</label>
-            <input type="text" id="edit-display-name" placeholder="Görünen adınız">
 
-            <label>E-posta Adresi</label>
-            <input type="email" id="edit-email" disabled>
+      </div>
 
-            <small>E-posta adresi güvenlik nedeniyle buradan değiştirilemez.</small>
-          <label>Telefon Numarası *</label>
-<input
-    type="tel"
-    id="edit-phone"
-    placeholder="05XXXXXXXXX"
-    maxlength="11"
-    inputmode="numeric"
-    required
->
 
-<label>T.C. Kimlik No *</label>
-<input
-    type="text"
-    id="edit-tc"
-    placeholder="11 haneli T.C. Kimlik No"
-    maxlength="11"
-    inputmode="numeric"
-    autocomplete="off"
-    required
->
-          <small id="tc-lock-message" style="display:none;">
-    T.C. Kimlik Numarası kaydedildikten sonra değiştirilemez.
-</small>
 
-<label>Adres</label>
-<textarea
-    id="edit-address"
-    placeholder="Açık adresinizi yazınız"
-    rows="3"
-></textarea>
-<small id="private-lock-message" style="display:none;">
-    Telefon, T.C. Kimlik No ve adres bilgileri kaydedildikten sonra değiştirilemez. Değişiklik için site yönetimiyle iletişime geçiniz.
-</small>
-        </div>
+      <div class="profile-modal-body">
 
-        <div class="profile-modal-footer">
-            <button type="button" id="profile-edit-cancel">Vazgeç</button>
-            <button type="button" id="profile-edit-save">Değişiklikleri Kaydet</button>
-        </div>
+
+        <label>
+          Kullanıcı Adı
+        </label>
+
+        <input
+          type="text"
+          id="edit-username"
+          placeholder="Kullanıcı adınız"
+        >
+
+
+        <label>
+          Görünen Ad
+        </label>
+
+        <input
+          type="text"
+          id="edit-display-name"
+          placeholder="Görünen adınız"
+        >
+
+
+        <label>
+          E-posta Adresi
+        </label>
+
+        <input
+          type="email"
+          id="edit-email"
+          disabled
+        >
+
+        <small>
+          E-posta adresi güvenlik nedeniyle buradan değiştirilemez.
+        </small>
+
+
+
+        <label>
+          Telefon Numarası *
+        </label>
+
+        <input
+          type="tel"
+          id="edit-phone"
+          placeholder="05XXXXXXXXX"
+          maxlength="11"
+          inputmode="numeric"
+          required
+        >
+
+
+
+        <label>
+          T.C. Kimlik No *
+        </label>
+
+        <input
+          type="text"
+          id="edit-tc"
+          placeholder="11 haneli T.C. Kimlik No"
+          maxlength="11"
+          inputmode="numeric"
+          autocomplete="off"
+          required
+        >
+
+
+        <small
+          id="tc-lock-message"
+          style="display:none;"
+        >
+
+          T.C. Kimlik Numarası kaydedildikten sonra değiştirilemez.
+
+        </small>
+
+
+
+        <label>
+          Adres
+        </label>
+
+        <textarea
+          id="edit-address"
+          placeholder="Açık adresinizi yazınız"
+          rows="3"
+        ></textarea>
+
+
+        <small
+          id="private-lock-message"
+          style="display:none;"
+        >
+
+          Telefon, T.C. Kimlik No ve adres bilgileri kaydedildikten
+          sonra değiştirilemez. Değişiklik için site yönetimiyle
+          iletişime geçiniz.
+
+        </small>
+
+
+      </div>
+
+
+
+      <div class="profile-modal-footer">
+
+
+        <button
+          type="button"
+          id="profile-edit-cancel"
+        >
+
+          Vazgeç
+
+        </button>
+
+
+        <button
+          type="button"
+          id="profile-edit-save"
+        >
+
+          Değişiklikleri Kaydet
+
+        </button>
+
+
+      </div>
+
 
     </div>
-</div>
+
+  </div>
+
+
 </main>
-  
+
+
+
 <script src="script.js"></script>
-  
+
+
 <script>
+
+/* =========================================================
+   ROYALE2 MARKET
+   ACCOUNT CONTROL CENTER
+   ========================================================= */
+
+
 async function loadAccountPage() {
-    const savedUser = localStorage.getItem("royale2_user");
-    const accessToken = localStorage.getItem("royale2_access_token");
+
+    const savedUser =
+        localStorage.getItem("royale2_user");
+
+    const accessToken =
+        localStorage.getItem("royale2_access_token");
+
 
     if (!savedUser || !accessToken) {
-        window.location.href = "index.html#login";
+
+        window.location.href =
+            "index.html#login";
+
         return;
     }
 
-    const user = JSON.parse(savedUser);
 
-    // E-posta bilgisini hemen göster
-    document.getElementById("profile-email").textContent =
+    const user =
+        JSON.parse(savedUser);
+
+
+
+    /* =============================================
+       AUTH BİLGİLERİNİ HEMEN GÖSTER
+       ============================================= */
+
+
+    document.getElementById(
+        "profile-email"
+    ).textContent =
         user.email || "-";
 
-    // Üyelik tarihini auth kullanıcısından hemen göster
-    document.getElementById("profile-created-at").textContent =
+
+    document.getElementById(
+        "profile-created-at"
+    ).textContent =
         user.created_at
-            ? new Date(user.created_at).toLocaleDateString("tr-TR")
+            ? new Date(
+                user.created_at
+              ).toLocaleDateString("tr-TR")
             : "-";
 
-    // Kullanıcı adını üst menüde geçici olarak göster
-    document.getElementById("account-username").textContent =
-        user.email ? user.email.split("@")[0] : "Hesabım";
 
-    // PROFİL BİLGİLERİ
+    document.getElementById(
+        "account-username"
+    ).textContent =
+        user.email
+            ? user.email.split("@")[0]
+            : "Hesabım";
+
+
+
+    /* =============================================
+       PROFİL BİLGİLERİ
+       ============================================= */
+
     try {
-        const profileResponse = await fetch(
-            `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}&select=*`,
-            {
-                headers: {
-                    apikey: window.SUPABASE_KEY,
-                    Authorization: `Bearer ${accessToken}`
-                }
-            }
-        );
-
-        const profileData = await profileResponse.json();
-        const profile = profileData?.[0];
-      const privateResponse = await fetch(
-    `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
-    {
-        headers: {
-            apikey: window.SUPABASE_KEY,
-            Authorization: `Bearer ${accessToken}`
-        }
-    }
-);
-
-const privateData = await privateResponse.json();
-const privateProfile = privateData?.[0];
-
-if (privateProfile) {
-    document.getElementById("edit-phone").value = privateProfile.phone || "";
-    document.getElementById("edit-address").value = privateProfile.address || "";
-
-    const tcInput = document.getElementById("edit-tc");
-    const tcMessage = document.getElementById("tc-lock-message");
-
-    if (privateProfile.tc_identity_no) {
-        tcInput.value = privateProfile.tc_identity_no;
-        tcInput.disabled = true;
-
-        if (tcMessage) {
-            tcMessage.style.display = "block";
-        }
-    }
-}
-
-        const username =
-            profile?.username ||
-            user.email?.split("@")[0] ||
-            "-";
-
-        const displayName =
-            profile?.display_name ||
-            username;
-
-        document.getElementById("profile-username").textContent =
-            username;
-
-        document.getElementById("profile-display-name").textContent =
-            displayName;
-
-        document.getElementById("account-username").textContent =
-            username;
-
-        // Doğrulama durumu
-        const verified =
-            user.email_confirmed_at ||
-            user.confirmed_at;
-
-        document.getElementById("verified-status").textContent =
-            verified ? "Evet" : "Hayır";
-
-        const securityBadge =
-            document.getElementById("security-verified");
-
-        if (securityBadge) {
-            securityBadge.textContent =
-                verified ? "Doğrulandı" : "Doğrulanmadı";
-        }
-
-    } catch (error) {
-        console.error("Profil bilgileri yüklenemedi:", error);
-
-        const fallbackUsername =
-            user.email?.split("@")[0] || "-";
-
-        document.getElementById("profile-username").textContent =
-            fallbackUsername;
-
-        document.getElementById("profile-display-name").textContent =
-            fallbackUsername;
-    }
-
-    // AKTİF İLAN SAYISI
-    try {
-        const listingsResponse = await fetch(
-            `${window.SUPABASE_API_URL}listings?user_id=eq.${user.id}&status=eq.active&select=id`,
-            {
-                headers: {
-                    apikey: window.SUPABASE_KEY,
-                    Authorization: `Bearer ${accessToken}`
-                }
-            }
-        );
-
-        const listings = await listingsResponse.json();
-
-        document.getElementById("active-listings-count").textContent =
-            Array.isArray(listings) ? listings.length : 0;
-
-    } catch (error) {
-        console.error("İlanlar yüklenemedi:", error);
-
-        document.getElementById("active-listings-count").textContent = "0";
-    }
-} async function loadAccountPage() {
-  const savedUser = localStorage.getItem("royale2_user");
-  const accessToken = localStorage.getItem("royale2_access_token");
-
-  if (!savedUser || !accessToken) {
-    window.location.href = "index.html#login";
-    return;
-  }
-
-  const user = JSON.parse(savedUser);
-
-  try {
-    const profileResponse = await fetch(
-      `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}&select=*`,
-      {
-        headers: {
-          apikey: window.SUPABASE_KEY,
-          Authorization: `Bearer ${accessToken}`
-        }
-      }
-    );
-
-    const profileData = await profileResponse.json();
-    const profile = profileData?.[0];
-
-    document.getElementById("profile-username").textContent =
-      profile?.username || "-";
-
-    document.getElementById("profile-display-name").textContent =
-      profile?.display_name || "-";
-
-    document.getElementById("profile-email").textContent =
-      user.email || "-";
-
-    document.getElementById("profile-created-at").textContent =
-      profile?.created_at
-        ? new Date(profile.created_at).toLocaleDateString("tr-TR")
-        : "-";
-
-    document.getElementById("verified-status").textContent =
-      profile?.is_verified ? "Evet" : "Hayır";
-
-const accountUsername = document.getElementById("account-username");
-
-if (accountUsername) {
-    accountUsername.textContent = profile?.username || "Hesabım";
-}
 
 
-    const listingsResponse = await fetch(
-      `${window.SUPABASE_API_URL}listings?user_id=eq.${user.id}&status=eq.active&select=id`,
-      {
-        headers: {
-          apikey: window.SUPABASE_KEY,
-          Authorization: `Bearer ${accessToken}`
-        }
-      }
-    );
+        const profileResponse =
+            await fetch(
 
-    const listings = await listingsResponse.json();
+                `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}&select=*`,
 
-    document.getElementById("active-listings-count").textContent =
-      Array.isArray(listings) ? listings.length : 0;
+                {
 
-  } catch (error) {
-    console.error("Hesap bilgileri yüklenemedi:", error);
-  }
-}
-document.addEventListener("DOMContentLoaded", () => {
-    const editButton = document.getElementById("profile-edit-button");
-    const modal = document.getElementById("profile-edit-modal");
-    const closeButton = document.getElementById("profile-modal-close");
-    const cancelButton = document.getElementById("profile-edit-cancel");
-  const saveButton = document.getElementById("profile-edit-save");
+                    headers: {
 
-if (editButton && modal) {
-    editButton.addEventListener("click", async () => {
+                        apikey:
+                            window.SUPABASE_KEY,
 
-        const username =
-            document.getElementById("profile-username")?.textContent || "";
+                        Authorization:
+                            `Bearer ${accessToken}`
 
-        const displayName =
-            document.getElementById("profile-display-name")?.textContent || "";
-
-        const email =
-            document.getElementById("profile-email")?.textContent || "";
-
-        document.getElementById("edit-username").value = username;
-        document.getElementById("edit-display-name").value = displayName;
-        document.getElementById("edit-email").value = email;
-
-        const savedUser = localStorage.getItem("royale2_user");
-        const accessToken = localStorage.getItem("royale2_access_token");
-
-        if (savedUser && accessToken) {
-            const user = JSON.parse(savedUser);
-
-            try {
-                const response = await fetch(
-                    `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
-                    {
-                        headers: {
-                            apikey: window.SUPABASE_KEY,
-                            Authorization: `Bearer ${accessToken}`
-                        }
                     }
+
+                }
+
+            );
+
+
+        const profileData =
+            await profileResponse.json();
+
+
+        const profile =
+            profileData?.[0];
+
+
+
+        /* =============================================
+           ÖZEL PROFİL BİLGİLERİ
+           ============================================= */
+
+
+        const privateResponse =
+            await fetch(
+
+                `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
+
+                {
+
+                    headers: {
+
+                        apikey:
+                            window.SUPABASE_KEY,
+
+                        Authorization:
+                            `Bearer ${accessToken}`
+
+                    }
+
+                }
+
+            );
+
+
+        const privateData =
+            await privateResponse.json();
+
+
+        const privateProfile =
+            privateData?.[0];
+
+
+
+        if (privateProfile) {
+
+
+            document.getElementById(
+                "edit-phone"
+            ).value =
+                privateProfile.phone || "";
+
+
+            document.getElementById(
+                "edit-address"
+            ).value =
+                privateProfile.address || "";
+
+
+            const tcInput =
+                document.getElementById(
+                    "edit-tc"
                 );
 
-                const data = await response.json();
-                const privateProfile = data?.[0];
 
-                const phoneInput = document.getElementById("edit-phone");
-                const tcInput = document.getElementById("edit-tc");
-                const addressInput = document.getElementById("edit-address");
-                const tcMessage = document.getElementById("tc-lock-message");
-              const privateLockMessage = document.getElementById("private-lock-message");
+            const tcMessage =
+                document.getElementById(
+                    "tc-lock-message"
+                );
 
-                phoneInput.value = privateProfile?.phone || "";
-                addressInput.value = privateProfile?.address || "";
-              addressInput.value = privateProfile?.address || "";
-if (privateLockMessage && (privateProfile?.phone || privateProfile?.tc_identity_no || privateProfile?.address)) {
-    privateLockMessage.style.display = "block";
-} else if (privateLockMessage) {
-    privateLockMessage.style.display = "none";
-}
-if (privateProfile?.phone) {
-    phoneInput.disabled = true;
-}
 
-if (privateProfile?.address) {
-    addressInput.disabled = true;
-}
-                if (privateProfile?.tc_identity_no) {
-                    tcInput.value = privateProfile.tc_identity_no;
-                    tcInput.disabled = true;
+            if (
+                privateProfile.tc_identity_no
+            ) {
 
-                    if (tcMessage) {
-                        tcMessage.style.display = "block";
-                    }
-                } else {
-                    tcInput.value = "";
-                    tcInput.disabled = false;
 
-                    if (tcMessage) {
-                        tcMessage.style.display = "none";
-                    }
+                tcInput.value =
+                    privateProfile.tc_identity_no;
+
+
+                tcInput.disabled =
+                    true;
+
+
+                if (tcMessage) {
+
+                    tcMessage.style.display =
+                        "block";
+
                 }
 
-            } catch (error) {
-                console.error("Özel profil bilgileri yüklenemedi:", error);
             }
+
         }
 
-        modal.classList.add("active");
-    });
-}
 
-    if (closeButton && modal) {
-        closeButton.addEventListener("click", () => {
-            modal.classList.remove("active");
-        });
+
+        /* =============================================
+           KULLANICI ADI
+           ============================================= */
+
+
+        const username =
+
+            profile?.username ||
+
+            user.email?.split("@")[0] ||
+
+            "-";
+
+
+        const displayName =
+
+            profile?.display_name ||
+
+            username;
+
+
+
+        document.getElementById(
+            "profile-username"
+        ).textContent =
+            username;
+
+
+        document.getElementById(
+            "profile-display-name"
+        ).textContent =
+            displayName;
+
+
+        document.getElementById(
+            "account-username"
+        ).textContent =
+            username;
+
+
+
+        /* SIDEBAR KULLANICI ADI */
+
+
+        const sidebarUsername =
+            document.getElementById(
+                "sidebar-username"
+            );
+
+
+        if (sidebarUsername) {
+
+            sidebarUsername.textContent =
+                username;
+
+        }
+
+
+
+        /* AVATAR HARFİ */
+
+
+        const avatarLetter =
+            document.getElementById(
+                "profile-avatar-letter"
+            );
+
+
+        if (avatarLetter) {
+
+            avatarLetter.textContent =
+
+                (
+                    displayName ||
+                    username ||
+                    "R"
+                )
+                .trim()
+                .charAt(0)
+                .toUpperCase();
+
+        }
+
+
+
+        /* =============================================
+           DOĞRULAMA DURUMU
+           ============================================= */
+
+
+        const verified =
+
+            user.email_confirmed_at ||
+
+            user.confirmed_at;
+
+
+        document.getElementById(
+            "verified-status"
+        ).textContent =
+
+            verified
+                ? "Evet"
+                : "Hayır";
+
+
+        const securityBadge =
+            document.getElementById(
+                "security-verified"
+            );
+
+
+        if (securityBadge) {
+
+            securityBadge.textContent =
+
+                verified
+                    ? "Doğrulandı"
+                    : "Doğrulanmadı";
+
+        }
+
+
     }
-if (saveButton && modal) {
-    saveButton.addEventListener("click", async () => {
-        const displayName = document.getElementById("edit-display-name").value.trim();
-      const username = document.getElementById("edit-username").value.trim();
-      const phone = document.getElementById("edit-phone").value.trim();
-const tcInput = document.getElementById("edit-tc");
-const tcIdentityNo = tcInput.value.trim();
-const address = document.getElementById("edit-address").value.trim();
 
-if (!/^05\d{9}$/.test(phone)) {
-    alert("Telefon numarası 05XXXXXXXXX şeklinde 11 haneli olmalıdır.");
-    return;
-}
+    catch (error) {
 
-if (!/^[1-9][0-9]{10}$/.test(tcIdentityNo)) {
-    alert("T.C. Kimlik No 11 haneli olmalıdır.");
-    return;
-}
 
-        if (!displayName) {
-            alert("Görünen ad boş bırakılamaz.");
-            return;
+        console.error(
+            "Profil bilgileri yüklenemedi:",
+            error
+        );
+
+
+        const fallbackUsername =
+
+            user.email?.split("@")[0] ||
+
+            "-";
+
+
+        document.getElementById(
+            "profile-username"
+        ).textContent =
+            fallbackUsername;
+
+
+        document.getElementById(
+            "profile-display-name"
+        ).textContent =
+            fallbackUsername;
+
+
+        const sidebarUsername =
+            document.getElementById(
+                "sidebar-username"
+            );
+
+
+        if (sidebarUsername) {
+
+            sidebarUsername.textContent =
+                fallbackUsername;
+
         }
 
-        const savedUser = localStorage.getItem("royale2_user");
-        const accessToken = localStorage.getItem("royale2_access_token");
+    }
 
-        if (!savedUser || !accessToken) {
-            alert("Oturum bulunamadı. Lütfen tekrar giriş yapın.");
-            return;
-        }
 
-        const user = JSON.parse(savedUser);
 
-        try {
-            saveButton.disabled = true;
-            saveButton.textContent = "Kaydediliyor...";
+    /* =============================================
+       FAVORİ SAYISI
+       ============================================= */
 
-            const response = await fetch(
-                `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}`,
+    try {
+
+
+        const favoritesResponse =
+            await fetch(
+
+                `${window.SUPABASE_API_URL}favorites?user_id=eq.${user.id}&select=*`,
+
                 {
-                    method: "PATCH",
+
                     headers: {
-                        "apikey": window.SUPABASE_KEY,
-                        "Authorization": `Bearer ${accessToken}`,
-                        "Content-Type": "application/json",
-                        "Prefer": "return=representation"
-                    },
-body: JSON.stringify({
-    username: username,
-    display_name: displayName
-})
+
+                        apikey:
+                            window.SUPABASE_KEY,
+
+                        Authorization:
+                            `Bearer ${accessToken}`
+
+                    }
+
+                }
+
+            );
+
+
+        if (!favoritesResponse.ok) {
+
+            throw new Error(
+                await favoritesResponse.text()
+            );
+
+        }
+
+
+        const favorites =
+            await favoritesResponse.json();
+
+
+        document.getElementById(
+            "favorite-count"
+        ).textContent =
+
+            Array.isArray(favorites)
+                ? favorites.length
+                : 0;
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Favoriler yüklenemedi:",
+            error
+        );
+
+
+        document.getElementById(
+            "favorite-count"
+        ).textContent =
+            "0";
+
+    }
+
+
+
+    /* =============================================
+       AKTİF İLAN SAYISI
+       ============================================= */
+
+    try {
+
+
+        const listingsResponse =
+            await fetch(
+
+                `${window.SUPABASE_API_URL}listings?user_id=eq.${user.id}&status=eq.active&select=id`,
+
+                {
+
+                    headers: {
+
+                        apikey:
+                            window.SUPABASE_KEY,
+
+                        Authorization:
+                            `Bearer ${accessToken}`
+
+                    }
+
+                }
+
+            );
+
+
+        const listings =
+            await listingsResponse.json();
+
+
+        document.getElementById(
+            "active-listings-count"
+        ).textContent =
+
+            Array.isArray(listings)
+                ? listings.length
+                : 0;
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "İlanlar yüklenemedi:",
+            error
+        );
+
+
+        document.getElementById(
+            "active-listings-count"
+        ).textContent =
+            "0";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   PROFİL DÜZENLEME
+   ========================================================= */
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        const editButton =
+            document.getElementById(
+                "profile-edit-button"
+            );
+
+
+        const modal =
+            document.getElementById(
+                "profile-edit-modal"
+            );
+
+
+        const closeButton =
+            document.getElementById(
+                "profile-modal-close"
+            );
+
+
+        const cancelButton =
+            document.getElementById(
+                "profile-edit-cancel"
+            );
+
+
+        const saveButton =
+            document.getElementById(
+                "profile-edit-save"
+            );
+
+
+
+        /* =============================================
+           MODALI AÇ
+           ============================================= */
+
+
+        if (editButton && modal) {
+
+
+            editButton.addEventListener(
+                "click",
+                async () => {
+
+
+                    const username =
+
+                        document.getElementById(
+                            "profile-username"
+                        )?.textContent || "";
+
+
+                    const displayName =
+
+                        document.getElementById(
+                            "profile-display-name"
+                        )?.textContent || "";
+
+
+                    const email =
+
+                        document.getElementById(
+                            "profile-email"
+                        )?.textContent || "";
+
+
+
+                    document.getElementById(
+                        "edit-username"
+                    ).value =
+                        username;
+
+
+                    document.getElementById(
+                        "edit-display-name"
+                    ).value =
+                        displayName;
+
+
+                    document.getElementById(
+                        "edit-email"
+                    ).value =
+                        email;
+
+
+
+                    const savedUser =
+                        localStorage.getItem(
+                            "royale2_user"
+                        );
+
+
+                    const accessToken =
+                        localStorage.getItem(
+                            "royale2_access_token"
+                        );
+
+
+
+                    if (
+                        savedUser &&
+                        accessToken
+                    ) {
+
+
+                        const user =
+                            JSON.parse(
+                                savedUser
+                            );
+
+
+                        try {
+
+
+                            const response =
+                                await fetch(
+
+                                    `${window.SUPABASE_API_URL}profile_private?user_id=eq.${user.id}&select=*`,
+
+                                    {
+
+                                        headers: {
+
+                                            apikey:
+                                                window.SUPABASE_KEY,
+
+                                            Authorization:
+                                                `Bearer ${accessToken}`
+
+                                        }
+
+                                    }
+
+                                );
+
+
+                            const data =
+                                await response.json();
+
+
+                            const privateProfile =
+                                data?.[0];
+
+
+
+                            const phoneInput =
+                                document.getElementById(
+                                    "edit-phone"
+                                );
+
+
+                            const tcInput =
+                                document.getElementById(
+                                    "edit-tc"
+                                );
+
+
+                            const addressInput =
+                                document.getElementById(
+                                    "edit-address"
+                                );
+
+
+                            const tcMessage =
+                                document.getElementById(
+                                    "tc-lock-message"
+                                );
+
+
+                            const privateLockMessage =
+                                document.getElementById(
+                                    "private-lock-message"
+                                );
+
+
+
+                            phoneInput.value =
+                                privateProfile?.phone ||
+                                "";
+
+
+                            addressInput.value =
+                                privateProfile?.address ||
+                                "";
+
+
+
+                            if (
+                                privateLockMessage &&
+                                (
+                                    privateProfile?.phone ||
+                                    privateProfile?.tc_identity_no ||
+                                    privateProfile?.address
+                                )
+                            ) {
+
+
+                                privateLockMessage.style.display =
+                                    "block";
+
+
+                            }
+
+                            else if (
+                                privateLockMessage
+                            ) {
+
+
+                                privateLockMessage.style.display =
+                                    "none";
+
+                            }
+
+
+
+                            if (
+                                privateProfile?.phone
+                            ) {
+
+                                phoneInput.disabled =
+                                    true;
+
+                            }
+
+                            else {
+
+                                phoneInput.disabled =
+                                    false;
+
+                            }
+
+
+
+                            if (
+                                privateProfile?.address
+                            ) {
+
+                                addressInput.disabled =
+                                    true;
+
+                            }
+
+                            else {
+
+                                addressInput.disabled =
+                                    false;
+
+                            }
+
+
+
+                            if (
+                                privateProfile?.tc_identity_no
+                            ) {
+
+
+                                tcInput.value =
+                                    privateProfile.tc_identity_no;
+
+
+                                tcInput.disabled =
+                                    true;
+
+
+                                if (tcMessage) {
+
+                                    tcMessage.style.display =
+                                        "block";
+
+                                }
+
+
+                            }
+
+                            else {
+
+
+                                tcInput.value =
+                                    "";
+
+
+                                tcInput.disabled =
+                                    false;
+
+
+                                if (tcMessage) {
+
+                                    tcMessage.style.display =
+                                        "none";
+
+                                }
+
+                            }
+
+
+                        }
+
+                        catch (error) {
+
+
+                            console.error(
+                                "Özel profil bilgileri yüklenemedi:",
+                                error
+                            );
+
+                        }
+
+                    }
+
+
+
+                    modal.classList.add(
+                        "active"
+                    );
+
+
                 }
             );
 
-            if (!response.ok) {
-                throw new Error(await response.text());
-            }
-
-const privatePayload = {
-    user_id: user.id
-};
-
-// Sadece henüz kilitlenmemiş alanları gönder
-if (!document.getElementById("edit-phone").disabled) {
-    privatePayload.phone = phone;
-}
-
-if (!document.getElementById("edit-tc").disabled) {
-    privatePayload.tc_identity_no = tcIdentityNo;
-}
-
-if (!document.getElementById("edit-address").disabled) {
-    privatePayload.address = address;
-}
-
-// user_id dışında kaydedilecek yeni bilgi varsa Supabase'e gönder
-if (Object.keys(privatePayload).length > 1) {
-
-    const privateResponse = await fetch(
-        `${window.SUPABASE_API_URL}profile_private?on_conflict=user_id`,
-        {
-            method: "POST",
-            headers: {
-                apikey: window.SUPABASE_KEY,
-                Authorization: `Bearer ${accessToken}`,
-                "Content-Type": "application/json",
-                Prefer: "resolution=merge-duplicates,return=representation"
-            },
-            body: JSON.stringify(privatePayload)
         }
-    );
 
-    if (!privateResponse.ok) {
-        throw new Error(await privateResponse.text());
-    }
-}
-const profileUsername = document.getElementById("profile-username");
-if (profileUsername) {
-    profileUsername.textContent = username;
-}
-            document.getElementById("profile-display-name").textContent = displayName;
 
-            modal.classList.remove("active");
 
-            alert("Profil bilgilerin başarıyla güncellendi.");
+        /* =============================================
+           MODALI KAPAT
+           ============================================= */
 
-} catch (error) {
-    console.error("Profil güncellenemedi:", error);
 
-    const errorMessage = String(error?.message || error || "");
+        if (
+            closeButton &&
+            modal
+        ) {
 
-    if (
-        errorMessage.includes("profiles_username_unique_ci") ||
-        errorMessage.includes("duplicate key value") ||
-        errorMessage.includes("23505")
-    ) {
-        alert("Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin.");
-    } else {
-        alert("Profil güncellenirken bir hata oluştu. Lütfen tekrar deneyin.");
-    }
-        } finally {
-            saveButton.disabled = false;
-            saveButton.textContent = "Değişiklikleri Kaydet";
+
+            closeButton.addEventListener(
+                "click",
+                () => {
+
+                    modal.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
         }
-    });
-}
-    if (cancelButton && modal) {
-        cancelButton.addEventListener("click", () => {
-            modal.classList.remove("active");
-        });
-    }
 
-    if (modal) {
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.classList.remove("active");
-            }
-        });
+
+
+        if (
+            cancelButton &&
+            modal
+        ) {
+
+
+            cancelButton.addEventListener(
+                "click",
+                () => {
+
+                    modal.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        if (modal) {
+
+
+            modal.addEventListener(
+                "click",
+                (e) => {
+
+
+                    if (
+                        e.target === modal
+                    ) {
+
+                        modal.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+
+                }
+            );
+
+        }
+
+
+
+        /* =============================================
+           PROFİLİ KAYDET
+           ============================================= */
+
+
+        if (
+            saveButton &&
+            modal
+        ) {
+
+
+            saveButton.addEventListener(
+                "click",
+                async () => {
+
+
+                    const displayName =
+                        document
+                            .getElementById(
+                                "edit-display-name"
+                            )
+                            .value
+                            .trim();
+
+
+                    const username =
+                        document
+                            .getElementById(
+                                "edit-username"
+                            )
+                            .value
+                            .trim();
+
+
+                    const phone =
+                        document
+                            .getElementById(
+                                "edit-phone"
+                            )
+                            .value
+                            .trim();
+
+
+                    const tcInput =
+                        document.getElementById(
+                            "edit-tc"
+                        );
+
+
+                    const tcIdentityNo =
+                        tcInput.value.trim();
+
+
+                    const address =
+                        document
+                            .getElementById(
+                                "edit-address"
+                            )
+                            .value
+                            .trim();
+
+
+
+                    /* TELEFON KONTROLÜ */
+
+
+                    if (
+                        !/^05\d{9}$/.test(
+                            phone
+                        )
+                    ) {
+
+
+                        alert(
+                            "Telefon numarası 05XXXXXXXXX şeklinde 11 haneli olmalıdır."
+                        );
+
+
+                        return;
+
+                    }
+
+
+
+                    /* TC KONTROLÜ */
+
+
+                    if (
+                        !/^[1-9][0-9]{10}$/.test(
+                            tcIdentityNo
+                        )
+                    ) {
+
+
+                        alert(
+                            "T.C. Kimlik No 11 haneli olmalıdır."
+                        );
+
+
+                        return;
+
+                    }
+
+
+
+                    if (!displayName) {
+
+
+                        alert(
+                            "Görünen ad boş bırakılamaz."
+                        );
+
+
+                        return;
+
+                    }
+
+
+
+                    if (!username) {
+
+
+                        alert(
+                            "Kullanıcı adı boş bırakılamaz."
+                        );
+
+
+                        return;
+
+                    }
+
+
+
+                    const savedUser =
+                        localStorage.getItem(
+                            "royale2_user"
+                        );
+
+
+                    const accessToken =
+                        localStorage.getItem(
+                            "royale2_access_token"
+                        );
+
+
+
+                    if (
+                        !savedUser ||
+                        !accessToken
+                    ) {
+
+
+                        alert(
+                            "Oturum bulunamadı. Lütfen tekrar giriş yapın."
+                        );
+
+
+                        return;
+
+                    }
+
+
+
+                    const user =
+                        JSON.parse(
+                            savedUser
+                        );
+
+
+
+                    try {
+
+
+                        saveButton.disabled =
+                            true;
+
+
+                        saveButton.textContent =
+                            "Kaydediliyor...";
+
+
+
+                        /* =============================================
+                           PUBLIC PROFILE UPDATE
+                           ============================================= */
+
+
+                        const response =
+                            await fetch(
+
+                                `${window.SUPABASE_API_URL}profiles?id=eq.${user.id}`,
+
+                                {
+
+                                    method:
+                                        "PATCH",
+
+
+                                    headers: {
+
+                                        "apikey":
+                                            window.SUPABASE_KEY,
+
+                                        "Authorization":
+                                            `Bearer ${accessToken}`,
+
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Prefer":
+                                            "return=representation"
+
+                                    },
+
+
+                                    body:
+                                        JSON.stringify({
+
+                                            username:
+                                                username,
+
+                                            display_name:
+                                                displayName
+
+                                        })
+
+                                }
+
+                            );
+
+
+
+                        if (!response.ok) {
+
+
+                            throw new Error(
+                                await response.text()
+                            );
+
+                        }
+
+
+
+                        /* =============================================
+                           PRIVATE PROFILE UPDATE
+                           ============================================= */
+
+
+                        const privatePayload = {
+
+                            user_id:
+                                user.id
+
+                        };
+
+
+
+                        /*
+                         * Sadece daha önce kaydedilmemiş
+                         * ve kilitlenmemiş alanlar gönderilir.
+                         */
+
+
+                        if (
+                            !document.getElementById(
+                                "edit-phone"
+                            ).disabled
+                        ) {
+
+                            privatePayload.phone =
+                                phone;
+
+                        }
+
+
+
+                        if (
+                            !document.getElementById(
+                                "edit-tc"
+                            ).disabled
+                        ) {
+
+                            privatePayload.tc_identity_no =
+                                tcIdentityNo;
+
+                        }
+
+
+
+                        if (
+                            !document.getElementById(
+                                "edit-address"
+                            ).disabled
+                        ) {
+
+                            privatePayload.address =
+                                address;
+
+                        }
+
+
+
+                        /*
+                         * user_id dışında veri varsa
+                         * Supabase'e gönder.
+                         */
+
+
+                        if (
+                            Object.keys(
+                                privatePayload
+                            ).length > 1
+                        ) {
+
+
+                            const privateResponse =
+                                await fetch(
+
+                                    `${window.SUPABASE_API_URL}profile_private?on_conflict=user_id`,
+
+                                    {
+
+                                        method:
+                                            "POST",
+
+
+                                        headers: {
+
+                                            apikey:
+                                                window.SUPABASE_KEY,
+
+                                            Authorization:
+                                                `Bearer ${accessToken}`,
+
+                                            "Content-Type":
+                                                "application/json",
+
+                                            Prefer:
+                                                "resolution=merge-duplicates,return=representation"
+
+                                        },
+
+
+                                        body:
+                                            JSON.stringify(
+                                                privatePayload
+                                            )
+
+                                    }
+
+                                );
+
+
+
+                            if (
+                                !privateResponse.ok
+                            ) {
+
+
+                                throw new Error(
+                                    await privateResponse.text()
+                                );
+
+                            }
+
+                        }
+
+
+
+                        /* =============================================
+                           EKRANI ANINDA GÜNCELLE
+                           ============================================= */
+
+
+                        const profileUsername =
+                            document.getElementById(
+                                "profile-username"
+                            );
+
+
+                        if (profileUsername) {
+
+                            profileUsername.textContent =
+                                username;
+
+                        }
+
+
+
+                        document.getElementById(
+                            "profile-display-name"
+                        ).textContent =
+                            displayName;
+
+
+
+                        const accountUsername =
+                            document.getElementById(
+                                "account-username"
+                            );
+
+
+                        if (accountUsername) {
+
+                            accountUsername.textContent =
+                                username;
+
+                        }
+
+
+
+                        const sidebarUsername =
+                            document.getElementById(
+                                "sidebar-username"
+                            );
+
+
+                        if (sidebarUsername) {
+
+                            sidebarUsername.textContent =
+                                username;
+
+                        }
+
+
+
+                        const avatarLetter =
+                            document.getElementById(
+                                "profile-avatar-letter"
+                            );
+
+
+                        if (avatarLetter) {
+
+
+                            avatarLetter.textContent =
+
+                                (
+                                    displayName ||
+                                    username ||
+                                    "R"
+                                )
+                                .trim()
+                                .charAt(0)
+                                .toUpperCase();
+
+                        }
+
+
+
+                        modal.classList.remove(
+                            "active"
+                        );
+
+
+                        alert(
+                            "Profil bilgilerin başarıyla güncellendi."
+                        );
+
+
+                    }
+
+                    catch (error) {
+
+
+                        console.error(
+                            "Profil güncellenemedi:",
+                            error
+                        );
+
+
+                        const errorMessage =
+                            String(
+                                error?.message ||
+                                error ||
+                                ""
+                            );
+
+
+
+                        if (
+
+                            errorMessage.includes(
+                                "profiles_username_unique_ci"
+                            ) ||
+
+                            errorMessage.includes(
+                                "duplicate key value"
+                            ) ||
+
+                            errorMessage.includes(
+                                "23505"
+                            )
+
+                        ) {
+
+
+                            alert(
+                                "Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin."
+                            );
+
+
+                        }
+
+                        else {
+
+
+                            alert(
+                                "Profil güncellenirken bir hata oluştu. Lütfen tekrar deneyin."
+                            );
+
+                        }
+
+
+                    }
+
+                    finally {
+
+
+                        saveButton.disabled =
+                            false;
+
+
+                        saveButton.textContent =
+                            "Değişiklikleri Kaydet";
+
+                    }
+
+
+                }
+            );
+
+        }
+
+
     }
-});
-document.addEventListener("DOMContentLoaded", loadAccountPage);
+);
+
+
+
+/* =========================================================
+   SAYFAYI YÜKLE
+   ========================================================= */
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadAccountPage
+);
+
 </script>
+
 
 </body>
 </html>

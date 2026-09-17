@@ -681,10 +681,13 @@ document.addEventListener(
           `;
 
 
-          userLink
-            .parentElement
-            .appendChild(menu);
+const userMenuWrapper = document.createElement("div");
+userMenuWrapper.className = "user-menu-wrapper";
 
+userLink.parentElement.insertBefore(userMenuWrapper, userLink);
+
+userMenuWrapper.appendChild(userLink);
+userMenuWrapper.appendChild(menu);
 
           return;
         }

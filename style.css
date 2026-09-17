@@ -7185,3 +7185,87 @@ body > main .listing-card .checkmark {
     border-color: #8f6425 !important;
     accent-color: #c88a2b !important;
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET — GENEL SİYAH / ALTIN TEMA
+   Sabit arka plan görseline dokunmaz
+========================================================= */
+
+/* İLAN KARTLARI */
+body > main .listing-card {
+    background: rgba(10, 10, 10, 0.94) !important;
+    border-color: rgba(190, 132, 42, 0.38) !important;
+}
+
+/* İLAN KARTLARINDAKİ GÖRSEL KUTULARI */
+body > main .listing-card img,
+body > main .listing-card .listing-image,
+body > main .listing-card .image-wrap {
+    border-color: rgba(190, 132, 42, 0.30) !important;
+}
+
+/* KARTLARDAKİ AYIRICI ÇİZGİLER */
+body > main .listing-card hr,
+body > main .listing-card .listing-footer,
+body > main .listing-card .price-row {
+    border-color: rgba(190, 132, 42, 0.22) !important;
+}
+
+/* FİLTRE BUTONLARI */
+body > main .filters button {
+    background: rgba(10, 10, 10, 0.92) !important;
+    border-color: rgba(190, 132, 42, 0.35) !important;
+    color: #d6c4a5 !important;
+}
+
+body > main .filters button:hover,
+body > main .filters button.active {
+    background: rgba(190, 132, 42, 0.12) !important;
+    border-color: #c88a2b !important;
+    color: #e6ad45 !important;
+}
+
+/* KATEGORİ SEÇİMİ */
+body > main select {
+    background-color: #0b0b0b !important;
+    border-color: rgba(190, 132, 42, 0.35) !important;
+    color: #d8d0c2 !important;
+}
+
+/* REKLAM ALANLARI — MAVİ/LACİVERT İÇ ZEMİNİ KALDIR */
+.ad-slot,
+.ad-placeholder,
+.side-ad,
+.left-ad,
+.right-ad,
+.top-ad {
+    background: rgba(8, 8, 8, 0.78) !important;
+    border-color: rgba(190, 132, 42, 0.55) !important;
+}
+
+/* REKLAM YAZILARI / ROZETLERİ */
+.ad-slot *,
+.ad-placeholder *,
+.side-ad *,
+.left-ad *,
+.right-ad *,
+.top-ad * {
+    border-color: rgba(190, 132, 42, 0.55) !important;
+}
+
+/* KÜÇÜK MAVİ KARELER */
+body > main .listing-card input[type="checkbox"],
+body > main .listing-card .checkbox,
+body > main .listing-card .checkmark {
+    border-color: #9b6a25 !important;
+    accent-color: #c88a2b !important;
+}
+
+/* GENEL MAVİ ÇERÇEVELERİ ALTIN TONUNA ÇEK */
+body > main .card,
+body > main .server-card,
+body > main .step-card {
+    background-color: rgba(9, 9, 9, 0.92) !important;
+    border-color: rgba(190, 132, 42, 0.30) !important;
+}

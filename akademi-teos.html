@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Akademi Teos İlan Pazarı | Royale2 Market</title>
+
+  <meta
+    name="description"
+    content="Royale2 Akademi Teos sunucusu Yang, item ve hesap ilanlarını keşfet."
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="images/royale-market-icon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+
+<body>
+
+  <!-- =====================================================
+       ÜST REKLAM
+  ====================================================== -->
+
+  <div class="top-ad-area">
+
+    <a
+      href="#"
+      class="top-ad-link"
+      aria-label="Üst reklam alanı"
+    >
+
+      <div class="top-ad-placeholder">
+
+        <span>REKLAM</span>
+
+        <strong>728 × 90</strong>
+
+        <small>
+          Üst Banner Reklam Alanı
+        </small>
+
+      </div>
+
+    </a>
+
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="market-header">
+
+    <div class="header-main">
+
+      <!-- LOGO -->
+
+      <a
+        class="market-brand"
+        href="index.html"
+        aria-label="Royale Market Ana Sayfa"
+      >
+
+        <img
+          src="images/royale-market-logo.png"
+          alt="Royale Market"
+          class="market-brand-logo"
+        >
+
+      </a>
+
+
+      <!-- GENEL ARAMA -->
+
+      <div class="market-search">
+
+        <input
+          type="search"
+          id="market-search-input"
+          placeholder="İlan, item veya hesap ara..."
+          aria-label="İlanlarda ara"
+        >
+
+        <button
+          type="button"
+          id="market-search-button"
+          aria-label="Ara"
+        >
+          🔍
+        </button>
+
+      </div>
+
+
+      <!-- KULLANICI İŞLEMLERİ -->
+
+      <div class="header-actions">
+
+        <a
+          class="header-messages"
+          href="messages.html"
+          id="messages-link"
+        >
+          💬 Mesajlar
+        </a>
+
+
+        <a
+          class="header-login"
+          href="#login"
+        >
+          Giriş Yap
+        </a>
+
+
+        <a
+          class="header-register"
+          href="#register"
+          id="register-open"
+        >
+          Üye Ol
+        </a>
+
+
+        <a
+          class="header-sell"
+          href="create-listing.html"
+        >
+          + İlan Ver
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         ANA MENÜ
+    ==================================================== -->
+
+    <div class="header-nav-wrap">
+
+      <nav
+        class="market-nav"
+        aria-label="Ana menü"
+      >
+
+        <a href="index.html">
+          İlan Pazarı
+        </a>
+
+
+        <a
+          href="ephesus.html"
+          data-header-server="Ephesus"
+        >
+          Ephesus
+        </a>
+
+
+        <a
+          href="teos.html"
+          data-header-server="Teos"
+        >
+          Teos
+        </a>
+
+
+        <a
+          href="pergamon.html"
+          data-header-server="Pergamon"
+        >
+          Pergamon
+        </a>
+
+
+        <a
+          class="active"
+          href="akademi-teos.html"
+          data-header-server="Akademi Teos"
+        >
+          Akademi Teos
+        </a>
+
+
+        <a href="#how">
+          Nasıl Çalışır?
+        </a>
+
+
+        <a
+          class="nav-discord"
+          href="https://discord.gg/royale2wiki"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Discord
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       AKADEMİ TEOS PAZAR SAYFASI
+  ====================================================== -->
+
+  <main>
+
+    <section
+      id="akademi-teos-market"
+      class="section ephesus-market-page"
+    >
+
+      <!-- =================================================
+           SAYFA BAŞLIĞI
+      ================================================== -->
+
+      <div class="ephesus-market-header">
+
+        <div class="ephesus-market-title">
+
+          <span class="eyebrow">
+            AKADEMİ TEOS PAZARI
+          </span>
+
+          <h1>
+            Akademi Teos İlan Pazarı
+          </h1>
+
+          <p id="akademiTeosListingCount">
+            İlanlar yükleniyor...
+          </p>
+
+        </div>
+
+
+        <!-- ===============================================
+             ARAMA + SIRALAMA
+        ================================================ -->
+
+        <div class="ephesus-market-controls">
+
+          <div class="ephesus-search">
+
+            <label
+              for="akademiTeosSearch"
+              class="sr-only"
+            >
+              Akademi Teos ilanlarında ara
+            </label>
+
+            <input
+              id="akademiTeosSearch"
+              type="search"
+              placeholder="Akademi Teos ilanlarında ara..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+
+          </div>
+
+
+          <div class="ephesus-sort">
+
+            <label
+              for="akademiTeosSort"
+              class="sr-only"
+            >
+              İlanları sırala
+            </label>
+
+            <select
+              id="akademiTeosSort"
+              aria-label="İlanları sırala"
+            >
+
+              <option value="newest">
+                Önce En Yeni
+              </option>
+
+              <option value="oldest">
+                Önce En Eski
+              </option>
+
+              <option value="price-asc">
+                Fiyat (Artan)
+              </option>
+
+              <option value="price-desc">
+                Fiyat (Azalan)
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           KATEGORİ FİLTRELERİ
+      ================================================== -->
+
+      <div
+        class="ephesus-category-filters"
+        role="group"
+        aria-label="Akademi Teos ilan kategorileri"
+      >
+
+        <button
+          type="button"
+          class="akademi-teos-filter active"
+          data-category="Tümü"
+          aria-pressed="true"
+        >
+          Tüm İlanlar
+        </button>
+
+
+        <button
+          type="button"
+          class="akademi-teos-filter"
+          data-category="Yang"
+          aria-pressed="false"
+        >
+          Yang
+        </button>
+
+
+        <button
+          type="button"
+          class="akademi-teos-filter"
+          data-category="Item"
+          aria-pressed="false"
+        >
+          İtem
+        </button>
+
+
+        <button
+          type="button"
+          class="akademi-teos-filter"
+          data-category="Hesap"
+          aria-pressed="false"
+        >
+          Hesap
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           YÜKLEME / HATA DURUMU
+      ================================================== -->
+
+      <div
+        id="akademiTeosMarketStatus"
+        class="ephesus-market-status"
+        role="status"
+        aria-live="polite"
+      >
+        Akademi Teos ilanları yükleniyor...
+      </div>
+
+
+      <!-- =================================================
+           İLANLAR
+      ================================================== -->
+
+      <div
+        id="akademiTeosListings"
+        class="listing-grid ephesus-listing-grid"
+      ></div>
+
+
+      <!-- =================================================
+           SONUÇ BULUNAMADI
+      ================================================== -->
+
+      <div
+        id="akademiTeosEmptyState"
+        class="ephesus-empty-state"
+        hidden
+      >
+
+        <h3>
+          İlan bulunamadı
+        </h3>
+
+        <p>
+          Arama kelimesini veya kategori filtresini
+          değiştirerek tekrar deneyebilirsin.
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           SAYFALAMA
+      ================================================== -->
+
+      <nav
+        id="akademiTeosPagination"
+        class="ephesus-pagination"
+        aria-label="İlan sayfaları"
+        hidden
+      ></nav>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       SOL / SAĞ REKLAM ALANLARI
+  ====================================================== -->
+
+  <div class="side-ad side-ad-left">
+
+    <span>REKLAM</span>
+
+    <strong>
+      200 × 760
+    </strong>
+
+    <small>
+      Sol Reklam Alanı
+    </small>
+
+  </div>
+
+
+  <div class="side-ad side-ad-right">
+
+    <span>REKLAM</span>
+
+    <strong>
+      200 × 760
+    </strong>
+
+    <small>
+      Sağ Reklam Alanı
+    </small>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUPABASE
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+
+  <!-- =====================================================
+       MEVCUT ORTAK SİSTEM
+  ====================================================== -->
+
+  <script src="script.js"></script>
+
+
+  <!-- =====================================================
+       AKADEMİ TEOS MARKET MODÜLÜ
+  ====================================================== -->
+
+  <script src="akademi-teos.js"></script>
+
+</body>
+
+</html>

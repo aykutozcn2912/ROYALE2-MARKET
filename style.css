@@ -8185,3 +8185,36 @@ body > main .yang-rate-card {
     padding-right: 0 !important;
   }
 }
+
+
+/* =========================================================
+   YAN REKLAM - RESPONSIVE GÜVENLİK AYARI
+   Küçük / büyük masaüstünde taşmayı önler
+   ========================================================= */
+
+/* Orta masaüstü */
+@media (min-width: 1550px) and (max-width: 1699px) {
+  .side-ad {
+    width: clamp(160px, 10vw, 180px) !important;
+    height: min(760px, calc(100vh - 24px)) !important;
+    min-height: 500px !important;
+  }
+}
+
+/* Normal masaüstü */
+@media (min-width: 1700px) and (max-width: 1919px) {
+  .side-ad {
+    width: clamp(190px, 12vw, 220px) !important;
+    height: min(840px, calc(100vh - 24px)) !important;
+    min-height: 560px !important;
+  }
+}
+
+/* 1920px ve üzeri */
+@media (min-width: 1920px) {
+  .side-ad {
+    width: clamp(220px, 15vw, 290px) !important;
+    height: min(900px, calc(100vh - 24px)) !important;
+    min-height: 620px !important;
+  }
+}

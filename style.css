@@ -8068,4 +8068,168 @@ body > main .yang-rate-card {
   display: block;
 }
 
+/* =========================================================
+   ROYALE2 MARKET - GLOBAL REKLAM ALANLARI
+   ÜST 728x90 + SOL/SAĞ 200x760
+   ========================================================= */
 
+/* ÜST REKLAM */
+.top-ad-area {
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 20;
+  background: #2a2112;
+  border-bottom: 1px solid rgba(184, 133, 37, 0.28);
+  box-sizing: border-box;
+  padding: 14px 220px;
+}
+
+.top-ad-area .top-ad-link {
+  display: block;
+  width: min(728px, 100%);
+  text-decoration: none;
+}
+
+.top-ad-area .top-ad-placeholder {
+  width: 100%;
+  height: 90px;
+  box-sizing: border-box;
+  border: 1px dashed rgba(184, 133, 37, 0.75);
+  border-radius: 4px;
+  background: rgba(5, 5, 5, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #fff;
+}
+
+.top-ad-area .top-ad-placeholder span {
+  padding: 4px 8px;
+  border: 1px solid #b88525;
+  border-radius: 4px;
+  color: #e0a94f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.top-ad-area .top-ad-placeholder strong {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.top-ad-area .top-ad-placeholder small {
+  color: #877d6c;
+  font-size: 11px;
+}
+
+
+/* SOL + SAĞ REKLAMLAR */
+.side-ad {
+  position: absolute;
+  top: 135px;
+  width: 200px;
+  height: 760px;
+  z-index: 18;
+  box-sizing: border-box;
+
+  border: 1px dashed rgba(184, 133, 37, 0.65);
+  border-radius: 3px;
+
+  background: rgba(5, 5, 5, 0.82);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto;
+}
+
+.side-ad-left {
+  left: max(6px, calc(50% - 960px));
+}
+
+.side-ad-right {
+  right: max(6px, calc(50% - 960px));
+}
+
+.side-ad > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 8px;
+  margin-bottom: 10px;
+
+  border: 1px solid #b88525;
+  border-radius: 4px;
+
+  color: #e0a94f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.side-ad > strong {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.side-ad > small {
+  color: #877d6c;
+  font-size: 10px;
+}
+
+
+/* Reklamlar ana içeriğin üzerine binmesin */
+@media (min-width: 1500px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+
+/* Ekran daraldığında yan reklamları gizle */
+@media (max-width: 1499px) {
+  .side-ad {
+    display: none !important;
+  }
+
+  .top-ad-area {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
+/* Telefon */
+@media (max-width: 768px) {
+  .top-ad-area {
+    min-height: 82px;
+    padding: 8px 12px;
+  }
+
+  .top-ad-area .top-ad-placeholder {
+    height: 66px;
+    gap: 7px;
+  }
+
+  .top-ad-area .top-ad-placeholder strong {
+    font-size: 12px;
+  }
+
+  .top-ad-area .top-ad-placeholder small {
+    display: none;
+  }
+}

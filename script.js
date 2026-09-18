@@ -660,28 +660,34 @@ document.addEventListener(
           menu.id =
             "user-dropdown";
 
+menu.innerHTML = `
+    <a href="account.html#overview">
+        Hesabım
+    </a>
 
-          menu.innerHTML = `
-            <a href="account.html">
-              Hesabım
-            </a>
+    <a href="account.html#my-listings">
+        İlanlarım
+    </a>
 
-            <a href="#my-listings">
-              İlanlarım
-            </a>
+    <a href="account.html#orders">
+        Siparişlerim
+    </a>
 
-            <a href="#favorites">
-              Favorilerim
-            </a>
+    <a href="account.html#wallet-deposit">
+        Bakiye Yükle
+    </a>
 
-            <button
-              type="button"
-              id="logout-button"
-            >
-              Çıkış Yap
-            </button>
-          `;
+    <a href="account.html#wallet-withdraw">
+        Para Çek
+    </a>
 
+    <button
+        type="button"
+        id="logout-button"
+    >
+        Çıkış Yap
+    </button>
+`;
 
 const userMenuWrapper = document.createElement("div");
 userMenuWrapper.className = "user-menu-wrapper";

@@ -1665,3 +1665,403 @@ body:has(.messages-page) .messages-page {
         padding: 0 12px;
     }
 }
+
+
+/* =====================================================
+   ROYALE2 MARKET
+   MESAJLAŞMA PROFESYONEL SON DOKUNUŞLAR
+   ===================================================== */
+
+/* MESAJ AKIŞI */
+.messages-page #messageList,
+.messages-page .message-list {
+    padding: 22px 26px 18px;
+
+    gap: 8px;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(190, 132, 43, 0.65)
+        rgba(255, 255, 255, 0.035);
+}
+
+
+/* CHROME / EDGE SCROLLBAR */
+.messages-page #messageList::-webkit-scrollbar,
+.messages-page .message-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.messages-page #messageList::-webkit-scrollbar-track,
+.messages-page .message-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.messages-page #messageList::-webkit-scrollbar-thumb,
+.messages-page .message-list::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #c58a32,
+            #76501f
+        );
+
+    border-radius: 999px;
+}
+
+.messages-page #messageList::-webkit-scrollbar-thumb:hover,
+.messages-page .message-list::-webkit-scrollbar-thumb:hover {
+    background: #d69a3c;
+}
+
+
+/* MESAJ SATIRI */
+.messages-page .message-item {
+    width: 100%;
+
+    display: flex;
+
+    margin: 0;
+    padding: 0 2px;
+}
+
+
+/* GELEN MESAJ */
+.messages-page .message-received {
+    justify-content: flex-start;
+}
+
+
+/* GİDEN MESAJ */
+.messages-page .message-sent {
+    justify-content: flex-end;
+}
+
+
+/* ORTAK MESAJ BALONU */
+.messages-page .message-bubble {
+    position: relative;
+
+    width: auto;
+    min-width: 76px;
+    max-width: min(68%, 540px);
+
+    padding: 11px 13px 8px;
+
+    border-radius: 10px;
+
+    line-height: 1.4;
+
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.16);
+
+    transition:
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+/* GELEN MESAJ BALONU */
+.messages-page .message-received .message-bubble {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(58, 49, 36, 0.96),
+            rgba(42, 36, 27, 0.96)
+        );
+
+    border: 1px solid rgba(177, 137, 75, 0.18);
+
+    color: #f4eee5;
+
+    border-bottom-left-radius: 3px;
+}
+
+
+/* GİDEN MESAJ BALONU */
+.messages-page .message-sent .message-bubble,
+.messages-page .message-bubble.own {
+    background:
+        linear-gradient(
+            145deg,
+            #c38a32,
+            #a66f23
+        );
+
+    border: 1px solid rgba(229, 174, 78, 0.52);
+
+    color: #fff;
+
+    border-bottom-right-radius: 3px;
+
+    box-shadow:
+        0 5px 18px rgba(126, 79, 19, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+
+/* MESAJ METNİ */
+.messages-page .message-text {
+    margin: 0;
+
+    color: inherit;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1.42;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+
+/* MESAJ SAATİ */
+.messages-page .message-time {
+    display: block;
+
+    margin-top: 5px;
+
+    color: rgba(255, 255, 255, 0.52);
+
+    font-size: 9px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    text-align: right;
+}
+
+
+/* GELEN MESAJIN SAATİ */
+.messages-page .message-received .message-time {
+    color: rgba(230, 220, 205, 0.48);
+}
+
+
+/* MESAJ YAZMA ALANI */
+.messages-page #messageForm,
+.messages-page .message-form {
+    padding: 12px 16px;
+
+    gap: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15, 13, 10, 0.98),
+            rgba(10, 9, 7, 0.98)
+        );
+
+    border-top:
+        1px solid rgba(190, 132, 43, 0.22);
+}
+
+
+/* TEXTAREA */
+.messages-page #messageInput {
+    min-height: 44px;
+    height: 44px;
+    max-height: 110px;
+
+    padding: 12px 14px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid rgba(197, 145, 67, 0.18);
+
+    border-radius: 8px;
+
+    color: #f4eee5;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.messages-page #messageInput:hover {
+    border-color:
+        rgba(197, 145, 67, 0.32);
+}
+
+.messages-page #messageInput:focus {
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    border-color:
+        rgba(211, 154, 61, 0.72);
+
+    box-shadow:
+        0 0 0 3px rgba(190, 132, 43, 0.08);
+
+    outline: none;
+}
+
+.messages-page #messageInput::placeholder {
+    color:
+        rgba(211, 201, 185, 0.38);
+}
+
+
+/* GÖNDER BUTONU */
+.messages-page #messageForm button,
+.messages-page .message-form button {
+    min-width: 88px;
+    height: 44px;
+
+    padding: 0 18px;
+
+    border:
+        1px solid rgba(226, 168, 71, 0.52);
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #c88e35,
+            #a66d21
+        );
+
+    color: #171008;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 4px 12px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.16s ease,
+        filter 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+.messages-page #messageForm button:hover,
+.messages-page .message-form button:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #d79b40,
+            #b57927
+        );
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.messages-page #messageForm button:active,
+.messages-page .message-form button:active {
+    transform: translateY(0);
+}
+
+
+/* GÜVENLİK BİLGİSİ */
+.messages-page .phone-warning {
+    margin: 0 16px 8px;
+
+    padding: 9px 11px;
+
+    background:
+        rgba(185, 127, 37, 0.055);
+
+    border:
+        1px solid rgba(190, 132, 43, 0.30);
+
+    border-radius: 7px;
+
+    color: #ba914c;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+}
+
+
+/* AKTİF KONUŞMA */
+.messages-page .conversation-item.active {
+    position: relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(177, 119, 34, 0.18),
+            rgba(47, 35, 20, 0.55)
+        );
+
+    border-color:
+        rgba(210, 151, 57, 0.68);
+
+    box-shadow:
+        inset 3px 0 0 #d29536;
+}
+
+
+/* KONUŞMA HOVER */
+.messages-page .conversation-item:hover {
+    border-color:
+        rgba(197, 140, 51, 0.48);
+
+    background:
+        rgba(197, 140, 51, 0.075);
+}
+
+
+/* OKUNMAMIŞ MESAJ ROZETİ */
+.messages-page .conversation-unread-badge {
+    min-width: 20px;
+    height: 20px;
+
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dfa641,
+            #a56c22
+        );
+
+    color: #171008;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 10px rgba(191, 128, 35, 0.25);
+}
+
+
+/* MOBİL */
+@media (max-width: 800px) {
+
+    .messages-page #messageList,
+    .messages-page .message-list {
+        padding: 16px 12px;
+    }
+
+    .messages-page .message-bubble {
+        max-width: 84%;
+    }
+
+    .messages-page #messageForm,
+    .messages-page .message-form {
+        padding: 10px;
+    }
+
+    .messages-page .phone-warning {
+        margin:
+            0 10px 7px;
+    }
+}

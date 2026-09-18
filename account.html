@@ -5281,79 +5281,62 @@ if (photos.length) {
      * Fotoğraf seçildiğinde önizleme
      */
 
-    document
-      .getElementById(
-        "listing-edit-photo"
-      )
-      ?.addEventListener(
-        "change",
-        event => {
+document
+    .getElementById("listing-edit-photo")
+    ?.addEventListener("change", event => {
+        previewProfessionalListingPhotos(
+            event.target.files
+        );
+    });
 
 /*
  * Mevcut ilan fotoğraflarında
  * Kapak Yap işlemi
  */
 document
-  .getElementById(
-    "listing-edit-existing-photos"
-  )
-  ?.addEventListener(
-    "click",
-    async event => {
+    .getElementById("listing-edit-existing-photos")
+    ?.addEventListener("click", async event => {
 
-      const coverButton =
-        event.target.closest(
-          ".listing-edit-make-cover"
-        );
+        const coverButton =
+            event.target.closest(
+                ".listing-edit-make-cover"
+            );
 
-      if (!coverButton) {
-        return;
-      }
+        if (!coverButton) {
+            return;
+        }
 
-      const imageId =
-        coverButton.dataset.imageId;
+        const imageId =
+            coverButton.dataset.imageId;
 
-      if (!imageId) {
-        return;
-      }
+        if (!imageId) {
+            return;
+        }
 
-      coverButton.disabled = true;
+        coverButton.disabled = true;
 
-      const oldText =
-        coverButton.textContent;
+        const oldText =
+            coverButton.textContent;
 
-      coverButton.textContent =
-        "Değiştiriliyor...";
+        coverButton.textContent =
+            "Değiştiriliyor...";
 
-      try {
+        try {
 
-        await setProfessionalListingCover
-          imageId
-        );
+            await setProfessionalListingCover(
+                imageId
+            );
 
-      } finally {
+        } finally {
 
-        if (coverButton.isConnected) {
-
-          coverButton.disabled = false;
-
-          coverButton.textContent =
-            oldText;
+            if (coverButton.isConnected) {
+                coverButton.disabled = false;
+                coverButton.textContent = oldText;
+            }
 
         }
 
-      }
-
-    }
-  );
-          
-previewProfessionalListingPhotos(
-  event.target.files
-);
-
-        }
-      );
-
+    });
 
     /*
      * Modalın dışına tıklayınca kapat

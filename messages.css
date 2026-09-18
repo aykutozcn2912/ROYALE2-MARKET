@@ -1361,3 +1361,307 @@
 
     margin: 0 !important;
 }
+
+/* =====================================================
+   ROYALE2 MARKET - MESAJLAR SAYFASI HEADER DÜZELTMESİ
+   Sadece messages.html sayfasını etkiler
+   ===================================================== */
+
+body:has(.messages-page) .site-header {
+    width: 100%;
+    height: 72px;
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    z-index: 1000;
+
+    background: rgba(28, 22, 14, 0.96) !important;
+    border-bottom: 1px solid rgba(197, 137, 47, 0.28) !important;
+}
+
+body:has(.messages-page) .site-header .header-inner {
+    width: min(1420px, calc(100% - 40px));
+    height: 72px;
+
+    margin: 0 auto;
+    padding: 0;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 34px;
+}
+
+
+/* LOGO */
+
+body:has(.messages-page) .site-header .brand {
+    min-width: 180px;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+body:has(.messages-page) .site-header .brand-mark {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+
+    display: grid !important;
+    place-items: center;
+
+    border: 1px solid #b87927;
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(184, 121, 39, 0.20),
+            rgba(16, 12, 8, 0.90)
+        );
+
+    color: #e5ad4d;
+
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+body:has(.messages-page) .site-header .brand-text {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+
+    line-height: 1;
+}
+
+body:has(.messages-page) .site-header .brand-text strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    line-height: 1;
+}
+
+body:has(.messages-page) .site-header .brand-text small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #9d8a6b;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    line-height: 1;
+}
+
+
+/* ORTA NAVİGASYON */
+
+body:has(.messages-page) .site-header nav {
+    min-width: 0;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 28px;
+
+    margin: 0;
+    padding: 0;
+}
+
+body:has(.messages-page) .site-header nav a {
+    display: inline-flex !important;
+    align-items: center;
+
+    margin: 0;
+    padding: 8px 0;
+
+    color: #a89b88;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        color 0.18s ease,
+        opacity 0.18s ease;
+}
+
+body:has(.messages-page) .site-header nav a:hover {
+    color: #d9a447;
+}
+
+
+/* SAĞ TARAF */
+
+body:has(.messages-page) .site-header .actions {
+    margin-left: auto;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 12px;
+
+    white-space: nowrap;
+}
+
+body:has(.messages-page) .site-header .actions .login {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    color: #d5c6af;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    background: transparent;
+    border: 0;
+}
+
+body:has(.messages-page) .site-header .actions .login:hover {
+    color: #e2ad4d;
+}
+
+body:has(.messages-page) .site-header .actions .sell {
+    min-height: 40px;
+
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border: 1px solid rgba(205, 143, 48, 0.55);
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #bd812d,
+            #98621f
+        );
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-decoration: none;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 5px 15px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
+}
+
+body:has(.messages-page) .site-header .actions .sell:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+
+/* HEADER İLE MESAJ SAYFASI ARASINDAKİ MESAFE */
+
+body:has(.messages-page) .messages-page {
+    min-height: calc(100vh - 72px);
+}
+
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+
+    body:has(.messages-page) .site-header .header-inner {
+        width: calc(100% - 28px);
+        gap: 20px;
+    }
+
+    body:has(.messages-page) .site-header nav {
+        gap: 16px;
+    }
+
+    body:has(.messages-page) .site-header .brand {
+        min-width: auto;
+    }
+}
+
+
+/* MOBİL */
+
+@media (max-width: 760px) {
+
+    body:has(.messages-page) .site-header {
+        height: auto;
+        min-height: 64px;
+    }
+
+    body:has(.messages-page) .site-header .header-inner {
+        width: calc(100% - 24px);
+        min-height: 64px;
+
+        flex-wrap: wrap;
+
+        padding: 10px 0;
+        gap: 10px 16px;
+    }
+
+    body:has(.messages-page) .site-header .brand {
+        margin-right: auto;
+    }
+
+    body:has(.messages-page) .site-header nav {
+        width: 100%;
+        order: 3;
+
+        overflow-x: auto;
+
+        gap: 18px;
+    }
+
+    body:has(.messages-page) .site-header nav a {
+        font-size: 12px;
+    }
+
+    body:has(.messages-page) .site-header .actions {
+        margin-left: 0;
+    }
+
+    body:has(.messages-page) .site-header .actions .sell {
+        padding: 0 12px;
+    }
+}

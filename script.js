@@ -1630,8 +1630,9 @@ document
 // ANA SAYFA İLAN SİSTEMİNİ BAŞLAT
 // ==========================================================
 
-loadListings();
-
+if (!document.querySelector(".account-page")) {
+  loadListings();
+}
 
 // ==========================================================
 // İLAN OLUŞTURMA SAYFASI

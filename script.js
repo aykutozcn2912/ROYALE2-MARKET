@@ -6941,3 +6941,83 @@ document.addEventListener(
 
   window.addEventListener("load", updateAccountView);
 })();
+
+
+// ======================================================
+// ROYALE2 MARKET - GLOBAL REKLAM ALANLARI
+// Üst 728x90 + Sol/Sağ 200x760
+// Tüm sayfalarda otomatik oluşturulur.
+// ======================================================
+
+(function initGlobalAdAreas() {
+  "use strict";
+
+  function createGlobalAds() {
+    if (!document.body) return;
+
+    // --------------------------------------------------
+    // ÜST REKLAM
+    // index.html üzerinde zaten varsa tekrar oluşturma.
+    // --------------------------------------------------
+    let topAd = document.querySelector(".top-ad-area");
+
+    if (!topAd) {
+      topAd = document.createElement("div");
+      topAd.className = "top-ad-area global-ad-area";
+
+      topAd.innerHTML = `
+        <a href="#" class="top-ad-link" aria-label="Üst Banner Reklam Alanı">
+          <div class="top-ad-placeholder">
+            <span>REKLAM</span>
+            <strong>728 × 90</strong>
+            <small>Üst Banner Reklam Alanı</small>
+          </div>
+        </a>
+      `;
+
+      document.body.insertBefore(topAd, document.body.firstChild);
+    }
+
+    // --------------------------------------------------
+    // SOL REKLAM
+    // --------------------------------------------------
+    let leftAd = document.querySelector(".side-ad-left");
+
+    if (!leftAd) {
+      leftAd = document.createElement("div");
+      leftAd.className = "side-ad side-ad-left global-ad-area";
+
+      leftAd.innerHTML = `
+        <span>REKLAM</span>
+        <strong>200 × 760</strong>
+        <small>Sol Reklam Alanı</small>
+      `;
+
+      document.body.appendChild(leftAd);
+    }
+
+    // --------------------------------------------------
+    // SAĞ REKLAM
+    // --------------------------------------------------
+    let rightAd = document.querySelector(".side-ad-right");
+
+    if (!rightAd) {
+      rightAd = document.createElement("div");
+      rightAd.className = "side-ad side-ad-right global-ad-area";
+
+      rightAd.innerHTML = `
+        <span>REKLAM</span>
+        <strong>200 × 760</strong>
+        <small>Sağ Reklam Alanı</small>
+      `;
+
+      document.body.appendChild(rightAd);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", createGlobalAds);
+  } else {
+    createGlobalAds();
+  }
+})();

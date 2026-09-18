@@ -6964,11 +6964,11 @@ document.addEventListener(
       leftAd = document.createElement("div");
       leftAd.className = "side-ad side-ad-left global-ad-area";
 
-      leftAd.innerHTML = `
-        <span>REKLAM</span>
-        <strong>200 × 760</strong>
-        <small>Sol Reklam Alanı</small>
-      `;
+leftAd.innerHTML = `
+  <span>REKLAM</span>
+  <strong>YAN REKLAM</strong>
+  <small>Sol Reklam Alanı</small>
+`;
 
       document.body.appendChild(leftAd);
     }
@@ -6982,11 +6982,11 @@ document.addEventListener(
       rightAd = document.createElement("div");
       rightAd.className = "side-ad side-ad-right global-ad-area";
 
-      rightAd.innerHTML = `
-        <span>REKLAM</span>
-        <strong>200 × 760</strong>
-        <small>Sağ Reklam Alanı</small>
-      `;
+rightAd.innerHTML = `
+  <span>REKLAM</span>
+  <strong>YAN REKLAM</strong>
+  <small>Sağ Reklam Alanı</small>
+`;
 
       document.body.appendChild(rightAd);
     }

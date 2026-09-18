@@ -3739,9 +3739,7 @@ function openProfessionalListingEditor(
 
 }
 
-async function makeProfessionalListingCover(
-  imageId
-) {
+async function makeProfessionalListingCover(imageId) {
 
   if (
     !professionalEditingListing ||
@@ -3754,19 +3752,14 @@ async function makeProfessionalListingCover(
     getAccountSession();
 
   if (!session?.user?.id) {
-
     alert(
       "Oturum bulunamadı. Lütfen tekrar giriş yap."
     );
-
     return;
-
   }
-
 
   const listingId =
     professionalEditingListing.id;
-
 
   const currentImages =
     [
@@ -3781,7 +3774,6 @@ async function makeProfessionalListingCover(
         Number(b.sort_order || 0)
     );
 
-
   const selectedIndex =
     currentImages.findIndex(
       image =>
@@ -3789,129 +3781,125 @@ async function makeProfessionalListingCover(
         String(imageId)
     );
 
-
   if (selectedIndex <= 0) {
     return;
   }
 
-
   const selectedImage =
     currentImages[selectedIndex];
 
-
-  const reorderedImages = [
-    selectedImage,
-    ...currentImages.filter(
-      image =>
-        String(image.id) !==
-        String(imageId)
-    )
-  ];
-
+  const currentCover =
+    currentImages[0];
 
   try {
 
     /*
-     * Her fotoğrafa geçici olarak yüksek
-     * sort_order veriyoruz.
-     *
-     * Böylece veritabanında sort_order
-     * için UNIQUE kuralı varsa bile
-     * sıralama çakışması oluşmaz.
+     * Önce mevcut kapağı geçici bir sıraya taşıyoruz.
+     * Böylece sort_order UNIQUE ise çakışma olmaz.
      */
-    for (
-      let index = 0;
-      index < reorderedImages.length;
-      index += 1
-    ) {
+    const coverTemporaryResponse =
+      await fetch(
+        `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
+          currentCover.id
+        )}&listing_id=eq.${encodeURIComponent(
+          listingId
+        )}`,
+        {
+          method: "PATCH",
 
-      const image =
-        reorderedImages[index];
+          headers:
+            accountApiHeaders({
+              "Content-Type":
+                "application/json"
+            }),
 
-      const temporaryResponse =
-        await fetch(
-          `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
-            image.id
-          )}&listing_id=eq.${encodeURIComponent(
-            listingId
-          )}`,
-          {
-            method: "PATCH",
+          body:
+            JSON.stringify({
+              sort_order: 10000
+            })
+        }
+      );
 
-            headers:
-              accountApiHeaders({
-                "Content-Type":
-                  "application/json"
-              }),
-
-            body:
-              JSON.stringify({
-                sort_order:
-                  10000 + index
-              })
-          }
-        );
-
-
-      if (!temporaryResponse.ok) {
-
-        throw new Error(
-          await temporaryResponse.text()
-        );
-
-      }
-
+    if (!coverTemporaryResponse.ok) {
+      throw new Error(
+        await coverTemporaryResponse.text()
+      );
     }
 
 
     /*
-     * Şimdi gerçek sıralamayı 0'dan
-     * başlayarak kaydediyoruz.
+     * Seçilen fotoğraf artık kapak.
      */
-    for (
-      let index = 0;
-      index < reorderedImages.length;
-      index += 1
-    ) {
+    const selectedResponse =
+      await fetch(
+        `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
+          selectedImage.id
+        )}&listing_id=eq.${encodeURIComponent(
+          listingId
+        )}`,
+        {
+          method: "PATCH",
 
-      const image =
-        reorderedImages[index];
+          headers:
+            accountApiHeaders({
+              "Content-Type":
+                "application/json"
+            }),
 
-      const updateResponse =
-        await fetch(
-          `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
-            image.id
-          )}&listing_id=eq.${encodeURIComponent(
-            listingId
-          )}`,
-          {
-            method: "PATCH",
+          body:
+            JSON.stringify({
+              sort_order: 0
+            })
+        }
+      );
 
-            headers:
-              accountApiHeaders({
-                "Content-Type":
-                  "application/json"
-              }),
-
-            body:
-              JSON.stringify({
-                sort_order: index
-              })
-          }
-        );
-
-
-      if (!updateResponse.ok) {
-
-        throw new Error(
-          await updateResponse.text()
-        );
-
-      }
-
+    if (!selectedResponse.ok) {
+      throw new Error(
+        await selectedResponse.text()
+      );
     }
 
 
+    /*
+     * Eski kapağı seçilen fotoğrafın
+     * eski sırasına yerleştiriyoruz.
+     */
+    const oldCoverResponse =
+      await fetch(
+        `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
+          currentCover.id
+        )}&listing_id=eq.${encodeURIComponent(
+          listingId
+        )}`,
+        {
+          method: "PATCH",
+
+          headers:
+            accountApiHeaders({
+              "Content-Type":
+                "application/json"
+            }),
+
+          body:
+            JSON.stringify({
+              sort_order:
+                Number(
+                  selectedImage.sort_order
+                )
+            })
+        }
+      );
+
+    if (!oldCoverResponse.ok) {
+      throw new Error(
+        await oldCoverResponse.text()
+      );
+    }
+
+
+    /*
+     * Verileri yeniden çek.
+     */
     await loadProfessionalMyListings();
 
 
@@ -3922,19 +3910,19 @@ async function makeProfessionalListingCover(
           String(listingId)
       );
 
-
     if (refreshedListing) {
-
       professionalEditingListing =
         refreshedListing;
-
     }
 
 
+    /*
+     * Modalı yeni fotoğraf sırasıyla
+     * tekrar oluştur.
+     */
     openProfessionalListingEditor(
       listingId
     );
-
 
   } catch (error) {
 
@@ -3949,7 +3937,7 @@ async function makeProfessionalListingCover(
 
   }
 
-}
+}}
   function closeProfessionalListingEditor() {
 
     const modal =
@@ -5340,7 +5328,7 @@ document
 
       try {
 
-        await makeProfessionalListingCover(
+        await setProfessionalListingCover
           imageId
         );
 

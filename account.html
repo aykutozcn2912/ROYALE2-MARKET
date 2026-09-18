@@ -1134,6 +1134,7 @@ body {
       #b98220
     );
 }
+
 /* ==========================================================
    İLAN DÜZENLEME - ÇOKLU FOTOĞRAF YÖNETİMİ
    ========================================================== */
@@ -1303,6 +1304,87 @@ body {
   font-size: 12px;
   text-align: center;
 }
+
+/* FOTOĞRAF YÖNETİM BUTONLARI */
+
+.listing-edit-photo-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.listing-edit-photo-action {
+  min-height: 30px;
+  padding: 5px 7px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(227, 182, 64, .28);
+  border-radius: 7px;
+
+  color: #d8a64e;
+  background: rgba(227, 182, 64, .06);
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1.2;
+
+  transition:
+    border-color .18s ease,
+    background .18s ease,
+    color .18s ease,
+    opacity .18s ease;
+}
+
+.listing-edit-photo-action:hover {
+  border-color: rgba(227, 182, 64, .62);
+  background: rgba(227, 182, 64, .12);
+}
+
+.listing-edit-photo-action:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+
+.listing-edit-photo-action.cover-active {
+  color: #151008;
+  border-color: #e3b640;
+  background:
+    linear-gradient(
+      180deg,
+      #e3b64d,
+      #b98220
+    );
+}
+
+.listing-edit-photo-action.delete {
+  color: #ed9797;
+  border-color: rgba(205, 70, 70, .28);
+  background: rgba(160, 45, 45, .07);
+}
+
+.listing-edit-photo-action.delete:hover {
+  color: #ffb0b0;
+  border-color: rgba(225, 79, 79, .55);
+  background: rgba(180, 48, 48, .13);
+}
+
+.listing-edit-photo-action.remove-selection {
+  grid-column: 1 / -1;
+  color: #d9b989;
+}
+
+.listing-edit-photo-item.is-busy {
+  opacity: .55;
+  pointer-events: none;
+}
+
 @media (max-width: 1050px) {
 
   .my-listings-head {
@@ -1359,6 +1441,7 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
 /* ==========================================================
    İLAN DÜZENLEME - ÇOKLU FOTOĞRAF MOBİL
    ========================================================== */
@@ -1398,8 +1481,14 @@ body {
     font-size: 10px;
   }
 
-}
+  .listing-edit-photo-actions {
+    grid-template-columns: 1fr;
+  }
 
+  .listing-edit-photo-action.remove-selection {
+    grid-column: auto;
+  }
+}
 
 @media (max-width: 430px) {
 
@@ -1407,8 +1496,8 @@ body {
   .listing-edit-new-photos {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 }
+
 </style>
 
 </head>
@@ -2007,7 +2096,8 @@ body {
 
   </div>
 
-    <!-- ======================================================
+
+  <!-- ======================================================
        İLAN DÜZENLEME MODALI
        ====================================================== -->
 
@@ -2028,7 +2118,7 @@ body {
           </h2>
 
           <p>
-            İlan başlığı, açıklaması, fiyatı ve kapak fotoğrafını güncelle.
+            İlan bilgilerini ve fotoğraflarını güvenli şekilde yönet.
           </p>
 
         </div>
@@ -2124,70 +2214,67 @@ body {
         </div>
 
 
-<div class="listing-edit-field listing-edit-photos-field">
+        <div class="listing-edit-field listing-edit-photos-field">
 
-  <div class="listing-edit-photos-title">
+          <div class="listing-edit-photos-title">
 
-    <div>
-      <label for="listing-edit-photo">
-        İlan Fotoğrafları
-      </label>
+            <div>
 
-      <p>
-        Mevcut fotoğraflarını görüntüleyebilir ve ilana yeni fotoğraflar ekleyebilirsin.
-        İlk fotoğraf ilanının kapak fotoğrafıdır.
-      </p>
-    </div>
+              <label for="listing-edit-photo">
+                İlan Fotoğrafları
+              </label>
 
-    <span id="listing-edit-photo-count">
-      0 Fotoğraf
-    </span>
+              <p>
+                Mevcut fotoğraflarını silebilir, kapak fotoğrafını
+                değiştirebilir veya ilana yeni fotoğraflar ekleyebilirsin.
+              </p>
 
-  </div>
+            </div>
 
-
-  <div
-    id="listing-edit-existing-photos"
-    class="listing-edit-existing-photos"
-  >
-  </div>
-
-
-  <div class="listing-edit-photo-upload">
-
-    <input
-      type="file"
-      id="listing-edit-photo"
-      accept="image/jpeg,image/png,image/webp"
-      multiple
-    >
-
-    <div class="listing-edit-upload-info">
-
-      <strong>
-        + Yeni Fotoğraflar Ekle
-      </strong>
-
-      <span>
-        Birden fazla fotoğrafı aynı anda seçebilirsin.
-        JPG, PNG veya WEBP • Fotoğraf başına en fazla 8 MB.
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div
-    id="listing-edit-new-photos"
-    class="listing-edit-new-photos"
-  >
-  </div>
+            <span id="listing-edit-photo-count">
+              0 Fotoğraf
+            </span>
 
           </div>
 
-        </div>
 
+          <div
+            id="listing-edit-existing-photos"
+            class="listing-edit-existing-photos"
+          ></div>
+
+
+          <div class="listing-edit-photo-upload">
+
+            <input
+              type="file"
+              id="listing-edit-photo"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+            >
+
+            <div class="listing-edit-upload-info">
+
+              <strong>
+                + Yeni Fotoğraflar Ekle
+              </strong>
+
+              <span>
+                Birden fazla fotoğrafı aynı anda seçebilirsin.
+                JPG, PNG veya WEBP • Fotoğraf başına en fazla 8 MB.
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="listing-edit-new-photos"
+            class="listing-edit-new-photos"
+          ></div>
+
+        </div>
 
       </div>
 
@@ -2452,32 +2539,14 @@ body {
 
   function escapeAccountHtml(value) {
 
-    return String(value ?? "")
-
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-
-      .replace(
-        /</g,
-        "&lt;"
-      )
-
-      .replace(
-        />/g,
-        "&gt;"
-      )
-
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-
-      .replace(
-        /'/g,
-        "&#039;"
-      );
+    return String(
+      value ?? ""
+    )
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
 
   }
 
@@ -2515,423 +2584,1734 @@ body {
 
   function formatAccountPrice(value) {
 
-    const price =
+    const number =
       Number(value || 0);
 
-    return new Intl.NumberFormat(
-      "tr-TR",
-      {
-        style: "currency",
-        currency: "TRY",
-        maximumFractionDigits: 0
-      }
-    ).format(price);
+    return (
+      number.toLocaleString(
+        "tr-TR"
+      ) + " TL"
+    );
 
   }
 
 
 
-  /* =======================================================
-     HESAP BİLGİLERİNİ EKRANA YAZ
-     ======================================================= */
+  function normalizeListingStatus(status) {
 
-
-  function renderStoredAccountUser() {
-
-    const user =
-      getStoredAccountUser();
-
-    if (!user) {
-      return;
-    }
-
-
-    const username =
-      user.username ||
-      user.display_name ||
-      user.email ||
-      "Kullanıcı";
-
-
-    const displayName =
-      user.display_name ||
-      user.username ||
-      "Kullanıcı";
-
-
-    const usernameElements = [
-
-      document.getElementById(
-        "sidebar-username"
-      ),
-
-      document.getElementById(
-        "profile-username"
-      ),
-
-      document.getElementById(
-        "account-username"
+    const value =
+      String(
+        status || ""
       )
-
-    ];
-
-
-    usernameElements.forEach(
-      element => {
-
-        if (element) {
-          element.textContent =
-            username;
-        }
-
-      }
-    );
-
-
-    const displayNameElement =
-      document.getElementById(
-        "profile-display-name"
-      );
-
-    if (displayNameElement) {
-
-      displayNameElement.textContent =
-        displayName;
-
-    }
-
-
-    const emailElement =
-      document.getElementById(
-        "profile-email"
-      );
-
-    if (emailElement) {
-
-      emailElement.textContent =
-        user.email || "-";
-
-    }
-
-
-    const createdElement =
-      document.getElementById(
-        "profile-created-at"
-      );
-
-    if (createdElement) {
-
-      createdElement.textContent =
-        formatAccountDate(
-          user.created_at
-        );
-
-    }
-
-
-    const avatar =
-      document.getElementById(
-        "profile-avatar-letter"
-      );
-
-    if (avatar) {
-
-      avatar.textContent =
-        String(username)
-          .trim()
-          .charAt(0)
-          .toLocaleUpperCase("tr-TR") ||
-        "P";
-
-    }
-
-
-    const verified =
-      Boolean(
-        user.email_confirmed_at ||
-        user.email_verified ||
-        user.confirmed_at
-      );
-
-
-    const verifiedStatus =
-      document.getElementById(
-        "verified-status"
-      );
-
-    if (verifiedStatus) {
-
-      verifiedStatus.textContent =
-        verified
-          ? "Evet"
-          : "Hayır";
-
-    }
-
-
-    const securityVerified =
-      document.getElementById(
-        "security-verified"
-      );
-
-    if (securityVerified) {
-
-      securityVerified.textContent =
-        verified
-          ? "Doğrulandı"
-          : "Doğrulanmadı";
-
-    }
-
-  }
-
-
-
-  /* =======================================================
-     HESAP GÖRÜNÜM YÖNETİMİ
-     ======================================================= */
-
-
-  function updateAccountView() {
-
-    const overviewView =
-      document.getElementById(
-        "account-overview-view"
-      );
-
-
-    const listingsView =
-      document.getElementById(
-        "account-listings-view"
-      );
-
-
-    if (
-      !overviewView ||
-      !listingsView
-    ) {
-      return;
-    }
-
-
-    const isMyListings =
-      window.location.hash ===
-      "#my-listings";
-
-
-    overviewView.classList.toggle(
-      "active",
-      !isMyListings
-    );
-
-
-    listingsView.classList.toggle(
-      "active",
-      isMyListings
-    );
-
-
-    const accountMenuLinks =
-      document.querySelectorAll(
-        ".account-menu a"
-      );
-
-
-    accountMenuLinks.forEach(
-      link => {
-
-        const href =
-          link.getAttribute("href");
-
-
-        if (
-          href === "account.html" ||
-          href === "#my-listings"
-        ) {
-
-          link.classList.remove(
-            "active"
-          );
-
-        }
-
-      }
-    );
-
-
-    const activeLink =
-      document.querySelector(
-        isMyListings
-          ? '.account-menu a[href="#my-listings"]'
-          : '.account-menu a[href="account.html"]'
-      );
-
-
-    if (activeLink) {
-
-      activeLink.classList.add(
-        "active"
-      );
-
-    }
-
-
-    if (isMyListings) {
-
-      loadProfessionalMyListings();
-
-    }
-
-  }
-
-
-
-  /* =======================================================
-     İLANLARIM VERİLERİ
-     ======================================================= */
-
-
-  const ACCOUNT_SERVER_NAMES = {
-
-    1: "Ephesus",
-
-    2: "Teos",
-
-    3: "Pergamon",
-
-    4: "Akademi Teos"
-
-  };
-
-
-  const ACCOUNT_CATEGORY_NAMES = {
-
-    1: "Eşya",
-
-    2: "Yang",
-
-    3: "Karakter",
-
-    4: "Hesap"
-
-  };
-
-
-  let professionalMyListings = [];
-
-  let professionalMyListingImages = {};
-
-  let professionalListingFilter =
-    "all";
-
-  let professionalEditingListing =
-    null;
-
-
-
-  function accountStatusLabel(status) {
-
-    const normalized =
-      String(status || "")
+        .trim()
         .toLowerCase();
 
-
-    if (
-      normalized === "active"
-    ) {
-
-      return "Aktif";
-
-    }
-
-
-    if (
-      normalized === "sold"
-    ) {
-
-      return "Satıldı";
-
-    }
-
-
-    if (
-      normalized === "inactive" ||
-      normalized === "passive"
-    ) {
-
-      return "Yayında Değil";
-
-    }
-
-
-    return status || "Bilinmiyor";
-
-  }
-
-
-
-  function accountStatusClass(status) {
-
-    const normalized =
-      String(status || "")
-        .toLowerCase();
-
-
-    if (
-      normalized === "active"
-    ) {
-
-      return "active";
-
-    }
-
-
-    if (
-      normalized === "sold"
-    ) {
-
+    if (value === "sold") {
       return "sold";
-
     }
 
+    if (
+      value === "inactive" ||
+      value === "passive"
+    ) {
+      return "inactive";
+    }
 
-    return "inactive";
+    return "active";
 
   }
 
 
 
-  function getProfessionalListingImage(
-    listingId
-  ) {
+  function listingStatusText(status) {
 
-    const images =
-      professionalMyListingImages[
-        String(listingId)
-      ] || [];
+    const value =
+      normalizeListingStatus(status);
 
+    if (value === "sold") {
+      return "Satıldı";
+    }
+
+    if (value === "inactive") {
+      return "Yayında Değil";
+    }
+
+    return "Aktif";
+
+  }
+
+
+
+  function getAccountApiBase() {
+
+    return String(
+      window.SUPABASE_URL || ""
+    ).replace(/\/+$/, "");
+
+  }
+
+
+
+  function getStorageApiBase() {
 
     return (
-      images[0]?.image_url ||
-      ""
+      getAccountApiBase() +
+      "/storage/v1"
     );
 
   }
 
 
 
-  async function loadProfessionalMyListings() {
+  function createSafeFileName(file) {
+
+    const extension =
+      String(
+        file?.name || ""
+      )
+        .split(".")
+        .pop()
+        .toLowerCase()
+        .replace(
+          /[^a-z0-9]/g,
+          ""
+        ) || "jpg";
+
+    const randomPart =
+      (
+        window.crypto &&
+        typeof window.crypto.randomUUID === "function"
+      )
+        ? window.crypto
+            .randomUUID()
+            .replaceAll("-", "")
+        : (
+            Date.now().toString(36) +
+            Math.random()
+              .toString(36)
+              .slice(2)
+          );
+
+    return (
+      `${Date.now()}-${randomPart}.${extension}`
+    );
+
+  }
+
+
+
+  function encodeStoragePath(path) {
+
+    return String(path || "")
+      .split("/")
+      .filter(Boolean)
+      .map(
+        part =>
+          encodeURIComponent(part)
+      )
+      .join("/");
+
+  }
+
+
+
+  /* =======================================================
+     FOTOĞRAF YÖNETİMİ DURUMU
+     ======================================================= */
+
+
+  let professionalExistingImages = [];
+
+  let professionalNewFiles = [];
+
+  let professionalNewCoverIndex = null;
+
+  let professionalImageOperationBusy = false;
+
+
+  function sortProfessionalImages(images) {
+
+    return [
+      ...(Array.isArray(images)
+        ? images
+        : [])
+    ].sort(
+      (a, b) =>
+        Number(a?.sort_order ?? 0) -
+        Number(b?.sort_order ?? 0)
+    );
+
+  }
+
+
+
+  function normalizeProfessionalImageObjects() {
+
+    professionalExistingImages =
+      sortProfessionalImages(
+        professionalExistingImages
+      ).map(
+        (image, index) => ({
+          ...image,
+          sort_order: index
+        })
+      );
+
+  }
+
+
+
+  function getProfessionalTotalPhotoCount() {
+
+    return (
+      professionalExistingImages.length +
+      professionalNewFiles.length
+    );
+
+  }
+
+
+
+  function updateProfessionalPhotoCount() {
+
+    const countElement =
+      document.getElementById(
+        "listing-edit-photo-count"
+      );
+
+    if (!countElement) {
+      return;
+    }
+
+    const total =
+      getProfessionalTotalPhotoCount();
+
+    countElement.textContent =
+      `${total} Fotoğraf`;
+
+  }
+
+
+
+  function getProfessionalImageUrl(image) {
+
+    return String(
+      image?.image_url ||
+      image?.url ||
+      image?.public_url ||
+      ""
+    ).trim();
+
+  }
+
+
+
+  function getProfessionalImageId(image) {
+
+    return (
+      image?.id ??
+      image?.image_id ??
+      null
+    );
+
+  }
+
+
+
+  function getProfessionalStoragePath(image) {
+
+    const directPath =
+      String(
+        image?.storage_path ||
+        image?.path ||
+        image?.file_path ||
+        ""
+      ).trim();
+
+    if (directPath) {
+      return directPath
+        .replace(/^\/+/, "")
+        .replace(
+          /^listing-images\//,
+          ""
+        );
+    }
+
+    const imageUrl =
+      getProfessionalImageUrl(image);
+
+    if (!imageUrl) {
+      return "";
+    }
+
+    try {
+
+      const decoded =
+        decodeURIComponent(imageUrl);
+
+      const markers = [
+        "/storage/v1/object/public/listing-images/",
+        "/storage/v1/object/sign/listing-images/",
+        "/storage/v1/object/listing-images/"
+      ];
+
+      for (
+        const marker of markers
+      ) {
+
+        const markerIndex =
+          decoded.indexOf(marker);
+
+        if (markerIndex !== -1) {
+
+          return decoded
+            .slice(
+              markerIndex +
+              marker.length
+            )
+            .split("?")[0]
+            .replace(/^\/+/, "");
+
+        }
+
+      }
+
+    } catch (error) {
+
+      console.warn(
+        "Storage yolu çözümlenemedi:",
+        error
+      );
+
+    }
+
+    return "";
+
+  }
+
+
+
+  function revokeProfessionalNewFileUrls() {
+
+    professionalNewFiles.forEach(
+      item => {
+
+        if (item?.previewUrl) {
+
+          try {
+            URL.revokeObjectURL(
+              item.previewUrl
+            );
+          } catch (error) {
+            /* Sessiz geç */
+          }
+
+        }
+
+      }
+    );
+
+  }
+
+
+
+  function resetProfessionalImageState() {
+
+    revokeProfessionalNewFileUrls();
+
+    professionalExistingImages = [];
+    professionalNewFiles = [];
+    professionalNewCoverIndex = null;
+    professionalImageOperationBusy = false;
+
+    const input =
+      document.getElementById(
+        "listing-edit-photo"
+      );
+
+    if (input) {
+      input.value = "";
+    }
+
+    updateProfessionalPhotoCount();
+
+  }
+
+   /* =======================================================
+     FOTOĞRAF GALERİSİ — EKRANA BASMA
+     ======================================================= */
+
+
+  function renderProfessionalExistingPhotos() {
 
     const container =
       document.getElementById(
-        "my-listings-container"
+        "listing-edit-existing-photos"
       );
-
 
     if (!container) {
       return;
     }
 
+    normalizeProfessionalImageObjects();
+
+    if (
+      !professionalExistingImages.length
+    ) {
+
+      container.innerHTML =
+        `
+          <div class="listing-edit-no-photo">
+            Bu ilanda kayıtlı fotoğraf bulunmuyor.
+          </div>
+        `;
+
+      updateProfessionalPhotoCount();
+
+      return;
+    }
+
+
+    container.innerHTML =
+      professionalExistingImages
+        .map(
+          (image, index) => {
+
+            const imageId =
+              getProfessionalImageId(
+                image
+              );
+
+            const imageUrl =
+              getProfessionalImageUrl(
+                image
+              );
+
+            const isCover =
+              index === 0;
+
+            return `
+              <div
+                class="listing-edit-photo-item"
+                data-existing-index="${index}"
+                data-image-id="${escapeAccountHtml(
+                  imageId ?? ""
+                )}"
+              >
+
+                <div class="listing-edit-photo-thumb">
+
+                  <img
+                    src="${escapeAccountHtml(
+                      imageUrl
+                    )}"
+                    alt="İlan fotoğrafı ${index + 1}"
+                    loading="lazy"
+                  >
+
+                  ${
+                    isCover
+                      ? `
+                        <span class="listing-edit-cover-badge">
+                          KAPAK
+                        </span>
+                      `
+                      : ""
+                  }
+
+                </div>
+
+                <span class="listing-edit-photo-number">
+                  Fotoğraf ${index + 1}
+                </span>
+
+                <div class="listing-edit-photo-actions">
+
+                  <button
+                    type="button"
+                    class="listing-edit-photo-action ${
+                      isCover
+                        ? "cover-active"
+                        : ""
+                    }"
+                    data-action="make-existing-cover"
+                    data-image-id="${escapeAccountHtml(
+                      imageId ?? ""
+                    )}"
+                    ${
+                      isCover
+                        ? "disabled"
+                        : ""
+                    }
+                  >
+                    ${
+                      isCover
+                        ? "Kapak"
+                        : "Kapak Yap"
+                    }
+                  </button>
+
+                  <button
+                    type="button"
+                    class="listing-edit-photo-action delete"
+                    data-action="delete-existing-photo"
+                    data-image-id="${escapeAccountHtml(
+                      imageId ?? ""
+                    )}"
+                  >
+                    Sil
+                  </button>
+
+                </div>
+
+              </div>
+            `;
+
+          }
+        )
+        .join("");
+
+
+    updateProfessionalPhotoCount();
+
+  }
+
+
+
+  function renderProfessionalNewPhotos() {
+
+    const container =
+      document.getElementById(
+        "listing-edit-new-photos"
+      );
+
+    if (!container) {
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    if (
+      !professionalNewFiles.length
+    ) {
+
+      updateProfessionalPhotoCount();
+
+      return;
+    }
+
+
+    professionalNewFiles.forEach(
+      (item, index) => {
+
+        const file =
+          item?.file || item;
+
+        let previewUrl =
+          item?.previewUrl || "";
+
+
+        if (!previewUrl) {
+
+          previewUrl =
+            URL.createObjectURL(
+              file
+            );
+
+          professionalNewFiles[index] = {
+            file,
+            previewUrl
+          };
+
+        }
+
+
+        const noExistingPhotos =
+          professionalExistingImages.length === 0;
+
+
+        const automaticFirstCover =
+          (
+            professionalNewCoverIndex === null &&
+            noExistingPhotos &&
+            index === 0
+          );
+
+
+        const isSelectedCover =
+          (
+            professionalNewCoverIndex === index ||
+            automaticFirstCover
+          );
+
+
+        const itemElement =
+          document.createElement(
+            "div"
+          );
+
+        itemElement.className =
+          "listing-edit-photo-item listing-edit-photo-item-new";
+
+
+        const thumb =
+          document.createElement(
+            "div"
+          );
+
+        thumb.className =
+          "listing-edit-photo-thumb";
+
+
+        const image =
+          document.createElement(
+            "img"
+          );
+
+        image.src =
+          previewUrl;
+
+        image.alt =
+          `Yeni fotoğraf ${index + 1}`;
+
+        image.loading =
+          "lazy";
+
+
+        thumb.appendChild(
+          image
+        );
+
+
+        if (isSelectedCover) {
+
+          const badge =
+            document.createElement(
+              "span"
+            );
+
+          badge.className =
+            "listing-edit-cover-badge";
+
+          badge.textContent =
+            "KAPAK";
+
+          thumb.appendChild(
+            badge
+          );
+
+        }
+
+
+        const number =
+          document.createElement(
+            "span"
+          );
+
+        number.className =
+          "listing-edit-photo-number";
+
+        number.textContent =
+          `Yeni Fotoğraf ${index + 1}`;
+
+
+        const actions =
+          document.createElement(
+            "div"
+          );
+
+        actions.className =
+          "listing-edit-photo-actions";
+
+
+        const coverButton =
+          document.createElement(
+            "button"
+          );
+
+        coverButton.type =
+          "button";
+
+        coverButton.className =
+          "listing-edit-photo-action";
+
+
+        if (isSelectedCover) {
+
+          coverButton.classList.add(
+            "cover-active"
+          );
+
+          coverButton.textContent =
+            "Kapak";
+
+          coverButton.disabled =
+            true;
+
+        } else {
+
+          coverButton.textContent =
+            "Kapak Yap";
+
+        }
+
+
+        coverButton.addEventListener(
+          "click",
+          function () {
+
+            if (
+              professionalImageOperationBusy
+            ) {
+              return;
+            }
+
+            professionalNewCoverIndex =
+              index;
+
+            renderProfessionalNewPhotos();
+
+          }
+        );
+
+
+        const removeButton =
+          document.createElement(
+            "button"
+          );
+
+        removeButton.type =
+          "button";
+
+        removeButton.className =
+          "listing-edit-photo-action remove-selection";
+
+        removeButton.textContent =
+          "Seçimden Çıkar";
+
+
+        removeButton.addEventListener(
+          "click",
+          function () {
+
+            if (
+              professionalImageOperationBusy
+            ) {
+              return;
+            }
+
+
+            const removed =
+              professionalNewFiles[index];
+
+
+            if (
+              removed?.previewUrl
+            ) {
+
+              try {
+
+                URL.revokeObjectURL(
+                  removed.previewUrl
+                );
+
+              } catch (error) {
+                /* Sessiz geç */
+              }
+
+            }
+
+
+            professionalNewFiles.splice(
+              index,
+              1
+            );
+
+
+            if (
+              professionalNewCoverIndex === index
+            ) {
+
+              professionalNewCoverIndex =
+                null;
+
+            } else if (
+              professionalNewCoverIndex !== null &&
+              index <
+                professionalNewCoverIndex
+            ) {
+
+              professionalNewCoverIndex -=
+                1;
+
+            }
+
+
+            /*
+             * Mevcut fotoğraf yoksa ve
+             * yeni fotoğraf kaldıysa ilk
+             * fotoğraf otomatik kapak olur.
+             */
+
+            if (
+              !professionalExistingImages.length &&
+              professionalNewFiles.length &&
+              professionalNewCoverIndex === null
+            ) {
+
+              professionalNewCoverIndex =
+                0;
+
+            }
+
+
+            renderProfessionalNewPhotos();
+
+          }
+        );
+
+
+        actions.appendChild(
+          coverButton
+        );
+
+        actions.appendChild(
+          removeButton
+        );
+
+
+        itemElement.appendChild(
+          thumb
+        );
+
+        itemElement.appendChild(
+          number
+        );
+
+        itemElement.appendChild(
+          actions
+        );
+
+
+        container.appendChild(
+          itemElement
+        );
+
+      }
+    );
+
+
+    updateProfessionalPhotoCount();
+
+  }
+
+
+
+  function renderProfessionalPhotoManager() {
+
+    renderProfessionalExistingPhotos();
+
+    renderProfessionalNewPhotos();
+
+    updateProfessionalPhotoCount();
+
+  }
+
+
+
+  /* =======================================================
+     FOTOĞRAF DOSYASI SEÇİMİ
+     ======================================================= */
+
+
+  function addProfessionalNewFiles(
+    fileList
+  ) {
+
+    const files =
+      Array.from(
+        fileList || []
+      );
+
+
+    if (!files.length) {
+      return;
+    }
+
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ];
+
+
+    const maxFileSize =
+      8 * 1024 * 1024;
+
+
+    const validFiles = [];
+
+
+    for (
+      const file of files
+    ) {
+
+      if (
+        !allowedTypes.includes(
+          file.type
+        )
+      ) {
+
+        alert(
+          `${file.name} desteklenmeyen bir dosya türü. Sadece JPG, PNG veya WEBP kullanabilirsin.`
+        );
+
+        continue;
+
+      }
+
+
+      if (
+        file.size > maxFileSize
+      ) {
+
+        alert(
+          `${file.name} 8 MB sınırını aşıyor.`
+        );
+
+        continue;
+
+      }
+
+
+      validFiles.push(
+        file
+      );
+
+    }
+
+
+    if (!validFiles.length) {
+      return;
+    }
+
+
+    validFiles.forEach(
+      file => {
+
+        professionalNewFiles.push({
+          file,
+          previewUrl:
+            URL.createObjectURL(
+              file
+            )
+        });
+
+      }
+    );
+
+
+    /*
+     * İlanda hiç mevcut fotoğraf yoksa
+     * ilk yeni fotoğraf otomatik kapaktır.
+     */
+
+    if (
+      !professionalExistingImages.length &&
+      professionalNewFiles.length &&
+      professionalNewCoverIndex === null
+    ) {
+
+      professionalNewCoverIndex =
+        0;
+
+    }
+
+
+    const input =
+      document.getElementById(
+        "listing-edit-photo"
+      );
+
+
+    /*
+     * Aynı dosyanın tekrar seçilebilmesi
+     * için input temizlenir.
+     */
+
+    if (input) {
+      input.value = "";
+    }
+
+
+    renderProfessionalNewPhotos();
+
+  }
+
+
+
+  /* =======================================================
+     SUPABASE — İLAN FOTOĞRAFLARINI GETİR
+     ======================================================= */
+
+
+  async function fetchProfessionalListingImages(
+    listingId
+  ) {
+
+    if (!listingId) {
+      return [];
+    }
+
+
+    const base =
+      getAccountApiBase();
+
+
+    if (!base) {
+
+      throw new Error(
+        "Supabase bağlantı adresi bulunamadı."
+      );
+
+    }
+
+
+    const url =
+      `${base}/rest/v1/listing_images` +
+      `?listing_id=eq.${encodeURIComponent(
+        listingId
+      )}` +
+      `&select=*` +
+      `&order=sort_order.asc`;
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          method: "GET",
+          headers:
+            accountApiHeaders({
+              Accept:
+                "application/json"
+            })
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+
+    const rows =
+      await response.json();
+
+
+    return sortProfessionalImages(
+      Array.isArray(rows)
+        ? rows
+        : []
+    );
+
+  }
+
+
+
+  /* =======================================================
+     SUPABASE — FOTOĞRAF SIRASINI NORMALLEŞTİR
+     ======================================================= */
+
+
+  async function normalizeProfessionalListingImageOrder(
+    listingId,
+    orderedImages
+  ) {
+
+    const base =
+      getAccountApiBase();
+
+
+    if (!base) {
+
+      throw new Error(
+        "Supabase bağlantı adresi bulunamadı."
+      );
+
+    }
+
+
+    const images =
+      Array.from(
+        orderedImages || []
+      );
+
+
+    /*
+     * Önce geçici yüksek sıra numaraları verilir.
+     * Böylece olası unique sort_order kısıtlarıyla
+     * çakışma riski azaltılır.
+     */
+
+    for (
+      let index = 0;
+      index < images.length;
+      index += 1
+    ) {
+
+      const imageId =
+        getProfessionalImageId(
+          images[index]
+        );
+
+
+      if (!imageId) {
+        continue;
+      }
+
+
+      const response =
+        await fetch(
+          `${base}/rest/v1/listing_images` +
+          `?id=eq.${encodeURIComponent(
+            imageId
+          )}` +
+          `&listing_id=eq.${encodeURIComponent(
+            listingId
+          )}`,
+          {
+            method: "PATCH",
+
+            headers:
+              accountApiHeaders({
+                "Content-Type":
+                  "application/json",
+                Prefer:
+                  "return=minimal"
+              }),
+
+            body:
+              JSON.stringify({
+                sort_order:
+                  10000 + index
+              })
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          await response.text()
+        );
+
+      }
+
+    }
+
+
+    /*
+     * Ardından gerçek sıra:
+     * 0, 1, 2, 3...
+     */
+
+    for (
+      let index = 0;
+      index < images.length;
+      index += 1
+    ) {
+
+      const imageId =
+        getProfessionalImageId(
+          images[index]
+        );
+
+
+      if (!imageId) {
+        continue;
+      }
+
+
+      const response =
+        await fetch(
+          `${base}/rest/v1/listing_images` +
+          `?id=eq.${encodeURIComponent(
+            imageId
+          )}` +
+          `&listing_id=eq.${encodeURIComponent(
+            listingId
+          )}`,
+          {
+            method: "PATCH",
+
+            headers:
+              accountApiHeaders({
+                "Content-Type":
+                  "application/json",
+                Prefer:
+                  "return=minimal"
+              }),
+
+            body:
+              JSON.stringify({
+                sort_order:
+                  index
+              })
+          }
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          await response.text()
+        );
+
+      }
+
+
+      images[index].sort_order =
+        index;
+
+    }
+
+
+    professionalExistingImages =
+      images;
+
+  }
+
+
+
+  /* =======================================================
+     SUPABASE STORAGE — FOTOĞRAF SİL
+     ======================================================= */
+
+
+  async function removeProfessionalStorageImage(
+    image
+  ) {
+
+    const storagePath =
+      getProfessionalStoragePath(
+        image
+      );
+
+
+    if (!storagePath) {
+
+      console.warn(
+        "Fotoğrafın Storage yolu bulunamadı. Veritabanı kaydı yine silinebilir."
+      );
+
+      return false;
+
+    }
+
+
+    const storageBase =
+      getStorageApiBase();
+
+
+    if (!storageBase) {
+      return false;
+    }
+
+
+    try {
+
+      const response =
+        await fetch(
+          `${storageBase}/object/listing-images/${encodeStoragePath(
+            storagePath
+          )}`,
+          {
+            method: "DELETE",
+            headers:
+              accountApiHeaders()
+          }
+        );
+
+
+      if (!response.ok) {
+
+        console.warn(
+          "Storage fotoğrafı silinemedi:",
+          await response.text()
+        );
+
+        return false;
+
+      }
+
+
+      return true;
+
+    } catch (error) {
+
+      console.warn(
+        "Storage silme işlemi başarısız:",
+        error
+      );
+
+      return false;
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     MEVCUT FOTOĞRAFI SİL
+     ======================================================= */
+
+
+  async function deleteProfessionalExistingPhoto(
+    imageId
+  ) {
+
+    if (
+      professionalImageOperationBusy
+    ) {
+      return;
+    }
+
+
+    const listingId =
+      document.getElementById(
+        "listing-edit-id"
+      )?.value;
+
+
+    if (
+      !listingId ||
+      !imageId
+    ) {
+      return;
+    }
+
+
+    const targetImage =
+      professionalExistingImages.find(
+        image =>
+          String(
+            getProfessionalImageId(
+              image
+            )
+          ) ===
+          String(imageId)
+      );
+
+
+    if (!targetImage) {
+
+      alert(
+        "Silinecek fotoğraf bulunamadı."
+      );
+
+      return;
+
+    }
+
+
+    const approved =
+      window.confirm(
+        professionalExistingImages[0] ===
+          targetImage
+          ? "Bu fotoğraf şu anda kapak fotoğrafı. Silmek istediğine emin misin? Kalan ilk fotoğraf otomatik olarak kapak yapılacak."
+          : "Bu fotoğrafı ilandan silmek istediğine emin misin?"
+      );
+
+
+    if (!approved) {
+      return;
+    }
+
+
+    professionalImageOperationBusy =
+      true;
+
+
+    try {
+
+      const base =
+        getAccountApiBase();
+
+
+      const deleteResponse =
+        await fetch(
+          `${base}/rest/v1/listing_images` +
+          `?id=eq.${encodeURIComponent(
+            imageId
+          )}` +
+          `&listing_id=eq.${encodeURIComponent(
+            listingId
+          )}`,
+          {
+            method: "DELETE",
+
+            headers:
+              accountApiHeaders({
+                Prefer:
+                  "return=minimal"
+              })
+          }
+        );
+
+
+      if (!deleteResponse.ok) {
+
+        throw new Error(
+          await deleteResponse.text()
+        );
+
+      }
+
+
+      /*
+       * DB kaydı başarıyla silindikten sonra
+       * Storage temizliği best-effort yapılır.
+       * Storage hatası ilan yönetimini kilitlemez.
+       */
+
+      await removeProfessionalStorageImage(
+        targetImage
+      );
+
+
+      professionalExistingImages =
+        professionalExistingImages.filter(
+          image =>
+            String(
+              getProfessionalImageId(
+                image
+              )
+            ) !==
+            String(imageId)
+        );
+
+
+      /*
+       * Kapak dahil hangi fotoğraf silinirse
+       * silinsin kalan fotoğraflar 0,1,2...
+       * olarak yeniden düzenlenir.
+       */
+
+      if (
+        professionalExistingImages.length
+      ) {
+
+        await normalizeProfessionalListingImageOrder(
+          listingId,
+          professionalExistingImages
+        );
+
+      }
+
+
+      /*
+       * Hiç mevcut fotoğraf kalmadıysa fakat
+       * yeni seçilmiş fotoğraf varsa ilk yeni
+       * fotoğraf otomatik kapak olur.
+       */
+
+      if (
+        !professionalExistingImages.length &&
+        professionalNewFiles.length &&
+        professionalNewCoverIndex === null
+      ) {
+
+        professionalNewCoverIndex =
+          0;
+
+      }
+
+
+      renderProfessionalPhotoManager();
+
+
+      /*
+       * Ana İlanlarım ekranındaki küçük resmi de
+       * mümkün olduğunca anında güncel tut.
+       */
+
+      await refreshProfessionalListingCache(
+        listingId
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Fotoğraf silinemedi:",
+        error
+      );
+
+
+      alert(
+        "Fotoğraf silinemedi. Lütfen tekrar dene."
+      );
+
+
+      /*
+       * Sunucudaki gerçek durumu tekrar çek.
+       */
+
+      try {
+
+        professionalExistingImages =
+          await fetchProfessionalListingImages(
+            listingId
+          );
+
+        renderProfessionalPhotoManager();
+
+      } catch (refreshError) {
+
+        console.error(
+          "Fotoğraf listesi yenilenemedi:",
+          refreshError
+        );
+
+      }
+
+
+    } finally {
+
+      professionalImageOperationBusy =
+        false;
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     MEVCUT FOTOĞRAFI KAPAK YAP
+     ======================================================= */
+
+
+  async function makeProfessionalExistingCover(
+    imageId
+  ) {
+
+    if (
+      professionalImageOperationBusy
+    ) {
+      return;
+    }
+
+
+    const listingId =
+      document.getElementById(
+        "listing-edit-id"
+      )?.value;
+
+
+    if (
+      !listingId ||
+      !imageId
+    ) {
+      return;
+    }
+
+
+    const selectedIndex =
+      professionalExistingImages.findIndex(
+        image =>
+          String(
+            getProfessionalImageId(
+              image
+            )
+          ) ===
+          String(imageId)
+      );
+
+
+    if (
+      selectedIndex < 0
+    ) {
+      return;
+    }
+
+
+    if (
+      selectedIndex === 0
+    ) {
+
+      professionalNewCoverIndex =
+        null;
+
+      renderProfessionalPhotoManager();
+
+      return;
+
+    }
+
+
+    professionalImageOperationBusy =
+      true;
+
+
+    try {
+
+      const selectedImage =
+        professionalExistingImages[
+          selectedIndex
+        ];
+
+
+      const reordered = [
+        selectedImage,
+        ...professionalExistingImages.filter(
+          (_, index) =>
+            index !== selectedIndex
+        )
+      ];
+
+
+      await normalizeProfessionalListingImageOrder(
+        listingId,
+        reordered
+      );
+
+
+      /*
+       * Mevcut fotoğraf kapak yapıldıysa
+       * yeni fotoğraflardaki kapak seçimi iptal edilir.
+       */
+
+      professionalNewCoverIndex =
+        null;
+
+
+      renderProfessionalPhotoManager();
+
+
+      await refreshProfessionalListingCache(
+        listingId
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Kapak fotoğrafı değiştirilemedi:",
+        error
+      );
+
+
+      alert(
+        "Kapak fotoğrafı değiştirilemedi. Lütfen tekrar dene."
+      );
+
+
+      try {
+
+        professionalExistingImages =
+          await fetchProfessionalListingImages(
+            listingId
+          );
+
+        renderProfessionalPhotoManager();
+
+      } catch (refreshError) {
+
+        console.error(
+          "Fotoğraf listesi yenilenemedi:",
+          refreshError
+        );
+
+      }
+
+
+    } finally {
+
+      professionalImageOperationBusy =
+        false;
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     FOTOĞRAF BUTONLARI — EVENT DELEGATION
+     ======================================================= */
+
+
+  function handleProfessionalExistingPhotoClick(
+    event
+  ) {
+
+    const button =
+      event.target.closest(
+        "[data-action]"
+      );
+
+
+    if (!button) {
+      return;
+    }
+
+
+    const action =
+      button.dataset.action;
+
+
+    const imageId =
+      button.dataset.imageId;
+
+
+    if (
+      action ===
+      "make-existing-cover"
+    ) {
+
+      makeProfessionalExistingCover(
+        imageId
+      );
+
+      return;
+
+    }
+
+
+    if (
+      action ===
+      "delete-existing-photo"
+    ) {
+
+      deleteProfessionalExistingPhoto(
+        imageId
+      );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     YENİ FOTOĞRAF — STORAGE'A YÜKLE
+     ======================================================= */
+
+
+  async function uploadProfessionalImageFile(
+    file,
+    listingId
+  ) {
 
     const session =
       getAccountSession();
@@ -2941,8 +4321,799 @@ body {
       !session?.user?.id
     ) {
 
-      window.location.href =
-        "index.html#login";
+      throw new Error(
+        "Oturum bulunamadı."
+      );
+
+    }
+
+
+    const base =
+      getAccountApiBase();
+
+
+    if (!base) {
+
+      throw new Error(
+        "Supabase bağlantı adresi bulunamadı."
+      );
+
+    }
+
+
+    const fileName =
+      createSafeFileName(
+        file
+      );
+
+
+    const storagePath =
+      `${session.user.id}/${listingId}/${fileName}`;
+
+
+    const uploadUrl =
+      `${base}/storage/v1/object/listing-images/${encodeStoragePath(
+        storagePath
+      )}`;
+
+
+    const uploadResponse =
+      await fetch(
+        uploadUrl,
+        {
+          method: "POST",
+
+          headers:
+            accountApiHeaders({
+              "Content-Type":
+                file.type ||
+                "application/octet-stream",
+
+              "x-upsert":
+                "false"
+            }),
+
+          body:
+            file
+        }
+      );
+
+
+    if (!uploadResponse.ok) {
+
+      throw new Error(
+        await uploadResponse.text()
+      );
+
+    }
+
+
+    const publicUrl =
+      `${base}/storage/v1/object/public/listing-images/${encodeStoragePath(
+        storagePath
+      )}`;
+
+
+    return {
+      storagePath,
+      publicUrl
+    };
+
+  }
+
+
+
+  /* =======================================================
+     YENİ FOTOĞRAF KAYDINI DB'YE EKLE
+     ======================================================= */
+
+
+  async function insertProfessionalImageRecord(
+    listingId,
+    imageUrl,
+    storagePath,
+    sortOrder
+  ) {
+
+    const base =
+      getAccountApiBase();
+
+
+    const payload = {
+
+      listing_id:
+        listingId,
+
+      image_url:
+        imageUrl,
+
+      sort_order:
+        sortOrder
+
+    };
+
+
+    /*
+     * Projedeki listing_images tablosunda
+     * storage_path kolonu bulunmayabilir.
+     * Bu nedenle mevcut şemayla uyumlu kalmak
+     * için DB'ye zorunlu olarak eklemiyoruz.
+     *
+     * Storage yolu image_url üzerinden de
+     * güvenli biçimde çözülebiliyor.
+     */
+
+
+    const response =
+      await fetch(
+        `${base}/rest/v1/listing_images`,
+        {
+          method: "POST",
+
+          headers:
+            accountApiHeaders({
+              "Content-Type":
+                "application/json",
+
+              Prefer:
+                "return=representation"
+            }),
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if (!response.ok) {
+
+      /*
+       * DB insert başarısızsa Storage'da
+       * sahipsiz dosya bırakmamaya çalış.
+       */
+
+      try {
+
+        await fetch(
+          `${getStorageApiBase()}/object/listing-images/${encodeStoragePath(
+            storagePath
+          )}`,
+          {
+            method: "DELETE",
+            headers:
+              accountApiHeaders()
+          }
+        );
+
+      } catch (cleanupError) {
+
+        console.warn(
+          "Başarısız yükleme sonrası Storage temizlenemedi:",
+          cleanupError
+        );
+
+      }
+
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+
+    const rows =
+      await response.json();
+
+
+    return (
+      Array.isArray(rows)
+        ? rows[0] || null
+        : null
+    );
+
+  }
+
+
+
+  /* =======================================================
+     YENİ FOTOĞRAFLARI KAYDET
+     ======================================================= */
+
+
+  async function uploadProfessionalListingPhotos(
+    listingId
+  ) {
+
+    if (
+      !professionalNewFiles.length
+    ) {
+
+      return;
+    }
+
+
+    const files =
+      professionalNewFiles.map(
+        item =>
+          item?.file || item
+      );
+
+
+    const validSelectedCover =
+      (
+        Number.isInteger(
+          professionalNewCoverIndex
+        ) &&
+        professionalNewCoverIndex >= 0 &&
+        professionalNewCoverIndex <
+          files.length
+      );
+
+
+    /*
+     * Hiç mevcut fotoğraf yoksa ve kullanıcı
+     * ayrıca kapak seçmediyse ilk yeni fotoğraf
+     * otomatik kapaktır.
+     */
+
+    const selectedCoverIndex =
+      validSelectedCover
+        ? professionalNewCoverIndex
+        : (
+            professionalExistingImages.length === 0
+              ? 0
+              : null
+          );
+
+
+    /*
+     * Yeni fotoğraflardan biri kapak seçildiyse
+     * mevcut fotoğraflar önce 1'den başlayacak
+     * şekilde güvenli geçici sıralamaya alınır.
+     */
+
+    if (
+      selectedCoverIndex !== null &&
+      professionalExistingImages.length
+    ) {
+
+      const base =
+        getAccountApiBase();
+
+
+      /*
+       * Önce yüksek geçici değerler.
+       */
+
+      for (
+        let index = 0;
+        index <
+          professionalExistingImages.length;
+        index += 1
+      ) {
+
+        const image =
+          professionalExistingImages[
+            index
+          ];
+
+
+        const response =
+          await fetch(
+            `${base}/rest/v1/listing_images` +
+            `?id=eq.${encodeURIComponent(
+              getProfessionalImageId(
+                image
+              )
+            )}` +
+            `&listing_id=eq.${encodeURIComponent(
+              listingId
+            )}`,
+            {
+              method: "PATCH",
+
+              headers:
+                accountApiHeaders({
+                  "Content-Type":
+                    "application/json",
+                  Prefer:
+                    "return=minimal"
+                }),
+
+              body:
+                JSON.stringify({
+                  sort_order:
+                    10000 + index
+                })
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            await response.text()
+          );
+
+        }
+
+      }
+
+
+      /*
+       * Sonra mevcut fotoğraflar 1,2,3...
+       */
+
+      for (
+        let index = 0;
+        index <
+          professionalExistingImages.length;
+        index += 1
+      ) {
+
+        const image =
+          professionalExistingImages[
+            index
+          ];
+
+
+        const response =
+          await fetch(
+            `${base}/rest/v1/listing_images` +
+            `?id=eq.${encodeURIComponent(
+              getProfessionalImageId(
+                image
+              )
+            )}` +
+            `&listing_id=eq.${encodeURIComponent(
+              listingId
+            )}`,
+            {
+              method: "PATCH",
+
+              headers:
+                accountApiHeaders({
+                  "Content-Type":
+                    "application/json",
+                  Prefer:
+                    "return=minimal"
+                }),
+
+              body:
+                JSON.stringify({
+                  sort_order:
+                    index + 1
+                })
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            await response.text()
+          );
+
+        }
+
+
+        image.sort_order =
+          index + 1;
+
+      }
+
+    }
+
+
+    /*
+     * Kapak seçilmediyse yeni fotoğraflar
+     * mevcut galerinin sonuna eklenir.
+     */
+
+    let nextSortOrder;
+
+
+    if (
+      selectedCoverIndex !== null
+    ) {
+
+      nextSortOrder =
+        professionalExistingImages.length +
+        1;
+
+    } else {
+
+      nextSortOrder =
+        professionalExistingImages.length;
+
+    }
+
+
+    const insertedNewImages = [];
+
+
+    /*
+     * Seçilen yeni kapak önce yüklenir.
+     * Böylece sort_order = 0 garanti edilir.
+     */
+
+    const uploadIndexes = [];
+
+
+    if (
+      selectedCoverIndex !== null
+    ) {
+
+      uploadIndexes.push(
+        selectedCoverIndex
+      );
+
+    }
+
+
+    for (
+      let index = 0;
+      index < files.length;
+      index += 1
+    ) {
+
+      if (
+        index !== selectedCoverIndex
+      ) {
+
+        uploadIndexes.push(
+          index
+        );
+
+      }
+
+    }
+
+
+    for (
+      const originalIndex of
+        uploadIndexes
+    ) {
+
+      const file =
+        files[
+          originalIndex
+        ];
+
+
+      const uploaded =
+        await uploadProfessionalImageFile(
+          file,
+          listingId
+        );
+
+
+      const isNewCover =
+        originalIndex ===
+          selectedCoverIndex;
+
+
+      const sortOrder =
+        isNewCover
+          ? 0
+          : nextSortOrder++;
+
+
+      const record =
+        await insertProfessionalImageRecord(
+          listingId,
+          uploaded.publicUrl,
+          uploaded.storagePath,
+          sortOrder
+        );
+
+
+      if (record) {
+
+        insertedNewImages.push(
+          record
+        );
+
+      } else {
+
+        insertedNewImages.push({
+          listing_id:
+            listingId,
+
+          image_url:
+            uploaded.publicUrl,
+
+          sort_order:
+            sortOrder,
+
+          storage_path:
+            uploaded.storagePath
+        });
+
+      }
+
+    }
+
+
+    /*
+     * Sunucudan tekrar okuyup son sıralamayı
+     * kesin olarak 0,1,2,3... haline getir.
+     */
+
+    const refreshedImages =
+      await fetchProfessionalListingImages(
+        listingId
+      );
+
+
+    if (
+      refreshedImages.length
+    ) {
+
+      await normalizeProfessionalListingImageOrder(
+        listingId,
+        refreshedImages
+      );
+
+    }
+
+
+    revokeProfessionalNewFileUrls();
+
+    professionalNewFiles = [];
+
+    professionalNewCoverIndex =
+      null;
+
+
+    const input =
+      document.getElementById(
+        "listing-edit-photo"
+      );
+
+
+    if (input) {
+      input.value = "";
+    }
+
+
+    professionalExistingImages =
+      await fetchProfessionalListingImages(
+        listingId
+      );
+
+
+    renderProfessionalPhotoManager();
+
+  }
+
+
+
+  /* =======================================================
+     İLANLARIM — DURUM
+     ======================================================= */
+
+
+  let professionalMyListings = [];
+
+  let professionalMyListingImages = {};
+
+  let professionalEditingListing =
+    null;
+
+  let professionalListingFilter =
+    "all";
+
+  let professionalListingSearch =
+    "";
+
+
+
+  function accountStatusLabel(
+    status
+  ) {
+
+    return listingStatusText(
+      status
+    );
+
+  }
+
+
+
+  function getProfessionalListingCover(
+    listing
+  ) {
+
+    const listingId =
+      String(
+        listing?.id ?? ""
+      );
+
+
+    const images =
+      professionalMyListingImages[
+        listingId
+      ] || [];
+
+
+    if (images.length) {
+
+      const sorted =
+        sortProfessionalImages(
+          images
+        );
+
+
+      const imageUrl =
+        getProfessionalImageUrl(
+          sorted[0]
+        );
+
+
+      if (imageUrl) {
+        return imageUrl;
+      }
+
+    }
+
+
+    return String(
+      listing?.image_url ||
+      listing?.cover_image ||
+      listing?.photo_url ||
+      ""
+    );
+
+  }
+
+
+
+  function getProfessionalListingServer(
+    listing
+  ) {
+
+    return String(
+      listing?.server ||
+      listing?.server_name ||
+      listing?.realm ||
+      "-"
+    );
+
+  }
+
+
+
+  function getProfessionalListingCategory(
+    listing
+  ) {
+
+    return String(
+      listing?.category ||
+      listing?.category_name ||
+      listing?.type ||
+      "-"
+    );
+
+  }
+
+
+
+  function getProfessionalFilteredListings() {
+
+    const search =
+      String(
+        professionalListingSearch ||
+        ""
+      )
+        .trim()
+        .toLocaleLowerCase(
+          "tr-TR"
+        );
+
+
+    return professionalMyListings.filter(
+      listing => {
+
+        const normalizedStatus =
+          normalizeListingStatus(
+            listing.status
+          );
+
+
+        if (
+          professionalListingFilter !==
+            "all" &&
+          normalizedStatus !==
+            professionalListingFilter
+        ) {
+
+          return false;
+
+        }
+
+
+        if (!search) {
+          return true;
+        }
+
+
+        const haystack =
+          [
+            listing.title,
+            listing.description,
+            getProfessionalListingServer(
+              listing
+            ),
+            getProfessionalListingCategory(
+              listing
+            )
+          ]
+            .join(" ")
+            .toLocaleLowerCase(
+              "tr-TR"
+            );
+
+
+        return haystack.includes(
+          search
+        );
+
+      }
+    );
+
+  }
+
+
+
+  function renderProfessionalMyListings() {
+
+    const container =
+      document.getElementById(
+        "my-listings-container"
+      );
+
+
+    const totalElement =
+      document.getElementById(
+        "my-listings-total"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    if (totalElement) {
+
+      totalElement.textContent =
+        String(
+          professionalMyListings.length
+        );
+
+    }
+
+
+    const listings =
+      getProfessionalFilteredListings();
+
+
+    if (!listings.length) {
+
+      container.innerHTML =
+        `
+          <div class="my-listings-empty">
+            ${
+              professionalMyListings.length
+                ? "Arama veya filtreye uygun ilan bulunamadı."
+                : "Henüz yayınladığın bir ilan bulunmuyor."
+            }
+          </div>
+        `;
 
       return;
 
@@ -2950,29 +5121,329 @@ body {
 
 
     container.innerHTML =
-      '<div class="my-listings-loading">İlanların yükleniyor...</div>';
+      listings
+        .map(
+          listing => {
+
+            const listingId =
+              String(
+                listing.id ?? ""
+              );
+
+
+            const title =
+              String(
+                listing.title ||
+                "Başlıksız İlan"
+              );
+
+
+            const description =
+              String(
+                listing.description ||
+                ""
+              );
+
+
+            const cover =
+              getProfessionalListingCover(
+                listing
+              );
+
+
+            const status =
+              normalizeListingStatus(
+                listing.status
+              );
+
+
+            const server =
+              getProfessionalListingServer(
+                listing
+              );
+
+
+            const category =
+              getProfessionalListingCategory(
+                listing
+              );
+
+
+            return `
+              <div
+                class="my-listing-row"
+                data-listing-id="${escapeAccountHtml(
+                  listingId
+                )}"
+              >
+
+                <div class="my-listing-main">
+
+                  <div class="my-listing-thumb">
+
+                    ${
+                      cover
+                        ? `
+                          <img
+                            src="${escapeAccountHtml(
+                              cover
+                            )}"
+                            alt="${escapeAccountHtml(
+                              title
+                            )}"
+                            loading="lazy"
+                          >
+                        `
+                        : `
+                          <div
+                            style="
+                              width:100%;
+                              height:100%;
+                              display:grid;
+                              place-items:center;
+                              color:#6f675c;
+                              font-size:10px;
+                              text-align:center;
+                              padding:5px;
+                              box-sizing:border-box;
+                            "
+                          >
+                            Fotoğraf Yok
+                          </div>
+                        `
+                    }
+
+                  </div>
+
+                  <div style="min-width:0">
+
+                    <div class="my-listing-title">
+                      ${escapeAccountHtml(
+                        title
+                      )}
+                    </div>
+
+                    <div class="my-listing-sub">
+                      ${escapeAccountHtml(
+                        description
+                          ? (
+                              description.length > 90
+                                ? description.slice(
+                                    0,
+                                    90
+                                  ) + "..."
+                                : description
+                            )
+                          : "Açıklama bulunmuyor."
+                      )}
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="my-listing-meta">
+
+                  <strong>
+                    ${escapeAccountHtml(
+                      server
+                    )}
+                  </strong>
+
+                  <span>
+                    ${escapeAccountHtml(
+                      category
+                    )}
+                  </span>
+
+                </div>
+
+
+                <div class="my-listing-price">
+
+                  <strong>
+                    ${escapeAccountHtml(
+                      formatAccountPrice(
+                        listing.price
+                      )
+                    )}
+                  </strong>
+
+                </div>
+
+
+                <div class="my-listing-status-wrap">
+
+                  <span
+                    class="my-listing-status ${escapeAccountHtml(
+                      status
+                    )}"
+                  >
+                    ${escapeAccountHtml(
+                      listingStatusText(
+                        status
+                      )
+                    )}
+                  </span>
+
+                </div>
+
+
+                <div class="my-listing-actions">
+
+                  <a
+                    class="my-listing-action"
+                    href="listing.html?id=${encodeURIComponent(
+                      listingId
+                    )}"
+                  >
+                    Görüntüle
+                  </a>
+
+                  <button
+                    type="button"
+                    class="my-listing-action"
+                    data-action="edit-listing"
+                    data-listing-id="${escapeAccountHtml(
+                      listingId
+                    )}"
+                  >
+                    Düzenle
+                  </button>
+
+                </div>
+
+              </div>
+            `;
+
+          }
+        )
+        .join("");
+
+  }
+
+
+
+  async function refreshProfessionalListingCache(
+    listingId
+  ) {
+
+    try {
+
+      professionalMyListingImages[
+        String(listingId)
+      ] =
+        await fetchProfessionalListingImages(
+          listingId
+        );
+
+
+      professionalExistingImages =
+        [
+          ...professionalMyListingImages[
+            String(listingId)
+          ]
+        ];
+
+
+      renderProfessionalMyListings();
+
+
+    } catch (error) {
+
+      console.error(
+        "İlan fotoğrafları yenilenemedi:",
+        error
+      );
+
+    }
+
+  }
+
+   /* =======================================================
+     İLANLARI SUPABASE'DEN YÜKLE
+     ======================================================= */
+
+
+  async function loadProfessionalMyListings() {
+
+    const session =
+      getAccountSession();
+
+
+    const container =
+      document.getElementById(
+        "my-listings-container"
+      );
+
+
+    if (!session?.user?.id) {
+
+      if (container) {
+
+        container.innerHTML =
+          `
+            <div class="my-listings-error">
+              Oturum bilgisi bulunamadı.
+            </div>
+          `;
+
+      }
+
+      return;
+
+    }
+
+
+    if (container) {
+
+      container.innerHTML =
+        `
+          <div class="my-listings-loading">
+            İlanların yükleniyor...
+          </div>
+        `;
+
+    }
 
 
     try {
 
+      const base =
+        getAccountApiBase();
+
+
+      if (!base) {
+
+        throw new Error(
+          "Supabase bağlantı adresi bulunamadı."
+        );
+
+      }
+
+
       const listingsResponse =
         await fetch(
-
-          `${window.SUPABASE_API_URL}listings?user_id=eq.${encodeURIComponent(
+          `${base}/rest/v1/listings` +
+          `?user_id=eq.${encodeURIComponent(
             session.user.id
-          )}&select=*&order=created_at.desc`,
-
+          )}` +
+          `&select=*` +
+          `&order=created_at.desc`,
           {
-            headers:
-              accountApiHeaders()
-          }
+            method: "GET",
 
+            headers:
+              accountApiHeaders({
+                Accept:
+                  "application/json"
+              })
+          }
         );
 
 
-      if (
-        !listingsResponse.ok
-      ) {
+      if (!listingsResponse.ok) {
 
         throw new Error(
           await listingsResponse.text()
@@ -2981,39 +5452,71 @@ body {
       }
 
 
-      const listingData =
+      const listings =
         await listingsResponse.json();
 
 
       professionalMyListings =
-        Array.isArray(listingData)
-          ? listingData
+        Array.isArray(listings)
+          ? listings
           : [];
 
 
-      const totalElement =
-        document.getElementById(
-          "my-listings-total"
-        );
+      professionalMyListingImages =
+        {};
 
 
-      if (totalElement) {
+      /*
+       * Her ilanın fotoğraflarını getir.
+       * Bir fotoğraf isteği hata verirse
+       * tüm İlanlarım ekranını bozma.
+       */
 
-        totalElement.textContent =
-          String(
-            professionalMyListings.length
-          );
+      await Promise.all(
+        professionalMyListings.map(
+          async listing => {
 
-      }
+            try {
+
+              const images =
+                await fetchProfessionalListingImages(
+                  listing.id
+                );
+
+
+              professionalMyListingImages[
+                String(listing.id)
+              ] = images;
+
+
+            } catch (error) {
+
+              console.error(
+                `İlan ${listing.id} fotoğrafları yüklenemedi:`,
+                error
+              );
+
+
+              professionalMyListingImages[
+                String(listing.id)
+              ] = [];
+
+            }
+
+          }
+        )
+      );
+
+
+      renderProfessionalMyListings();
 
 
       const activeCount =
         professionalMyListings.filter(
           listing =>
-            String(
-              listing.status || ""
-            ).toLowerCase() ===
-            "active"
+            normalizeListingStatus(
+              listing.status
+            ) === "active"
         ).length;
 
 
@@ -3031,915 +5534,44 @@ body {
       }
 
 
-      professionalMyListingImages = {};
-
-
-      const listingIds =
-        professionalMyListings
-
-          .map(
-            listing =>
-              listing.id
-          )
-
-          .filter(Boolean);
-
-
-      if (listingIds.length) {
-
-        const encodedIds =
-          listingIds
-
-            .map(
-              id =>
-                encodeURIComponent(id)
-            )
-
-            .join(",");
-
-
-        const imagesResponse =
-          await fetch(
-
-            `${window.SUPABASE_API_URL}listing_images?listing_id=in.(${encodedIds})&select=id,listing_id,image_url,sort_order&order=sort_order.asc`,
-
-            {
-              headers:
-                accountApiHeaders()
-            }
-
-          );
-
-
-        if (
-          imagesResponse.ok
-        ) {
-
-          const imageData =
-            await imagesResponse.json();
-
-
-          (
-            Array.isArray(imageData)
-              ? imageData
-              : []
-          ).forEach(
-            image => {
-
-              const key =
-                String(
-                  image.listing_id
-                );
-
-
-              if (
-                !professionalMyListingImages[
-                  key
-                ]
-              ) {
-
-                professionalMyListingImages[
-                  key
-                ] = [];
-
-              }
-
-
-              professionalMyListingImages[
-                key
-              ].push(image);
-
-            }
-          );
-
-        }
-
-      }
-
-
-      renderProfessionalMyListings();
-
-
     } catch (error) {
 
       console.error(
-        "İlanlarım yüklenemedi:",
+        "İlanlar yüklenemedi:",
         error
       );
 
 
-      container.innerHTML =
-        '<div class="my-listings-error">İlanlar yüklenirken bir hata oluştu.</div>';
-
-    }
-
-  }
+      professionalMyListings = [];
+      professionalMyListingImages = {};
 
 
+      if (container) {
 
-  /* =======================================================
-     İLAN FİLTRELEME
-     ======================================================= */
-
-
-  function getFilteredProfessionalListings() {
-
-    const searchInput =
-      document.getElementById(
-        "my-listings-search"
-      );
-
-
-    const searchValue =
-      String(
-        searchInput?.value || ""
-      )
-        .trim()
-        .toLocaleLowerCase(
-          "tr-TR"
-        );
-
-
-    return professionalMyListings.filter(
-      listing => {
-
-
-        const listingStatus =
-          String(
-            listing.status || ""
-          ).toLowerCase();
-
-
-        let statusMatches =
-          professionalListingFilter ===
-          "all";
-
-
-        if (
-          professionalListingFilter ===
-          "active"
-        ) {
-
-          statusMatches =
-            listingStatus ===
-            "active";
-
-        }
-
-
-        if (
-          professionalListingFilter ===
-          "sold"
-        ) {
-
-          statusMatches =
-            listingStatus ===
-            "sold";
-
-        }
-
-
-        if (
-          professionalListingFilter ===
-          "inactive"
-        ) {
-
-          statusMatches =
-            listingStatus ===
-              "inactive" ||
-            listingStatus ===
-              "passive";
-
-        }
-
-
-        if (!statusMatches) {
-
-          return false;
-
-        }
-
-
-        if (!searchValue) {
-
-          return true;
-
-        }
-
-
-        const searchableText = [
-
-          listing.title,
-
-          listing.description,
-
-          listing.id,
-
-          ACCOUNT_SERVER_NAMES[
-            listing.server_id
-          ],
-
-          ACCOUNT_CATEGORY_NAMES[
-            listing.category_id
-          ]
-
-        ]
-
-          .filter(Boolean)
-
-          .join(" ")
-
-          .toLocaleLowerCase(
-            "tr-TR"
-          );
-
-
-        return searchableText.includes(
-          searchValue
-        );
+        container.innerHTML =
+          `
+            <div class="my-listings-error">
+              İlanların yüklenirken bir hata oluştu.
+              Lütfen sayfayı yenileyip tekrar dene.
+            </div>
+          `;
 
       }
-    );
+
+    }
 
   }
 
 
 
   /* =======================================================
-     İLANLARI SATIRLI OLARAK ÇİZ
+     İLAN DÜZENLEME MODALINI AÇ
      ======================================================= */
 
 
-  function renderProfessionalMyListings() {
-
-    const container =
-      document.getElementById(
-        "my-listings-container"
-      );
-
-
-    if (!container) {
-      return;
-    }
-
-
-    const listings =
-      getFilteredProfessionalListings();
-
-
-    if (!listings.length) {
-
-      container.innerHTML =
-        '<div class="my-listings-empty">Bu filtreye uygun ilan bulunamadı.</div>';
-
-      return;
-
-    }
-
-
-    container.innerHTML =
-      listings
-
-        .map(
-          listing => {
-
-
-            const imageUrl =
-              getProfessionalListingImage(
-                listing.id
-              );
-
-
-            const serverName =
-              ACCOUNT_SERVER_NAMES[
-                listing.server_id
-              ] ||
-              "-";
-
-
-            const categoryName =
-              ACCOUNT_CATEGORY_NAMES[
-                listing.category_id
-              ] ||
-              "-";
-
-
-            const statusText =
-              accountStatusLabel(
-                listing.status
-              );
-
-
-            const statusClass =
-              accountStatusClass(
-                listing.status
-              );
-
-
-            const imageHtml =
-              imageUrl
-
-                ? `
-                  <img
-                    src="${escapeAccountHtml(
-                      imageUrl
-                    )}"
-                    alt="${escapeAccountHtml(
-                      listing.title ||
-                      "İlan"
-                    )}"
-                  >
-                `
-
-                : "";
-
-
-            return `
-              <div
-                class="my-listing-row"
-                data-listing-id="${escapeAccountHtml(
-                  listing.id
-                )}"
-              >
-
-                <div class="my-listing-main">
-
-                  <div class="my-listing-thumb">
-                    ${imageHtml}
-                  </div>
-
-                  <div style="min-width:0">
-
-                    <div class="my-listing-title">
-                      ${escapeAccountHtml(
-                        listing.title ||
-                        "İsimsiz İlan"
-                      )}
-                    </div>
-
-                    <div class="my-listing-sub">
-
-                      İlan No:
-                      ${escapeAccountHtml(
-                        listing.id
-                      )}
-
-                      <br>
-
-                      ${formatAccountDate(
-                        listing.created_at
-                      )}
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-                <div class="my-listing-meta">
-
-                  <strong>
-                    ${escapeAccountHtml(
-                      serverName
-                    )}
-                  </strong>
-
-                  <span>
-                    ${escapeAccountHtml(
-                      categoryName
-                    )}
-                  </span>
-
-                </div>
-
-
-                <div
-                  class="
-                    my-listing-meta
-                    my-listing-price
-                  "
-                >
-
-                  <strong>
-                    ${escapeAccountHtml(
-                      formatAccountPrice(
-                        listing.price
-                      )
-                    )}
-                  </strong>
-
-                  <span>
-                    İlan fiyatı
-                  </span>
-
-                </div>
-
-
-                <div class="my-listing-status-wrap">
-
-                  <span
-                    class="
-                      my-listing-status
-                      ${statusClass}
-                    "
-                  >
-                    ${escapeAccountHtml(
-                      statusText
-                    )}
-                  </span>
-
-                </div>
-
-
-                <div class="my-listing-actions">
-
-                  <a
-                    class="my-listing-action"
-                    href="listing.html?id=${encodeURIComponent(
-                      listing.id
-                    )}"
-                  >
-                    Gör
-                  </a>
-
-
-                  <button
-                    type="button"
-                    class="
-                      my-listing-action
-                      edit-listing-button
-                    "
-                    data-listing-id="${escapeAccountHtml(
-                      listing.id
-                    )}"
-                  >
-                    Düzenle
-                  </button>
-
-                </div>
-
-              </div>
-            `;
-
-          }
-        )
-
-        .join("");
-
-  }  /* =======================================================
-     İLAN DÜZENLEME MODALI
-     ======================================================= */
-
-
-function openProfessionalListingEditor(
-  listingId
-) {
-
-  const listing =
-    professionalMyListings.find(
-      item =>
-        String(item.id) ===
-        String(listingId)
-    );
-
-  if (!listing) {
-    return;
-  }
-
-
-  professionalEditingListing =
-    listing;
-
-
-  const idInput =
-    document.getElementById(
-      "listing-edit-id"
-    );
-
-  const titleInput =
-    document.getElementById(
-      "listing-edit-title"
-    );
-
-  const priceInput =
-    document.getElementById(
-      "listing-edit-price"
-    );
-
-  const descriptionInput =
-    document.getElementById(
-      "listing-edit-description"
-    );
-
-  const statusInput =
-    document.getElementById(
-      "listing-edit-status"
-    );
-
-  const photoInput =
-    document.getElementById(
-      "listing-edit-photo"
-    );
-
-  const existingPhotosContainer =
-    document.getElementById(
-      "listing-edit-existing-photos"
-    );
-
-  const newPhotosContainer =
-    document.getElementById(
-      "listing-edit-new-photos"
-    );
-
-  const photoCount =
-    document.getElementById(
-      "listing-edit-photo-count"
-    );
-
-  const modal =
-    document.getElementById(
-      "listing-edit-modal"
-    );
-
-
-  if (idInput) {
-    idInput.value =
-      listing.id;
-  }
-
-
-  if (titleInput) {
-    titleInput.value =
-      listing.title || "";
-  }
-
-
-  if (priceInput) {
-    priceInput.value =
-      listing.price ?? "";
-  }
-
-
-  if (descriptionInput) {
-    descriptionInput.value =
-      listing.description || "";
-  }
-
-
-  if (statusInput) {
-    statusInput.value =
-      accountStatusLabel(
-        listing.status
-      );
-  }
-
-
-  if (photoInput) {
-    photoInput.value = "";
-  }
-
-
-  /*
-   * Önceki seçimlerden kalan
-   * yeni fotoğraf önizlemelerini temizle.
-   */
-  if (newPhotosContainer) {
-    newPhotosContainer.innerHTML = "";
-  }
-
-
-  /*
-   * Bu ilana ait mevcut fotoğrafları al.
-   */
-  const existingImages =
-    professionalMyListingImages[
-      String(listing.id)
-    ] || [];
-
-
-  /*
-   * sort_order değerine göre sırala.
-   * İlk fotoğraf kapak fotoğrafıdır.
-   */
-  const sortedImages =
-    [...existingImages].sort(
-      (a, b) =>
-        Number(a.sort_order || 0) -
-        Number(b.sort_order || 0)
-    );
-
-
-  if (existingPhotosContainer) {
-
-    if (!sortedImages.length) {
-
-      existingPhotosContainer.innerHTML =
-        `
-          <div class="listing-edit-no-photo">
-            Bu ilanda kayıtlı fotoğraf bulunmuyor.
-          </div>
-        `;
-
-    } else {
-
-      existingPhotosContainer.innerHTML =
-        sortedImages
-          .map(
-            (image, index) => {
-
-              const imageUrl =
-                String(
-                  image.image_url || ""
-                );
-
-              return `
-                <div
-                  class="listing-edit-photo-item"
-                  data-image-id="${escapeAccountHtml(
-                    image.id || ""
-                  )}"
-                >
-
-                  <div class="listing-edit-photo-thumb">
-
-                    <img
-                      src="${escapeAccountHtml(
-                        imageUrl
-                      )}"
-                      alt="İlan fotoğrafı ${index + 1}"
-                      loading="lazy"
-                    >
-
-                    ${
-                      index === 0
-                        ? `
-                          <span class="listing-edit-cover-badge">
-                            KAPAK
-                          </span>
-                        `
-                        : ""
-                    }
-
-                  </div>
-
-<div class="listing-edit-photo-info">
-
-  <span class="listing-edit-photo-number">
-    Fotoğraf ${index + 1}
-  </span>
-
-  ${
-    index !== 0
-      ? `
-        <button
-          type="button"
-          class="listing-edit-make-cover"
-          data-image-id="${escapeAccountHtml(
-            image.id || ""
-          )}"
-        >
-          Kapak Yap
-        </button>
-      `
-      : `
-        <span class="listing-edit-current-cover">
-          Mevcut Kapak
-        </span>
-      `
-  }
-
-</div>                </div>
-              `;
-
-            }
-          )
-          .join("");
-
-    }
-
-  }
-
-
-  if (photoCount) {
-
-    photoCount.textContent =
-      `${sortedImages.length} Fotoğraf`;
-
-  }
-
-
-  if (modal) {
-
-    modal.classList.add(
-      "active"
-    );
-
-  }
-
-}
-
-async function makeProfessionalListingCover(imageId) {
-
-  if (
-    !professionalEditingListing ||
-    !imageId
+  async function openProfessionalListingEditor(
+    listingId
   ) {
-    return;
-  }
-
-  const session =
-    getAccountSession();
-
-  if (!session?.user?.id) {
-    alert(
-      "Oturum bulunamadı. Lütfen tekrar giriş yap."
-    );
-    return;
-  }
-
-  const listingId =
-    professionalEditingListing.id;
-
-  const currentImages =
-    [
-      ...(
-        professionalMyListingImages[
-          String(listingId)
-        ] || []
-      )
-    ].sort(
-      (a, b) =>
-        Number(a.sort_order || 0) -
-        Number(b.sort_order || 0)
-    );
-
-  const selectedIndex =
-    currentImages.findIndex(
-      image =>
-        String(image.id) ===
-        String(imageId)
-    );
-
-  if (selectedIndex <= 0) {
-    return;
-  }
-
-  const selectedImage =
-    currentImages[selectedIndex];
-
-  const currentCover =
-    currentImages[0];
-
-  try {
-
-    /*
-     * Önce mevcut kapağı geçici bir sıraya taşıyoruz.
-     * Böylece sort_order UNIQUE ise çakışma olmaz.
-     */
-    const coverTemporaryResponse =
-      await fetch(
-        `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
-          currentCover.id
-        )}&listing_id=eq.${encodeURIComponent(
-          listingId
-        )}`,
-        {
-          method: "PATCH",
-
-          headers:
-            accountApiHeaders({
-              "Content-Type":
-                "application/json"
-            }),
-
-          body:
-            JSON.stringify({
-              sort_order: 10000
-            })
-        }
-      );
-
-    if (!coverTemporaryResponse.ok) {
-      throw new Error(
-        await coverTemporaryResponse.text()
-      );
-    }
-
-
-    /*
-     * Seçilen fotoğraf artık kapak.
-     */
-    const selectedResponse =
-      await fetch(
-        `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
-          selectedImage.id
-        )}&listing_id=eq.${encodeURIComponent(
-          listingId
-        )}`,
-        {
-          method: "PATCH",
-
-          headers:
-            accountApiHeaders({
-              "Content-Type":
-                "application/json"
-            }),
-
-          body:
-            JSON.stringify({
-              sort_order: 0
-            })
-        }
-      );
-
-    if (!selectedResponse.ok) {
-      throw new Error(
-        await selectedResponse.text()
-      );
-    }
-
-
-    /*
-     * Eski kapağı seçilen fotoğrafın
-     * eski sırasına yerleştiriyoruz.
-     */
-    const oldCoverResponse =
-      await fetch(
-        `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
-          currentCover.id
-        )}&listing_id=eq.${encodeURIComponent(
-          listingId
-        )}`,
-        {
-          method: "PATCH",
-
-          headers:
-            accountApiHeaders({
-              "Content-Type":
-                "application/json"
-            }),
-
-          body:
-            JSON.stringify({
-              sort_order:
-                Number(
-                  selectedImage.sort_order
-                )
-            })
-        }
-      );
-
-    if (!oldCoverResponse.ok) {
-      throw new Error(
-        await oldCoverResponse.text()
-      );
-    }
-
-
-    /*
-     * Verileri yeniden çek.
-     */
-    await loadProfessionalMyListings();
-
-
-    const refreshedListing =
-      professionalMyListings.find(
-        item =>
-          String(item.id) ===
-          String(listingId)
-      );
-
-    if (refreshedListing) {
-      professionalEditingListing =
-        refreshedListing;
-    }
-
-
-    /*
-     * Modalı yeni fotoğraf sırasıyla
-     * tekrar oluştur.
-     */
-    openProfessionalListingEditor(
-      listingId
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Kapak fotoğrafı değiştirilemedi:",
-      error
-    );
-
-    alert(
-      "Kapak fotoğrafı değiştirilemedi. Lütfen tekrar dene."
-    );
-
-  }
-  
-}
-  
-  function closeProfessionalListingEditor() {
 
     const modal =
       document.getElementById(
@@ -3947,589 +5579,39 @@ async function makeProfessionalListingCover(imageId) {
       );
 
 
-    if (modal) {
-
-      modal.classList.remove(
-        "active"
+    const listing =
+      professionalMyListings.find(
+        item =>
+          String(item.id) ===
+          String(listingId)
       );
 
+
+    if (
+      !modal ||
+      !listing
+    ) {
+
+      return;
+
     }
+
+
+    /*
+     * Önce eski modal seçimlerini tamamen temizle.
+     */
+
+    resetProfessionalImageState();
 
 
     professionalEditingListing =
-      null;
-
-  }
+      listing;
 
 
-
-  /* =======================================================
-     YENİ FOTOĞRAF ÖNİZLEME
-     ======================================================= */
-    function previewProfessionalListingPhotos(
-  files
-) {
-
-  const container =
-    document.getElementById(
-      "listing-edit-new-photos"
-    );
-
-  const photoCount =
-    document.getElementById(
-      "listing-edit-photo-count"
-    );
-
-  if (!container) {
-    return;
-  }
-
-
-  container.innerHTML = "";
-
-
-  const selectedFiles =
-    Array.from(files || []);
-
-
-  const existingImages =
-    professionalEditingListing
-      ? (
-          professionalMyListingImages[
-            String(
-              professionalEditingListing.id
-            )
-          ] || []
-        )
-      : [];
-
-
-  /*
-   * Kullanıcı dosya seçimini iptal ederse
-   * mevcut fotoğraflar aynen korunur.
-   */
-  if (!selectedFiles.length) {
-
-    if (photoCount) {
-
-      photoCount.textContent =
-        `${existingImages.length} Fotoğraf`;
-
-    }
-
-    return;
-  }
-
-
-  selectedFiles.forEach(
-    (file, index) => {
-
-      const objectUrl =
-        URL.createObjectURL(file);
-
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-      item.className =
-        "listing-edit-photo-item listing-edit-photo-item-new";
-
-
-      const thumb =
-        document.createElement(
-          "div"
-        );
-
-      thumb.className =
-        "listing-edit-photo-thumb";
-
-
-      const image =
-        document.createElement(
-          "img"
-        );
-
-      image.src =
-        objectUrl;
-
-      image.alt =
-        `Yeni fotoğraf ${index + 1}`;
-
-      image.loading =
-        "lazy";
-
-
-      image.onload = () => {
-
-        URL.revokeObjectURL(
-          objectUrl
-        );
-
-      };
-
-
-      thumb.appendChild(
-        image
+    const idInput =
+      document.getElementById(
+        "listing-edit-id"
       );
-
-
-      /*
-       * İlanın mevcut fotoğrafı yoksa
-       * seçilen ilk fotoğraf kapak olur.
-       */
-      if (
-        existingImages.length === 0 &&
-        index === 0
-      ) {
-
-        const coverBadge =
-          document.createElement(
-            "span"
-          );
-
-        coverBadge.className =
-          "listing-edit-cover-badge";
-
-        coverBadge.textContent =
-          "KAPAK";
-
-        thumb.appendChild(
-          coverBadge
-        );
-
-      }
-
-
-      const number =
-        document.createElement(
-          "span"
-        );
-
-      number.className =
-        "listing-edit-photo-number";
-
-      number.textContent =
-        `Yeni Fotoğraf ${index + 1}`;
-
-
-      item.appendChild(
-        thumb
-      );
-
-      item.appendChild(
-        number
-      );
-
-      container.appendChild(
-        item
-      );
-
-    }
-  );
-
-
-  if (photoCount) {
-
-    photoCount.textContent =
-      `${
-        existingImages.length +
-        selectedFiles.length
-      } Fotoğraf`;
-
-  }
-
-}
-  
-  /* =======================================================
-     SUPABASE STORAGE — YENİ KAPAK FOTOĞRAFI
-     ======================================================= */
-async function uploadProfessionalListingPhotos(
-  files,
-  listingId
-) {
-
-  const session =
-    getAccountSession();
-
-
-  if (!session?.user?.id) {
-
-    throw new Error(
-      "Oturum bulunamadı."
-    );
-
-  }
-
-
-  const selectedFiles =
-    Array.from(files || []);
-
-
-  /*
-   * Yeni fotoğraf seçilmediyse
-   * mevcut fotoğraflara dokunma.
-   */
-  if (!selectedFiles.length) {
-
-    return [];
-
-  }
-
-
-  const allowedTypes = [
-
-    "image/jpeg",
-
-    "image/png",
-
-    "image/webp"
-
-  ];
-
-
-  /*
-   * Tüm fotoğrafları yüklemeden önce
-   * doğrula. Böylece yarım yükleme
-   * riskini azaltıyoruz.
-   */
-  for (const file of selectedFiles) {
-
-    if (
-      !allowedTypes.includes(
-        file.type
-      )
-    ) {
-
-      throw new Error(
-        "Fotoğraflar JPG, PNG veya WEBP formatında olmalıdır."
-      );
-
-    }
-
-
-    if (
-      file.size >
-      8 * 1024 * 1024
-    ) {
-
-      throw new Error(
-        "Her fotoğraf en fazla 8 MB olabilir."
-      );
-
-    }
-
-  }
-
-
-  const projectBaseUrl =
-    String(
-      window.SUPABASE_API_URL ||
-      ""
-    ).replace(
-      /\/rest\/v1\/?$/,
-      ""
-    );
-
-
-  if (!projectBaseUrl) {
-
-    throw new Error(
-      "Supabase proje adresi bulunamadı."
-    );
-
-  }
-
-
-  /*
-   * İlanın mevcut fotoğraflarını al.
-   */
-  const existingImages =
-    professionalMyListingImages[
-      String(listingId)
-    ] || [];
-
-
-  /*
-   * Yeni fotoğraflar mevcut listenin
-   * sonundan devam edecek.
-   *
-   * Örnek:
-   * Mevcut sort_order: 0,1,2
-   * Yeni fotoğraflar: 3,4,5...
-   */
-  let nextSortOrder =
-    existingImages.reduce(
-      (highest, image) => {
-
-        const sortOrder =
-          Number(
-            image.sort_order
-          );
-
-        return Number.isFinite(
-          sortOrder
-        )
-          ? Math.max(
-              highest,
-              sortOrder
-            )
-          : highest;
-
-      },
-      -1
-    ) + 1;
-
-
-  const uploadedImages = [];
-
-
-  /*
-   * Fotoğrafları sırayla yükle.
-   * Böylece sort_order sırası
-   * kullanıcı seçim sırasıyla aynı kalır.
-   */
-  for (
-    let index = 0;
-    index < selectedFiles.length;
-    index += 1
-  ) {
-
-    const file =
-      selectedFiles[index];
-
-
-    const originalExtension =
-      String(
-        file.name
-          .split(".")
-          .pop() ||
-        "jpg"
-      )
-        .toLowerCase()
-        .replace(
-          /[^a-z0-9]/g,
-          ""
-        );
-
-
-    const safeExtension =
-      [
-        "jpg",
-        "jpeg",
-        "png",
-        "webp"
-      ].includes(
-        originalExtension
-      )
-
-        ? originalExtension
-
-        : (
-            file.type === "image/png"
-              ? "png"
-              : file.type === "image/webp"
-                ? "webp"
-                : "jpg"
-          );
-
-
-    /*
-     * Aynı milisaniyede birden fazla
-     * fotoğraf yüklenebileceği için
-     * index değerini de dosya adına ekliyoruz.
-     */
-    const storagePath =
-      `${session.user.id}/${listingId}/${Date.now()}-${index}.${safeExtension}`;
-
-
-    const uploadResponse =
-      await fetch(
-
-        `${projectBaseUrl}/storage/v1/object/listing-images/${storagePath}`,
-
-        {
-
-          method:
-            "POST",
-
-
-          headers:
-            accountApiHeaders({
-
-              "Content-Type":
-                file.type ||
-                "application/octet-stream",
-
-              "x-upsert":
-                "false"
-
-            }),
-
-
-          body:
-            file
-
-        }
-
-      );
-
-
-    if (
-      !uploadResponse.ok
-    ) {
-
-      throw new Error(
-        await uploadResponse.text()
-      );
-
-    }
-
-
-    const publicImageUrl =
-      `${projectBaseUrl}/storage/v1/object/public/listing-images/${storagePath}`;
-
-
-    /*
-     * Storage'a yüklenen her fotoğraf için
-     * listing_images tablosuna ayrı kayıt aç.
-     */
-    const imageInsertResponse =
-      await fetch(
-
-        `${window.SUPABASE_API_URL}listing_images`,
-
-        {
-
-          method:
-            "POST",
-
-
-          headers:
-            accountApiHeaders({
-
-              "Content-Type":
-                "application/json",
-
-              "Prefer":
-                "return=representation"
-
-            }),
-
-
-          body:
-            JSON.stringify({
-
-              listing_id:
-                listingId,
-
-              image_url:
-                publicImageUrl,
-
-              sort_order:
-                nextSortOrder
-
-            })
-
-        }
-
-      );
-
-
-    if (
-      !imageInsertResponse.ok
-    ) {
-
-      throw new Error(
-        await imageInsertResponse.text()
-      );
-
-    }
-
-
-    const insertedRows =
-      await imageInsertResponse.json();
-
-
-    uploadedImages.push({
-
-      image_url:
-        publicImageUrl,
-
-      sort_order:
-        nextSortOrder,
-
-      record:
-        Array.isArray(insertedRows)
-          ? insertedRows[0] || null
-          : null
-
-    });
-
-
-    nextSortOrder += 1;
-
-  }
-
-
-  return uploadedImages;
-
-}
-
-
-  /* =======================================================
-     İLAN DEĞİŞİKLİKLERİNİ KAYDET
-     ======================================================= */
-
-
-  async function saveProfessionalListingChanges() {
-
-    if (
-      !professionalEditingListing
-    ) {
-      return;
-    }
-
-
-    const session =
-      getAccountSession();
-
-
-    if (
-      !session?.user?.id
-    ) {
-
-      alert(
-        "Oturum bulunamadı. Lütfen tekrar giriş yap."
-      );
-
-      return;
-
-    }
-
-
-    /*
-     * Front-end tarafında da sahiplik kontrolü.
-     * Asıl güvenlik Supabase RLS tarafından sağlanmalıdır.
-     */
-
-    if (
-      String(
-        professionalEditingListing.user_id
-      ) !==
-      String(
-        session.user.id
-      )
-    ) {
-
-      alert(
-        "Bu ilanı düzenleme yetkin yok."
-      );
-
-      return;
-
-    }
 
 
     const titleInput =
@@ -4544,58 +5626,259 @@ async function uploadProfessionalListingPhotos(
       );
 
 
+    const statusInput =
+      document.getElementById(
+        "listing-edit-status"
+      );
+
+
     const descriptionInput =
       document.getElementById(
         "listing-edit-description"
       );
 
 
-    const photoInput =
-      document.getElementById(
-        "listing-edit-photo"
+    if (idInput) {
+
+      idInput.value =
+        String(
+          listing.id ?? ""
+        );
+
+    }
+
+
+    if (titleInput) {
+
+      titleInput.value =
+        String(
+          listing.title || ""
+        );
+
+    }
+
+
+    if (priceInput) {
+
+      priceInput.value =
+        Number(
+          listing.price || 0
+        );
+
+    }
+
+
+    if (statusInput) {
+
+      statusInput.value =
+        listingStatusText(
+          listing.status
+        );
+
+    }
+
+
+    if (descriptionInput) {
+
+      descriptionInput.value =
+        String(
+          listing.description || ""
+        );
+
+    }
+
+
+    /*
+     * Modalı kullanıcıya hemen göster.
+     */
+
+    modal.classList.add(
+      "active"
+    );
+
+
+    document.body.style.overflow =
+      "hidden";
+
+
+    /*
+     * Cache'deki fotoğrafları önce göster.
+     */
+
+    professionalExistingImages =
+      sortProfessionalImages(
+        professionalMyListingImages[
+          String(listing.id)
+        ] || []
       );
 
 
-    const saveButton =
-      document.getElementById(
-        "listing-edit-save"
+    renderProfessionalPhotoManager();
+
+
+    /*
+     * Sonra sunucudan gerçek güncel listeyi çek.
+     */
+
+    try {
+
+      professionalExistingImages =
+        await fetchProfessionalListingImages(
+          listing.id
+        );
+
+
+      professionalMyListingImages[
+        String(listing.id)
+      ] =
+        [
+          ...professionalExistingImages
+        ];
+
+
+      renderProfessionalPhotoManager();
+
+
+    } catch (error) {
+
+      console.error(
+        "İlan fotoğrafları yenilenemedi:",
+        error
       );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     İLAN DÜZENLEME MODALINI KAPAT
+     ======================================================= */
+
+
+  function closeProfessionalListingEditor() {
+
+    const modal =
+      document.getElementById(
+        "listing-edit-modal"
+      );
+
+
+    if (!modal) {
+      return;
+    }
+
+
+    if (
+      professionalImageOperationBusy
+    ) {
+      return;
+    }
+
+
+    modal.classList.remove(
+      "active"
+    );
+
+
+    document.body.style.overflow =
+      "";
+
+
+    professionalEditingListing =
+      null;
+
+
+    resetProfessionalImageState();
+
+  }
+
+
+
+  /* =======================================================
+     İLAN BİLGİLERİNİ KAYDET
+     ======================================================= */
+
+
+  async function saveProfessionalListingChanges() {
+
+    if (
+      professionalImageOperationBusy
+    ) {
+      return;
+    }
+
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+
+      alert(
+        "Oturum bilgisi bulunamadı."
+      );
+
+      return;
+
+    }
+
+
+    const listingId =
+      document.getElementById(
+        "listing-edit-id"
+      )?.value;
 
 
     const title =
       String(
-        titleInput?.value ||
-        ""
+        document.getElementById(
+          "listing-edit-title"
+        )?.value || ""
       ).trim();
 
 
     const description =
       String(
-        descriptionInput?.value ||
-        ""
+        document.getElementById(
+          "listing-edit-description"
+        )?.value || ""
       ).trim();
 
 
+    const priceRaw =
+      document.getElementById(
+        "listing-edit-price"
+      )?.value;
+
+
     const price =
-      Number(
-        priceInput?.value
-      );
+      Number(priceRaw);
 
 
-const photos =
-  Array.from(
-    photoInput?.files || []
-  );
-
-    if (
-      title.length < 2
-    ) {
+    if (!listingId) {
 
       alert(
-        "İlan başlığı en az 2 karakter olmalıdır."
+        "Düzenlenecek ilan bulunamadı."
       );
 
-      titleInput?.focus();
+      return;
+
+    }
+
+
+    if (!title) {
+
+      alert(
+        "İlan başlığı boş bırakılamaz."
+      );
+
+      document.getElementById(
+        "listing-edit-title"
+      )?.focus();
 
       return;
 
@@ -4611,195 +5894,241 @@ const photos =
         "Geçerli bir fiyat gir."
       );
 
-      priceInput?.focus();
+      document.getElementById(
+        "listing-edit-price"
+      )?.focus();
 
       return;
 
     }
 
 
-if (photos.length) {
-
-  const allowedTypes = [
-    "image/jpeg",
-    "image/png",
-    "image/webp"
-  ];
-
-
-  for (const photo of photos) {
-
-    if (
-      !allowedTypes.includes(
-        photo.type
-      )
-    ) {
-
-      alert(
-        "Tüm fotoğraflar JPG, PNG veya WEBP formatında olmalıdır."
+    const saveButton =
+      document.getElementById(
+        "listing-edit-save"
       );
 
-      return;
 
-    }
-
-
-    if (
-      photo.size >
-      8 * 1024 * 1024
-    ) {
-
-      alert(
-        "Her fotoğraf en fazla 8 MB olabilir."
+    const cancelButton =
+      document.getElementById(
+        "listing-edit-cancel"
       );
 
-      return;
+
+    const closeButton =
+      document.getElementById(
+        "listing-edit-close"
+      );
+
+
+    const oldSaveText =
+      saveButton?.textContent ||
+      "Değişiklikleri Kaydet";
+
+
+    professionalImageOperationBusy =
+      true;
+
+
+    if (saveButton) {
+
+      saveButton.disabled =
+        true;
+
+      saveButton.textContent =
+        "Kaydediliyor...";
 
     }
 
-  }
 
-}
+    if (cancelButton) {
+
+      cancelButton.disabled =
+        true;
+
+    }
+
+
+    if (closeButton) {
+
+      closeButton.disabled =
+        true;
+
+    }
+
 
     try {
 
-
-      if (saveButton) {
-
-        saveButton.disabled =
-          true;
+      const base =
+        getAccountApiBase();
 
 
-        saveButton.textContent =
-          "Kaydediliyor...";
+      if (!base) {
+
+        throw new Error(
+          "Supabase bağlantı adresi bulunamadı."
+        );
 
       }
 
 
       /*
-       * Sadece düzenlenmesine izin verdiğimiz alanları
-       * PATCH ediyoruz.
-       *
-       * server_id, category_id, user_id ve status
-       * değiştirilmez.
+       * Kullanıcı sadece kendi ilanını
+       * güncelleyebilsin.
        */
 
-      const listingUpdateResponse =
+      const updateResponse =
         await fetch(
-
-          `${window.SUPABASE_API_URL}listings?id=eq.${encodeURIComponent(
-            professionalEditingListing.id
-          )}&user_id=eq.${encodeURIComponent(
+          `${base}/rest/v1/listings` +
+          `?id=eq.${encodeURIComponent(
+            listingId
+          )}` +
+          `&user_id=eq.${encodeURIComponent(
             session.user.id
           )}`,
-
           {
-
-            method:
-              "PATCH",
-
+            method: "PATCH",
 
             headers:
               accountApiHeaders({
-
                 "Content-Type":
                   "application/json",
 
-                "Prefer":
+                Prefer:
                   "return=representation"
-
               }),
-
 
             body:
               JSON.stringify({
-
-                title:
-                  title,
-
-                description:
-                  description ||
-                  null,
-
-                price:
-                  price
-
+                title,
+                description,
+                price
               })
-
           }
-
         );
 
 
-      if (
-        !listingUpdateResponse.ok
-      ) {
+      if (!updateResponse.ok) {
 
         throw new Error(
-          await listingUpdateResponse.text()
+          await updateResponse.text()
         );
 
       }
 
 
       const updatedRows =
-        await listingUpdateResponse.json();
+        await updateResponse.json();
+
+
+      if (
+        Array.isArray(updatedRows) &&
+        updatedRows[0]
+      ) {
+
+        const listingIndex =
+          professionalMyListings.findIndex(
+            listing =>
+              String(listing.id) ===
+              String(listingId)
+          );
+
+
+        if (
+          listingIndex !== -1
+        ) {
+
+          professionalMyListings[
+            listingIndex
+          ] = {
+            ...professionalMyListings[
+              listingIndex
+            ],
+            ...updatedRows[0]
+          };
+
+        }
+
+      }
 
 
       /*
-       * Supabase PATCH başarılı görünmesine rağmen
-       * RLS nedeniyle satır dönmediyse bunu da
-       * başarısız kabul ediyoruz.
+       * Yeni fotoğraf varsa yükle.
+       * Seçilen yeni kapak burada gerçekten
+       * sort_order = 0 olarak kaydedilir.
        */
 
       if (
-        !Array.isArray(
-          updatedRows
-        ) ||
-        updatedRows.length === 0
+        professionalNewFiles.length
       ) {
 
-        throw new Error(
-          "İlan güncellenemedi veya düzenleme yetkisi bulunamadı."
+        await uploadProfessionalListingPhotos(
+          listingId
         );
 
       }
 
 
-/*
- * Kullanıcı yeni fotoğraflar seçmişse
- * mevcut fotoğrafları koruyarak
- * yeni fotoğrafları ilana ekle.
- */
+      /*
+       * Son sunucu durumunu tekrar getir.
+       */
 
-if (photos.length) {
+      professionalExistingImages =
+        await fetchProfessionalListingImages(
+          listingId
+        );
 
-  await uploadProfessionalListingPhotos(
-    photos,
-    professionalEditingListing.id
-  );
 
-}
+      professionalMyListingImages[
+        String(listingId)
+      ] =
+        [
+          ...professionalExistingImages
+        ];
 
 
       /*
-       * Veriyi Supabase'den yeniden çekiyoruz.
-       * Böylece ekranda eski veri kalmaz.
+       * İlan satırını güncelle.
        */
 
-      await loadProfessionalMyListings();
+      const localListing =
+        professionalMyListings.find(
+          listing =>
+            String(listing.id) ===
+            String(listingId)
+        );
+
+
+      if (localListing) {
+
+        localListing.title =
+          title;
+
+        localListing.description =
+          description;
+
+        localListing.price =
+          price;
+
+      }
+
+
+      renderProfessionalMyListings();
+
+
+      /*
+       * Modalı güvenli şekilde kapatmak için
+       * busy durumunu burada kaldırıyoruz.
+       */
+
+      professionalImageOperationBusy =
+        false;
 
 
       closeProfessionalListingEditor();
 
 
-      alert(
-        "İlan başarıyla güncellendi."
-      );
-
-
     } catch (error) {
-
 
       console.error(
         "İlan güncellenemedi:",
@@ -4807,34 +6136,40 @@ if (photos.length) {
       );
 
 
-      const message =
-        String(
-          error?.message ||
-          error ||
-          ""
-        );
+      alert(
+        "İlan güncellenirken bir hata oluştu. Lütfen tekrar dene."
+      );
 
 
-      if (
-        message.includes(
-          "row-level security"
-        ) ||
-        message.includes(
-          "permission"
-        ) ||
-        message.includes(
-          "policy"
-        )
-      ) {
+      /*
+       * Hata sonrası sunucudaki gerçek fotoğraf
+       * durumunu tekrar yüklemeye çalış.
+       */
 
-        alert(
-          "Supabase güvenlik politikası bu işlemi engelledi. İlan düzenleme yetkisini kontrol etmemiz gerekiyor."
-        );
+      try {
 
-      } else {
+        professionalExistingImages =
+          await fetchProfessionalListingImages(
+            listingId
+          );
 
-        alert(
-          "İlan güncellenirken bir hata oluştu. Lütfen tekrar dene."
+
+        professionalMyListingImages[
+          String(listingId)
+        ] =
+          [
+            ...professionalExistingImages
+          ];
+
+
+        renderProfessionalPhotoManager();
+
+
+      } catch (refreshError) {
+
+        console.error(
+          "Hata sonrası fotoğraf listesi yenilenemedi:",
+          refreshError
         );
 
       }
@@ -4842,265 +6177,35 @@ if (photos.length) {
 
     } finally {
 
+      professionalImageOperationBusy =
+        false;
+
 
       if (saveButton) {
 
         saveButton.disabled =
           false;
 
-
         saveButton.textContent =
-          "Değişiklikleri Kaydet";
-
-      }
-
-    }
-
-  }
-
-
-
-  /* =======================================================
-     PROFİL BİLGİLERİNİ SUPABASE'DEN YÜKLE
-     ======================================================= */
-
-
-  async function loadProfessionalAccountProfile() {
-
-    const session =
-      getAccountSession();
-
-
-    if (
-      !session?.user?.id
-    ) {
-      return;
-    }
-
-
-    try {
-
-
-      const profileResponse =
-        await fetch(
-
-          `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
-            session.user.id
-          )}&select=*`,
-
-          {
-            headers:
-              accountApiHeaders()
-          }
-
-        );
-
-
-      if (
-        !profileResponse.ok
-      ) {
-
-        throw new Error(
-          await profileResponse.text()
-        );
+          oldSaveText;
 
       }
 
 
-      const profileData =
-        await profileResponse.json();
+      if (cancelButton) {
 
-
-      const profile =
-        Array.isArray(profileData)
-          ? profileData[0]
-          : null;
-
-
-      if (!profile) {
-        return;
-      }
-
-
-      const username =
-        profile.username ||
-        session.user.email
-          ?.split("@")[0] ||
-        "Kullanıcı";
-
-
-      const displayName =
-        profile.display_name ||
-        username;
-
-
-      const profileUsername =
-        document.getElementById(
-          "profile-username"
-        );
-
-
-      const profileDisplayName =
-        document.getElementById(
-          "profile-display-name"
-        );
-
-
-      const sidebarUsername =
-        document.getElementById(
-          "sidebar-username"
-        );
-
-
-      const accountUsername =
-        document.getElementById(
-          "account-username"
-        );
-
-
-      const avatarLetter =
-        document.getElementById(
-          "profile-avatar-letter"
-        );
-
-
-      if (profileUsername) {
-
-        profileUsername.textContent =
-          username;
+        cancelButton.disabled =
+          false;
 
       }
 
 
-      if (profileDisplayName) {
+      if (closeButton) {
 
-        profileDisplayName.textContent =
-          displayName;
-
-      }
-
-
-      if (sidebarUsername) {
-
-        sidebarUsername.textContent =
-          username;
+        closeButton.disabled =
+          false;
 
       }
-
-
-      if (accountUsername) {
-
-        accountUsername.textContent =
-          username;
-
-      }
-
-
-      if (avatarLetter) {
-
-        avatarLetter.textContent =
-          String(
-            displayName ||
-            username ||
-            "R"
-          )
-            .trim()
-            .charAt(0)
-            .toLocaleUpperCase(
-              "tr-TR"
-            );
-
-      }
-
-
-    } catch (error) {
-
-      console.error(
-        "Profil bilgileri yüklenemedi:",
-        error
-      );
-
-    }
-
-  }
-
-
-
-  /* =======================================================
-     FAVORİ SAYISINI YÜKLE
-     ======================================================= */
-
-
-  async function loadProfessionalFavoriteCount() {
-
-    const session =
-      getAccountSession();
-
-
-    const favoriteCount =
-      document.getElementById(
-        "favorite-count"
-      );
-
-
-    if (
-      !session?.user?.id ||
-      !favoriteCount
-    ) {
-      return;
-    }
-
-
-    try {
-
-
-      const response =
-        await fetch(
-
-          `${window.SUPABASE_API_URL}favorites?user_id=eq.${encodeURIComponent(
-            session.user.id
-          )}&select=id`,
-
-          {
-            headers:
-              accountApiHeaders()
-          }
-
-        );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          await response.text()
-        );
-
-      }
-
-
-      const favorites =
-        await response.json();
-
-
-      favoriteCount.textContent =
-        String(
-          Array.isArray(favorites)
-            ? favorites.length
-            : 0
-        );
-
-
-    } catch (error) {
-
-
-      console.error(
-        "Favori sayısı yüklenemedi:",
-        error
-      );
-
-
-      favoriteCount.textContent =
-        "0";
 
     }
 
@@ -5115,7 +6220,7 @@ if (photos.length) {
 
   function initializeProfessionalListingEvents() {
 
-    const container =
+    const listingsContainer =
       document.getElementById(
         "my-listings-container"
       );
@@ -5127,26 +6232,69 @@ if (photos.length) {
       );
 
 
-    const editModal =
+    const filters =
+      document.querySelectorAll(
+        ".my-listings-filter"
+      );
+
+
+    const modal =
       document.getElementById(
         "listing-edit-modal"
       );
 
 
+    const closeButton =
+      document.getElementById(
+        "listing-edit-close"
+      );
+
+
+    const cancelButton =
+      document.getElementById(
+        "listing-edit-cancel"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "listing-edit-save"
+      );
+
+
+    const photoInput =
+      document.getElementById(
+        "listing-edit-photo"
+      );
+
+
+    const existingPhotosContainer =
+      document.getElementById(
+        "listing-edit-existing-photos"
+      );
+
+
     /*
-     * Dinamik oluşturulan Düzenle butonları
+     * Dinamik oluşturulan ilan satırları
+     * event delegation ile yönetilir.
      */
 
-    if (container) {
+    if (
+      listingsContainer &&
+      !listingsContainer.dataset.eventsReady
+    ) {
 
-      container.addEventListener(
+      listingsContainer.dataset.eventsReady =
+        "1";
+
+
+      listingsContainer.addEventListener(
         "click",
-        event => {
-
+        function (event) {
 
           const editButton =
             event.target.closest(
-              ".edit-listing-button"
+              '[data-action="edit-listing"]'
             );
 
 
@@ -5155,211 +6303,47 @@ if (photos.length) {
           }
 
 
+          event.preventDefault();
+          event.stopPropagation();
+
+
           const listingId =
-            editButton.getAttribute(
-              "data-listing-id"
-            );
+            editButton.dataset.listingId;
+
+
+          if (!listingId) {
+            return;
+          }
 
 
           openProfessionalListingEditor(
             listingId
           );
 
-
         }
       );
 
     }
 
 
-    /*
-     * Arama
-     */
+    if (
+      searchInput &&
+      !searchInput.dataset.eventsReady
+    ) {
 
-    if (searchInput) {
+      searchInput.dataset.eventsReady =
+        "1";
+
 
       searchInput.addEventListener(
         "input",
-        renderProfessionalMyListings
-      );
+        function () {
 
-    }
-
-
-    /*
-     * Durum filtreleri
-     */
-
-    document
-      .querySelectorAll(
-        ".my-listings-filter"
-      )
-      .forEach(
-        button => {
+          professionalListingSearch =
+            searchInput.value || "";
 
 
-          button.addEventListener(
-            "click",
-            () => {
-
-
-              document
-                .querySelectorAll(
-                  ".my-listings-filter"
-                )
-                .forEach(
-                  filterButton => {
-
-                    filterButton.classList.remove(
-                      "active"
-                    );
-
-                  }
-                );
-
-
-              button.classList.add(
-                "active"
-              );
-
-
-              professionalListingFilter =
-                button.getAttribute(
-                  "data-status"
-                ) ||
-                "all";
-
-
-              renderProfessionalMyListings();
-
-
-            }
-          );
-
-
-        }
-      );
-
-
-    /*
-     * Düzenleme modalını kapat
-     */
-
-    document
-      .getElementById(
-        "listing-edit-close"
-      )
-      ?.addEventListener(
-        "click",
-        closeProfessionalListingEditor
-      );
-
-
-    document
-      .getElementById(
-        "listing-edit-cancel"
-      )
-      ?.addEventListener(
-        "click",
-        closeProfessionalListingEditor
-      );
-
-
-    /*
-     * Kaydet
-     */
-
-    document
-      .getElementById(
-        "listing-edit-save"
-      )
-      ?.addEventListener(
-        "click",
-        saveProfessionalListingChanges
-      );
-
-
-    /*
-     * Fotoğraf seçildiğinde önizleme
-     */
-
-document
-    .getElementById("listing-edit-photo")
-    ?.addEventListener("change", event => {
-        previewProfessionalListingPhotos(
-            event.target.files
-        );
-    });
-
-/*
- * Mevcut ilan fotoğraflarında
- * Kapak Yap işlemi
- */
-document
-    .getElementById("listing-edit-existing-photos")
-    ?.addEventListener("click", async event => {
-
-        const coverButton =
-            event.target.closest(
-                ".listing-edit-make-cover"
-            );
-
-        if (!coverButton) {
-            return;
-        }
-
-        const imageId =
-            coverButton.dataset.imageId;
-
-        if (!imageId) {
-            return;
-        }
-
-        coverButton.disabled = true;
-
-        const oldText =
-            coverButton.textContent;
-
-        coverButton.textContent =
-            "Değiştiriliyor...";
-
-        try {
-
-            await setProfessionalListingCover(
-                imageId
-            );
-
-        } finally {
-
-            if (coverButton.isConnected) {
-                coverButton.disabled = false;
-                coverButton.textContent = oldText;
-            }
-
-        }
-
-    });
-
-    /*
-     * Modalın dışına tıklayınca kapat
-     */
-
-    if (editModal) {
-
-      editModal.addEventListener(
-        "click",
-        event => {
-
-
-          if (
-            event.target ===
-            editModal
-          ) {
-
-            closeProfessionalListingEditor();
-
-          }
-
+          renderProfessionalMyListings();
 
         }
       );
@@ -5367,24 +6351,295 @@ document
     }
 
 
-    /*
-     * ESC ile kapat
-     */
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
+    filters.forEach(
+      filterButton => {
 
         if (
-          event.key ===
-          "Escape"
+          filterButton.dataset.eventsReady
         ) {
+          return;
+        }
+
+
+        filterButton.dataset.eventsReady =
+          "1";
+
+
+        filterButton.addEventListener(
+          "click",
+          function () {
+
+            filters.forEach(
+              button =>
+                button.classList.remove(
+                  "active"
+                )
+            );
+
+
+            filterButton.classList.add(
+              "active"
+            );
+
+
+            professionalListingFilter =
+              filterButton.dataset.status ||
+              "all";
+
+
+            renderProfessionalMyListings();
+
+          }
+        );
+
+      }
+    );
+
+
+    if (
+      photoInput &&
+      !photoInput.dataset.eventsReady
+    ) {
+
+      photoInput.dataset.eventsReady =
+        "1";
+
+
+      photoInput.addEventListener(
+        "change",
+        function (event) {
+
+          addProfessionalNewFiles(
+            event.target.files
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Mevcut fotoğraflardaki Kapak Yap ve Sil
+     * butonları tek delegation listener kullanır.
+     */
+
+    if (
+      existingPhotosContainer &&
+      !existingPhotosContainer.dataset.eventsReady
+    ) {
+
+      existingPhotosContainer.dataset.eventsReady =
+        "1";
+
+
+      existingPhotosContainer.addEventListener(
+        "click",
+        handleProfessionalExistingPhotoClick
+      );
+
+    }
+
+
+    if (
+      closeButton &&
+      !closeButton.dataset.eventsReady
+    ) {
+
+      closeButton.dataset.eventsReady =
+        "1";
+
+
+      closeButton.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+          event.stopPropagation();
 
           closeProfessionalListingEditor();
 
         }
+      );
 
+    }
+
+
+    if (
+      cancelButton &&
+      !cancelButton.dataset.eventsReady
+    ) {
+
+      cancelButton.dataset.eventsReady =
+        "1";
+
+
+      cancelButton.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          closeProfessionalListingEditor();
+
+        }
+      );
+
+    }
+
+
+    if (
+      saveButton &&
+      !saveButton.dataset.eventsReady
+    ) {
+
+      saveButton.dataset.eventsReady =
+        "1";
+
+
+      saveButton.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          saveProfessionalListingChanges();
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Modalın yalnızca karanlık dış alanına
+     * tıklanınca kapanır. İç kutuya tıklamak
+     * modalı kapatmaz.
+     */
+
+    if (
+      modal &&
+      !modal.dataset.eventsReady
+    ) {
+
+      modal.dataset.eventsReady =
+        "1";
+
+
+      modal.addEventListener(
+        "click",
+        function (event) {
+
+          if (
+            event.target !== modal
+          ) {
+            return;
+          }
+
+
+          closeProfessionalListingEditor();
+
+        }
+      );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     HESAP GÖRÜNÜMLERİ
+     ======================================================= */
+
+
+  function setAccountView(
+    viewName
+  ) {
+
+    const overview =
+      document.getElementById(
+        "account-overview-view"
+      );
+
+
+    const listings =
+      document.getElementById(
+        "account-listings-view"
+      );
+
+
+    const menuLinks =
+      document.querySelectorAll(
+        ".account-menu a"
+      );
+
+
+    if (
+      !overview ||
+      !listings
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      viewName ===
+      "listings"
+    ) {
+
+      overview.classList.remove(
+        "active"
+      );
+
+
+      listings.classList.add(
+        "active"
+      );
+
+
+      menuLinks.forEach(
+        link => {
+
+          link.classList.toggle(
+            "active",
+            link.getAttribute(
+              "href"
+            ) === "#my-listings"
+          );
+
+        }
+      );
+
+
+      return;
+
+    }
+
+
+    overview.classList.add(
+      "active"
+    );
+
+
+    listings.classList.remove(
+      "active"
+    );
+
+
+    menuLinks.forEach(
+      link => {
+
+        link.classList.toggle(
+          "active",
+          link.getAttribute(
+            "href"
+          ) === "account.html"
+        );
 
       }
     );
@@ -5393,12 +6648,882 @@ document
 
 
 
+  function handleAccountHash() {
+
+    const hash =
+      String(
+        window.location.hash ||
+        ""
+      ).toLowerCase();
+
+
+    if (
+      hash === "#my-listings"
+    ) {
+
+      setAccountView(
+        "listings"
+      );
+
+      return;
+
+    }
+
+
+    setAccountView(
+      "overview"
+    );
+
+
+    if (
+      hash === "#security"
+    ) {
+
+      window.setTimeout(
+        function () {
+
+          document.getElementById(
+            "security"
+          )?.scrollIntoView({
+            behavior:
+              "smooth",
+            block:
+              "start"
+          });
+
+        },
+        50
+      );
+
+    }
+
+  }
+
+
+
+  function initializeAccountNavigation() {
+
+    const menuLinks =
+      document.querySelectorAll(
+        ".account-menu a"
+      );
+
+
+    menuLinks.forEach(
+      link => {
+
+        const href =
+          link.getAttribute(
+            "href"
+          );
+
+
+        if (
+          href !== "#my-listings" &&
+          href !== "#security" &&
+          href !== "#favorites"
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          link.dataset.navigationReady
+        ) {
+          return;
+        }
+
+
+        link.dataset.navigationReady =
+          "1";
+
+
+        link.addEventListener(
+          "click",
+          function (event) {
+
+            /*
+             * İlanlarım sayfa içi görünümüdür.
+             */
+
+            if (
+              href === "#my-listings"
+            ) {
+
+              event.preventDefault();
+
+
+              if (
+                window.location.hash !==
+                "#my-listings"
+              ) {
+
+                history.pushState(
+                  null,
+                  "",
+                  "#my-listings"
+                );
+
+              }
+
+
+              setAccountView(
+                "listings"
+              );
+
+
+              return;
+
+            }
+
+
+            /*
+             * Güvenlik ana hesap görünümünde.
+             */
+
+            if (
+              href === "#security"
+            ) {
+
+              event.preventDefault();
+
+
+              setAccountView(
+                "overview"
+              );
+
+
+              history.pushState(
+                null,
+                "",
+                "#security"
+              );
+
+
+              window.setTimeout(
+                function () {
+
+                  document.getElementById(
+                    "security"
+                  )?.scrollIntoView({
+                    behavior:
+                      "smooth",
+                    block:
+                      "start"
+                  });
+
+                },
+                30
+              );
+
+
+              return;
+
+            }
+
+
+            /*
+             * Favoriler henüz ayrı görünüm değilse
+             * mevcut çalışan davranışı bozma.
+             */
+
+            if (
+              href === "#favorites"
+            ) {
+
+              return;
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    window.addEventListener(
+      "hashchange",
+      handleAccountHash
+    );
+
+
+    window.addEventListener(
+      "popstate",
+      handleAccountHash
+    );
+
+
+    handleAccountHash();
+
+  }
+
+
+
   /* =======================================================
-     PROFİL DÜZENLEME MODALI
+     PROFİL BİLGİLERİNİ EKRANA BAS
      ======================================================= */
 
 
-  function initializeProfessionalProfileModal() {
+  function renderAccountProfile(
+    user
+  ) {
+
+    if (!user) {
+      return;
+    }
+
+
+    const username =
+      String(
+        user.username ||
+        user.user_metadata?.username ||
+        user.email?.split("@")[0] ||
+        "Kullanıcı"
+      );
+
+
+    const displayName =
+      String(
+        user.display_name ||
+        user.full_name ||
+        user.user_metadata?.display_name ||
+        user.user_metadata?.full_name ||
+        username
+      );
+
+
+    const email =
+      String(
+        user.email || "-"
+      );
+
+
+    const createdAt =
+      user.created_at ||
+      user.createdAt ||
+      null;
+
+
+    const emailConfirmed =
+      Boolean(
+        user.email_confirmed_at ||
+        user.confirmed_at ||
+        user.email_verified
+      );
+
+
+    const values = {
+
+      "account-username":
+        username,
+
+      "sidebar-username":
+        username,
+
+      "profile-username":
+        username,
+
+      "profile-display-name":
+        displayName,
+
+      "profile-email":
+        email,
+
+      "profile-created-at":
+        formatAccountDate(
+          createdAt
+        )
+
+    };
+
+
+    Object.entries(values).forEach(
+      ([id, value]) => {
+
+        const element =
+          document.getElementById(
+            id
+          );
+
+
+        if (element) {
+
+          element.textContent =
+            value;
+
+        }
+
+      }
+    );
+
+
+    const avatar =
+      document.getElementById(
+        "profile-avatar-letter"
+      );
+
+
+    if (avatar) {
+
+      avatar.textContent =
+        (
+          displayName
+            .trim()
+            .charAt(0) ||
+          username
+            .trim()
+            .charAt(0) ||
+          "R"
+        ).toLocaleUpperCase(
+          "tr-TR"
+        );
+
+    }
+
+
+    const verifiedStatus =
+      document.getElementById(
+        "verified-status"
+      );
+
+
+    if (verifiedStatus) {
+
+      verifiedStatus.textContent =
+        emailConfirmed
+          ? "Evet"
+          : "Hayır";
+
+    }
+
+
+    const securityVerified =
+      document.getElementById(
+        "security-verified"
+      );
+
+
+    if (securityVerified) {
+
+      securityVerified.textContent =
+        emailConfirmed
+          ? "Doğrulandı"
+          : "Doğrulanmadı";
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     PROFİL MODALI
+     ======================================================= */
+
+
+  function openProfileModal() {
+
+    const session =
+      getAccountSession();
+
+
+    const modal =
+      document.getElementById(
+        "profile-modal"
+      );
+
+
+    if (
+      !session?.user ||
+      !modal
+    ) {
+
+      return;
+
+    }
+
+
+    const user =
+      session.user;
+
+
+    const usernameInput =
+      document.getElementById(
+        "profile-edit-username"
+      );
+
+
+    const displayNameInput =
+      document.getElementById(
+        "profile-edit-display-name"
+      );
+
+
+    const bioInput =
+      document.getElementById(
+        "profile-edit-bio"
+      );
+
+
+    const message =
+      document.getElementById(
+        "profile-edit-message"
+      );
+
+
+    if (usernameInput) {
+
+      usernameInput.value =
+        String(
+          user.username ||
+          user.user_metadata?.username ||
+          ""
+        );
+
+    }
+
+
+    if (displayNameInput) {
+
+      displayNameInput.value =
+        String(
+          user.display_name ||
+          user.full_name ||
+          user.user_metadata?.display_name ||
+          user.user_metadata?.full_name ||
+          ""
+        );
+
+    }
+
+
+    if (bioInput) {
+
+      bioInput.value =
+        String(
+          user.bio ||
+          user.user_metadata?.bio ||
+          ""
+        );
+
+    }
+
+
+    if (message) {
+
+      message.textContent = "";
+
+    }
+
+
+    modal.classList.add(
+      "active"
+    );
+
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+
+  function closeProfileModal() {
+
+    const modal =
+      document.getElementById(
+        "profile-modal"
+      );
+
+
+    if (!modal) {
+      return;
+    }
+
+
+    modal.classList.remove(
+      "active"
+    );
+
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+   /* =======================================================
+     PROFİL DEĞİŞİKLİKLERİNİ KAYDET
+     ======================================================= */
+
+
+  async function saveProfileChanges() {
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+
+      alert(
+        "Oturum bilgisi bulunamadı."
+      );
+
+      return;
+
+    }
+
+
+    const usernameInput =
+      document.getElementById(
+        "profile-edit-username"
+      );
+
+
+    const displayNameInput =
+      document.getElementById(
+        "profile-edit-display-name"
+      );
+
+
+    const bioInput =
+      document.getElementById(
+        "profile-edit-bio"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "profile-modal-save"
+      );
+
+
+    const message =
+      document.getElementById(
+        "profile-edit-message"
+      );
+
+
+    const username =
+      String(
+        usernameInput?.value || ""
+      ).trim();
+
+
+    const displayName =
+      String(
+        displayNameInput?.value || ""
+      ).trim();
+
+
+    const bio =
+      String(
+        bioInput?.value || ""
+      ).trim();
+
+
+    if (!username) {
+
+      if (message) {
+
+        message.textContent =
+          "Kullanıcı adı boş bırakılamaz.";
+
+      }
+
+      usernameInput?.focus();
+
+      return;
+
+    }
+
+
+    if (
+      username.length < 3
+    ) {
+
+      if (message) {
+
+        message.textContent =
+          "Kullanıcı adı en az 3 karakter olmalıdır.";
+
+      }
+
+      usernameInput?.focus();
+
+      return;
+
+    }
+
+
+    if (
+      username.length > 30
+    ) {
+
+      if (message) {
+
+        message.textContent =
+          "Kullanıcı adı en fazla 30 karakter olabilir.";
+
+      }
+
+      usernameInput?.focus();
+
+      return;
+
+    }
+
+
+    if (
+      displayName.length > 60
+    ) {
+
+      if (message) {
+
+        message.textContent =
+          "Görünen ad en fazla 60 karakter olabilir.";
+
+      }
+
+      displayNameInput?.focus();
+
+      return;
+
+    }
+
+
+    if (
+      bio.length > 500
+    ) {
+
+      if (message) {
+
+        message.textContent =
+          "Hakkında alanı en fazla 500 karakter olabilir.";
+
+      }
+
+      bioInput?.focus();
+
+      return;
+
+    }
+
+
+    const oldButtonText =
+      saveButton?.textContent ||
+      "Değişiklikleri Kaydet";
+
+
+    if (saveButton) {
+
+      saveButton.disabled =
+        true;
+
+      saveButton.textContent =
+        "Kaydediliyor...";
+
+    }
+
+
+    if (message) {
+
+      message.textContent =
+        "Bilgiler güncelleniyor...";
+
+    }
+
+
+    try {
+
+      const base =
+        getAccountApiBase();
+
+
+      if (!base) {
+
+        throw new Error(
+          "Supabase bağlantı adresi bulunamadı."
+        );
+
+      }
+
+
+      /*
+       * Önce profiles tablosunu güncellemeyi deniyoruz.
+       * Projedeki mevcut kullanıcı sistemiyle uyumlu
+       * olacak şekilde yalnızca kullanıcının kendi ID'si
+       * hedeflenir.
+       */
+
+      const profileResponse =
+        await fetch(
+          `${base}/rest/v1/profiles` +
+          `?id=eq.${encodeURIComponent(
+            session.user.id
+          )}`,
+          {
+            method: "PATCH",
+
+            headers:
+              accountApiHeaders({
+                "Content-Type":
+                  "application/json",
+
+                Prefer:
+                  "return=representation"
+              }),
+
+            body:
+              JSON.stringify({
+                username,
+                display_name:
+                  displayName,
+                bio
+              })
+          }
+        );
+
+
+      if (!profileResponse.ok) {
+
+        throw new Error(
+          await profileResponse.text()
+        );
+
+      }
+
+
+      const profileRows =
+        await profileResponse.json();
+
+
+      const profileRow =
+        Array.isArray(profileRows)
+          ? profileRows[0]
+          : null;
+
+
+      /*
+       * LocalStorage içindeki kullanıcı bilgisini de
+       * güncelliyoruz. Böylece sayfa yenilenmeden
+       * kullanıcı adı ve görünen ad değişir.
+       */
+
+      const updatedUser = {
+
+        ...session.user,
+
+        username:
+          profileRow?.username ||
+          username,
+
+        display_name:
+          profileRow?.display_name ||
+          displayName,
+
+        bio:
+          profileRow?.bio ||
+          bio,
+
+        user_metadata: {
+
+          ...(
+            session.user.user_metadata ||
+            {}
+          ),
+
+          username:
+            profileRow?.username ||
+            username,
+
+          display_name:
+            profileRow?.display_name ||
+            displayName,
+
+          bio:
+            profileRow?.bio ||
+            bio
+
+        }
+
+      };
+
+
+      localStorage.setItem(
+        "royale2_user",
+        JSON.stringify(
+          updatedUser
+        )
+      );
+
+
+      renderAccountProfile(
+        updatedUser
+      );
+
+
+      if (message) {
+
+        message.textContent =
+          "Profil başarıyla güncellendi.";
+
+      }
+
+
+      window.setTimeout(
+        function () {
+
+          closeProfileModal();
+
+        },
+        500
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Profil güncellenemedi:",
+        error
+      );
+
+
+      if (message) {
+
+        message.textContent =
+          "Profil güncellenemedi. Lütfen tekrar dene.";
+
+      }
+
+    } finally {
+
+      if (saveButton) {
+
+        saveButton.disabled =
+          false;
+
+        saveButton.textContent =
+          oldButtonText;
+
+      }
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     PROFİL EVENTLERİ
+     ======================================================= */
+
+
+  function initializeProfileEvents() {
 
     const editButton =
       document.getElementById(
@@ -5431,340 +7556,480 @@ document
 
 
     if (
-      !editButton ||
-      !modal
+      editButton &&
+      !editButton.dataset.eventsReady
     ) {
-      return;
-    }
+
+      editButton.dataset.eventsReady =
+        "1";
 
 
-    function closeProfileModal() {
+      editButton.addEventListener(
+        "click",
+        function (event) {
 
-      modal.classList.remove(
-        "active"
+          event.preventDefault();
+
+          openProfileModal();
+
+        }
       );
 
     }
 
 
-    editButton.addEventListener(
-      "click",
-      async () => {
+    if (
+      closeButton &&
+      !closeButton.dataset.eventsReady
+    ) {
+
+      closeButton.dataset.eventsReady =
+        "1";
 
 
-        const session =
-          getAccountSession();
+      closeButton.addEventListener(
+        "click",
+        function (event) {
 
+          event.preventDefault();
+
+          closeProfileModal();
+
+        }
+      );
+
+    }
+
+
+    if (
+      cancelButton &&
+      !cancelButton.dataset.eventsReady
+    ) {
+
+      cancelButton.dataset.eventsReady =
+        "1";
+
+
+      cancelButton.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+          closeProfileModal();
+
+        }
+      );
+
+    }
+
+
+    if (
+      saveButton &&
+      !saveButton.dataset.eventsReady
+    ) {
+
+      saveButton.dataset.eventsReady =
+        "1";
+
+
+      saveButton.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+          saveProfileChanges();
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Profil modalında da yalnızca karanlık
+     * dış alana tıklanınca modal kapanır.
+     */
+
+    if (
+      modal &&
+      !modal.dataset.eventsReady
+    ) {
+
+      modal.dataset.eventsReady =
+        "1";
+
+
+      modal.addEventListener(
+        "click",
+        function (event) {
+
+          if (
+            event.target !== modal
+          ) {
+            return;
+          }
+
+
+          closeProfileModal();
+
+        }
+      );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     FAVORİ SAYISI
+     ======================================================= */
+
+
+  async function loadAccountFavoriteCount() {
+
+    const session =
+      getAccountSession();
+
+
+    const countElement =
+      document.getElementById(
+        "favorite-count"
+      );
+
+
+    if (
+      !session?.user?.id ||
+      !countElement
+    ) {
+      return;
+    }
+
+
+    try {
+
+      const base =
+        getAccountApiBase();
+
+
+      if (!base) {
+        return;
+      }
+
+
+      const response =
+        await fetch(
+          `${base}/rest/v1/favorites` +
+          `?user_id=eq.${encodeURIComponent(
+            session.user.id
+          )}` +
+          `&select=id`,
+          {
+            method: "GET",
+
+            headers:
+              accountApiHeaders({
+                Accept:
+                  "application/json"
+              })
+          }
+        );
+
+
+      if (!response.ok) {
+
+        console.warn(
+          "Favori sayısı alınamadı:",
+          await response.text()
+        );
+
+        return;
+
+      }
+
+
+      const rows =
+        await response.json();
+
+
+      countElement.textContent =
+        String(
+          Array.isArray(rows)
+            ? rows.length
+            : 0
+        );
+
+
+    } catch (error) {
+
+      console.warn(
+        "Favori sayısı yüklenemedi:",
+        error
+      );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     GÜNCEL PROFİLİ SUPABASE'DEN AL
+     ======================================================= */
+
+
+  async function loadAccountProfile() {
+
+    const session =
+      getAccountSession();
+
+
+    if (
+      !session?.user?.id
+    ) {
+      return;
+    }
+
+
+    /*
+     * Önce localStorage bilgisiyle ekranı
+     * anında doldur.
+     */
+
+    renderAccountProfile(
+      session.user
+    );
+
+
+    try {
+
+      const base =
+        getAccountApiBase();
+
+
+      if (!base) {
+        return;
+      }
+
+
+      const response =
+        await fetch(
+          `${base}/rest/v1/profiles` +
+          `?id=eq.${encodeURIComponent(
+            session.user.id
+          )}` +
+          `&select=*` +
+          `&limit=1`,
+          {
+            method: "GET",
+
+            headers:
+              accountApiHeaders({
+                Accept:
+                  "application/json"
+              })
+          }
+        );
+
+
+      if (!response.ok) {
+
+        console.warn(
+          "Profil bilgileri alınamadı:",
+          await response.text()
+        );
+
+        return;
+
+      }
+
+
+      const rows =
+        await response.json();
+
+
+      const profile =
+        Array.isArray(rows)
+          ? rows[0]
+          : null;
+
+
+      if (!profile) {
+        return;
+      }
+
+
+      const updatedUser = {
+
+        ...session.user,
+
+        ...profile,
+
+        user_metadata: {
+
+          ...(
+            session.user.user_metadata ||
+            {}
+          ),
+
+          username:
+            profile.username ||
+            session.user.user_metadata
+              ?.username,
+
+          display_name:
+            profile.display_name ||
+            session.user.user_metadata
+              ?.display_name,
+
+          bio:
+            profile.bio ||
+            session.user.user_metadata
+              ?.bio
+
+        }
+
+      };
+
+
+      localStorage.setItem(
+        "royale2_user",
+        JSON.stringify(
+          updatedUser
+        )
+      );
+
+
+      renderAccountProfile(
+        updatedUser
+      );
+
+
+    } catch (error) {
+
+      console.warn(
+        "Profil bilgileri yenilenemedi:",
+        error
+      );
+
+    }
+
+  }
+
+
+
+  /* =======================================================
+     ÇIKIŞ YAP
+     ======================================================= */
+
+
+  window.logoutUser =
+    function logoutUser() {
+
+      /*
+       * Kullanıcının oturum bilgilerini temizle.
+       */
+
+      localStorage.removeItem(
+        "royale2_user"
+      );
+
+
+      localStorage.removeItem(
+        "royale2_access_token"
+      );
+
+
+      localStorage.removeItem(
+        "royale2_refresh_token"
+      );
+
+
+      /*
+       * Eski sürümlerden kalmış olabilecek
+       * alternatif oturum anahtarlarını da temizle.
+       */
+
+      localStorage.removeItem(
+        "supabase.auth.token"
+      );
+
+
+      window.location.href =
+        "index.html#login";
+
+    };
+
+
+
+  /* =======================================================
+     ESC TUŞU
+     ======================================================= */
+
+
+  function initializeAccountKeyboardEvents() {
+
+    if (
+      document.body.dataset
+        .accountKeyboardReady
+    ) {
+      return;
+    }
+
+
+    document.body.dataset
+      .accountKeyboardReady =
+        "1";
+
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
 
         if (
-          !session?.user?.id
+          event.key !==
+          "Escape"
         ) {
           return;
         }
 
 
-        try {
+        const listingModal =
+          document.getElementById(
+            "listing-edit-modal"
+          );
 
 
-          const response =
-            await fetch(
-
-              `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
-                session.user.id
-              )}&select=*`,
-
-              {
-                headers:
-                  accountApiHeaders()
-              }
-
-            );
+        const profileModal =
+          document.getElementById(
+            "profile-modal"
+          );
 
 
-          if (!response.ok) {
-
-            throw new Error(
-              await response.text()
-            );
-
-          }
-
-
-          const data =
-            await response.json();
-
-
-          const profile =
-            Array.isArray(data)
-              ? data[0]
-              : null;
-
-
-          const usernameInput =
-            document.getElementById(
-              "profile-edit-username"
-            );
-
-
-          const displayNameInput =
-            document.getElementById(
-              "profile-edit-display-name"
-            );
-
-
-          const bioInput =
-            document.getElementById(
-              "profile-edit-bio"
-            );
-
-
-          if (usernameInput) {
-
-            usernameInput.value =
-              profile?.username ||
-              "";
-
-          }
-
-
-          if (displayNameInput) {
-
-            displayNameInput.value =
-              profile?.display_name ||
-              "";
-
-          }
-
-
-          if (bioInput) {
-
-            bioInput.value =
-              profile?.bio ||
-              "";
-
-          }
-
-
-          modal.classList.add(
+        if (
+          listingModal?.classList.contains(
             "active"
-          );
+          )
+        ) {
 
+          closeProfessionalListingEditor();
 
-        } catch (error) {
-
-          console.error(
-            "Profil düzenleme bilgileri alınamadı:",
-            error
-          );
-
-
-          alert(
-            "Profil bilgileri yüklenemedi."
-          );
+          return;
 
         }
 
 
-      }
-    );
-
-
-    closeButton?.addEventListener(
-      "click",
-      closeProfileModal
-    );
-
-
-    cancelButton?.addEventListener(
-      "click",
-      closeProfileModal
-    );
-
-
-    modal.addEventListener(
-      "click",
-      event => {
-
         if (
-          event.target ===
-          modal
+          profileModal?.classList.contains(
+            "active"
+          )
         ) {
 
           closeProfileModal();
 
         }
-
-      }
-    );
-
-
-    saveButton?.addEventListener(
-      "click",
-      async () => {
-
-
-        const session =
-          getAccountSession();
-
-
-        if (
-          !session?.user?.id
-        ) {
-          return;
-        }
-
-
-        const username =
-          String(
-            document.getElementById(
-              "profile-edit-username"
-            )?.value ||
-            ""
-          ).trim();
-
-
-        const displayName =
-          String(
-            document.getElementById(
-              "profile-edit-display-name"
-            )?.value ||
-            ""
-          ).trim();
-
-
-        const bio =
-          String(
-            document.getElementById(
-              "profile-edit-bio"
-            )?.value ||
-            ""
-          ).trim();
-
-
-        if (!username) {
-
-          alert(
-            "Kullanıcı adı boş bırakılamaz."
-          );
-
-          return;
-
-        }
-
-
-        if (!displayName) {
-
-          alert(
-            "Görünen ad boş bırakılamaz."
-          );
-
-          return;
-
-        }
-
-
-        try {
-
-
-          saveButton.disabled =
-            true;
-
-
-          saveButton.textContent =
-            "Kaydediliyor...";
-
-
-          const response =
-            await fetch(
-
-              `${window.SUPABASE_API_URL}profiles?id=eq.${encodeURIComponent(
-                session.user.id
-              )}`,
-
-              {
-
-                method:
-                  "PATCH",
-
-
-                headers:
-                  accountApiHeaders({
-
-                    "Content-Type":
-                      "application/json",
-
-                    "Prefer":
-                      "return=representation"
-
-                  }),
-
-
-                body:
-                  JSON.stringify({
-
-                    username:
-                      username,
-
-                    display_name:
-                      displayName,
-
-                    bio:
-                      bio ||
-                      null
-
-                  })
-
-              }
-
-            );
-
-
-          if (!response.ok) {
-
-            throw new Error(
-              await response.text()
-            );
-
-          }
-
-
-          await loadProfessionalAccountProfile();
-
-
-          closeProfileModal();
-
-
-          alert(
-            "Profil bilgilerin başarıyla güncellendi."
-          );
-
-
-        } catch (error) {
-
-
-          console.error(
-            "Profil güncellenemedi:",
-            error
-          );
-
-
-          alert(
-            "Profil güncellenirken bir hata oluştu."
-          );
-
-
-        } finally {
-
-
-          saveButton.disabled =
-            false;
-
-
-          saveButton.textContent =
-            "Değişiklikleri Kaydet";
-
-        }
-
 
       }
     );
@@ -5774,65 +8039,157 @@ document
 
 
   /* =======================================================
-     SAYFAYI BAŞLAT
+     OTURUM DOĞRULAMA
      ======================================================= */
 
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+  function validateAccountSession() {
+
+    const session =
+      getAccountSession();
 
 
-      const session =
-        getAccountSession();
+    if (
+      !session?.user ||
+      !session?.accessToken
+    ) {
 
+      window.location.href =
+        "index.html#login";
 
-      if (!session) {
-
-        window.location.href =
-          "index.html#login";
-
-        return;
-
-      }
-
-
-      renderStoredAccountUser();
-
-
-      initializeProfessionalListingEvents();
-
-
-      initializeProfessionalProfileModal();
-
-
-      loadProfessionalAccountProfile();
-
-
-      loadProfessionalFavoriteCount();
-
-
-      updateAccountView();
-
+      return null;
 
     }
-  );
+
+
+    return session;
+
+  }
 
 
 
   /* =======================================================
-     HASH DEĞİŞİKLİĞİ
+     SAYFA BAŞLATMA
      ======================================================= */
 
 
-window.addEventListener(
-  "hashchange",
-  updateAccountView
-);
-  
+  async function initializeAccountPage() {
+
+    const session =
+      validateAccountSession();
+
+
+    if (!session) {
+      return;
+    }
+
+
+    /*
+     * Kullanıcı bilgilerini ilk anda göster.
+     */
+
+    renderAccountProfile(
+      session.user
+    );
+
+
+    /*
+     * Event listener'ları yalnızca bir kez bağla.
+     */
+
+    initializeProfessionalListingEvents();
+
+    initializeProfileEvents();
+
+    initializeAccountNavigation();
+
+    initializeAccountKeyboardEvents();
+
+
+    /*
+     * Veriler birbirinden bağımsız yüklenir.
+     * Bir bölüm hata verse bile diğer bölümler
+     * çalışmaya devam eder.
+     */
+
+    const tasks = [
+
+      loadAccountProfile(),
+
+      loadProfessionalMyListings(),
+
+      loadAccountFavoriteCount()
+
+    ];
+
+
+    const results =
+      await Promise.allSettled(
+        tasks
+      );
+
+
+    results.forEach(
+      result => {
+
+        if (
+          result.status ===
+          "rejected"
+        ) {
+
+          console.error(
+            "Hesap sayfası yükleme işlemi başarısız:",
+            result.reason
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+     * İlanlar yüklendikten sonra hash görünümünü
+     * bir kez daha uygula. Böylece sayfa doğrudan
+     * account.html#my-listings ile açıldığında
+     * İlanlarım görünümü kesin olarak korunur.
+     */
+
+    handleAccountHash();
+
+  }
+
+
+
+  /* =======================================================
+     DOM READY
+     ======================================================= */
+
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeAccountPage,
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    initializeAccountPage();
+
+  }
+
+
 })();
 </script>
 
 </main>
+
 </body>
 </html>

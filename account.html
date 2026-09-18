@@ -2641,14 +2641,13 @@ body {
   }
 
 
-
-  function getAccountApiBase() {
-
-    return String(
-      window.SUPABASE_URL || ""
-    ).replace(/\/+$/, "");
-
-  }
+function getAccountApiBase() {
+  return String(
+    window.SUPABASE_API_URL || ""
+  )
+    .replace(/\/rest\/v1\/?$/, "")
+    .replace(/\/+$/, "");
+}
 
 
 

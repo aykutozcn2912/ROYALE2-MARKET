@@ -6761,11 +6761,34 @@ function getAccountApiBase() {
       wallet: "account-wallet-view"
     };
 
-    const targetId = viewMap[viewName] || viewMap.overview;
+    const targetId =
+      viewMap[viewName] ||
+      viewMap.overview;
 
-    document.querySelectorAll(".account-view").forEach(view => {
-      view.classList.toggle("active", view.id === targetId);
-    });
+    /*
+     * Tüm hesap görünümlerini kesin olarak kapat,
+     * yalnızca seçilen görünümü aç.
+     * Inline display kullanılması eski CSS kurallarının
+     * görünümü ezmesini engeller.
+     */
+    document
+      .querySelectorAll(".account-view")
+      .forEach(function (view) {
+
+        const isActive =
+          view.id === targetId;
+
+        view.classList.toggle(
+          "active",
+          isActive
+        );
+
+        view.style.display =
+          isActive
+            ? "block"
+            : "none";
+
+      });
 
     const activeHref = {
       overview: "#overview",
@@ -6775,13 +6798,23 @@ function getAccountApiBase() {
       wallet: "#wallet"
     }[viewName] || "#overview";
 
-    document.querySelectorAll(".account-menu a").forEach(link => {
-      link.classList.toggle("active", link.getAttribute("href") === activeHref);
+    document
+      .querySelectorAll(".account-menu a")
+      .forEach(function (link) {
+
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === activeHref
+        );
+
+      });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "auto"
     });
 
-    window.scrollTo({ top: 0, behavior: "auto" });
   }
-
 
   function handleAccountHash() {
 

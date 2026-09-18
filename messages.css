@@ -1062,3 +1062,28 @@
     }
 
 }
+
+
+/* =====================================================
+   CHAT AREA GÖRÜNÜRLÜK DÜZELTMESİ
+   Konuşma seçilmeden sohbet elemanları görünmesin
+   ===================================================== */
+
+.messages-page #chatArea[style*="display: none"] {
+    display: none !important;
+}
+
+.messages-page #chatArea[style*="display:none"] {
+    display: none !important;
+}
+
+.messages-page #chatArea[style*="display: flex"],
+.messages-page #chatArea[style*="display:flex"] {
+    display: flex !important;
+}
+
+/* ChatArea kapalıysa içindeki hiçbir eleman taşmasın */
+.messages-page #chatArea[style*="display: none"] > *,
+.messages-page #chatArea[style*="display:none"] > * {
+    display: none !important;
+}

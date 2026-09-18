@@ -6998,3 +6998,43 @@ rightAd.innerHTML = `
     createGlobalAds();
   }
 })();
+
+
+/* =========================================================
+   ROYALE2 MARKET - SSS ARAMA SİSTEMİ
+========================================================= */
+
+(function () {
+    "use strict";
+
+    function initFaqSearch() {
+        const searchInput = document.getElementById("faq-search-input");
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        if (!searchInput || !faqItems.length) return;
+
+        searchInput.addEventListener("input", function () {
+            const searchText = this.value
+                .toLocaleLowerCase("tr-TR")
+                .trim();
+
+            faqItems.forEach(function (item) {
+                const itemText = item.textContent
+                    .toLocaleLowerCase("tr-TR");
+
+                if (!searchText || itemText.includes(searchText)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                    item.removeAttribute("open");
+                }
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initFaqSearch);
+    } else {
+        initFaqSearch();
+    }
+})();

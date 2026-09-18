@@ -1134,7 +1134,175 @@ body {
       #b98220
     );
 }
+/* ==========================================================
+   İLAN DÜZENLEME - ÇOKLU FOTOĞRAF YÖNETİMİ
+   ========================================================== */
 
+.listing-edit-photos-field {
+  margin-top: 4px;
+}
+
+.listing-edit-photos-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.listing-edit-photos-title label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.listing-edit-photos-title p {
+  margin: 0;
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+#listing-edit-photo-count {
+  flex: 0 0 auto;
+  padding: 7px 11px;
+  border: 1px solid rgba(227, 182, 64, 0.35);
+  border-radius: 999px;
+  background: rgba(227, 182, 64, 0.08);
+  color: #e3b640;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.listing-edit-existing-photos,
+.listing-edit-new-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px;
+}
+
+.listing-edit-existing-photos {
+  margin-bottom: 14px;
+}
+
+.listing-edit-new-photos {
+  margin-top: 14px;
+}
+
+.listing-edit-photo-item {
+  min-width: 0;
+}
+
+.listing-edit-photo-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(227, 182, 64, 0.28);
+  border-radius: 10px;
+  background: #0b0907;
+}
+
+.listing-edit-photo-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listing-edit-cover-badge {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  z-index: 2;
+  padding: 4px 7px;
+  border: 1px solid rgba(227, 182, 64, 0.55);
+  border-radius: 999px;
+  background: rgba(10, 8, 5, 0.9);
+  color: #e3b640;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+}
+
+.listing-edit-photo-number {
+  display: block;
+  margin-top: 6px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listing-edit-photo-upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px dashed rgba(227, 182, 64, 0.42);
+  border-radius: 12px;
+  background: rgba(227, 182, 64, 0.035);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.listing-edit-photo-upload:hover {
+  border-color: rgba(227, 182, 64, 0.75);
+  background: rgba(227, 182, 64, 0.07);
+}
+
+.listing-edit-photo-upload input[type="file"] {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.listing-edit-upload-info {
+  pointer-events: none;
+}
+
+.listing-edit-upload-info strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #e3b640;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.listing-edit-upload-info span {
+  display: block;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.listing-edit-photo-item-new .listing-edit-photo-thumb {
+  border-color: rgba(227, 182, 64, 0.48);
+}
+
+.listing-edit-no-photo {
+  grid-column: 1 / -1;
+  padding: 16px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 12px;
+  text-align: center;
+}
 @media (max-width: 1050px) {
 
   .my-listings-head {
@@ -1191,7 +1359,56 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* ==========================================================
+   İLAN DÜZENLEME - ÇOKLU FOTOĞRAF MOBİL
+   ========================================================== */
 
+@media (max-width: 700px) {
+
+  .listing-edit-photos-title {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  #listing-edit-photo-count {
+    align-self: flex-start;
+  }
+
+  .listing-edit-existing-photos,
+  .listing-edit-new-photos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .listing-edit-photo-upload {
+    min-height: 82px;
+    padding: 12px;
+  }
+
+  .listing-edit-upload-info strong {
+    font-size: 12px;
+  }
+
+  .listing-edit-upload-info span {
+    font-size: 10px;
+  }
+
+  .listing-edit-photo-number {
+    font-size: 10px;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .listing-edit-existing-photos,
+  .listing-edit-new-photos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
 </style>
 
 </head>
@@ -3466,11 +3683,33 @@ function openProfessionalListingEditor(
 
                   </div>
 
-                  <span class="listing-edit-photo-number">
-                    Fotoğraf ${index + 1}
-                  </span>
+<div class="listing-edit-photo-info">
 
-                </div>
+  <span class="listing-edit-photo-number">
+    Fotoğraf ${index + 1}
+  </span>
+
+  ${
+    index !== 0
+      ? `
+        <button
+          type="button"
+          class="listing-edit-make-cover"
+          data-image-id="${escapeAccountHtml(
+            image.id || ""
+          )}"
+        >
+          Kapak Yap
+        </button>
+      `
+      : `
+        <span class="listing-edit-current-cover">
+          Mevcut Kapak
+        </span>
+      `
+  }
+
+</div>                </div>
               `;
 
             }
@@ -3500,7 +3739,217 @@ function openProfessionalListingEditor(
 
 }
 
+async function makeProfessionalListingCover(
+  imageId
+) {
 
+  if (
+    !professionalEditingListing ||
+    !imageId
+  ) {
+    return;
+  }
+
+  const session =
+    getAccountSession();
+
+  if (!session?.user?.id) {
+
+    alert(
+      "Oturum bulunamadı. Lütfen tekrar giriş yap."
+    );
+
+    return;
+
+  }
+
+
+  const listingId =
+    professionalEditingListing.id;
+
+
+  const currentImages =
+    [
+      ...(
+        professionalMyListingImages[
+          String(listingId)
+        ] || []
+      )
+    ].sort(
+      (a, b) =>
+        Number(a.sort_order || 0) -
+        Number(b.sort_order || 0)
+    );
+
+
+  const selectedIndex =
+    currentImages.findIndex(
+      image =>
+        String(image.id) ===
+        String(imageId)
+    );
+
+
+  if (selectedIndex <= 0) {
+    return;
+  }
+
+
+  const selectedImage =
+    currentImages[selectedIndex];
+
+
+  const reorderedImages = [
+    selectedImage,
+    ...currentImages.filter(
+      image =>
+        String(image.id) !==
+        String(imageId)
+    )
+  ];
+
+
+  try {
+
+    /*
+     * Her fotoğrafa geçici olarak yüksek
+     * sort_order veriyoruz.
+     *
+     * Böylece veritabanında sort_order
+     * için UNIQUE kuralı varsa bile
+     * sıralama çakışması oluşmaz.
+     */
+    for (
+      let index = 0;
+      index < reorderedImages.length;
+      index += 1
+    ) {
+
+      const image =
+        reorderedImages[index];
+
+      const temporaryResponse =
+        await fetch(
+          `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
+            image.id
+          )}&listing_id=eq.${encodeURIComponent(
+            listingId
+          )}`,
+          {
+            method: "PATCH",
+
+            headers:
+              accountApiHeaders({
+                "Content-Type":
+                  "application/json"
+              }),
+
+            body:
+              JSON.stringify({
+                sort_order:
+                  10000 + index
+              })
+          }
+        );
+
+
+      if (!temporaryResponse.ok) {
+
+        throw new Error(
+          await temporaryResponse.text()
+        );
+
+      }
+
+    }
+
+
+    /*
+     * Şimdi gerçek sıralamayı 0'dan
+     * başlayarak kaydediyoruz.
+     */
+    for (
+      let index = 0;
+      index < reorderedImages.length;
+      index += 1
+    ) {
+
+      const image =
+        reorderedImages[index];
+
+      const updateResponse =
+        await fetch(
+          `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
+            image.id
+          )}&listing_id=eq.${encodeURIComponent(
+            listingId
+          )}`,
+          {
+            method: "PATCH",
+
+            headers:
+              accountApiHeaders({
+                "Content-Type":
+                  "application/json"
+              }),
+
+            body:
+              JSON.stringify({
+                sort_order: index
+              })
+          }
+        );
+
+
+      if (!updateResponse.ok) {
+
+        throw new Error(
+          await updateResponse.text()
+        );
+
+      }
+
+    }
+
+
+    await loadProfessionalMyListings();
+
+
+    const refreshedListing =
+      professionalMyListings.find(
+        item =>
+          String(item.id) ===
+          String(listingId)
+      );
+
+
+    if (refreshedListing) {
+
+      professionalEditingListing =
+        refreshedListing;
+
+    }
+
+
+    openProfessionalListingEditor(
+      listingId
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Kapak fotoğrafı değiştirilemedi:",
+      error
+    );
+
+    alert(
+      "Kapak fotoğrafı değiştirilemedi. Lütfen tekrar dene."
+    );
+
+  }
+
+}
   function closeProfessionalListingEditor() {
 
     const modal =
@@ -4853,7 +5302,64 @@ if (photos.length) {
         "change",
         event => {
 
+/*
+ * Mevcut ilan fotoğraflarında
+ * Kapak Yap işlemi
+ */
+document
+  .getElementById(
+    "listing-edit-existing-photos"
+  )
+  ?.addEventListener(
+    "click",
+    async event => {
 
+      const coverButton =
+        event.target.closest(
+          ".listing-edit-make-cover"
+        );
+
+      if (!coverButton) {
+        return;
+      }
+
+      const imageId =
+        coverButton.dataset.imageId;
+
+      if (!imageId) {
+        return;
+      }
+
+      coverButton.disabled = true;
+
+      const oldText =
+        coverButton.textContent;
+
+      coverButton.textContent =
+        "Değiştiriliyor...";
+
+      try {
+
+        await makeProfessionalListingCover(
+          imageId
+        );
+
+      } finally {
+
+        if (coverButton.isConnected) {
+
+          coverButton.disabled = false;
+
+          coverButton.textContent =
+            oldText;
+
+        }
+
+      }
+
+    }
+  );
+          
 previewProfessionalListingPhotos(
   event.target.files
 );

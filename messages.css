@@ -1087,3 +1087,277 @@
 .messages-page #chatArea[style*="display:none"] > * {
     display: none !important;
 }
+
+/* =====================================================
+   ROYALE2 MARKET
+   AKTİF SOHBET HEADER DÜZELTMESİ
+   ===================================================== */
+
+.messages-page #chatArea {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Sohbet üst barı */
+.messages-page #chatArea .chat-header {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 76px !important;
+    height: 76px !important;
+    flex: 0 0 76px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    padding: 14px 20px !important;
+    margin: 0 !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(31, 25, 16, 0.98),
+            rgba(17, 15, 12, 0.98)
+        ) !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(197, 139, 39, 0.25) !important;
+
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Kullanıcı bölümü */
+.messages-page #chatArea .chat-user-profile {
+    position: relative !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 12px !important;
+
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Avatar */
+.messages-page #chatArea .chat-user-avatar {
+    position: relative !important;
+    inset: auto !important;
+
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    flex: 0 0 42px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border-radius: 10px !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(191, 128, 24, 0.28),
+            rgba(74, 48, 12, 0.35)
+        ) !important;
+
+    border: 1px solid rgba(218, 155, 45, 0.55) !important;
+
+    color: #e0a837 !important;
+
+    font-size: 12px !important;
+    font-weight: 900 !important;
+
+    box-shadow: none !important;
+}
+
+/* Kullanıcı yazıları */
+.messages-page #chatArea .chat-user-details {
+    position: relative !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.messages-page #chatArea .chat-user-name-row {
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 7px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.messages-page #chatArea #chatUsername {
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #f4f0e8 !important;
+
+    font-size: 14px !important;
+    font-weight: 800 !important;
+
+    line-height: 1.2 !important;
+}
+
+.messages-page #chatArea #chatListingTitle {
+    display: block !important;
+
+    max-width: 420px !important;
+
+    margin: 5px 0 0 !important;
+    padding: 0 !important;
+
+    color: #8f8779 !important;
+
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Online noktası */
+.messages-page #chatArea .chat-status-dot {
+    position: relative !important;
+    inset: auto !important;
+
+    display: inline-block !important;
+
+    width: 7px !important;
+    height: 7px !important;
+    min-width: 7px !important;
+
+    margin: 0 !important;
+
+    border-radius: 50% !important;
+    background: #44c76a !important;
+
+    box-shadow: 0 0 8px rgba(68, 199, 106, 0.45) !important;
+}
+
+/* Güvenli mesajlaşma rozeti */
+.messages-page #chatArea .chat-header-badge {
+    position: relative !important;
+    inset: auto !important;
+
+    flex: 0 0 auto !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 0 0 16px !important;
+    padding: 7px 11px !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    border: 1px solid rgba(203, 143, 35, 0.35) !important;
+    border-radius: 7px !important;
+
+    background: rgba(191, 128, 24, 0.08) !important;
+
+    color: #c99332 !important;
+
+    font-size: 9px !important;
+    font-weight: 800 !important;
+
+    line-height: 1 !important;
+    letter-spacing: 0.7px !important;
+
+    white-space: nowrap !important;
+
+    box-shadow: none !important;
+}
+
+/* Mesaj alanı header'ın altından düzgün başlasın */
+.messages-page #chatArea #messageList,
+.messages-page #chatArea .message-list {
+    position: relative !important;
+
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 22px !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* Güvenlik uyarısı */
+.messages-page #chatArea .phone-warning {
+    position: relative !important;
+    inset: auto !important;
+
+    flex: 0 0 auto !important;
+
+    width: auto !important;
+
+    margin: 0 20px 10px !important;
+    padding: 10px 12px !important;
+}
+
+/* Mesaj gönderme bölümü */
+.messages-page #chatArea #messageForm {
+    position: relative !important;
+    inset: auto !important;
+
+    width: 100% !important;
+
+    flex: 0 0 auto !important;
+
+    margin: 0 !important;
+    padding: 12px 20px !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 10px !important;
+}
+
+/* Mesaj kutusu */
+.messages-page #chatArea #messageInput {
+    position: relative !important;
+
+    flex: 1 1 auto !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 110px !important;
+
+    margin: 0 !important;
+}
+
+/* Gönder */
+.messages-page #chatArea #messageForm button {
+    position: relative !important;
+
+    flex: 0 0 auto !important;
+
+    min-width: 94px !important;
+    height: 46px !important;
+
+    margin: 0 !important;
+}

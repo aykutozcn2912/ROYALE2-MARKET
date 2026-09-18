@@ -6807,57 +6807,144 @@ function getAccountApiBase() {
 
   }
 
-  function handleAccountHash() {
+function handleAccountHash() {
 
-    const hash = String(window.location.hash || "#overview").toLowerCase();
+  const hash = String(
+    window.location.hash || "#overview"
+  ).toLowerCase();
 
-    if (hash === "#my-listings") {
-      setAccountView("listings");
-      return;
-    }
+  /* =========================
+     İLANLARIM
+  ========================== */
+  if (hash === "#my-listings") {
+    setAccountView("listings");
+    return;
+  }
 
-    if (hash === "#orders") {
-      setAccountView("orders");
-      return;
-    }
+  /* =========================
+     SİPARİŞLERİM
+  ========================== */
+  if (hash === "#orders") {
+    setAccountView("orders");
+    return;
+  }
 
-    if (hash === "#ads") {
-      setAccountView("ads");
-      return;
-    }
+  /* =========================
+     REKLAM YÖNETİMİ
+  ========================== */
+  if (hash === "#ads") {
+    setAccountView("ads");
+    return;
+  }
 
-    if (hash === "#wallet") {
-      setAccountView("wallet");
-      return;
-    }
+  /* =========================
+     HESAP VE BAKİYE
+  ========================== */
+  if (hash === "#wallet") {
+    setAccountView("wallet");
+    return;
+  }
+
+  /* =========================
+     BAKİYE YÜKLE
+  ========================== */
+  if (hash === "#wallet-deposit") {
+
+    setAccountView("wallet");
+
+    window.setTimeout(function () {
+
+      const button = document.querySelector(
+        '.account-tab[data-panel="wallet-deposit"]'
+      );
+
+      if (button) {
+        button.click();
+      }
+
+    }, 0);
+
+    return;
+  }
+
+  /* =========================
+     PARA ÇEK
+  ========================== */
+  if (hash === "#wallet-withdraw") {
+
+    setAccountView("wallet");
+
+    window.setTimeout(function () {
+
+      const button = document.querySelector(
+        '.account-tab[data-panel="wallet-withdraw"]'
+      );
+
+      if (button) {
+        button.click();
+      }
+
+    }, 0);
+
+    return;
+  }
+
+  /* =========================
+     GÜVENLİK
+  ========================== */
+  if (hash === "#security") {
 
     setAccountView("overview");
 
-    if (hash === "#security") {
-      document.querySelectorAll(".account-menu a").forEach(link => {
-        link.classList.toggle("active", link.getAttribute("href") === "#security");
+    document
+      .querySelectorAll(".account-menu a")
+      .forEach(function (link) {
+
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === "#security"
+        );
+
       });
 
-      window.setTimeout(function () {
-        document.getElementById("security")?.scrollIntoView({
+    window.setTimeout(function () {
+
+      const securitySection =
+        document.getElementById("security");
+
+      if (securitySection) {
+
+        securitySection.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-      }, 30);
-    }
+
+      }
+
+    }, 0);
+
+    return;
   }
+
+  /* =========================
+     VARSAYILAN: HESABIM
+  ========================== */
+  setAccountView("overview");
+}
 
 
   function initializeAccountNavigation() {
 
-    const internalHashes = new Set([
-      "#overview",
-      "#my-listings",
-      "#orders",
-      "#ads",
-      "#wallet",
-      "#security"
-    ]);
+const internalHashes = new Set([
+  "#overview",
+  "#my-listings",
+  "#orders",
+  "#ads",
+  "#wallet",
+  "#wallet-deposit",
+  "#wallet-withdraw",
+  "#security"
+]);
 
     document.querySelectorAll(".account-menu a").forEach(link => {
       const href = link.getAttribute("href");

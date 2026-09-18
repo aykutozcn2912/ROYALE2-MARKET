@@ -905,36 +905,191 @@ body {
   resize: vertical;
 }
 
-.listing-edit-photo-row {
-  display: grid;
+/* ==========================================================
+   İLAN DÜZENLE - ÇOKLU FOTOĞRAF GALERİSİ
+   ========================================================== */
 
-  grid-template-columns:
-    100px 1fr;
-
+.listing-edit-photos-field {
+  display: flex;
+  flex-direction: column;
   gap: 14px;
-
-  align-items: center;
 }
 
-.listing-edit-preview {
-  width: 100px;
-  height: 100px;
+.listing-edit-photos-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
 
+.listing-edit-photos-title > div {
+  min-width: 0;
+}
+
+.listing-edit-photos-title label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+.listing-edit-photos-title p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  opacity: 0.72;
+}
+
+#listing-edit-photo-count {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid rgba(205, 143, 45, 0.28);
+  border-radius: 999px;
+  background: rgba(205, 143, 45, 0.08);
+  color: #d8a64e;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.listing-edit-existing-photos,
+.listing-edit-new-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+  gap: 12px;
+}
+
+.listing-edit-new-photos:empty {
+  display: none;
+}
+
+.listing-edit-photo-item {
+  min-width: 0;
+}
+
+.listing-edit-photo-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-
-  border:
-    1px solid rgba(205, 143, 45, .22);
-
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 12px;
-
   background: #0b0907;
 }
 
-.listing-edit-preview img {
+.listing-edit-photo-thumb img {
+  display: block;
   width: 100%;
   height: 100%;
-
   object-fit: cover;
+}
+
+.listing-edit-cover-badge {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  padding: 5px 7px;
+  border-radius: 7px;
+  background: rgba(15, 11, 7, 0.9);
+  border: 1px solid rgba(205, 143, 45, 0.55);
+  color: #e3b35c;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.listing-edit-photo-number {
+  display: block;
+  margin-top: 6px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listing-edit-photo-item-new .listing-edit-photo-thumb {
+  border-color: rgba(205, 143, 45, 0.42);
+}
+
+.listing-edit-photo-item-new .listing-edit-photo-number {
+  color: #d8a64e;
+}
+
+.listing-edit-photo-upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 82px;
+  padding: 15px;
+  overflow: hidden;
+  border: 1px dashed rgba(205, 143, 45, 0.42);
+  border-radius: 12px;
+  background: rgba(205, 143, 45, 0.045);
+  cursor: pointer;
+}
+
+.listing-edit-photo-upload:hover {
+  border-color: rgba(205, 143, 45, 0.72);
+  background: rgba(205, 143, 45, 0.075);
+}
+
+.listing-edit-photo-upload input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.listing-edit-upload-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.listing-edit-upload-info strong {
+  color: #d8a64e;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.listing-edit-upload-info span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.listing-edit-no-photo {
+  grid-column: 1 / -1;
+  padding: 16px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .listing-edit-photos-title {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .listing-edit-existing-photos,
+  .listing-edit-new-photos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .listing-edit-photo-upload {
+    min-height: 76px;
+    padding: 13px;
+  }
 }
 
 .listing-edit-footer {
@@ -1752,48 +1907,65 @@ body {
         </div>
 
 
-        <div class="listing-edit-field">
+<div class="listing-edit-field listing-edit-photos-field">
 
-          <label for="listing-edit-photo">
-            Kapak Fotoğrafı
-          </label>
+  <div class="listing-edit-photos-title">
+
+    <div>
+      <label for="listing-edit-photo">
+        İlan Fotoğrafları
+      </label>
+
+      <p>
+        Mevcut fotoğraflarını görüntüleyebilir ve ilana yeni fotoğraflar ekleyebilirsin.
+        İlk fotoğraf ilanının kapak fotoğrafıdır.
+      </p>
+    </div>
+
+    <span id="listing-edit-photo-count">
+      0 Fotoğraf
+    </span>
+
+  </div>
 
 
-          <div class="listing-edit-photo-row">
+  <div
+    id="listing-edit-existing-photos"
+    class="listing-edit-existing-photos"
+  >
+  </div>
 
 
-            <div class="listing-edit-preview">
+  <div class="listing-edit-photo-upload">
 
-              <img
-                id="listing-edit-preview-image"
-                alt="İlan fotoğrafı"
-              >
+    <input
+      type="file"
+      id="listing-edit-photo"
+      accept="image/jpeg,image/png,image/webp"
+      multiple
+    >
 
-            </div>
+    <div class="listing-edit-upload-info">
+
+      <strong>
+        + Yeni Fotoğraflar Ekle
+      </strong>
+
+      <span>
+        Birden fazla fotoğrafı aynı anda seçebilirsin.
+        JPG, PNG veya WEBP • Fotoğraf başına en fazla 8 MB.
+      </span>
+
+    </div>
+
+  </div>
 
 
-            <div>
-
-              <input
-                type="file"
-                id="listing-edit-photo"
-                accept="image/jpeg,image/png,image/webp"
-              >
-
-              <p
-                style="
-                  margin:8px 0 0;
-                  color:#746d63;
-                  font-size:10px;
-                  line-height:1.5;
-                "
-              >
-                Yeni fotoğraf seçmezsen mevcut kapak fotoğrafı korunur.
-                JPG, PNG veya WEBP kullanabilirsin.
-              </p>
-
-            </div>
-
+  <div
+    id="listing-edit-new-photos"
+    class="listing-edit-new-photos"
+  >
+  </div>
 
           </div>
 
@@ -3103,164 +3275,230 @@ body {
      ======================================================= */
 
 
-  function openProfessionalListingEditor(
-    listingId
-  ) {
+function openProfessionalListingEditor(
+  listingId
+) {
 
-    const listing =
-      professionalMyListings.find(
-        item =>
-          String(item.id) ===
-          String(listingId)
+  const listing =
+    professionalMyListings.find(
+      item =>
+        String(item.id) ===
+        String(listingId)
+    );
+
+  if (!listing) {
+    return;
+  }
+
+
+  professionalEditingListing =
+    listing;
+
+
+  const idInput =
+    document.getElementById(
+      "listing-edit-id"
+    );
+
+  const titleInput =
+    document.getElementById(
+      "listing-edit-title"
+    );
+
+  const priceInput =
+    document.getElementById(
+      "listing-edit-price"
+    );
+
+  const descriptionInput =
+    document.getElementById(
+      "listing-edit-description"
+    );
+
+  const statusInput =
+    document.getElementById(
+      "listing-edit-status"
+    );
+
+  const photoInput =
+    document.getElementById(
+      "listing-edit-photo"
+    );
+
+  const existingPhotosContainer =
+    document.getElementById(
+      "listing-edit-existing-photos"
+    );
+
+  const newPhotosContainer =
+    document.getElementById(
+      "listing-edit-new-photos"
+    );
+
+  const photoCount =
+    document.getElementById(
+      "listing-edit-photo-count"
+    );
+
+  const modal =
+    document.getElementById(
+      "listing-edit-modal"
+    );
+
+
+  if (idInput) {
+    idInput.value =
+      listing.id;
+  }
+
+
+  if (titleInput) {
+    titleInput.value =
+      listing.title || "";
+  }
+
+
+  if (priceInput) {
+    priceInput.value =
+      listing.price ?? "";
+  }
+
+
+  if (descriptionInput) {
+    descriptionInput.value =
+      listing.description || "";
+  }
+
+
+  if (statusInput) {
+    statusInput.value =
+      accountStatusLabel(
+        listing.status
       );
+  }
 
 
-    if (!listing) {
-      return;
-    }
+  if (photoInput) {
+    photoInput.value = "";
+  }
 
 
-    professionalEditingListing =
-      listing;
+  /*
+   * Önceki seçimlerden kalan
+   * yeni fotoğraf önizlemelerini temizle.
+   */
+  if (newPhotosContainer) {
+    newPhotosContainer.innerHTML = "";
+  }
 
 
-    const idInput =
-      document.getElementById(
-        "listing-edit-id"
-      );
+  /*
+   * Bu ilana ait mevcut fotoğrafları al.
+   */
+  const existingImages =
+    professionalMyListingImages[
+      String(listing.id)
+    ] || [];
 
 
-    const titleInput =
-      document.getElementById(
-        "listing-edit-title"
-      );
+  /*
+   * sort_order değerine göre sırala.
+   * İlk fotoğraf kapak fotoğrafıdır.
+   */
+  const sortedImages =
+    [...existingImages].sort(
+      (a, b) =>
+        Number(a.sort_order || 0) -
+        Number(b.sort_order || 0)
+    );
 
 
-    const priceInput =
-      document.getElementById(
-        "listing-edit-price"
-      );
+  if (existingPhotosContainer) {
 
+    if (!sortedImages.length) {
 
-    const descriptionInput =
-      document.getElementById(
-        "listing-edit-description"
-      );
+      existingPhotosContainer.innerHTML =
+        `
+          <div class="listing-edit-no-photo">
+            Bu ilanda kayıtlı fotoğraf bulunmuyor.
+          </div>
+        `;
 
+    } else {
 
-    const statusInput =
-      document.getElementById(
-        "listing-edit-status"
-      );
+      existingPhotosContainer.innerHTML =
+        sortedImages
+          .map(
+            (image, index) => {
 
+              const imageUrl =
+                String(
+                  image.image_url || ""
+                );
 
-    const photoInput =
-      document.getElementById(
-        "listing-edit-photo"
-      );
+              return `
+                <div
+                  class="listing-edit-photo-item"
+                  data-image-id="${escapeAccountHtml(
+                    image.id || ""
+                  )}"
+                >
 
+                  <div class="listing-edit-photo-thumb">
 
-    const previewImage =
-      document.getElementById(
-        "listing-edit-preview-image"
-      );
+                    <img
+                      src="${escapeAccountHtml(
+                        imageUrl
+                      )}"
+                      alt="İlan fotoğrafı ${index + 1}"
+                      loading="lazy"
+                    >
 
+                    ${
+                      index === 0
+                        ? `
+                          <span class="listing-edit-cover-badge">
+                            KAPAK
+                          </span>
+                        `
+                        : ""
+                    }
 
-    const modal =
-      document.getElementById(
-        "listing-edit-modal"
-      );
+                  </div>
 
+                  <span class="listing-edit-photo-number">
+                    Fotoğraf ${index + 1}
+                  </span>
 
-    if (idInput) {
+                </div>
+              `;
 
-      idInput.value =
-        listing.id;
-
-    }
-
-
-    if (titleInput) {
-
-      titleInput.value =
-        listing.title || "";
-
-    }
-
-
-    if (priceInput) {
-
-      priceInput.value =
-        listing.price ?? "";
-
-    }
-
-
-    if (descriptionInput) {
-
-      descriptionInput.value =
-        listing.description || "";
-
-    }
-
-
-    if (statusInput) {
-
-      statusInput.value =
-        accountStatusLabel(
-          listing.status
-        );
-
-    }
-
-
-    if (photoInput) {
-
-      photoInput.value = "";
-
-    }
-
-
-    if (previewImage) {
-
-      const imageUrl =
-        getProfessionalListingImage(
-          listing.id
-        );
-
-
-      if (imageUrl) {
-
-        previewImage.src =
-          imageUrl;
-
-        previewImage.style.display =
-          "block";
-
-      } else {
-
-        previewImage.removeAttribute(
-          "src"
-        );
-
-        previewImage.style.display =
-          "none";
-
-      }
-
-    }
-
-
-    if (modal) {
-
-      modal.classList.add(
-        "active"
-      );
+            }
+          )
+          .join("");
 
     }
 
   }
 
+
+  if (photoCount) {
+
+    photoCount.textContent =
+      `${sortedImages.length} Fotoğraf`;
+
+  }
+
+
+  if (modal) {
+
+    modal.classList.add(
+      "active"
+    );
+
+  }
+
+}
 
 
   function closeProfessionalListingEditor() {
@@ -3290,42 +3528,102 @@ body {
   /* =======================================================
      YENİ FOTOĞRAF ÖNİZLEME
      ======================================================= */
+    function previewProfessionalListingPhotos(
+  files
+) {
+
+  const container =
+    document.getElementById(
+      "listing-edit-new-photos"
+    );
+
+  const photoCount =
+    document.getElementById(
+      "listing-edit-photo-count"
+    );
+
+  if (!container) {
+    return;
+  }
 
 
-  function previewProfessionalListingPhoto(
-    file
-  ) {
+  container.innerHTML = "";
 
-    if (!file) {
-      return;
+
+  const selectedFiles =
+    Array.from(files || []);
+
+
+  const existingImages =
+    professionalEditingListing
+      ? (
+          professionalMyListingImages[
+            String(
+              professionalEditingListing.id
+            )
+          ] || []
+        )
+      : [];
+
+
+  /*
+   * Kullanıcı dosya seçimini iptal ederse
+   * mevcut fotoğraflar aynen korunur.
+   */
+  if (!selectedFiles.length) {
+
+    if (photoCount) {
+
+      photoCount.textContent =
+        `${existingImages.length} Fotoğraf`;
+
     }
 
-
-    const previewImage =
-      document.getElementById(
-        "listing-edit-preview-image"
-      );
+    return;
+  }
 
 
-    if (!previewImage) {
-      return;
-    }
+  selectedFiles.forEach(
+    (file, index) => {
+
+      const objectUrl =
+        URL.createObjectURL(file);
 
 
-    const objectUrl =
-      URL.createObjectURL(file);
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "listing-edit-photo-item listing-edit-photo-item-new";
 
 
-    previewImage.src =
-      objectUrl;
+      const thumb =
+        document.createElement(
+          "div"
+        );
+
+      thumb.className =
+        "listing-edit-photo-thumb";
 
 
-    previewImage.style.display =
-      "block";
+      const image =
+        document.createElement(
+          "img"
+        );
+
+      image.src =
+        objectUrl;
+
+      image.alt =
+        `Yeni fotoğraf ${index + 1}`;
+
+      image.loading =
+        "lazy";
 
 
-    previewImage.onload =
-      function () {
+      image.onload = () => {
 
         URL.revokeObjectURL(
           objectUrl
@@ -3333,45 +3631,132 @@ body {
 
       };
 
-  }
+
+      thumb.appendChild(
+        image
+      );
 
 
+      /*
+       * İlanın mevcut fotoğrafı yoksa
+       * seçilen ilk fotoğraf kapak olur.
+       */
+      if (
+        existingImages.length === 0 &&
+        index === 0
+      ) {
 
-  /* =======================================================
-     SUPABASE STORAGE — YENİ KAPAK FOTOĞRAFI
-     ======================================================= */
+        const coverBadge =
+          document.createElement(
+            "span"
+          );
+
+        coverBadge.className =
+          "listing-edit-cover-badge";
+
+        coverBadge.textContent =
+          "KAPAK";
+
+        thumb.appendChild(
+          coverBadge
+        );
+
+      }
 
 
-  async function uploadProfessionalListingPhoto(
-    file,
-    listingId
-  ) {
+      const number =
+        document.createElement(
+          "span"
+        );
 
-    const session =
-      getAccountSession();
+      number.className =
+        "listing-edit-photo-number";
+
+      number.textContent =
+        `Yeni Fotoğraf ${index + 1}`;
 
 
-    if (
-      !session?.user?.id
-    ) {
+      item.appendChild(
+        thumb
+      );
 
-      throw new Error(
-        "Oturum bulunamadı."
+      item.appendChild(
+        number
+      );
+
+      container.appendChild(
+        item
       );
 
     }
+  );
 
 
-    const allowedTypes = [
+  if (photoCount) {
 
-      "image/jpeg",
+    photoCount.textContent =
+      `${
+        existingImages.length +
+        selectedFiles.length
+      } Fotoğraf`;
 
-      "image/png",
+  }
 
-      "image/webp"
+}
+  
+  /* =======================================================
+     SUPABASE STORAGE — YENİ KAPAK FOTOĞRAFI
+     ======================================================= */
+async function uploadProfessionalListingPhotos(
+  files,
+  listingId
+) {
 
-    ];
+  const session =
+    getAccountSession();
 
+
+  if (!session?.user?.id) {
+
+    throw new Error(
+      "Oturum bulunamadı."
+    );
+
+  }
+
+
+  const selectedFiles =
+    Array.from(files || []);
+
+
+  /*
+   * Yeni fotoğraf seçilmediyse
+   * mevcut fotoğraflara dokunma.
+   */
+  if (!selectedFiles.length) {
+
+    return [];
+
+  }
+
+
+  const allowedTypes = [
+
+    "image/jpeg",
+
+    "image/png",
+
+    "image/webp"
+
+  ];
+
+
+  /*
+   * Tüm fotoğrafları yüklemeden önce
+   * doğrula. Böylece yarım yükleme
+   * riskini azaltıyoruz.
+   */
+  for (const file of selectedFiles) {
 
     if (
       !allowedTypes.includes(
@@ -3380,7 +3765,7 @@ body {
     ) {
 
       throw new Error(
-        "Fotoğraf JPG, PNG veya WEBP olmalıdır."
+        "Fotoğraflar JPG, PNG veya WEBP formatında olmalıdır."
       );
 
     }
@@ -3392,10 +3777,89 @@ body {
     ) {
 
       throw new Error(
-        "Fotoğraf en fazla 8 MB olabilir."
+        "Her fotoğraf en fazla 8 MB olabilir."
       );
 
     }
+
+  }
+
+
+  const projectBaseUrl =
+    String(
+      window.SUPABASE_API_URL ||
+      ""
+    ).replace(
+      /\/rest\/v1\/?$/,
+      ""
+    );
+
+
+  if (!projectBaseUrl) {
+
+    throw new Error(
+      "Supabase proje adresi bulunamadı."
+    );
+
+  }
+
+
+  /*
+   * İlanın mevcut fotoğraflarını al.
+   */
+  const existingImages =
+    professionalMyListingImages[
+      String(listingId)
+    ] || [];
+
+
+  /*
+   * Yeni fotoğraflar mevcut listenin
+   * sonundan devam edecek.
+   *
+   * Örnek:
+   * Mevcut sort_order: 0,1,2
+   * Yeni fotoğraflar: 3,4,5...
+   */
+  let nextSortOrder =
+    existingImages.reduce(
+      (highest, image) => {
+
+        const sortOrder =
+          Number(
+            image.sort_order
+          );
+
+        return Number.isFinite(
+          sortOrder
+        )
+          ? Math.max(
+              highest,
+              sortOrder
+            )
+          : highest;
+
+      },
+      -1
+    ) + 1;
+
+
+  const uploadedImages = [];
+
+
+  /*
+   * Fotoğrafları sırayla yükle.
+   * Böylece sort_order sırası
+   * kullanıcı seçim sırasıyla aynı kalır.
+   */
+  for (
+    let index = 0;
+    index < selectedFiles.length;
+    index += 1
+  ) {
+
+    const file =
+      selectedFiles[index];
 
 
     const originalExtension =
@@ -3424,36 +3888,23 @@ body {
 
         ? originalExtension
 
-        : "jpg";
-
-
-    const storagePath =
-      `${session.user.id}/${listingId}/${Date.now()}-cover.${safeExtension}`;
-
-
-    const projectBaseUrl =
-      String(
-        window.SUPABASE_API_URL ||
-        ""
-      ).replace(
-        /\/rest\/v1\/?$/,
-        ""
-      );
-
-
-    if (!projectBaseUrl) {
-
-      throw new Error(
-        "Supabase proje adresi bulunamadı."
-      );
-
-    }
+        : (
+            file.type === "image/png"
+              ? "png"
+              : file.type === "image/webp"
+                ? "webp"
+                : "jpg"
+          );
 
 
     /*
-     * create-listing sistemindeki mevcut bucket adı
-     * listing-images olarak kullanılıyor.
+     * Aynı milisaniyede birden fazla
+     * fotoğraf yüklenebileceği için
+     * index değerini de dosya adına ekliyoruz.
      */
+    const storagePath =
+      `${session.user.id}/${listingId}/${Date.now()}-${index}.${safeExtension}`;
+
 
     const uploadResponse =
       await fetch(
@@ -3502,141 +3953,91 @@ body {
       `${projectBaseUrl}/storage/v1/object/public/listing-images/${storagePath}`;
 
 
-    const existingImages =
-      professionalMyListingImages[
-        String(listingId)
-      ] || [];
-
-
     /*
-     * Mevcut fotoğraf varsa ilk/kapak fotoğrafının
-     * image_url değerini değiştiriyoruz.
+     * Storage'a yüklenen her fotoğraf için
+     * listing_images tablosuna ayrı kayıt aç.
      */
+    const imageInsertResponse =
+      await fetch(
+
+        `${window.SUPABASE_API_URL}listing_images`,
+
+        {
+
+          method:
+            "POST",
+
+
+          headers:
+            accountApiHeaders({
+
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=representation"
+
+            }),
+
+
+          body:
+            JSON.stringify({
+
+              listing_id:
+                listingId,
+
+              image_url:
+                publicImageUrl,
+
+              sort_order:
+                nextSortOrder
+
+            })
+
+        }
+
+      );
+
 
     if (
-      existingImages.length
+      !imageInsertResponse.ok
     ) {
 
-      const firstImage =
-        existingImages[0];
-
-
-      const imageUpdateResponse =
-        await fetch(
-
-          `${window.SUPABASE_API_URL}listing_images?id=eq.${encodeURIComponent(
-            firstImage.id
-          )}`,
-
-          {
-
-            method:
-              "PATCH",
-
-
-            headers:
-              accountApiHeaders({
-
-                "Content-Type":
-                  "application/json",
-
-                "Prefer":
-                  "return=representation"
-
-              }),
-
-
-            body:
-              JSON.stringify({
-
-                image_url:
-                  publicImageUrl
-
-              })
-
-          }
-
-        );
-
-
-      if (
-        !imageUpdateResponse.ok
-      ) {
-
-        throw new Error(
-          await imageUpdateResponse.text()
-        );
-
-      }
-
-    }
-
-    /*
-     * İlanın hiç fotoğrafı yoksa
-     * listing_images tablosuna ilk fotoğrafı ekliyoruz.
-     */
-
-    else {
-
-      const imageInsertResponse =
-        await fetch(
-
-          `${window.SUPABASE_API_URL}listing_images`,
-
-          {
-
-            method:
-              "POST",
-
-
-            headers:
-              accountApiHeaders({
-
-                "Content-Type":
-                  "application/json",
-
-                "Prefer":
-                  "return=representation"
-
-              }),
-
-
-            body:
-              JSON.stringify({
-
-                listing_id:
-                  listingId,
-
-                image_url:
-                  publicImageUrl,
-
-                sort_order:
-                  0
-
-              })
-
-          }
-
-        );
-
-
-      if (
-        !imageInsertResponse.ok
-      ) {
-
-        throw new Error(
-          await imageInsertResponse.text()
-        );
-
-      }
+      throw new Error(
+        await imageInsertResponse.text()
+      );
 
     }
 
 
-    return publicImageUrl;
+    const insertedRows =
+      await imageInsertResponse.json();
+
+
+    uploadedImages.push({
+
+      image_url:
+        publicImageUrl,
+
+      sort_order:
+        nextSortOrder,
+
+      record:
+        Array.isArray(insertedRows)
+          ? insertedRows[0] || null
+          : null
+
+    });
+
+
+    nextSortOrder += 1;
 
   }
 
+
+  return uploadedImages;
+
+}
 
 
   /* =======================================================
@@ -3743,10 +4144,10 @@ body {
       );
 
 
-    const photo =
-      photoInput?.files?.[0] ||
-      null;
-
+const photos =
+  Array.from(
+    photoInput?.files || []
+  );
 
     if (
       title.length < 2
@@ -3779,49 +4180,48 @@ body {
     }
 
 
-    if (photo) {
+if (photos.length) {
 
-      const allowedTypes = [
-
-        "image/jpeg",
-
-        "image/png",
-
-        "image/webp"
-
-      ];
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
 
 
-      if (
-        !allowedTypes.includes(
-          photo.type
-        )
-      ) {
+  for (const photo of photos) {
 
-        alert(
-          "Fotoğraf JPG, PNG veya WEBP formatında olmalıdır."
-        );
+    if (
+      !allowedTypes.includes(
+        photo.type
+      )
+    ) {
 
-        return;
+      alert(
+        "Tüm fotoğraflar JPG, PNG veya WEBP formatında olmalıdır."
+      );
 
-      }
-
-
-      if (
-        photo.size >
-        8 * 1024 * 1024
-      ) {
-
-        alert(
-          "Fotoğraf en fazla 8 MB olabilir."
-        );
-
-        return;
-
-      }
+      return;
 
     }
 
+
+    if (
+      photo.size >
+      8 * 1024 * 1024
+    ) {
+
+      alert(
+        "Her fotoğraf en fazla 8 MB olabilir."
+      );
+
+      return;
+
+    }
+
+  }
+
+}
 
     try {
 
@@ -3928,19 +4328,20 @@ body {
       }
 
 
-      /*
-       * Kullanıcı yeni fotoğraf seçmişse
-       * kapak fotoğrafını da güncelle.
-       */
+/*
+ * Kullanıcı yeni fotoğraflar seçmişse
+ * mevcut fotoğrafları koruyarak
+ * yeni fotoğrafları ilana ekle.
+ */
 
-      if (photo) {
+if (photos.length) {
 
-        await uploadProfessionalListingPhoto(
-          photo,
-          professionalEditingListing.id
-        );
+  await uploadProfessionalListingPhotos(
+    photos,
+    professionalEditingListing.id
+  );
 
-      }
+}
 
 
       /*
@@ -4453,19 +4854,9 @@ body {
         event => {
 
 
-          const file =
-            event.target
-              .files?.[0];
-
-
-          if (file) {
-
-            previewProfessionalListingPhoto(
-              file
-            );
-
-          }
-
+previewProfessionalListingPhotos(
+  event.target.files
+);
 
         }
       );

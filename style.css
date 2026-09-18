@@ -8040,9 +8040,9 @@ body > main .yang-rate-card {
     top: 50% !important;
     transform: translateY(-50%) !important;
 
-    width: clamp(180px, 12vw, 240px) !important;
-    height: min(820px, calc(100vh - 32px)) !important;
-    min-height: 560px !important;
+    width: clamp(220px, 15vw, 290px) !important;
+    height: min(900px, calc(100vh - 24px)) !important;
+    min-height: 620px !important;
 
     margin: 0 !important;
     padding: 20px 12px !important;

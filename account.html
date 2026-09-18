@@ -812,7 +812,7 @@ body {
 
   justify-content: space-between;
 
-  gap: 20px;
+    gap: 20px;
 
   padding: 20px 22px;
 
@@ -1498,6 +1498,114 @@ body {
   }
 }
 
+
+/* =========================================================
+   HESAP MERKEZİ — YENİ MODÜLLER
+   ========================================================= */
+
+.account-module-card {
+  margin-top: 0 !important;
+  overflow: hidden;
+}
+
+.account-module-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: #100e0b;
+}
+
+.account-module-tab {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 9px;
+  color: #a69e92;
+  background: #12100d;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.account-module-tab.active,
+.account-module-tab:hover {
+  color: #151008;
+  border-color: #d6a32f;
+  background: linear-gradient(#e3b64d,#b98220);
+}
+
+.account-tab-panel { display: none; }
+.account-tab-panel.active { display: block; }
+
+.account-empty-state {
+  padding: 54px 24px;
+  text-align: center;
+}
+
+.account-empty-state .empty-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 15px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(205,143,45,.25);
+  border-radius: 16px;
+  background: rgba(190,119,24,.07);
+  font-size: 24px;
+}
+
+.account-empty-state h3 {
+  margin: 0 0 8px;
+  color: #eee9e2;
+  font-size: 15px;
+}
+
+.account-empty-state p {
+  max-width: 580px;
+  margin: 0 auto;
+  color: #817a70;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.account-module-note {
+  margin: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(205,143,45,.18);
+  border-radius: 11px;
+  color: #9b9286;
+  background: rgba(190,119,24,.045);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.wallet-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
+  padding: 18px;
+}
+
+.wallet-mini-card {
+  padding: 17px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 13px;
+  background: #12100d;
+}
+
+.wallet-mini-card span,
+.wallet-mini-card strong { display:block; }
+.wallet-mini-card span { color:#817a70; font-size:9px; font-weight:900; text-transform:uppercase; letter-spacing:.8px; }
+.wallet-mini-card strong { margin-top:8px; color:#e3b354; font-size:20px; }
+
+@media (max-width: 700px) {
+  .wallet-summary-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 
 </head>
@@ -1519,7 +1627,7 @@ body {
 
   <nav>
 
-    <a href="index.html#market">
+        <a href="index.html#market">
       İlan Pazarı
     </a>
 
@@ -1605,7 +1713,7 @@ body {
 
 
         <a
-          href="account.html"
+          href="#overview"
           class="active"
         >
 
@@ -1625,11 +1733,29 @@ body {
         </a>
 
 
-        <a href="#favorites">
+        <a href="#orders">
 
-          <span>♥</span>
+          <span>🧾</span>
 
-          Favorilerim
+          Siparişlerim
+
+        </a>
+
+
+        <a href="#ads">
+
+          <span>📣</span>
+
+          Reklam Yönetimi
+
+        </a>
+
+
+        <a href="#wallet">
+
+          <span>💳</span>
+
+          Hesap ve Bakiye
 
         </a>
 
@@ -1696,7 +1822,7 @@ body {
           </h1>
 
           <p>
-            Profilini, ilanlarını, favorilerini ve hesap güvenliğini
+            Profilini, ilanlarını, siparişlerini, reklamlarını, bakiye işlemlerini ve hesap güvenliğini
             tek merkezden yönetebilirsin.
           </p>
 
@@ -1731,15 +1857,15 @@ body {
           <div class="summary-card">
 
             <span>
-              Favorilerim
+              Kullanılabilir Bakiye
             </span>
 
-            <strong id="favorite-count">
-              0
+            <strong id="account-balance-summary">
+              0 TL
             </strong>
 
             <small>
-              Kaydettiğin ilanlar
+              Hesap ve Bakiye bölümünden yönet
             </small>
 
           </div>
@@ -2092,6 +2218,80 @@ body {
 
       <!-- İLANLARIM ÖZEL GÖRÜNÜM SON -->
 
+      <!-- ==========================================
+           SİPARİŞLERİM
+           ========================================== -->
+      <div id="account-orders-view" class="account-view">
+        <div class="account-card account-module-card">
+          <div class="account-card-head">
+            <div><h2>Siparişlerim</h2><p>Royale2 Market üzerinden gerçekleşen alım ve satım işlemlerini buradan takip et.</p></div>
+          </div>
+          <div class="account-module-tabs" data-tab-group="orders">
+            <button type="button" class="account-module-tab active" data-panel-tab="orders-buy">Alımlarım</button>
+            <button type="button" class="account-module-tab" data-panel-tab="orders-sell">Satışlarım</button>
+          </div>
+          <div id="orders-buy" class="account-tab-panel active">
+            <div class="account-empty-state"><div class="empty-icon">🛒</div><h3>Henüz alım işlemin bulunmuyor</h3><p>Tamamlanan veya devam eden alımların sipariş numarası, ilan bilgisi, satıcı, tutar, tarih ve işlem durumu burada görüntülenecek.</p></div>
+          </div>
+          <div id="orders-sell" class="account-tab-panel">
+            <div class="account-empty-state"><div class="empty-icon">💰</div><h3>Henüz satış işlemin bulunmuyor</h3><p>İlanlarından gerçekleşen satışların alıcı, tutar, tarih ve işlem durumu burada görüntülenecek.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           REKLAM YÖNETİMİ
+           ========================================== -->
+      <div id="account-ads-view" class="account-view">
+        <div class="account-card account-module-card">
+          <div class="account-card-head">
+            <div><h2>Reklam Yönetimi</h2><p>Royale2 Market reklamlarını oluştur ve mevcut reklamlarını takip et.</p></div>
+          </div>
+          <div class="account-module-tabs" data-tab-group="ads">
+            <button type="button" class="account-module-tab active" data-panel-tab="ads-create">Reklam Ver</button>
+            <button type="button" class="account-module-tab" data-panel-tab="ads-mine">Reklamlarım</button>
+          </div>
+          <div id="ads-create" class="account-tab-panel active">
+            <div class="account-empty-state"><div class="empty-icon">📣</div><h3>Reklam oluşturma alanı hazır</h3><p>Reklam görseli, hedef bağlantı, reklam konumu ve yayın süresi için veri altyapısını sonraki aşamada Supabase'e bağlayacağız.</p></div>
+            <div class="account-module-note">Reklam ödeme ve yayınlama işlemleri backend doğrulaması tamamlanmadan aktif edilmeyecek.</div>
+          </div>
+          <div id="ads-mine" class="account-tab-panel">
+            <div class="account-empty-state"><div class="empty-icon">🗂️</div><h3>Henüz reklamın bulunmuyor</h3><p>Aktif, onay bekleyen ve süresi dolmuş reklamların burada listelenecek.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           HESAP VE BAKİYE
+           ========================================== -->
+      <div id="account-wallet-view" class="account-view">
+        <div class="account-card account-module-card">
+          <div class="account-card-head">
+            <div><h2>Hesap ve Bakiye</h2><p>Bakiye, para transferleri ve ödeme kayıtlarını tek merkezden yönet.</p></div>
+          </div>
+          <div class="wallet-summary-grid">
+            <div class="wallet-mini-card"><span>Kullanılabilir Bakiye</span><strong>0 TL</strong></div>
+            <div class="wallet-mini-card"><span>Bekleyen Tutar</span><strong>0 TL</strong></div>
+            <div class="wallet-mini-card"><span>Çekilebilir Tutar</span><strong>0 TL</strong></div>
+          </div>
+          <div class="account-module-tabs" data-tab-group="wallet">
+            <button type="button" class="account-module-tab active" data-panel-tab="wallet-deposit">Bakiye Yükle</button>
+            <button type="button" class="account-module-tab" data-panel-tab="wallet-withdraw">Para Çek</button>
+            <button type="button" class="account-module-tab" data-panel-tab="wallet-history">Hesap Hareketleri</button>
+            <button type="button" class="account-module-tab" data-panel-tab="wallet-banks">Banka Hesaplarım</button>
+            <button type="button" class="account-module-tab" data-panel-tab="wallet-payments">Ödemelerim</button>
+            <button type="button" class="account-module-tab" data-panel-tab="wallet-invoices">Faturalarım</button>
+          </div>
+          <div id="wallet-deposit" class="account-tab-panel active"><div class="account-empty-state"><div class="empty-icon">➕</div><h3>Bakiye Yükle</h3><p>Güvenli ödeme sağlayıcısı ve sunucu tarafı doğrulaması bağlandığında bakiye yükleme işlemleri burada yapılacak.</p></div></div>
+          <div id="wallet-withdraw" class="account-tab-panel"><div class="account-empty-state"><div class="empty-icon">↗️</div><h3>Para Çek</h3><p>Onaylı banka hesabına para çekme talepleri ve durumları burada yönetilecek.</p></div></div>
+          <div id="wallet-history" class="account-tab-panel"><div class="account-empty-state"><div class="empty-icon">📊</div><h3>Hesap Hareketleri</h3><p>Bakiye girişleri, çıkışları, bekleyen ve tamamlanan hareketler burada listelenecek.</p></div></div>
+          <div id="wallet-banks" class="account-tab-panel"><div class="account-empty-state"><div class="empty-icon">🏦</div><h3>Banka Hesaplarım</h3><p>Para çekme işlemlerinde kullanılacak doğrulanmış banka hesapları burada yönetilecek.</p></div></div>
+          <div id="wallet-payments" class="account-tab-panel"><div class="account-empty-state"><div class="empty-icon">💳</div><h3>Ödemelerim</h3><p>Gerçekleşen ödeme işlemleri ve ödeme durumları burada görüntülenecek.</p></div></div>
+          <div id="wallet-invoices" class="account-tab-panel"><div class="account-empty-state"><div class="empty-icon">🧾</div><h3>Faturalarım</h3><p>Oluşturulan fatura ve ödeme belgeleri burada listelenecek.</p></div></div>
+          <div class="account-module-note">Gerçek para hareketleri yalnızca güvenli backend, ödeme sağlayıcısı doğrulaması ve gerekli yetkilendirme kontrolleri tamamlandıktan sonra etkinleştirilecek.</div>
+        </div>
+      </div>
+
     </section>
 
   </div>
@@ -2240,7 +2440,7 @@ body {
 
           <div
             id="listing-edit-existing-photos"
-            class="listing-edit-existing-photos"
+                        class="listing-edit-existing-photos"
           ></div>
 
 
@@ -3054,7 +3254,7 @@ function getAccountApiBase() {
                     class="listing-edit-photo-action delete"
                     data-action="delete-existing-photo"
                     data-image-id="${escapeAccountHtml(
-                      imageId ?? ""
+                                            imageId ?? ""
                     )}"
                   >
                     Sil
@@ -3867,9 +4067,7 @@ function getAccountApiBase() {
 
   }
 
-
-
-  /* =======================================================
+   /* =======================================================
      MEVCUT FOTOĞRAFI SİL
      ======================================================= */
 
@@ -4682,7 +4880,7 @@ function getAccountApiBase() {
                     "return=minimal"
                 }),
 
-              body:
+                            body:
                 JSON.stringify({
                   sort_order:
                     index + 1
@@ -5496,8 +5694,7 @@ function getAccountApiBase() {
                 error
               );
 
-
-              professionalMyListingImages[
+                          professionalMyListingImages[
                 String(listing.id)
               ] = [];
 
@@ -6310,8 +6507,7 @@ function getAccountApiBase() {
           const listingId =
             editButton.dataset.listingId;
 
-
-          if (!listingId) {
+                  if (!listingId) {
             return;
           }
 
@@ -6555,311 +6751,143 @@ function getAccountApiBase() {
      ======================================================= */
 
 
-  function setAccountView(
-    viewName
-  ) {
+  function setAccountView(viewName) {
 
-      const overview =
-      document.getElementById(
-        "account-overview-view"
-      );
+    const viewMap = {
+      overview: "account-overview-view",
+      listings: "account-listings-view",
+      orders: "account-orders-view",
+      ads: "account-ads-view",
+      wallet: "account-wallet-view"
+    };
 
+    const targetId = viewMap[viewName] || viewMap.overview;
 
-    const listings =
-      document.getElementById(
-        "account-listings-view"
-      );
+    document.querySelectorAll(".account-view").forEach(view => {
+      view.classList.toggle("active", view.id === targetId);
+    });
 
+    const activeHref = {
+      overview: "#overview",
+      listings: "#my-listings",
+      orders: "#orders",
+      ads: "#ads",
+      wallet: "#wallet"
+    }[viewName] || "#overview";
 
-    const menuLinks =
-      document.querySelectorAll(
-        ".account-menu a"
-      );
+    document.querySelectorAll(".account-menu a").forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === activeHref);
+    });
 
-
-    if (
-      !overview ||
-      !listings
-    ) {
-
-      return;
-
-    }
-
-
-    if (
-      viewName ===
-      "listings"
-    ) {
-
-      overview.classList.remove(
-        "active"
-      );
-
-
-      listings.classList.add(
-        "active"
-      );
-
-
-      menuLinks.forEach(
-        link => {
-
-          link.classList.toggle(
-            "active",
-            link.getAttribute(
-              "href"
-            ) === "#my-listings"
-          );
-
-        }
-      );
-
-
-      return;
-
-    }
-
-
-    overview.classList.add(
-      "active"
-    );
-
-
-    listings.classList.remove(
-      "active"
-    );
-
-
-    menuLinks.forEach(
-      link => {
-
-        link.classList.toggle(
-          "active",
-          link.getAttribute(
-            "href"
-          ) === "account.html"
-        );
-
-      }
-    );
-
+    window.scrollTo({ top: 0, behavior: "auto" });
   }
-
 
 
   function handleAccountHash() {
 
-    const hash =
-      String(
-        window.location.hash ||
-        ""
-      ).toLowerCase();
+    const hash = String(window.location.hash || "#overview").toLowerCase();
 
-
-    if (
-      hash === "#my-listings"
-    ) {
-
-      setAccountView(
-        "listings"
-      );
-
+    if (hash === "#my-listings") {
+      setAccountView("listings");
       return;
-
     }
 
-
-    setAccountView(
-      "overview"
-    );
-
-
-    if (
-      hash === "#security"
-    ) {
-
-      window.setTimeout(
-        function () {
-
-          document.getElementById(
-            "security"
-          )?.scrollIntoView({
-            behavior:
-              "smooth",
-            block:
-              "start"
-          });
-
-        },
-        50
-      );
-
+    if (hash === "#orders") {
+      setAccountView("orders");
+      return;
     }
 
+    if (hash === "#ads") {
+      setAccountView("ads");
+      return;
+    }
+
+    if (hash === "#wallet") {
+      setAccountView("wallet");
+      return;
+    }
+
+    setAccountView("overview");
+
+    if (hash === "#security") {
+      document.querySelectorAll(".account-menu a").forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === "#security");
+      });
+
+      window.setTimeout(function () {
+        document.getElementById("security")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 30);
+    }
   }
-
 
 
   function initializeAccountNavigation() {
 
-    const menuLinks =
-      document.querySelectorAll(
-        ".account-menu a"
-      );
+    const internalHashes = new Set([
+      "#overview",
+      "#my-listings",
+      "#orders",
+      "#ads",
+      "#wallet",
+      "#security"
+    ]);
 
+    document.querySelectorAll(".account-menu a").forEach(link => {
+      const href = link.getAttribute("href");
 
-    menuLinks.forEach(
-      link => {
-
-        const href =
-          link.getAttribute(
-            "href"
-          );
-
-
-        if (
-          href !== "#my-listings" &&
-          href !== "#security" &&
-          href !== "#favorites"
-        ) {
-
-          return;
-
-        }
-
-
-        if (
-          link.dataset.navigationReady
-        ) {
-          return;
-        }
-
-
-        link.dataset.navigationReady =
-          "1";
-
-
-        link.addEventListener(
-          "click",
-          function (event) {
-
-            /*
-             * İlanlarım sayfa içi görünümüdür.
-             */
-
-            if (
-              href === "#my-listings"
-            ) {
-
-              event.preventDefault();
-
-
-              if (
-                window.location.hash !==
-                "#my-listings"
-              ) {
-
-                history.pushState(
-                  null,
-                  "",
-                  "#my-listings"
-                );
-
-              }
-
-
-              setAccountView(
-                "listings"
-              );
-
-
-              return;
-
-            }
-
-
-            /*
-             * Güvenlik ana hesap görünümünde.
-             */
-
-            if (
-              href === "#security"
-            ) {
-
-              event.preventDefault();
-
-
-              setAccountView(
-                "overview"
-              );
-
-
-              history.pushState(
-                null,
-                "",
-                "#security"
-              );
-
-
-              window.setTimeout(
-                function () {
-
-                  document.getElementById(
-                    "security"
-                  )?.scrollIntoView({
-                    behavior:
-                      "smooth",
-                    block:
-                      "start"
-                  });
-
-                },
-                30
-              );
-
-
-              return;
-
-            }
-
-
-            /*
-             * Favoriler henüz ayrı görünüm değilse
-             * mevcut çalışan davranışı bozma.
-             */
-
-            if (
-              href === "#favorites"
-            ) {
-
-              return;
-
-            }
-
-          }
-        );
-
+      if (!internalHashes.has(href) || link.dataset.navigationReady) {
+        return;
       }
-    );
 
+      link.dataset.navigationReady = "1";
 
-    window.addEventListener(
-      "hashchange",
-      handleAccountHash
-    );
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
 
+        if (window.location.hash !== href) {
+          history.pushState(null, "", href);
+        }
 
-    window.addEventListener(
-      "popstate",
-      handleAccountHash
-    );
+        handleAccountHash();
+      });
+    });
 
+    if (!window.__royale2AccountNavigationReady) {
+      window.__royale2AccountNavigationReady = true;
+      window.addEventListener("hashchange", handleAccountHash);
+      window.addEventListener("popstate", handleAccountHash);
+    }
 
     handleAccountHash();
-
   }
 
+
+  function initializeAccountModuleTabs() {
+
+    document.querySelectorAll("[data-panel-tab]").forEach(button => {
+      if (button.dataset.tabReady) return;
+      button.dataset.tabReady = "1";
+
+      button.addEventListener("click", function () {
+        const targetId = button.dataset.panelTab;
+        const tabs = button.closest(".account-module-tabs");
+        const card = button.closest(".account-module-card");
+
+        if (!targetId || !tabs || !card) return;
+
+        tabs.querySelectorAll("[data-panel-tab]").forEach(tab => {
+          tab.classList.toggle("active", tab === button);
+        });
+
+        card.querySelectorAll(".account-tab-panel").forEach(panel => {
+          panel.classList.toggle("active", panel.id === targetId);
+        });
+      });
+    });
+  }
 
 
   /* =======================================================
@@ -7295,7 +7323,6 @@ function getAccountApiBase() {
 
     }
 
-
     if (
       bio.length > 500
     ) {
@@ -7684,98 +7711,6 @@ function getAccountApiBase() {
 
 
   /* =======================================================
-     FAVORİ SAYISI
-     ======================================================= */
-
-
-  async function loadAccountFavoriteCount() {
-
-    const session =
-      getAccountSession();
-
-
-    const countElement =
-      document.getElementById(
-        "favorite-count"
-      );
-
-
-    if (
-      !session?.user?.id ||
-      !countElement
-    ) {
-      return;
-    }
-
-
-    try {
-
-      const base =
-        getAccountApiBase();
-
-
-      if (!base) {
-        return;
-      }
-
-
-      const response =
-        await fetch(
-          `${base}/rest/v1/favorites` +
-          `?user_id=eq.${encodeURIComponent(
-            session.user.id
-          )}` +
-          `&select=id`,
-          {
-            method: "GET",
-
-            headers:
-              accountApiHeaders({
-                Accept:
-                  "application/json"
-              })
-          }
-        );
-
-
-      if (!response.ok) {
-
-        console.warn(
-          "Favori sayısı alınamadı:",
-          await response.text()
-        );
-
-        return;
-
-      }
-
-
-      const rows =
-        await response.json();
-
-
-      countElement.textContent =
-        String(
-          Array.isArray(rows)
-            ? rows.length
-            : 0
-        );
-
-
-    } catch (error) {
-
-      console.warn(
-        "Favori sayısı yüklenemedi:",
-        error
-      );
-
-    }
-
-  }
-
-
-
-  /* =======================================================
      GÜNCEL PROFİLİ SUPABASE'DEN AL
      ======================================================= */
 
@@ -8103,6 +8038,8 @@ function getAccountApiBase() {
 
     initializeAccountNavigation();
 
+    initializeAccountModuleTabs();
+
     initializeAccountKeyboardEvents();
 
 
@@ -8116,9 +8053,7 @@ function getAccountApiBase() {
 
       loadAccountProfile(),
 
-      loadProfessionalMyListings(),
-
-      loadAccountFavoriteCount()
+      loadProfessionalMyListings()
 
     ];
 

@@ -6956,29 +6956,6 @@ document.addEventListener(
     if (!document.body) return;
 
     // --------------------------------------------------
-    // ÜST REKLAM
-    // index.html üzerinde zaten varsa tekrar oluşturma.
-    // --------------------------------------------------
-    let topAd = document.querySelector(".top-ad-area");
-
-    if (!topAd) {
-      topAd = document.createElement("div");
-      topAd.className = "top-ad-area global-ad-area";
-
-      topAd.innerHTML = `
-        <a href="#" class="top-ad-link" aria-label="Üst Banner Reklam Alanı">
-          <div class="top-ad-placeholder">
-            <span>REKLAM</span>
-            <strong>728 × 90</strong>
-            <small>Üst Banner Reklam Alanı</small>
-          </div>
-        </a>
-      `;
-
-      document.body.insertBefore(topAd, document.body.firstChild);
-    }
-
-    // --------------------------------------------------
     // SOL REKLAM
     // --------------------------------------------------
     let leftAd = document.querySelector(".side-ad-left");

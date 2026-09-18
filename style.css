@@ -8639,3 +8639,90 @@ body > main .yang-rate-card {
     overflow-x: hidden !important;
   }
 }
+
+
+/* =========================================================
+   ROYALE2 MARKET - MASAÜSTÜ EKRAN YERLEŞİMİ V2
+   Ana içerik + geniş yan reklamların çakışmasını engeller
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+  :root {
+    --r2-side-ad-width: clamp(150px, 12vw, 240px);
+  }
+
+  html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    padding-left: var(--r2-side-ad-width) !important;
+    padding-right: var(--r2-side-ad-width) !important;
+
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /*
+   * Reklamlar body padding'inden bağımsız olarak
+   * tarayıcı ekranının iki kenarında kalır.
+   */
+  .side-ad-left,
+  .side-ad-right {
+    width: var(--r2-side-ad-width) !important;
+    max-width: var(--r2-side-ad-width) !important;
+
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100dvh !important;
+
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .side-ad-left {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  .side-ad-right {
+    right: 0 !important;
+    left: auto !important;
+  }
+
+  /*
+   * Header gibi width:100vw kullanan alanların
+   * reklamların altına taşmasını önler.
+   */
+  .market-header,
+  .account-header,
+  .messages-header,
+  header,
+  main {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* 1500px altındaki ekranlarda içerik tekrar tam genişlik */
+@media (max-width: 1499px) {
+
+  body {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .side-ad-left,
+  .side-ad-right {
+    display: none !important;
+  }
+}

@@ -3575,120 +3575,6 @@ body {
     }
 }
 
-
-/* =========================================================
-
-   SOL / SAG DIKEY REKLAM ALANLARI
-   ========================================= */
-
-.side-ad {
-    position: fixed;
-    top: 330px;
-    width: 160px;
-    height: 600px;
-    background: #2e2414;
-    border: 1px dashed #e8b04f;
-    border-radius: 6px;
-    box-sizing: border-box;
-    z-index: 20;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    color: #a59984;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-}
-
-.side-ad span {
-    color: #f5c46f;
-    border: 1px solid #5e4d31;
-    border-radius: 3px;
-    padding: 4px 7px;
-    margin-bottom: 10px;
-    font-size: 10px;
-    font-weight: 700;
-}
-
-.side-ad strong {
-    color: #eaf4ff;
-    font-size: 14px;
-    margin-bottom: 6px;
-}
-
-.side-ad-left {
-    left: max(15px, calc(50% - 800px));
-}
-
-.side-ad-right {
-    right: max(15px, calc(50% - 800px));
-}
-
-/* Ekran daralinca reklamlar otomatik gizlenir */
-@media (max-width: 1500px) {
-    .side-ad {
-        display: none;
-    }
-}
-
-/* =========================================
-   SIDE ADS - GENIS FINAL
-   ========================================= */
-
-.side-ad {
-    width: 200px !important;
-    height: 820px !important;
-    top: 12px !important;
-    z-index: 50 !important;
-}
-
-.side-ad-left {
-    left: 8px !important;
-}
-
-.side-ad-right {
-    right: 8px !important;
-}
-
-@media (max-width: 1550px) {
-    .side-ad {
-        display: none !important;
-    }
-}
-
-
-/* =========================================================
-
-   ROYALE2 MARKET - SIDE ADS POSITION FIX
-   Sağ / Sol reklamları ekran kenarına sabitle
-   Ana içerik genişliğine müdahale etmez
-===================================================== */
-
-@media (min-width: 1550px) {
-
-    .side-ad {
-        position: fixed !important;
-        width: 200px !important;
-        height: 820px !important;
-        top: 120px !important;
-        z-index: 999 !important;
-        isolation: isolate;
-    }
-
-    .side-ad-left {
-        left: 8px !important;
-        right: auto !important;
-    }
-
-    .side-ad-right {
-        right: 8px !important;
-        left: auto !important;
-    }
-
-}
-
 /* =====================================================
    ROYALE MARKET - HEADER LOGO
    ===================================================== */
@@ -5451,33 +5337,6 @@ body > main > .market-slider {
 
 #market .listing-grid > * {
     min-width: 0 !important;
-}
-
-/* Büyük masaüstü reklamları */
-@media (min-width: 1550px) {
-    .side-ad {
-        display: flex !important;
-        width: 200px !important;
-        height: 820px !important;
-        top: 12px !important;
-    }
-
-    .side-ad-left {
-        left: 8px !important;
-        right: auto !important;
-    }
-
-    .side-ad-right {
-        right: 8px !important;
-        left: auto !important;
-    }
-}
-
-/* Reklamların içerikle çakışacağı çözünürlüklerde gizle */
-@media (max-width: 1549px) {
-    .side-ad {
-        display: none !important;
-    }
 }
 
 /* Laptop */
@@ -8157,55 +8016,7 @@ body > main .yang-rate-card {
 }
 
 .side-ad-right {
-  right: max(6px, calc(50% - 960px));
-}
-
-.side-ad > span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 4px 8px;
-  margin-bottom: 10px;
-
-  border: 1px solid #b88525;
-  border-radius: 4px;
-
-  color: #e0a94f;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.side-ad > strong {
-  display: block;
-  margin-bottom: 5px;
-
-  color: #fff;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.side-ad > small {
-  color: #877d6c;
-  font-size: 10px;
-}
-
-
-/* Reklamlar ana içeriğin üzerine binmesin */
-@media (min-width: 1500px) {
-  body {
-    overflow-x: hidden;
-  }
-}
-
-
-/* Ekran daraldığında yan reklamları gizle */
-@media (max-width: 1499px) {
-  .side-ad {
-    display: none !important;
-  }
-
+   
   .top-ad-area {
     padding-left: 20px;
     padding-right: 20px;
@@ -8472,257 +8283,179 @@ body > main .yang-rate-card {
   }
 }
 
-
 /* =========================================================
-   ROYALE2 MARKET - YENİ GLOBAL YAN REKLAM SİSTEMİ
-   Üst reklam kapalı / Masaüstü geniş yan reklam kolonları
+   ROYALE2 MARKET - FINAL YAN REKLAM SİSTEMİ
+   Masaüstü: büyük sabit sağ / sol reklam
+   Tablet ve mobil: otomatik gizlenir
+   Üst reklam kullanılmaz
    ========================================================= */
 
-/* Üst reklam hiçbir sayfada görünmesin */
+/* ÜST REKLAMI KESİNLİKLE KAPAT */
 .top-ad-area {
   display: none !important;
 }
 
-/* Ana sayfanın eski HTML yan reklamları + JS ile oluşan reklamlar */
-.side-ad,
-.global-ad-area {
-  box-sizing: border-box !important;
-}
+/* GENİŞ MASAÜSTÜ */
+@media (min-width: 1550px) {
 
-/* SOL / SAĞ ORTAK TASARIM */
-.side-ad-left,
-.side-ad-right {
-  position: fixed !important;
-
-  top: 0 !important;
-  bottom: 0 !important;
-
-  height: 100vh !important;
-  min-height: 100vh !important;
-
-  width: clamp(150px, 12vw, 240px) !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  margin: 0 !important;
-  padding: 20px 12px !important;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(45, 33, 17, 0.97) 0%,
-      rgba(13, 13, 13, 0.99) 26%,
-      rgba(8, 10, 11, 0.99) 100%
-    ) !important;
-
-  border: 1px dashed rgba(201, 139, 37, 0.42) !important;
-
-  z-index: 20 !important;
-
-  overflow: hidden !important;
-}
-
-/* SOL */
-.side-ad-left {
-  left: 0 !important;
-  right: auto !important;
-}
-
-/* SAĞ */
-.side-ad-right {
-  right: 0 !important;
-  left: auto !important;
-}
-
-/* Reklam yazıları */
-.side-ad-left span,
-.side-ad-right span {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  padding: 4px 8px !important;
-  margin-bottom: 8px !important;
-
-  color: #e0a94f !important;
-  background: rgba(0, 0, 0, 0.45) !important;
-
-  border: 1px solid rgba(201, 139, 37, 0.55) !important;
-  border-radius: 4px !important;
-
-  font-size: 10px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.7px !important;
-}
-
-.side-ad-left strong,
-.side-ad-right strong {
-  display: block !important;
-  color: #ffffff !important;
-  font-size: 15px !important;
-  line-height: 1.2 !important;
-  font-weight: 800 !important;
-  text-align: center !important;
-}
-
-.side-ad-left small,
-.side-ad-right small {
-  display: block !important;
-  margin-top: 7px !important;
-
-  color: rgba(255, 255, 255, 0.46) !important;
-  font-size: 10px !important;
-  text-align: center !important;
-}
-
-/* =========================================================
-   MASAÜSTÜ İÇERİK GÜVENLİ ALANI
-
-   Yan reklam genişliğine göre sitenin ana içeriğinin reklamların
-   altında kalmasını engeller.
-   ========================================================= */
-
-@media (min-width: 1500px) {
-
+  html,
   body {
-    padding-left: clamp(150px, 12vw, 240px) !important;
-    padding-right: clamp(150px, 12vw, 240px) !important;
+    max-width: 100% !important;
     overflow-x: hidden !important;
   }
 
   /*
-    Body padding'i nedeniyle fixed reklamların ölçüsü değişmesin.
+     Reklamlar viewport'a sabittir.
+     Header, main veya başka container reklamı hareket ettiremez.
   */
-  .side-ad-left,
-  .side-ad-right {
-    box-sizing: border-box !important;
-  }
-}
+  .side-ad {
+    position: fixed !important;
 
-/* =========================================================
-   1500px ALTI
-   Daha küçük PC / tabletlerde yan reklamı gizle.
-   Ana site %100 kullanılabilir kalsın.
-   ========================================================= */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
 
-@media (max-width: 1499px) {
-
-  body {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .side-ad-left,
-  .side-ad-right {
-    display: none !important;
-  }
-}
-
-/* =========================================================
-   TELEFON
-   ========================================================= */
-
-@media (max-width: 768px) {
-
-  .top-ad-area,
-  .side-ad-left,
-  .side-ad-right {
-    display: none !important;
-  }
-
-  body {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    overflow-x: hidden !important;
-  }
-}
-
-
-/* =========================================================
-   ROYALE2 MARKET - MASAÜSTÜ EKRAN YERLEŞİMİ V2
-   Ana içerik + geniş yan reklamların çakışmasını engeller
-   ========================================================= */
-
-@media (min-width: 1500px) {
-
-  :root {
-    --r2-side-ad-width: clamp(150px, 12vw, 240px);
-  }
-
-  html {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  body {
-    width: 100% !important;
-    max-width: none !important;
+    width: clamp(180px, 12vw, 240px) !important;
+    height: min(820px, calc(100vh - 32px)) !important;
+    min-height: 560px !important;
 
     margin: 0 !important;
-
-    padding-left: var(--r2-side-ad-width) !important;
-    padding-right: var(--r2-side-ad-width) !important;
+    padding: 20px 12px !important;
 
     box-sizing: border-box !important;
-    overflow-x: hidden !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(48, 33, 17, 0.96) 0%,
+        rgba(13, 13, 13, 0.98) 26%,
+        rgba(7, 7, 7, 0.99) 100%
+      ) !important;
+
+    border: 1px dashed rgba(201, 139, 37, 0.58) !important;
+
+    border-radius: 0 !important;
+
+    z-index: 9999 !important;
+
+    overflow: hidden !important;
+
+    pointer-events: auto !important;
   }
 
-  /*
-   * Reklamlar body padding'inden bağımsız olarak
-   * tarayıcı ekranının iki kenarında kalır.
-   */
-  .side-ad-left,
-  .side-ad-right {
-    width: var(--r2-side-ad-width) !important;
-    max-width: var(--r2-side-ad-width) !important;
-
-    top: 0 !important;
-    bottom: 0 !important;
-    height: 100dvh !important;
-
-    margin: 0 !important;
-    transform: none !important;
-  }
-
+  /* SOL REKLAM */
   .side-ad-left {
     left: 0 !important;
     right: auto !important;
   }
 
+  /* SAĞ REKLAM */
   .side-ad-right {
     right: 0 !important;
     left: auto !important;
   }
 
-  /*
-   * Header gibi width:100vw kullanan alanların
-   * reklamların altına taşmasını önler.
-   */
-  .market-header,
-  .account-header,
-  .messages-header,
-  header,
-  main {
-    max-width: 100% !important;
-    box-sizing: border-box !important;
+  /* REKLAM ETİKETİ */
+  .side-ad > span,
+  .side-ad-placeholder > span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 4px 8px !important;
+    margin: 0 0 10px !important;
+
+    color: #e0a94f !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+
+    border: 1px solid rgba(201, 139, 37, 0.58) !important;
+    border-radius: 4px !important;
+
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.8px !important;
+  }
+
+  /* REKLAM BOYUT YAZISI */
+  .side-ad > strong,
+  .side-ad-placeholder > strong {
+    display: block !important;
+
+    margin: 0 !important;
+
+    color: #ffffff !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+
+    text-align: center !important;
+  }
+
+  /* ALT AÇIKLAMA */
+  .side-ad > small,
+  .side-ad-placeholder > small {
+    display: block !important;
+
+    margin-top: 7px !important;
+
+    color: rgba(255, 255, 255, 0.48) !important;
+
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+
+    text-align: center !important;
   }
 }
 
+/* =========================================================
+   1550 PX ALTI
+   İçeriğe çarpacağı çözünürlüklerde reklamları kaldır
+   ========================================================= */
 
-/* 1500px altındaki ekranlarda içerik tekrar tam genişlik */
-@media (max-width: 1499px) {
+@media (max-width: 1549px) {
 
-  body {
-    width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
+  .side-ad,
   .side-ad-left,
   .side-ad-right {
     display: none !important;
+  }
+
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* =========================================================
+   TABLET / TELEFON
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .top-ad-area,
+  .side-ad,
+  .side-ad-left,
+  .side-ad-right {
+    display: none !important;
+  }
+
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }

@@ -8218,3 +8218,364 @@ body > main .yang-rate-card {
     min-height: 620px !important;
   }
 }
+
+/* =========================================================
+   ROYALE2 MARKET - SIKÇA SORULAN SORULAR
+========================================================= */
+
+.faq-section {
+    position: relative;
+    padding: 90px 24px 100px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(212, 168, 70, 0.08), transparent 32%),
+        linear-gradient(180deg, #101010 0%, #0b0b0b 100%);
+    border-top: 1px solid rgba(212, 168, 70, 0.12);
+}
+
+.faq-container {
+    width: min(100%, 980px);
+    margin: 0 auto;
+}
+
+
+/* ÜST BAŞLIK */
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.faq-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(212, 168, 70, 0.35);
+    border-radius: 16px;
+    background: rgba(212, 168, 70, 0.10);
+    color: #d4a846;
+    font-size: 28px;
+    font-weight: 800;
+    box-shadow: 0 0 30px rgba(212, 168, 70, 0.08);
+}
+
+.faq-header h2 {
+    margin: 0;
+    color: #f5f5f5;
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.faq-header > p {
+    max-width: 650px;
+    margin: 14px auto 0;
+    color: #9d9d9d;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ARAMA KUTUSU */
+
+.faq-search {
+    position: relative;
+    max-width: 720px;
+    margin: 32px auto 0;
+}
+
+.faq-search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d4a846;
+    font-size: 24px;
+    pointer-events: none;
+}
+
+.faq-search input {
+    width: 100%;
+    height: 60px;
+    padding: 0 22px 0 56px;
+    box-sizing: border-box;
+    border: 1px solid rgba(212, 168, 70, 0.22);
+    border-radius: 12px;
+    outline: none;
+    background: #171717;
+    color: #f1f1f1;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
+}
+
+.faq-search input::placeholder {
+    color: #747474;
+}
+
+.faq-search input:focus {
+    border-color: rgba(212, 168, 70, 0.7);
+    background: #191919;
+    box-shadow:
+        0 0 0 3px rgba(212, 168, 70, 0.08),
+        0 14px 35px rgba(0, 0, 0, 0.28);
+}
+
+
+/* SORU SAYISI */
+
+.faq-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 22px;
+    color: #8d8d8d;
+    font-size: 12px;
+}
+
+.faq-stats span::first-letter {
+    color: #d4a846;
+}
+
+
+/* GENEL SORULAR KARTI */
+
+.faq-card {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: #121212;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+}
+
+.faq-card-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    background:
+        linear-gradient(90deg, rgba(212, 168, 70, 0.10), rgba(212, 168, 70, 0.02));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.faq-card-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(212, 168, 70, 0.12);
+    border: 1px solid rgba(212, 168, 70, 0.22);
+    color: #d4a846;
+    font-weight: 800;
+}
+
+.faq-card-title h3 {
+    margin: 0 0 4px;
+    color: #f1f1f1;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.faq-card-title span {
+    color: #777;
+    font-size: 12px;
+}
+
+
+/* SORULAR */
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+    background: #121212;
+}
+
+.faq-item:last-child {
+    border-bottom: 0;
+}
+
+.faq-item summary {
+    position: relative;
+    padding: 19px 58px 19px 24px;
+    color: #e7e7e7;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    color: #a9a9a9;
+    font-size: 20px;
+    font-weight: 400;
+    transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.faq-item summary:hover {
+    color: #d4a846;
+    background: rgba(212, 168, 70, 0.035);
+}
+
+.faq-item summary:hover::after {
+    color: #d4a846;
+    background: rgba(212, 168, 70, 0.08);
+}
+
+.faq-item[open] summary {
+    color: #d4a846;
+    background: rgba(212, 168, 70, 0.045);
+}
+
+.faq-item[open] summary::after {
+    content: "−";
+    color: #d4a846;
+    background: rgba(212, 168, 70, 0.08);
+}
+
+.faq-answer {
+    padding: 0 58px 20px 24px;
+    color: #a5a5a5;
+    font-size: 13.5px;
+    line-height: 1.8;
+    background: rgba(255, 255, 255, 0.012);
+}
+
+
+/* ALT DESTEK KARTI */
+
+.faq-support {
+    margin-top: 28px;
+    padding: 38px 30px;
+    text-align: center;
+    border: 1px solid rgba(212, 168, 70, 0.28);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(212, 168, 70, 0.14), transparent 65%),
+        #15130f;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+
+.faq-support h3 {
+    margin: 0;
+    color: #f3f3f3;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.faq-support p {
+    margin: 10px 0 22px;
+    color: #999;
+    font-size: 14px;
+}
+
+.faq-support-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 24px;
+    border: 1px solid #d4a846;
+    border-radius: 9px;
+    background: #d4a846;
+    color: #0c0c0c;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.faq-support-button:hover {
+    transform: translateY(-2px);
+    background: #e0b754;
+    box-shadow: 0 10px 28px rgba(212, 168, 70, 0.20);
+}
+
+
+/* MOBİL */
+
+@media (max-width: 768px) {
+
+    .faq-section {
+        padding: 65px 14px 70px;
+    }
+
+    .faq-header {
+        margin-bottom: 38px;
+    }
+
+    .faq-header h2 {
+        font-size: 31px;
+    }
+
+    .faq-header > p {
+        font-size: 13px;
+    }
+
+    .faq-search {
+        margin-top: 25px;
+    }
+
+    .faq-search input {
+        height: 54px;
+        padding-left: 48px;
+        font-size: 13px;
+    }
+
+    .faq-search-icon {
+        left: 17px;
+    }
+
+    .faq-stats {
+        gap: 14px;
+    }
+
+    .faq-card-title {
+        padding: 17px 18px;
+    }
+
+    .faq-item summary {
+        padding: 17px 52px 17px 18px;
+        font-size: 13px;
+    }
+
+    .faq-item summary::after {
+        right: 17px;
+    }
+
+    .faq-answer {
+        padding: 0 18px 18px;
+        font-size: 13px;
+    }
+
+    .faq-support {
+        padding: 30px 20px;
+    }
+
+    .faq-support h3 {
+        font-size: 20px;
+    }
+}
